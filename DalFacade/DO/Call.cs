@@ -1,7 +1,7 @@
 ﻿
 namespace DO;
 /// <summary>
-/// 
+/// represente the rescue call that send to the volunteers
 /// </summary>
 /// <param name="Id">uniquely readable ID representation</param>
 /// <param name="TypeCall">the type of the call to the name of the system</param>
