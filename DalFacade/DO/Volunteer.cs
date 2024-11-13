@@ -16,19 +16,21 @@
 /// <param name = "MaximumDistance"> show the max distance that the volunteer can reach </param> 
 /// <param name = "DistanceType"> indicate in what means the distance is taken from the volunteer to the call point </param> 
 public record Volunteer
-{
-    int Id;
-    string FullName;
-    string Phone;
-    string Email;
-    string? Password;
-    string? Address;
-    double? Latitude;
-    double? Longitude;
-    Enum Role;
-    Boolean Active;
-    double? MaximumDistance;
-    Enum DistanceType;
+(
+    int Id,
+    string FullName,
+    string Phone,
+    string Email,
+    string? Password = null,
+    string? Address = null,
+    double? Latitude = null,
+    double? Longitude = null,
+    Enum Role = default,
+    Boolean Active = false,
+    double? MaximumDistance = null,
+    Enum DistanceType = default
+)
 
-    public Volunteer() { }
+{
+    public Volunteer() : this (0,"", "", "") { }
 }
