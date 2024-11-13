@@ -7,7 +7,7 @@
 /// <param name = "Phone"> presonal phone number of the volunteer </param> 
 /// <param name = "Email"> presonal email addres of the volunteer </param> 
 /// <param name = "Password"> password that first given by the manager and change by the volunteer </param> 
-/// <param name = "Addres"> presonal full and real corrent addres of the volunteer </param> 
+/// <param name = "Address"> presonal full and real corrent addres of the volunteer </param> 
 /// <param name = "Latitude"> number that show the distance between the point and the north or sout of the wquator  </param> 
 /// <param name = "Longitude"> number that show the distance between the point and the east or west of the wquator </param> 
 /// <param name = "Role"> indicate the position of the volunteer, a manager or not </param> 
@@ -21,7 +21,7 @@ public record Volunteer
     string Phone;
     string Email;
     string? Password;
-    string? Addres;
+    string? Address;
     double? Latitude;
     double? Longitude;
     Enum Role;
