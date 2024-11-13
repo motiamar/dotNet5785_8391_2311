@@ -10,14 +10,16 @@
 /// <param name = "FinishTime"> the time that the volunteer close the call </param> 
 /// <param name = "EndKind"> tell how the call ended (by volunteer, manager or cancellation) </param> 
 public record Assignment
-{
-    int Id;
-    int CallId;
-    int VolunteerId;
-    DateTime StartTime;
-    DateTime? FinishTime;
-    Enum? EndKind;
+(
+    int Id,
+    int CallId,
+    int VolunteerId,
+    DateTime StartTime = default,
+    DateTime? FinishTime = null,
+    Enum? EndKind = default
+)
 
-    public Assignment() { }
+{ 
+    public Assignment() : this (0, 0, 0) { }
 }
 
