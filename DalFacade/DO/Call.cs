@@ -12,15 +12,16 @@ namespace DO;
 /// <param name="OpeningCallTime">the time when the call was opened by the manager</param>
 /// <param name="MaxEndingCallTime">the maximom time a call should close</param>
 public record Call
+(
+    int Id,
+    Enum TypeCall = default,
+    string? VerbalDecription = null,
+    string FullAddressOfTheCall = " ",
+    double Latitude = 0,
+    double Longitude = 0,
+    DateTime OpeningCallTime = default,
+    DateTime? MaxEndingCallTime=null
+)
 {
-    int Id;
-    Enum TypeCall;
-    string? VerbalDecription;
-    string FullAddressOfTheCall;
-    double Latitude;
-    double Longitude;
-    DateTime OpeningCallTime;
-    DateTime? MaxEndingCallTime;
-
-    public Call() { }
+    public Call() :this (0) { }
 }
