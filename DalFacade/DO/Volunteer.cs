@@ -1,4 +1,5 @@
 ﻿namespace DO;
+
 /// <summary>
 /// Volunteer in the rescue organization 
 /// </summary>
@@ -30,5 +31,4 @@ public record Volunteer
     Enum DistanceType;
 
     public Volunteer() { }
-
 }
