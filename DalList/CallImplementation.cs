@@ -6,32 +6,53 @@ using System.Collections.Generic;
 public class CallImplementation : ICall
 {
     public void create(Call item)
-    {
-        throw new NotImplementedException();
+    { 
+        throw new NotImplementedException("אובייקט מסוג שיחה עם כזה תז כבר קיים");
     }
+            
+    
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        bool flag = false;
+        foreach (var item in DataSource.Calls)
+        {
+            if (item.Id == id)
+            {
+                flag = true;
+                DataSource.Calls.Remove(item);
+                break;
+            }
+        }
+        if (flag == false)
+            throw new NotImplementedException(" אובייקט מסוג שיחה אינו קיים עם תז כזה");
     }
 
     public void DeleteAll()
     {
-        throw new NotImplementedException();
+        DataSource.Calls.Clear();
     }
 
     public Call? Read(int id)
     {
-        throw new NotImplementedException();
+        foreach (var item in DataSource.Calls)
+        {
+            if (item.Id == id)
+                return item;
+        }
+        return null;
     }
 
     public List<Call> ReadAll()
     {
-        throw new NotImplementedException();
+        List<Call> newList = new List<Call>();
+        newList.AddRange(DataSource.Calls);
+        return newList;
     }
 
     public void Update(Call item)
     {
-        throw new NotImplementedException();
+        Delete(item.Id);
+        create(item);
     }
 }
