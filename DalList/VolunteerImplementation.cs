@@ -9,7 +9,7 @@ public class VolunteerImplementation : IVolunteer
     public void create(Volunteer item)
     {
         if(Read(item.Id) != null)
-            throw new NotImplementedException("אובייקט מסוג מתנדב עם תז כזה כבר קיים");
+            throw new NotImplementedException($"Volunteer with ID={item.Id} has already exists");
         else
             DataSource.Volunteers.Add(item);
     }
@@ -20,7 +20,7 @@ public class VolunteerImplementation : IVolunteer
         if (Read(id) != null)
             DataSource.Volunteers.Remove(Read(id)!);
         else 
-            throw new NotImplementedException("אובייקט מסוג מתנדב עם תז כזה לא קיים");
+            throw new NotImplementedException($"Volunteer with ID={id} doesn't exists");
     }
     // the func search for the entity in the list by the id and remove it
 
@@ -58,7 +58,7 @@ public class VolunteerImplementation : IVolunteer
             create(item);
         }
         else
-            throw new NotImplementedException("אובייקט מסוג מתנדב עם תז כזה לא קיים");
+            throw new NotImplementedException($"Volunteer with ID={item.Id} doesn't exists");
     }
     // the func updatr a entity in the list by the new parameters that in the given entity
 }
