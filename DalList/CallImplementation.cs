@@ -7,7 +7,8 @@ public class CallImplementation : ICall
 {
     public void create(Call item)
     { 
-        throw new NotImplementedException("אובייקט מסוג שיחה עם כזה תז כבר קיים");
+        int 
+        throw new NotImplementedException();
     }
             
     
