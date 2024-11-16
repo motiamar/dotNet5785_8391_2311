@@ -1,4 +1,6 @@
 ﻿namespace DalTest;
+
+using Dal;
 using DalApi;
 using DO;
 
@@ -41,6 +43,15 @@ public static class Initialization
     }
     private static void CreateCalls()
     {
+        
+        for (int i = 0; i < 50; i++)
+        {
+            DateTime start = new DateTime(s_dalConfig.Clock.Year - 2, 1, 1); //stage 1
+            int range = (s_dalConfig.Clock - start).Days; //stage 1
+            start.AddDays(s_rand.Next(range));
+            string? VerbalDecription;
+        }
+
 
     }
 }
