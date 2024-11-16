@@ -3,7 +3,7 @@ using DO;
 
 public interface IAssignment
 {
-    void create(Assignment item);//Creates new entity object in DAL
+    int create(Assignment item);//Creates new entity object in DAL
     Assignment? Read(int id); //Reads entity object by its ID 
     List<Assignment> ReadAll(); //stage 1 only, Reads all entity objects
     void Update(Assignment item); //Updates entity object
