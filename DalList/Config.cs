@@ -16,7 +16,7 @@ internal static class Config
     internal static DateTime Clock {  get; set; } = DateTime.Now;
     // return the corrent time of the clock
 
-    TimeSpan RiskRnge { }
+    internal static TimeSpan RiskRnge { get; set; } = TimeSpan.FromHours(1);
 
     internal static void Reset()
     {

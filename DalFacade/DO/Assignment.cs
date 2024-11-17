@@ -14,9 +14,9 @@ public record Assignment
     int Id,
     int CallId,
     int VolunteerId,
-    DateTime StartTime = default,
-    DateTime? FinishTime = null,
-    Enum? EndKind = default
+    DateTime StartTime = default, 
+    DateTime? FinishTime = null, 
+    Enum? EndKind = default 
 )
 
 { 

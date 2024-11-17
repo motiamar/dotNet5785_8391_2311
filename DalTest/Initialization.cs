@@ -377,48 +377,70 @@ public static class Initialization
     35.2356295,
     35.2178825
  };
-        string tmpVerbalDecription;
+        string tmpVerbalDecription = null;
         int tmpId = 0;
-       
 
-
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 50; i++) // create a new call with all the tmp arguments
         {
             TypeCall tmpTypeCall = (TypeCall)s_rand.Next(0, Enum.GetValues(typeof(TypeCall)).Length);
             switch (tmpTypeCall) // Matches event description to event randomly
             {
                 case TypeCall.medical_situation:
-                    tmpVerbalDecription = medical_Descriptions[s_rand.Next(medical_Descriptions.Length)];
+                    tmpVerbalDecription = medical_Descriptions[s_rand.Next(0, medical_Descriptions.Length)];
                     break;
                 case TypeCall.car_accident:
-                    tmpVerbalDecription = accident_Descriptions[s_rand.Next(accident_Descriptions.Length)];
+                    tmpVerbalDecription = accident_Descriptions[s_rand.Next(0, accident_Descriptions.Length)];
                     break;
                 case TypeCall.fall_from_hight:
-                    tmpVerbalDecription = fall_Descriptions[s_rand.Next(fall_Descriptions.Length)];
+                    tmpVerbalDecription = fall_Descriptions[s_rand.Next(0, fall_Descriptions.Length)];
                     break;
                 case TypeCall.violent_event:
-                    tmpVerbalDecription = violence_Descriptions[s_rand.Next(violence_Descriptions.Length)];
+                    tmpVerbalDecription = violence_Descriptions[s_rand.Next(0, violence_Descriptions.Length)];
                     break;
                 case TypeCall.domestic_violent:
-                    tmpVerbalDecription = domestic_Descriptions[s_rand.Next(domestic_Descriptions.Length)];
+                    tmpVerbalDecription = domestic_Descriptions[s_rand.Next(0, domestic_Descriptions.Length)];
                     break;
                 default:
                     break;
             }
-            
+            DateTime start = s_dalConfig.Clock.AddMinutes(s_rand.Next(5, 10));
+            DateTime finish = start.AddMinutes(s_rand.Next(5, 10));
+            s_dalCall!.create(new Call
+            {
+                Id = tmpId,
+                TypeCall = tmpTypeCall,
+                VerbalDecription = tmpVerbalDecription,
+                FullAddressOfTheCall = callAddress[i],
+                Latitude = callLatitude[i],
+                Longitude = callLongitude[i],
+                OpeningCallTime = start,
+                MaxEndingCallTime = finish,
+            });
+        }
+    }
 
+    private static void CreateAssignments() // // creating 70 calls Assignments
+    {
+        int tmpId = 0;
+        List<Call> tmpCalls = s_dalCall!.ReadAll();
+        List<Volunteer> tmpVolenteers = s_dalVolunteer!.ReadAll();
+        for (int i = 0; i < 70; i++)
+        {
+            if (i < 15)
+                s_dalAssignment.create(new Assignment());
+            // create 15 unssingnd assinment
+            else
+            {
+                int tmpCallId = tmpCalls[s_rand.Next(0, 50)].Id;
+                int tmpVolunteerId = tmpVolenteers[s_rand.Next(0, 50)].Id;
+                DateTime? tmpFinishTime = tmpCalls
+            }
+           
 
+           
 
         }
 
-    }
-
-
-
-
-
-    private static void CreateAssignments()
-    {
-
+        
     }
 }
