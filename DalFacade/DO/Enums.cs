@@ -18,7 +18,6 @@ public enum TypeCall // define the type of call that enterd the system
     medical_situation, // default
     car_accident,
     fall_from_hight,
-    alergy,
     violent_event,
     domestic_violent,
 }
