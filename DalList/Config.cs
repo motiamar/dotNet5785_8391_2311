@@ -18,7 +18,7 @@ internal static class Config
 
     TimeSpan RiskRnge { }
 
-    internal static void Rest()
+    internal static void Reset()
     {
         nextCallId = StartCallId;
         nextAssignmentId = StartAssignmentId;
