@@ -1,9 +1,9 @@
-﻿namespace DalTest;
-using Dal;
+﻿
+using System.Windows.Markup;
+namespace DalTest;
 using DalApi;
 using DO;
-using System.Windows.Markup;
-
+using Dal;
 public static class Initialization
 {
     private static IAssignment? s_dalAssignment; 
@@ -422,8 +422,16 @@ public static class Initialization
     private static void CreateAssignments() // // creating 70 calls Assignments
     {
         int tmpId = 0;
+        int tmpIndex = 0;
+        int tmpCallId = 0;
+        int tmpVolunteerId = 0;
+        DateTime ? tmpFinishTime = null;
+        DateTime tmpStartTime;
+        EndKind tmpEndKind = default;
+
         List<Call> tmpCalls = s_dalCall!.ReadAll();
         List<Volunteer> tmpVolenteers = s_dalVolunteer!.ReadAll();
+
         for (int i = 0; i < 70; i++)
         {
             if (i < 15)
@@ -431,16 +439,16 @@ public static class Initialization
             // create 15 unssingnd assinment
             else
             {
-                int tmpCallId = tmpCalls[s_rand.Next(0, 50)].Id;
-                int tmpVolunteerId = tmpVolenteers[s_rand.Next(0, 50)].Id;
-                DateTime? tmpFinishTime = tmpCalls
+                tmpIndex = s_rand.Next(0, 50);
+                tmpCallId = tmpCalls[tmpIndex].Id;
+                tmpVolunteerId = tmpVolenteers[s_rand.Next(0, 50)].Id;
+                tmpFinishTime = tmpCalls[tmpIndex].MaxEndingCallTime;
+                tmpStartTime = tmpCalls[tmpIndex].OpeningCallTime;
+                if (i > 14 && i < 20)
+                    tmpEndKind = EndKind.expired_cancellation;//5 expired calls
+                else if (i > 19)
+                    tmpEndKind = (EndKind)s_rand.Next(1, 3);//random end assinment
             }
-           
-
-           
-
         }
-
-        
     }
 }
