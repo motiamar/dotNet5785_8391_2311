@@ -28,7 +28,7 @@ public enum EndKind // tells how the assiment ended
     administrator_cancellation,
     expired_cancellation,
 }
-public enum MainMenu
+public enum MainMenu //  choises for the menu
 {
     exit,
     sub_volunteer,
@@ -40,7 +40,7 @@ public enum MainMenu
     reset
 
 }
-public enum SubMenu
+public enum SubMenu  //  choises for the sub menu
 { 
     exit,
     add,
@@ -50,7 +50,7 @@ public enum SubMenu
     delete,
     delete_all
 }
-public enum ConfingSubMenu
+public enum ConfingSubMenu  //  choises for the confing sub menu
 {
     exit,
     minutes,

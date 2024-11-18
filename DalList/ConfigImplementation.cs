@@ -14,4 +14,11 @@ public class ConfigImplementation : IConfig // realizing the original methhods t
     {
         Config.Reset();
     }
+
+    public TimeSpan RiskRnge
+    {
+        get => Config.RiskRnge;
+        set => Config.RiskRnge = value;
+    }
+
 }

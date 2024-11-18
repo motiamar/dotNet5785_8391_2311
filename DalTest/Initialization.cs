@@ -403,8 +403,8 @@ public static class Initialization
                 default:
                     break;
             }
-            DateTime start = s_dalConfig!.Clock.AddMinutes(s_rand.Next(5, 10));
-            DateTime finish = start.AddMinutes(s_rand.Next(5, 10));
+            DateTime start = s_dalConfig!.Clock.AddMinutes(s_rand.Next(5, 10));  // define the random time
+            DateTime finish = start.AddMinutes(s_rand.Next(5, 10));   // define the random ending time
             s_dalCall!.create(new Call
             {
                 Id = tmpId,
@@ -428,7 +428,6 @@ public static class Initialization
         DateTime ? tmpFinishTime = null;
         DateTime tmpStartTime;
         EndKind tmpEndKind = default;
-
         List<Call> tmpCalls = s_dalCall!.ReadAll();
         List<Volunteer> tmpVolenteers = s_dalVolunteer!.ReadAll();
 
@@ -472,6 +471,7 @@ public static class Initialization
         s_dalCall = dalCall ?? throw new NullReferenceException("DAL can not be null!");
         s_dalVolunteer = dalVolunteer ?? throw new NullReferenceException("DAL can not be null!");
         s_dalConfig = dalConfig ?? throw new NullReferenceException("DAL can not be null!");
+        // assingd entities to use 
 
         Console.WriteLine("Reset Configuration values and List values");
         s_dalConfig.Reset();
