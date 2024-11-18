@@ -10,8 +10,8 @@ public class ConfigImplementation : IConfig // realizing the original methhods t
         set => Config.Clock = value;
     }
 
-    public void Rest()
+    public void Reset()
     {
-        Config.Rest();
+        Config.Reset();
     }
 }

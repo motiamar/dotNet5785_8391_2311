@@ -20,7 +20,7 @@ public record Call
     double Latitude = 0,
     double Longitude = 0,
     DateTime OpeningCallTime = default,
-    DateTime? MaxEndingCallTime=null
+    DateTime? MaxEndingCallTime = null
 )
 {
     public Call() :this (0) { }
