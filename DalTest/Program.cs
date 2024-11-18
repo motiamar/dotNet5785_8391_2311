@@ -409,7 +409,6 @@ namespace DalTest
                 Console.WriteLine(item2);
             }
         }
-
         static void Main(string[] args)
         {
             MainMenu key;
