@@ -403,7 +403,7 @@ public static class Initialization
                 default:
                     break;
             }
-            DateTime start = s_dalConfig.Clock.AddMinutes(s_rand.Next(5, 10));
+            DateTime start = s_dalConfig!.Clock.AddMinutes(s_rand.Next(5, 10));
             DateTime finish = start.AddMinutes(s_rand.Next(5, 10));
             s_dalCall!.create(new Call
             {
@@ -435,20 +435,57 @@ public static class Initialization
         for (int i = 0; i < 70; i++)
         {
             if (i < 15)
-                s_dalAssignment.create(new Assignment());
-            // create 15 unssingnd assinment
+                s_dalAssignment!.create(new Assignment());
+                   // create 15 unssingnd assinment
             else
             {
                 tmpIndex = s_rand.Next(0, 50);
                 tmpCallId = tmpCalls[tmpIndex].Id;
                 tmpVolunteerId = tmpVolenteers[s_rand.Next(0, 50)].Id;
-                tmpFinishTime = tmpCalls[tmpIndex].MaxEndingCallTime;
-                tmpStartTime = tmpCalls[tmpIndex].OpeningCallTime;
-                if (i > 14 && i < 20)
+                tmpStartTime = tmpCalls[tmpIndex].OpeningCallTime.AddMinutes(1);
+                if ((tmpCallId % 2) == 0)
+                {
+                    tmpFinishTime = tmpCalls[tmpIndex].MaxEndingCallTime; // the finish time of the assinment is exact like the call
+                    tmpEndKind = (EndKind)s_rand.Next(0, 2);//random end assinment
+                }
+                else
+                {
+                    tmpFinishTime = tmpCalls[tmpIndex].MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 2)); // the finish time of the assinment is more then the call
                     tmpEndKind = EndKind.expired_cancellation;//5 expired calls
-                else if (i > 19)
-                    tmpEndKind = (EndKind)s_rand.Next(1, 3);//random end assinment
+                }
+                s_dalAssignment!.create(new Assignment
+                {
+                    Id = tmpId,
+                    CallId = tmpCallId,
+                    VolunteerId = tmpVolunteerId,
+                    StartTime = tmpStartTime,
+                    FinishTime = tmpFinishTime,
+                    EndKind = tmpEndKind,
+                });
             }
         }
+    }
+
+    public static void Do(IAssignment? dalAssignment, ICall? dalCall, IVolunteer? dalVolunteer, IConfig? dalConfig)
+    {
+        s_dalAssignment = dalAssignment ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalCall = dalCall ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalVolunteer = dalVolunteer ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalConfig = dalConfig ?? throw new NullReferenceException("DAL can not be null!");
+
+        Console.WriteLine("Reset Configuration values and List values");
+        s_dalConfig.Reset();
+        s_dalCall.DeleteAll();
+        s_dalVolunteer.DeleteAll();
+        s_dalAssignment.DeleteAll();
+        // reset and delete all the lists
+
+        Console.WriteLine("Initializing Volunteer list");
+        CreateVolunteers();
+        Console.WriteLine("Initializing Call list");
+        CreateCalls();
+        Console.WriteLine("Initializing Assignment list");
+        CreateAssignments();
+        // create all the new list with the entities inside
     }
 }
