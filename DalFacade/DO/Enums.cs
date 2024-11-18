@@ -28,4 +28,37 @@ public enum EndKind // tells how the assiment ended
     administrator_cancellation,
     expired_cancellation,
 }
+public enum MainMenu
+{
+    exit,
+    sub_volunteer,
+    sub_call,
+    sub_assignment,
+    initialization,
+    show_all,
+    sub_confing,
+    reset
+
+}
+public enum SubMenu
+{ 
+    exit,
+    add,
+    show,
+    see_all,
+    update,
+    delete,
+    delete_all
+}
+public enum ConfingSubMenu
+{
+    exit,
+    minutes,
+    hours,
+    show_time,
+    set_new_value,
+    show_spesific_value,
+    reset
+}
+
 
