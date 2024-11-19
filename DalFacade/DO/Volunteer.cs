@@ -25,10 +25,10 @@ public record Volunteer
     string? Address = null,
     double? Latitude = null,
     double? Longitude = null,
-    Enum Role = default,
+    Roles Role = Roles.volunteer,
     Boolean Active = false,
     double? MaximumDistance = null,
-    Enum DistanceType = default
+    DistanceTypes DistanceType = DistanceTypes.air
 )
 
 {

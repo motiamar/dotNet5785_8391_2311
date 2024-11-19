@@ -14,7 +14,7 @@ namespace DO;
 public record Call
 (
     int Id,
-    Enum TypeCall = default,
+    TypeCalls TypeCall = TypeCalls.medical_situation,
     string? VerbalDecription = null,
     string FullAddressOfTheCall = " ",
     double Latitude = 0,

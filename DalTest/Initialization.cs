@@ -27,7 +27,7 @@ public static class Initialization
         {
             int tmpid;
             do
-                tmpid = s_rand.Next(400000000, 200000000);
+                tmpid = s_rand.Next(200000000, 400000000);
             while (s_dalVolunteer!.Read(tmpid) != null);
             // make sure that the id dosent exsist
 
@@ -37,17 +37,17 @@ public static class Initialization
             string? password = name + "pass" + (i*4);
             // random password
 
-            Role tmpRole = default(Role);
+            Roles tmpRole = default(Roles);
             if(i == volunteerName.Length-1)
             {
-                Role tmpRoleManager = (Role)Enum.GetValues(typeof(Role)).Cast<Role>().ElementAt(1);
+                Roles tmpRoleManager = (Roles)Enum.GetValues(typeof(Roles)).Cast<Roles>().ElementAt(1);
                 tmpRole = tmpRoleManager;
             }
             // 15 volunteers and one manager
 
             double tmpMaximumDistance = s_rand.Next(50000, 100000); // random distance
 
-            DistanceType tmpDistanceType = default(DistanceType);
+            DistanceTypes tmpDistanceType = default(DistanceTypes);
 
             s_dalVolunteer.create(new Volunteer // create a new volunteer with all the tmp arguments
             {
@@ -173,6 +173,30 @@ public static class Initialization
     "Talpiot, HaOman Street 9, Jerusalem",
     "French Hill, HaAskan Street 4, Jerusalem",
     "Motza, Hahaganah Street 2, Jerusalem",
+    "Ramat Rachel, Kibbut, Jerusalem",
+     "Har Nof, Hayarden Street 18, Jerusalem",
+    "Pisgat Ze'ev, Moshe Dayan Street 78, Jerusalem",
+    "Armon Hanatziv, Zur Street 8, Jerusalem",
+    "Abu Tor, Hebron Road 35, Jerusalem",
+    "Gilo, Aharon Granot Street 5, Jerusalem",
+    "Arnona, Yanovsky Street 15, Jerusalem",
+    "HaTzayad Street 4, Tzur Hadassah",
+    "Givat Shaul, Kanfei Nesharim Street 35, Jerusalem",
+    "Talbieh, Dubnov Street 3, Jerusalem",
+    "Nachlaot, Nissim Bachar Street 10, Jerusalem",
+    "Katamon, Bilu Street 7, Jerusalem",
+    "San Simon, Gad Street 11, Jerusalem",
+    "Yemin Moshe, Yemin Moshe Street 2, Jerusalem",
+    "Mount Scopus, Har Hatsofim Street 1, Jerusalem",
+    "Beit HaKerem, HaRav Herzog Street 5, Jerusalem",
+    "HaGefen Street 8, Moshav Ora",
+    "HaPerach Street 3, Moshav Aminadav",
+    "Neve Yaakov, Neve Yaakov Boulevard 15, Jerusalem",
+    "Savyonim Street 22, Ma’ale Adumim",
+    "Givat Mordechai, Ben Yosef Street 12, Jerusalem",
+    "Talpiot, HaOman Street 9, Jerusalem",
+    "French Hill, HaAskan Street 4, Jerusalem",
+    "Motza, Hahaganah Street 2, Jerusalem",
     "Ramat Rachel, Kibbut, Jerusalem"
  };
         double[] callLatitude = {35.22119546257982,
@@ -243,6 +267,38 @@ public static class Initialization
 31.7708323,
 31.7750074,
 31.7738688,
+31.785841,
+32.0733788,
+31.7908428,
+31.7737814,
+31.8109352,
+31.809913,
+31.7671028,
+31.7804243,
+31.752766,
+31.8286017,
+31.749309,
+31.7660038,
+31.7697764,
+31.7557591,
+31.719374,
+31.7871046,
+31.7683109,
+31.7829636,
+31.7625612,
+31.7554844,
+31.7715538,
+31.768319,
+31.769796,
+31.7515142,
+31.751705,
+31.8426791,
+31.777369,
+31.762951,
+31.7483217,
+31.7541261,
+31.8041316,
+31.7403163,
 31.785841,
 32.0733788,
 31.7908428,
@@ -375,29 +431,52 @@ public static class Initialization
     35.2115231,
     35.2279147,
     35.2356295,
+    35.2178825,
+    35.2391439,
+    35.236047,
+    35.22574,
+    35.2033023,
+    35.2230772,
+    35.096958,
+    35.1813603,
+    35.2172931,
+    35.2102015,
+    35.2100508,
+    35.2177412,
+    35.2241405,
+    35.21371,
+    35.211126,
+    35.1447801,
+    35.142428,
+    35.2429618,
+    35.297955,
+    35.197501,
+    35.2115231,
+    35.2279147,
+    35.2356295,
     35.2178825
  };
         string tmpVerbalDecription = null;
         int tmpId = 0;
 
-        for (int i = 0; i < 50; i++) // create a new call with all the tmp arguments
+        for (int i = 0; i < 70; i++) // create a new call with all the tmp arguments
         {
-            TypeCall tmpTypeCall = (TypeCall)s_rand.Next(0, Enum.GetValues(typeof(TypeCall)).Length);
+            TypeCalls tmpTypeCall = (TypeCalls)s_rand.Next(0, Enum.GetValues(typeof(TypeCalls)).Length);
             switch (tmpTypeCall) // Matches event description to event randomly
             {
-                case TypeCall.medical_situation:
+                case TypeCalls.medical_situation:
                     tmpVerbalDecription = medical_Descriptions[s_rand.Next(0, medical_Descriptions.Length)];
                     break;
-                case TypeCall.car_accident:
+                case TypeCalls.car_accident:
                     tmpVerbalDecription = accident_Descriptions[s_rand.Next(0, accident_Descriptions.Length)];
                     break;
-                case TypeCall.fall_from_hight:
+                case TypeCalls.fall_from_hight:
                     tmpVerbalDecription = fall_Descriptions[s_rand.Next(0, fall_Descriptions.Length)];
                     break;
-                case TypeCall.violent_event:
+                case TypeCalls.violent_event:
                     tmpVerbalDecription = violence_Descriptions[s_rand.Next(0, violence_Descriptions.Length)];
                     break;
-                case TypeCall.domestic_violent:
+                case TypeCalls.domestic_violent:
                     tmpVerbalDecription = domestic_Descriptions[s_rand.Next(0, domestic_Descriptions.Length)];
                     break;
                 default:
@@ -427,30 +506,27 @@ public static class Initialization
         int tmpVolunteerId = 0;
         DateTime ? tmpFinishTime = null;
         DateTime tmpStartTime;
-        EndKind tmpEndKind = default;
+        EndKinds tmpEndKind = default;
         List<Call> tmpCalls = s_dalCall!.ReadAll();
         List<Volunteer> tmpVolenteers = s_dalVolunteer!.ReadAll();
 
-        for (int i = 0; i < 70; i++)
+        for (int i = 0; i < 50; i++)
         {
-            if (i < 15)
-                s_dalAssignment!.create(new Assignment());
-                   // create 15 unssingnd assinment
-            else
-            {
+       
+            
                 tmpIndex = s_rand.Next(0, 50);
                 tmpCallId = tmpCalls[tmpIndex].Id;
-                tmpVolunteerId = tmpVolenteers[s_rand.Next(0, 50)].Id;
+                tmpVolunteerId = tmpVolenteers[s_rand.Next(0, 16)].Id;
                 tmpStartTime = tmpCalls[tmpIndex].OpeningCallTime.AddMinutes(1);
                 if ((tmpCallId % 2) == 0)
                 {
                     tmpFinishTime = tmpCalls[tmpIndex].MaxEndingCallTime; // the finish time of the assinment is exact like the call
-                    tmpEndKind = (EndKind)s_rand.Next(0, 2);//random end assinment
+                    tmpEndKind = (EndKinds)s_rand.Next(0, 2);//random end assinment
                 }
                 else
                 {
                     tmpFinishTime = tmpCalls[tmpIndex].MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 2)); // the finish time of the assinment is more then the call
-                    tmpEndKind = EndKind.expired_cancellation;//5 expired calls
+                    tmpEndKind = EndKinds.expired_cancellation;//5 expired calls
                 }
                 s_dalAssignment!.create(new Assignment
                 {
@@ -461,7 +537,7 @@ public static class Initialization
                     FinishTime = tmpFinishTime,
                     EndKind = tmpEndKind,
                 });
-            }
+            
         }
     }
 

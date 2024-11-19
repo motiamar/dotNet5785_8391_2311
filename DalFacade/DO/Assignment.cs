@@ -16,7 +16,7 @@ public record Assignment
     int VolunteerId,
     DateTime StartTime = default, 
     DateTime? FinishTime = null, 
-    Enum? EndKind = default 
+    EndKinds EndKind = EndKinds.treated
 )
 
 { 

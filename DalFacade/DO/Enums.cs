@@ -1,19 +1,19 @@
 ﻿namespace DO;
 
-public enum Role // define the character of the volunteer
+public enum Roles // define the character of the volunteer
 {
     volunteer,  // default
     manager,
 }
 // 
 
-public enum DistanceType // define in what means the distance get measured
+public enum DistanceTypes // define in what means the distance get measured
 {
     air, // default
     walk,
     car,
 }
-public enum TypeCall // define the type of call that enterd the system
+public enum TypeCalls // define the type of call that enterd the system
 {
     medical_situation, // default
     car_accident,
@@ -21,7 +21,7 @@ public enum TypeCall // define the type of call that enterd the system
     violent_event,
     domestic_violent,
 }
-public enum EndKind // tells how the assiment ended
+public enum EndKinds // tells how the assiment ended
 {
     treated, // default
     self_cancellation,
