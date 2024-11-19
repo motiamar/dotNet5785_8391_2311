@@ -102,8 +102,6 @@ namespace DalTest
                 Console.WriteLine($"enter 6 to delete all the {type}");
                 try
                 {
-
-
                     string input = Console.ReadLine();
                     int key = int.Parse(input);
 
