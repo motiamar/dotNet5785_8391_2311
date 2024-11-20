@@ -2,6 +2,7 @@
 using DalApi;
 using DO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
@@ -42,21 +43,20 @@ internal class CallImplementation : ICall
 
     public Call? Read(int id)
     {
-        foreach (var item in DataSource.Calls)
-        {
-            if (item.Id == id)
-                return item;
-        }
-        return null;
+        return DataSource.Calls.FirstOrDefault(item => item.Id == id); //stage 2
     }
+
+    public Call? Read(Func<Call, bool> filter)
+    {
+        return DataSource.Calls.FirstOrDefault(filter);
+    }
+
     // the func search a entity in the list end return a pointer, if it not exsist it return null
 
-    public List<Call> ReadAll()
-    {
-        List<Call> newList = new List<Call>();
-        newList.AddRange(DataSource.Calls);
-        return newList;
-    }
+    public IEnumerable<Call> ReadAll(Func<Call, bool>? filter = null) //stage 2
+         => filter == null
+             ? DataSource.Calls.Select(item => item)
+            : DataSource.Calls.Where(filter);
     // the func create a new list with the same entities as the list that send to it
 
     public void Update(Call item)

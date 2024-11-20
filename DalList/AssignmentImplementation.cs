@@ -2,6 +2,7 @@
 using DalApi;
 using DO;
 using System.Collections.Generic;
+using System.Linq;
 
 internal class AssignmentImplementation : IAssignment
 {
@@ -39,21 +40,21 @@ internal class AssignmentImplementation : IAssignment
 
     public Assignment? Read(int id)
     {
-        foreach (var item in DataSource.Assignments)
-        {
-            if (item.Id == id)
-                return item;
-        }
-        return null;
+        return DataSource.Assignments.FirstOrDefault(item => item.Id == id); //stage 2
     }
+
+    public Assignment? Read(Func<Assignment, bool> filter)
+    {
+        return DataSource.Assignments.FirstOrDefault(filter);
+    }
+
     // the func search a entity in the list end return a pointer, if it not exsist it return null
 
-    public List<Assignment> ReadAll()
-    {
-        List<Assignment> newList = new List<Assignment>();
-        newList.AddRange(DataSource.Assignments);
-        return newList;
-    }
+    public IEnumerable<Assignment> ReadAll(Func<Assignment, bool>? filter = null) //stage 2
+         => filter == null
+             ? DataSource.Assignments.Select(item => item)
+            : DataSource.Assignments.Where(filter);
+
     // the func create a new list with the same entities as the list that send to it
 
     public void Update(Assignment item)

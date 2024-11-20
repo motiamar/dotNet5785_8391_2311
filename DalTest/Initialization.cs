@@ -1,5 +1,4 @@
-﻿
-using System.Windows.Markup;
+﻿using System.Windows.Markup;
 namespace DalTest;
 using DalApi;
 using DO;
@@ -508,25 +507,25 @@ public static class Initialization
         DateTime ? tmpFinishTime = null;
         DateTime tmpStartTime;
         EndKinds tmpEndKind = default;
-        List<Call> tmpCalls = s_dal.call!.ReadAll();
-        List<Volunteer> tmpVolenteers = s_dal.volunteer!.ReadAll();
+        IEnumerable<Call> tmpCalls = s_dal.call!.ReadAll();
+        IEnumerable<Volunteer> tmpVolenteers = s_dal.volunteer!.ReadAll();
 
         for (int i = 0; i < 50; i++)
         {
        
             
                 tmpIndex = s_rand.Next(0, 50);
-                tmpCallId = tmpCalls[tmpIndex].Id;
-                tmpVolunteerId = tmpVolenteers[s_rand.Next(0, 16)].Id;
-                tmpStartTime = tmpCalls[tmpIndex].OpeningCallTime.AddMinutes(1);
+                tmpCallId = tmpCalls.ElementAt(tmpIndex).Id;
+                tmpVolunteerId = tmpVolenteers.ElementAt(s_rand.Next(0, 16)).Id;
+                tmpStartTime = tmpCalls.ElementAt(tmpIndex).OpeningCallTime.AddMinutes(1);
                 if ((tmpCallId % 2) == 0)
                 {
-                    tmpFinishTime = tmpCalls[tmpIndex].MaxEndingCallTime; // the finish time of the assinment is exact like the call
+                    tmpFinishTime = tmpCalls.ElementAt(tmpIndex).MaxEndingCallTime; // the finish time of the assinment is exact like the call
                     tmpEndKind = (EndKinds)s_rand.Next(0, 2);//random end assinment
                 }
                 else
                 {
-                    tmpFinishTime = tmpCalls[tmpIndex].MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 2)); // the finish time of the assinment is more then the call
+                    tmpFinishTime = tmpCalls.ElementAt(tmpIndex).MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 2)); // the finish time of the assinment is more then the call
                     tmpEndKind = EndKinds.expired_cancellation;//5 expired calls
                 }
                 s_dal.assignment!.Create(new Assignment

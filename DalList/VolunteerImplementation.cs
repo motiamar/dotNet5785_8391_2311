@@ -34,21 +34,20 @@ internal class VolunteerImplementation : IVolunteer
 
     public Volunteer? Read(int id)
     {
-        foreach (Volunteer item in DataSource.Volunteers)
-        {
-            if (item.Id == id)
-                return item;
-        }
-        return null;
+        return DataSource.Volunteers.FirstOrDefault(item => item.Id == id); //stage 2
     }
+
+    public Volunteer? Read(Func<Volunteer, bool> filter)
+    {
+        return DataSource.Volunteers.FirstOrDefault(filter);
+    }
+
     // the func search a entity in the list end return a pointer, if it not exsist it return null
 
-    public List<Volunteer> ReadAll()
-    {
-        List<Volunteer> volunteersCopy = new List<Volunteer>();
-        volunteersCopy.AddRange(DataSource.Volunteers);  
-        return volunteersCopy;
-    }
+    public IEnumerable<Volunteer> ReadAll(Func<Volunteer, bool>? filter = null) //stage 2
+         => filter == null
+             ? DataSource.Volunteers.Select(item => item)
+            : DataSource.Volunteers.Where(filter);
     // the func create a new list with the same entities as the list that send to it
 
     public void Update(Volunteer item)

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Dal;
 
-    sealed public class DalList : IDal
+sealed public class DalList : IDal
 {
     public IVolunteer volunteer { get; } = new VolunteerImplementation();
 
