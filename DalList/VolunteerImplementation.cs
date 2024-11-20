@@ -4,7 +4,7 @@ using DO;
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 
-public class VolunteerImplementation : IVolunteer
+internal class VolunteerImplementation : IVolunteer
 {
     public int Create(Volunteer item)
     {

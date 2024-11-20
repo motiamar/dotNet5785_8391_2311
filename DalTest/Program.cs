@@ -10,10 +10,11 @@ namespace DalTest
     internal class Program
     {
         // set gonpinf entities to use in the main
-        private static IConfig? s_dalConfig = new ConfigImplementation();
-        private static IAssignment? s_dalAssignment = new AssignmentImplementation();
-        private static ICall? s_dalCall = new CallImplementation();
-        private static IVolunteer? s_dalVolunteer = new VolunteerImplementation();
+        //private static IConfig? s_dalConfig = new ConfigImplementation();
+        //private static IAssignment? s_dalAssignment = new AssignmentImplementation();
+        //private static ICall? s_dalCall = new CallImplementation();
+        //private static IVolunteer? s_dalVolunteer = new VolunteerImplementation();
+        static readonly IDal s_dal = new DalList();  
 
         static void Main(string[] args)
         {
@@ -45,7 +46,7 @@ namespace DalTest
                             break;
 
                         case MainMenu.initialization:  // initiolztion all the data
-                            Initialization.Do(s_dalAssignment, s_dalCall, s_dalVolunteer, s_dalConfig);
+                            Initialization.Do(s_dal);
                             break;
 
                         case MainMenu.show_all:   // print all the lists
@@ -57,10 +58,10 @@ namespace DalTest
                             break;
 
                         case MainMenu.reset:   // reset all the list and the conping setup
-                            s_dalAssignment!.DeleteAll();
-                            s_dalCall!.DeleteAll();
-                            s_dalVolunteer!.DeleteAll();
-                            s_dalConfig!.Reset();
+                            s_dal.assignment!.DeleteAll();
+                            s_dal.call!.DeleteAll();
+                            s_dal.volunteer!.DeleteAll();
+                            s_dal.config!.Reset();
                             break;
 
                         default:
@@ -119,12 +120,12 @@ namespace DalTest
                         case SubMenu.show:
                             Console.WriteLine("Enter volunteer Id");
                             Id = int.Parse(Console.ReadLine());
-                            Volunteer item = s_dalVolunteer.Read(Id);
+                            Volunteer item = s_dal.volunteer.Read(Id);
                             Console.WriteLine(item);
                             break;
 
                         case SubMenu.see_all:
-                            List<Volunteer> tmpForShow = s_dalVolunteer.ReadAll();
+                            List<Volunteer> tmpForShow = s_dal.volunteer.ReadAll();
                             foreach (var item1 in tmpForShow)
                             {
                                 Console.WriteLine(item1);
@@ -138,11 +139,11 @@ namespace DalTest
                         case SubMenu.delete:
                             Console.WriteLine("enter ID please");
                             Id = int.Parse(Console.ReadLine());
-                            s_dalVolunteer!.Delete(Id);
+                            s_dal.volunteer!.Delete(Id);
                             break;
 
                         case SubMenu.delete_all:
-                            s_dalVolunteer!.DeleteAll();
+                            s_dal.volunteer!.DeleteAll();
                             break;
 
                         default:
@@ -186,12 +187,12 @@ namespace DalTest
                         case SubMenu.show:
                             Console.WriteLine("Enter Call Id");
                             Id = int.Parse(Console.ReadLine());
-                            Call item = s_dalCall.Read(Id);
+                            Call item = s_dal.call.Read(Id);
                             Console.WriteLine(item);
                             break;
 
                         case SubMenu.see_all:
-                            List<Call> tmpForShow = s_dalCall.ReadAll();
+                            List<Call> tmpForShow = s_dal.call.ReadAll();
                             foreach (var item1 in tmpForShow)
                             {
                                 Console.WriteLine(item1);
@@ -205,11 +206,11 @@ namespace DalTest
                         case SubMenu.delete:
                             Console.WriteLine("enter ID please");
                             Id = int.Parse(Console.ReadLine());
-                            s_dalCall!.Delete(Id);
+                            s_dal.call!.Delete(Id);
                             break;
 
                         case SubMenu.delete_all:
-                            s_dalCall!.DeleteAll();
+                            s_dal.call!.DeleteAll();
                             break;
 
                         default:
@@ -252,12 +253,12 @@ namespace DalTest
                         case SubMenu.show:
                             Console.WriteLine("Enter Assignment Id");
                             Id = int.Parse(Console.ReadLine());
-                            Assignment item = s_dalAssignment.Read(Id);
+                            Assignment item = s_dal.assignment.Read(Id);
                             Console.WriteLine(item);
                             break;
 
                         case SubMenu.see_all:
-                            List<Assignment> tmpForShow = s_dalAssignment.ReadAll();
+                            List<Assignment> tmpForShow = s_dal.assignment.ReadAll();
                             foreach (var item1 in tmpForShow)
                             {
                                 Console.WriteLine(item1);
@@ -271,11 +272,11 @@ namespace DalTest
                         case SubMenu.delete:
                             Console.WriteLine("enter ID please");
                             Id = int.Parse(Console.ReadLine());
-                            s_dalAssignment!.Delete(Id);
+                            s_dal.assignment!.Delete(Id);
                             break;
 
                         case SubMenu.delete_all:
-                            s_dalAssignment!.DeleteAll();
+                            s_dal.assignment!.DeleteAll();
                             break;
 
                         default:
@@ -311,15 +312,15 @@ namespace DalTest
                             break;
 
                         case ConfingSubMenu.minutes:
-                            s_dalConfig.Clock.AddMinutes(1);
+                            s_dal.config.Clock.AddMinutes(1);
                             break;
 
                         case ConfingSubMenu.hours:
-                            s_dalConfig.Clock.AddHours(1);
+                            s_dal.config.Clock.AddHours(1);
                             break;
 
                         case ConfingSubMenu.show_time:
-                            Console.WriteLine(s_dalConfig.Clock);
+                            Console.WriteLine(s_dal.config.Clock);
                             break;
 
                         case ConfingSubMenu.set_new_value:
@@ -331,13 +332,13 @@ namespace DalTest
                                 Console.WriteLine("Enter a new time");
                                 if (!DateTime.TryParse(Console.ReadLine(), out DateTime bdt)) throw new FormatException("time is invalid!");
                                 DateTime tmpFinishTime = bdt;
-                                s_dalConfig.Clock = bdt;
+                                s_dal.config.Clock = bdt;
                             }
                             else if (choise == 2)
                             {
                                 Console.WriteLine("Enter a new risk range (in secondes) ");
                                 if (int.TryParse(Console.ReadLine(), out int riskrangeInsecondes))
-                                    s_dalConfig.RiskRnge = TimeSpan.FromSeconds(riskrangeInsecondes);
+                                    s_dal.config.RiskRnge = TimeSpan.FromSeconds(riskrangeInsecondes);
                             }
                             break;
 
@@ -346,13 +347,13 @@ namespace DalTest
                             Console.WriteLine("to see the time press 1, to see the Risk Rnge press 2");
                             choise2 = int.Parse(Console.ReadLine());
                             if (choise2 == 1)
-                                Console.WriteLine(s_dalConfig.Clock);
+                                Console.WriteLine(s_dal.config.Clock);
                             else if (choise2 == 2)
-                                Console.WriteLine(s_dalConfig.RiskRnge);
+                                Console.WriteLine(s_dal.config.RiskRnge);
                             break;
 
                         case ConfingSubMenu.reset:
-                            s_dalConfig!.Reset();
+                            s_dal.config!.Reset();
                             break;
 
                         default:
@@ -390,13 +391,13 @@ namespace DalTest
             Console.WriteLine("enter Maximum Distance please");
             double? MaximumDistance = double.Parse(Console.ReadLine());
             Volunteer addvolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer , true ,MaximumDistance, distanceTypes);
-            s_dalVolunteer!.Create(addvolunteer);
+            s_dal.volunteer!.Create(addvolunteer);
         }
         private static void UpdateVolunteer()  // func to update a existing entity
         {
             Console.WriteLine("enter ID please");
             int Id = int.Parse(Console.ReadLine());
-            Volunteer tmp = s_dalVolunteer.Read(Id);
+            Volunteer tmp = s_dal.volunteer.Read(Id);
             Console.WriteLine(tmp);
             // show the entity first
             Console.WriteLine("enter Full Name please");
@@ -420,7 +421,7 @@ namespace DalTest
             Console.WriteLine("enter Maximum Distance please");
             double? MaximumDistance = double.Parse(Console.ReadLine());
             Volunteer Updatevolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer, true, MaximumDistance, distanceTypes);
-            s_dalVolunteer.Update(Updatevolunteer);
+            s_dal.volunteer.Update(Updatevolunteer);
         }
         private static void AddCall()  // func to add entity to rhe list
         {
@@ -441,13 +442,13 @@ namespace DalTest
             int time = int.Parse(Console.ReadLine());
             DateTime tmpEndCallTime = DateTime.Now.AddMinutes(time);
             Call addcall = new Call(0, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
-            s_dalCall!.Create(addcall);
+            s_dal.call!.Create(addcall);
         }
         private static void UpdateCall()  // func to update a existing entity
         {
             Console.WriteLine("enter ID please");
             int Id = int.Parse(Console.ReadLine());
-            Call tmp = s_dalCall.Read(Id);
+            Call tmp = s_dal.call.Read(Id);
             Console.WriteLine(tmp);
             // show the entity first
             Console.WriteLine("enter Type call, 0 to medical_situation, 1 to car_accident, 2 to fall_from_hight, 3 to violent_event, 4 to domestic_violent");
@@ -465,7 +466,7 @@ namespace DalTest
             int time = int.Parse(Console.ReadLine());
             DateTime tmpEndCallTime = DateTime.Now.AddMinutes(time);
             Call updateCall = new Call(0, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
-            s_dalCall.Update(updateCall);
+            s_dal.call.Update(updateCall);
         }
         private static void AddAssignment()  // func to add entity to rhe list
         {
@@ -480,13 +481,13 @@ namespace DalTest
             Console.WriteLine("enter Assignment end kind, 0 to treated, 1 to self_cancellation, 2 to administrator_cancellation, 3 to expired_cancellation");
             EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine());
             Assignment addAssignment = new Assignment(0, tmpCallId, tmpVolunteerId, tmpStartTime, tmpFinishTime, tmpEndKind);
-            s_dalAssignment!.Create(addAssignment);
+            s_dal.assignment!.Create(addAssignment);
         }
         private static void UpdateAssignment()  // func to update a existing entity
         {
             Console.WriteLine("enter ID please");
             int Id = int.Parse(Console.ReadLine());
-            Assignment? tmp = s_dalAssignment.Read(Id);
+            Assignment? tmp = s_dal.assignment.Read(Id);
             Console.WriteLine(tmp);
             // show the entity first
             Console.WriteLine("enter call Id please");
@@ -500,21 +501,21 @@ namespace DalTest
             Console.WriteLine("enter Assignment end kind, 0 to treated, 1 to self_cancellation, 2 to administrator_cancellation, 3 to expired_cancellation");
             EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine());
             Assignment UpdateAssignment = new Assignment(0, tmpCallId, tmpVolunteerId, tmpStartTime, tmpFinishTime, tmpEndKind);
-            s_dalAssignment.Update(UpdateAssignment);
+            s_dal.assignment.Update(UpdateAssignment);
         }
         private static void ShowAllTheData() // print all the lists of all the entities
         {
-            List<Volunteer> tmpForShow = s_dalVolunteer.ReadAll();
+            List<Volunteer> tmpForShow = s_dal.volunteer.ReadAll();
             foreach (var item in tmpForShow)
             {
                 Console.WriteLine(item);
             }
-            List<Call> tmpForShow1 = s_dalCall.ReadAll();
+            List<Call> tmpForShow1 = s_dal.call.ReadAll();
             foreach (var item1 in tmpForShow1)
             {
                 Console.WriteLine(item1);
             }
-            List<Assignment> tmpForShow2 = s_dalAssignment.ReadAll();
+            List<Assignment> tmpForShow2 = s_dal.assignment.ReadAll();
             foreach (var item2 in tmpForShow2)
             {
                 Console.WriteLine(item2);

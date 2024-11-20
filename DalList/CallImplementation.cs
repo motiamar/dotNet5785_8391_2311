@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
-public class CallImplementation : ICall
+internal class CallImplementation : ICall
 {
     public int Create(Call item)
     {

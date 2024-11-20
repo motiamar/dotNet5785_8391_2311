@@ -6,10 +6,11 @@ using DO;
 using Dal;
 public static class Initialization
 {
-    private static IAssignment? s_dalAssignment; 
-    private static ICall? s_dalCall;
-    private static IVolunteer? s_dalVolunteer;
-    private static IConfig? s_dalConfig;
+    //private static IAssignment? s_dalAssignment; 
+    //private static ICall? s_dalCall;
+    //private static IVolunteer? s_dalVolunteer;
+    //private static IConfig? s_dalConfig;
+    private static IDal? s_dal;
     private static readonly Random s_rand = new(); // createing random numbers for the entities
 
 
@@ -28,7 +29,7 @@ public static class Initialization
             int tmpid;
             do
                 tmpid = s_rand.Next(200000000, 400000000);
-            while (s_dalVolunteer!.Read(tmpid) != null);
+            while (s_dal.volunteer.Read(tmpid) != null);
             // make sure that the id dosent exsist
 
             bool tmpaActive = (tmpid % 2) == 0 ? true : false;
@@ -49,7 +50,7 @@ public static class Initialization
 
             DistanceTypes tmpDistanceType = default(DistanceTypes);
 
-            s_dalVolunteer.Create(new Volunteer // create a new volunteer with all the tmp arguments
+            s_dal.volunteer.Create(new Volunteer // create a new volunteer with all the tmp arguments
             {
                 Id = tmpid,
                 FullName = name,
@@ -482,9 +483,9 @@ public static class Initialization
                 default:
                     break;
             }
-            DateTime start = s_dalConfig!.Clock.AddMinutes(s_rand.Next(5, 10));  // define the random time
+            DateTime start = s_dal.config!.Clock.AddMinutes(s_rand.Next(5, 10));  // define the random time
             DateTime finish = start.AddMinutes(s_rand.Next(5, 10));   // define the random ending time
-            s_dalCall!.Create(new Call
+            s_dal.call!.Create(new Call
             {
                 Id = tmpId,
                 TypeCall = tmpTypeCall,
@@ -507,8 +508,8 @@ public static class Initialization
         DateTime ? tmpFinishTime = null;
         DateTime tmpStartTime;
         EndKinds tmpEndKind = default;
-        List<Call> tmpCalls = s_dalCall!.ReadAll();
-        List<Volunteer> tmpVolenteers = s_dalVolunteer!.ReadAll();
+        List<Call> tmpCalls = s_dal.call!.ReadAll();
+        List<Volunteer> tmpVolenteers = s_dal.volunteer!.ReadAll();
 
         for (int i = 0; i < 50; i++)
         {
@@ -528,7 +529,7 @@ public static class Initialization
                     tmpFinishTime = tmpCalls[tmpIndex].MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 2)); // the finish time of the assinment is more then the call
                     tmpEndKind = EndKinds.expired_cancellation;//5 expired calls
                 }
-                s_dalAssignment!.Create(new Assignment
+                s_dal.assignment!.Create(new Assignment
                 {
                     Id = tmpId,
                     CallId = tmpCallId,
@@ -541,20 +542,24 @@ public static class Initialization
         }
     }
 
-    public static void Do(IAssignment? dalAssignment, ICall? dalCall, IVolunteer? dalVolunteer, IConfig? dalConfig)
+    public static void Do(IDal dal)
     {
-        s_dalAssignment = dalAssignment ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalCall = dalCall ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalVolunteer = dalVolunteer ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalConfig = dalConfig ?? throw new NullReferenceException("DAL can not be null!");
+    //    s_dalAssignment = dalAssignment ?? throw new NullReferenceException("DAL can not be null!");
+    //    s_dalCall = dalCall ?? throw new NullReferenceException("DAL can not be null!");
+    //    s_dalVolunteer = dalVolunteer ?? throw new NullReferenceException("DAL can not be null!");
+    //    s_dalConfig = dalConfig ?? throw new NullReferenceException("DAL can not be null!");
         // assingd entities to use 
 
+        s_dal=dal??throw new NullReferenceException("Reset configuration and List value...");  
         Console.WriteLine("Reset Configuration values and List values");
-        s_dalConfig.Reset();
-        s_dalCall.DeleteAll();
-        s_dalVolunteer.DeleteAll();
-        s_dalAssignment.DeleteAll();
+
+        //s_dalConfig.Reset();
+        //s_dalCall.DeleteAll();
+        //s_dalVolunteer.DeleteAll();
+        //s_dalAssignment.DeleteAll();
         // reset and delete all the lists
+        s_dal.RestDB();
+
 
         Console.WriteLine("Initializing Volunteer list");
         CreateVolunteers();
