@@ -6,12 +6,13 @@ using System.Reflection.Metadata.Ecma335;
 
 public class VolunteerImplementation : IVolunteer
 {
-    public void create(Volunteer item)
+    public int Create(Volunteer item)
     {
         if(Read(item.Id) != null)
             throw new NotImplementedException($"Volunteer with ID={item.Id} has already exists");
         else
             DataSource.Volunteers.Add(item);
+        return item.Id;
     }
     // the func crate a new spot in the list and add the new entity to the spot
     
@@ -55,7 +56,7 @@ public class VolunteerImplementation : IVolunteer
         if (Read(item.Id) != null)
         {
             Delete(item.Id);
-            create(item);
+            Create(item);
         }
         else
             throw new NotImplementedException($"Volunteer with ID={item.Id} doesn't exists");

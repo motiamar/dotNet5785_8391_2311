@@ -4,6 +4,7 @@ using Dal;
 using DalApi;
 using DO;
 
+
 namespace DalTest
 {
     internal class Program
@@ -382,10 +383,14 @@ namespace DalTest
             double? Latitude = double.Parse(Console.ReadLine());
             Console.WriteLine("enter Longitude please");
             double? Longitude = double.Parse(Console.ReadLine());
+            Console.WriteLine("enter Distance Type, 0 to air, 1 to walk, 2 to car ");
+            string input = Console.ReadLine();
+            int key = int.Parse(input);
+            DistanceTypes distanceTypes = (DistanceTypes)key;
             Console.WriteLine("enter Maximum Distance please");
             double? MaximumDistance = double.Parse(Console.ReadLine());
-            Volunteer addvolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer , true ,MaximumDistance);
-            s_dalVolunteer!.create(addvolunteer);
+            Volunteer addvolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer , true ,MaximumDistance, distanceTypes);
+            s_dalVolunteer!.Create(addvolunteer);
         }
         private static void UpdateVolunteer()  // func to update a existing entity
         {
@@ -408,9 +413,13 @@ namespace DalTest
             double? Latitude = double.Parse(Console.ReadLine());
             Console.WriteLine("enter Longitude please");
             double? Longitude = double.Parse(Console.ReadLine());
+            Console.WriteLine("enter Distance Type, 0 to air, 1 to walk, 2 to car ");
+            string input = Console.ReadLine();
+            int key = int.Parse(input);
+            DistanceTypes distanceTypes = (DistanceTypes)key;
             Console.WriteLine("enter Maximum Distance please");
             double? MaximumDistance = double.Parse(Console.ReadLine());
-            Volunteer Updatevolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer, true, MaximumDistance);
+            Volunteer Updatevolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer, true, MaximumDistance, distanceTypes);
             s_dalVolunteer.Update(Updatevolunteer);
         }
         private static void AddCall()  // func to add entity to rhe list
@@ -432,7 +441,7 @@ namespace DalTest
             int time = int.Parse(Console.ReadLine());
             DateTime tmpEndCallTime = DateTime.Now.AddMinutes(time);
             Call addcall = new Call(0, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
-            s_dalCall!.create(addcall);
+            s_dalCall!.Create(addcall);
         }
         private static void UpdateCall()  // func to update a existing entity
         {
@@ -471,7 +480,7 @@ namespace DalTest
             Console.WriteLine("enter Assignment end kind, 0 to treated, 1 to self_cancellation, 2 to administrator_cancellation, 3 to expired_cancellation");
             EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine());
             Assignment addAssignment = new Assignment(0, tmpCallId, tmpVolunteerId, tmpStartTime, tmpFinishTime, tmpEndKind);
-            s_dalAssignment!.create(addAssignment);
+            s_dalAssignment!.Create(addAssignment);
         }
         private static void UpdateAssignment()  // func to update a existing entity
         {

@@ -49,7 +49,7 @@ public static class Initialization
 
             DistanceTypes tmpDistanceType = default(DistanceTypes);
 
-            s_dalVolunteer.create(new Volunteer // create a new volunteer with all the tmp arguments
+            s_dalVolunteer.Create(new Volunteer // create a new volunteer with all the tmp arguments
             {
                 Id = tmpid,
                 FullName = name,
@@ -484,7 +484,7 @@ public static class Initialization
             }
             DateTime start = s_dalConfig!.Clock.AddMinutes(s_rand.Next(5, 10));  // define the random time
             DateTime finish = start.AddMinutes(s_rand.Next(5, 10));   // define the random ending time
-            s_dalCall!.create(new Call
+            s_dalCall!.Create(new Call
             {
                 Id = tmpId,
                 TypeCall = tmpTypeCall,
@@ -528,7 +528,7 @@ public static class Initialization
                     tmpFinishTime = tmpCalls[tmpIndex].MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 2)); // the finish time of the assinment is more then the call
                     tmpEndKind = EndKinds.expired_cancellation;//5 expired calls
                 }
-                s_dalAssignment!.create(new Assignment
+                s_dalAssignment!.Create(new Assignment
                 {
                     Id = tmpId,
                     CallId = tmpCallId,

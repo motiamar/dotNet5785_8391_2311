@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class AssignmentImplementation : IAssignment
 {
-    public int create(Assignment item)
+    public int Create(Assignment item)
     {
         int NewId = Config.NextAssignmentId;
         var copy = item with { Id = NewId };
@@ -59,7 +59,7 @@ public class AssignmentImplementation : IAssignment
     public void Update(Assignment item)
     {
         Delete(item.Id);
-        create(item);
+        Create(item);
     }
     // the func updatr a entity in the list by the new parameters that in the given entity
 

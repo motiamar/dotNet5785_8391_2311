@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 
 public class CallImplementation : ICall
 {
-    public int create(Call item)
+    public int Create(Call item)
     {
         int NewId = Config.NextCallId;
         var copy = item with { Id = NewId };
@@ -62,7 +62,7 @@ public class CallImplementation : ICall
     public void Update(Call item)
     {
         Delete(item.Id);
-        create(item);
+        Create(item);
     }
     // the func updatr a entity in the list by the new parameters that in the given entity
 
