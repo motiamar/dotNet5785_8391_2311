@@ -6,51 +6,48 @@ using System.Reflection.Metadata.Ecma335;
 
 internal class VolunteerImplementation : IVolunteer
 {
-    public int Create(Volunteer item)
+    public int Create(Volunteer item)    // the func crate a new spot in the list and add the new entity to the spot
     {
-        if(Read(item.Id) != null)
-            throw new NotImplementedException($"Volunteer with ID={item.Id} has already exists");
+        if (Read(item.Id) != null)
+            throw new DalAlreadyExistException($"Volunteer with ID={item.Id} has already exists");
         else
             DataSource.Volunteers.Add(item);
         return item.Id;
     }
-    // the func crate a new spot in the list and add the new entity to the spot
     
-    public void Delete(int id)
+
+    public void Delete(int id)    // the func search for the entity in the list by the id and remove it
     {
         if (Read(id) != null)
             DataSource.Volunteers.Remove(Read(id)!);
         else 
-            throw new NotImplementedException($"Volunteer with ID={id} doesn't exists");
+            throw new DalDoesNotExistException($"Volunteer with ID={id} doesn't exists");
     }
-    // the func search for the entity in the list by the id and remove it
 
-    public void DeleteAll()
+
+    public void DeleteAll()  // the func remove all the entities in the list
     {
         DataSource.Volunteers.Clear();  
     }
-    // the func remove all the entities in the list
 
 
-    public Volunteer? Read(int id)
+    public Volunteer? Read(int id) // return if the item with the corrent id exist
     {
-        return DataSource.Volunteers.FirstOrDefault(item => item.Id == id); //stage 2
+        return DataSource.Volunteers.FirstOrDefault(item => item.Id == id); 
     }
 
-    public Volunteer? Read(Func<Volunteer, bool> filter)
+    public Volunteer? Read(Func <Volunteer, bool> filter)  // the func search a entity in the list end return a pointer, depend on the filter func, if it not exsist it return null
     {
         return DataSource.Volunteers.FirstOrDefault(filter);
     }
 
-    // the func search a entity in the list end return a pointer, if it not exsist it return null
 
-    public IEnumerable<Volunteer> ReadAll(Func<Volunteer, bool>? filter = null) //stage 2
-         => filter == null
-             ? DataSource.Volunteers.Select(item => item)
-            : DataSource.Volunteers.Where(filter);
-    // the func create a new list with the same entities as the list that send to it
+    // the func return the list with/without the filter func pointer
+    public IEnumerable<Volunteer> ReadAll(Func<Volunteer, bool> ? filter = null) 
+         => filter == null ? DataSource.Volunteers.Select(item => item) : DataSource.Volunteers.Where(filter);
 
-    public void Update(Volunteer item)
+    public void Update(Volunteer item)   // the func updatr a entity in the list by the new parameters that in the given entity
+
     {
         if (Read(item.Id) != null)
         {
@@ -58,7 +55,6 @@ internal class VolunteerImplementation : IVolunteer
             Create(item);
         }
         else
-            throw new NotImplementedException($"Volunteer with ID={item.Id} doesn't exists");
+            throw new DalDoesNotExistException($"Volunteer with ID={item.Id} doesn't exists");
     }
-    // the func updatr a entity in the list by the new parameters that in the given entity
 }

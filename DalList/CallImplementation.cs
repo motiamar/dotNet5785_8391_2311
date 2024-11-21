@@ -8,17 +8,18 @@ using System.Security.Cryptography.X509Certificates;
 
 internal class CallImplementation : ICall
 {
-    public int Create(Call item)
+    
+    public int Create(Call item)   // the func crate a new spot in the list and add the new entity to the spot with a new Id and return the new Id.
     {
         int NewId = Config.NextCallId;
         var copy = item with { Id = NewId };
         DataSource.Calls.Add(copy);
         return NewId;
     }
-    // the func crate a new spot in the list and add the new entity to the spot with a new Id and return the new Id.
 
 
-    public void Delete(int id)
+   
+    public void Delete(int id)  // the func search for the entity in the list by the id and remove it
     {
         bool flag = false;
         foreach (var item in DataSource.Calls)
@@ -31,39 +32,38 @@ internal class CallImplementation : ICall
             }
         }
         if (flag == false)
-            throw new NotImplementedException($"Call with ID={id} doesn't exists");
+            throw new DalDoesNotExistException($"Call with ID={id} doesn't exists");
     }
-    // the func search for the entity in the list by the id and remove it
 
-    public void DeleteAll()
+   
+
+    public void DeleteAll()   // the func remove all the entities in the list
     {
         DataSource.Calls.Clear();
     }
-    // the func remove all the entities in the list
 
-    public Call? Read(int id)
+    public Call? Read(int id)   // return if the item with the corrent id exist
     {
-        return DataSource.Calls.FirstOrDefault(item => item.Id == id); //stage 2
+        return DataSource.Calls.FirstOrDefault(item => item.Id == id);
     }
 
-    public Call? Read(Func<Call, bool> filter)
+
+    public Call? Read(Func<Call, bool> filter) // the func search a entity in the list end return a pointer, depend on the filter func, if it not exsist it return null
     {
+        
         return DataSource.Calls.FirstOrDefault(filter);
     }
 
-    // the func search a entity in the list end return a pointer, if it not exsist it return null
-
-    public IEnumerable<Call> ReadAll(Func<Call, bool>? filter = null) //stage 2
+    public IEnumerable<Call> ReadAll(Func<Call, bool>? filter = null)  // the func return the list with/without the filter func pointer
          => filter == null
              ? DataSource.Calls.Select(item => item)
             : DataSource.Calls.Where(filter);
-    // the func create a new list with the same entities as the list that send to it
 
-    public void Update(Call item)
+   
+    public void Update(Call item)  // the func updatr a entity in the list by the new parameters that in the given entity
     {
         Delete(item.Id);
         Create(item);
     }
-    // the func updatr a entity in the list by the new parameters that in the given entity
 
 }

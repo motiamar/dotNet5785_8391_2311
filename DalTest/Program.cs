@@ -504,17 +504,17 @@ internal class Program
     }
     private static void ShowAllTheData() // print all the lists of all the entities
     {
-        IEnumerable<Volunteer> tmpForShow = s_dal.volunteer.ReadAll();
+        IEnumerable <Volunteer> tmpForShow = s_dal.volunteer.ReadAll();
         foreach (var item in tmpForShow)
         {
             Console.WriteLine(item);
         }
-        IEnumerable<Call> tmpForShow1 = s_dal.call.ReadAll();
+        IEnumerable <Call> tmpForShow1 = s_dal.call.ReadAll();
         foreach (var item1 in tmpForShow1)
         {
             Console.WriteLine(item1);
         }
-        IEnumerable<Assignment> tmpForShow2 = s_dal.assignment.ReadAll();
+        IEnumerable <Assignment> tmpForShow2 = s_dal.assignment.ReadAll();
         foreach (var item2 in tmpForShow2)
         {
             Console.WriteLine(item2);

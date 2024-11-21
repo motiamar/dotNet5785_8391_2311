@@ -507,8 +507,8 @@ public static class Initialization
         DateTime ? tmpFinishTime = null;
         DateTime tmpStartTime;
         EndKinds tmpEndKind = default;
-        IEnumerable<Call> tmpCalls = s_dal.call!.ReadAll();
-        IEnumerable<Volunteer> tmpVolenteers = s_dal.volunteer!.ReadAll();
+        IEnumerable <Call> tmpCalls = s_dal.call!.ReadAll();
+        IEnumerable <Volunteer> tmpVolenteers = s_dal.volunteer!.ReadAll();
 
         for (int i = 0; i < 50; i++)
         {
@@ -558,8 +558,6 @@ public static class Initialization
         //s_dalAssignment.DeleteAll();
         // reset and delete all the lists
         s_dal.RestDB();
-
-
         Console.WriteLine("Initializing Volunteer list");
         CreateVolunteers();
         Console.WriteLine("Initializing Call list");
