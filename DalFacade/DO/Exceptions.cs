@@ -1,5 +1,5 @@
 ﻿namespace DO;
-
+[Serializable]
 
 // exception for not exist items
 public class DalDoesNotExistException : Exception

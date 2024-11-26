@@ -22,8 +22,8 @@ internal class Program
         {
             try
             {
-
-                ShowMainMenu(); // print func
+                // print func
+                ShowMainMenu(); 
                 string input = Console.ReadLine();
                 int key = int.Parse(input);
                 switch ((MainMenu)key)
@@ -76,7 +76,9 @@ internal class Program
         } while (logOut);
     }
 
-    private static void ShowMainMenu() // func to show the main menu
+
+    // func to show the main menu
+    private static void ShowMainMenu() 
     {
         Console.WriteLine("Enter 0 to exit the main menu");
         Console.WriteLine("Enter 1 to show sub menu for volunteer");
@@ -87,7 +89,10 @@ internal class Program
         Console.WriteLine("Enter 6 to show sub menu for confing");
         Console.WriteLine("Enter 7 to reset the data base and the confing");
     }
-    private static void ShowVolunteerSubMenu(string type)  // func to show the volunteer sub menu
+    
+    
+    // func to show the volunteer sub menu
+    private static void ShowVolunteerSubMenu(string type) 
     {
         bool flag = true;
         int Id;
@@ -156,7 +161,10 @@ internal class Program
 
         } while (flag);
     }
-    private static void ShowCallSubMenu(string type)  // func to show the call sub menu
+    
+    
+    // func to show the call sub menu
+    private static void ShowCallSubMenu(string type)  
     {
         bool flag = true;
         int Id;
@@ -222,7 +230,10 @@ internal class Program
             }
         } while (flag);
     }
-    private static void ShowAssignmentSubMenu(string type)  // func to show the assignment sub menu
+    
+    
+    // func to show the assignment sub menu
+    private static void ShowAssignmentSubMenu(string type)  
     {
         bool flag = true;
         int Id;
@@ -287,8 +298,11 @@ internal class Program
                 Console.WriteLine(ex);
             }
         } while (flag);
-    }
-    private static void ShowConfingSubMenu()  // func to show the config sub menu
+    } 
+    
+    
+    // func to show the config sub menu
+    private static void ShowConfingSubMenu() 
     {
         bool flag = true;
         do
@@ -365,7 +379,10 @@ internal class Program
             }
         } while (flag);
     }
-    private static void AddVolunteer() // func to add entity to rhe list
+    
+    
+    // func to add entity to rhe list
+    private static void AddVolunteer()
     {
         Console.WriteLine("enter ID please");
         int Id = int.Parse(Console.ReadLine());
@@ -392,7 +409,9 @@ internal class Program
         Volunteer addvolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer, true, MaximumDistance, distanceTypes);
         s_dal.volunteer!.Create(addvolunteer);
     }
-    private static void UpdateVolunteer()  // func to update a existing entity
+    
+    // func to update a existing entity
+    private static void UpdateVolunteer() 
     {
         Console.WriteLine("enter ID please");
         int Id = int.Parse(Console.ReadLine());
@@ -422,7 +441,10 @@ internal class Program
         Volunteer Updatevolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer, true, MaximumDistance, distanceTypes);
         s_dal.volunteer.Update(Updatevolunteer);
     }
-    private static void AddCall()  // func to add entity to rhe list
+    
+    
+    // func to add entity to rhe list
+    private static void AddCall()  
     {
         Console.WriteLine("enter Type call, 0 to medical_situation, 1 to car_accident, 2 to fall_from_hight, 3 to violent_event, 4 to domestic_violent");
         string input = Console.ReadLine();
@@ -443,7 +465,10 @@ internal class Program
         Call addcall = new Call(0, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
         s_dal.call!.Create(addcall);
     }
-    private static void UpdateCall()  // func to update a existing entity
+    
+    
+    // func to update a existing entity
+    private static void UpdateCall()  
     {
         Console.WriteLine("enter ID please");
         int Id = int.Parse(Console.ReadLine());
@@ -467,7 +492,10 @@ internal class Program
         Call updateCall = new Call(0, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
         s_dal.call.Update(updateCall);
     }
-    private static void AddAssignment()  // func to add entity to rhe list
+    
+    
+    // func to add entity to rhe list
+    private static void AddAssignment()  
     {
         Console.WriteLine("enter call Id please");
         int tmpCallId = int.Parse(Console.ReadLine());
@@ -482,7 +510,10 @@ internal class Program
         Assignment addAssignment = new Assignment(0, tmpCallId, tmpVolunteerId, tmpStartTime, tmpFinishTime, tmpEndKind);
         s_dal.assignment!.Create(addAssignment);
     }
-    private static void UpdateAssignment()  // func to update a existing entity
+    
+    
+    // func to update a existing entity
+    private static void UpdateAssignment()  
     {
         Console.WriteLine("enter ID please");
         int Id = int.Parse(Console.ReadLine());
@@ -502,7 +533,11 @@ internal class Program
         Assignment UpdateAssignment = new Assignment(0, tmpCallId, tmpVolunteerId, tmpStartTime, tmpFinishTime, tmpEndKind);
         s_dal.assignment.Update(UpdateAssignment);
     }
-    private static void ShowAllTheData() // print all the lists of all the entities
+    
+    
+    
+    // print all the lists of all the entities
+    private static void ShowAllTheData() 
     {
         IEnumerable <Volunteer> tmpForShow = s_dal.volunteer.ReadAll();
         foreach (var item in tmpForShow)

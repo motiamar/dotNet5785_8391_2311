@@ -13,7 +13,9 @@ public static class Initialization
     private static readonly Random s_rand = new(); // createing random numbers for the entities
 
 
-    private static void CreateVolunteers() // creating 16 volunteers
+
+// creating 16 volunteers
+    private static void CreateVolunteers() 
     {
         string[] volunteerName = { "moti amar", "elya motai", "iosi yoskovich", "david gindi", "yuval michaeli", "dan zilber", "meir nahum", "izchak grinvald", "shalom salam", "meir morgnshtain", "eden cohen", "shimon cohen", "david hadad", "elly hadar", "nuriel hadad", "israel gadisha" };
         string[] volunteerPhone = { "0524815812", "0501234567", "0527654321", "0549876543", "0584567890", "0533210987", "0555678901", "0501112222", "0523334444", "0545526673", "0587748876", "0529950030", "0558767765", "0528775432", "0528765432", "0542109876" };
@@ -24,32 +26,42 @@ public static class Initialization
 
         int i = 0;
         foreach (var name in volunteerName)
-        {
+        { 
+            
+            // make sure that the id dosent exsist
             int tmpid;
             do
                 tmpid = s_rand.Next(200000000, 400000000);
             while (s_dal.volunteer.Read(tmpid) != null);
-            // make sure that the id dosent exsist
+           
 
+
+             // active choise
             bool tmpaActive = (tmpid % 2) == 0 ? true : false;
-            // active choise
-
-            string? password = name + "pass" + (i*4);
+           
             // random password
+            string? password = name + "pass" + (i*4);
+            
+
+
+            // 15 volunteers and one manager
 
             Roles tmpRole = default(Roles);
             if(i == volunteerName.Length-1)
             {
                 Roles tmpRoleManager = (Roles)Enum.GetValues(typeof(Roles)).Cast<Roles>().ElementAt(1);
                 tmpRole = tmpRoleManager;
-            }
-            // 15 volunteers and one manager
+            }  
 
-            double tmpMaximumDistance = s_rand.Next(50000, 100000); // random distance
+
+            // random distance
+            double tmpMaximumDistance = s_rand.Next(50000, 100000); 
 
             DistanceTypes tmpDistanceType = default(DistanceTypes);
 
-            s_dal.volunteer.Create(new Volunteer // create a new volunteer with all the tmp arguments
+
+            // create a new volunteer with all the tmp arguments
+            s_dal.volunteer.Create(new Volunteer 
             {
                 Id = tmpid,
                 FullName = name,
@@ -67,8 +79,11 @@ public static class Initialization
             i++;
         }
     }
-    
-    private static void CreateCalls()  // creating 50 calls
+
+
+
+     // creating 50 calls
+    private static void CreateCalls() 
     {
         string[] medical_Descriptions = { "Man aged 60 unconscious in critical condition","Young woman complaining of severe pain",  "Infant with high fever and instability", "Elderly person reporting severe shortness of breath", "Teenager unconscious after sudden fainting episode" };
         string[] accident_Descriptions = {"Car overturned with injured passengers inside", "Motorcyclist unconscious after severe accident", "Head-on collision between two vehicles", "Pedestrian hit at a crosswalk", "Woman injured by a car, moderate condition" };
@@ -458,11 +473,14 @@ public static class Initialization
  };
         string tmpVerbalDecription = null;
         int tmpId = 0;
-
-        for (int i = 0; i < 70; i++) // create a new call with all the tmp arguments
+        // create a new call with all the tmp arguments
+        for (int i = 0; i < 70; i++) 
         {
             TypeCalls tmpTypeCall = (TypeCalls)s_rand.Next(0, Enum.GetValues(typeof(TypeCalls)).Length);
-            switch (tmpTypeCall) // Matches event description to event randomly
+
+
+             // Matches event description to event randomly
+            switch (tmpTypeCall)
             {
                 case TypeCalls.medical_situation:
                     tmpVerbalDecription = medical_Descriptions[s_rand.Next(0, medical_Descriptions.Length)];
@@ -481,9 +499,14 @@ public static class Initialization
                     break;
                 default:
                     break;
-            }
-            DateTime start = s_dal.config!.Clock.AddMinutes(s_rand.Next(5, 10));  // define the random time
-            DateTime finish = start.AddMinutes(s_rand.Next(5, 10));   // define the random ending time
+            } 
+            
+            // define the random time
+            DateTime start = s_dal.config!.Clock.AddMinutes(s_rand.Next(5, 10));
+            
+            
+            // define the random ending time
+            DateTime finish = start.AddMinutes(s_rand.Next(5, 10));  
             s_dal.call!.Create(new Call
             {
                 Id = tmpId,
@@ -498,7 +521,9 @@ public static class Initialization
         }
     }
 
-    private static void CreateAssignments() // // creating 70 calls Assignments
+
+    // creating 70 calls Assignments
+    private static void CreateAssignments() 
     {
         int tmpId = 0;
         int tmpIndex = 0;
@@ -520,13 +545,21 @@ public static class Initialization
                 tmpStartTime = tmpCalls.ElementAt(tmpIndex).OpeningCallTime.AddMinutes(1);
                 if ((tmpCallId % 2) == 0)
                 {
-                    tmpFinishTime = tmpCalls.ElementAt(tmpIndex).MaxEndingCallTime; // the finish time of the assinment is exact like the call
-                    tmpEndKind = (EndKinds)s_rand.Next(0, 2);//random end assinment
+                
+                
+                    // the finish time of the assinment is exact like the call
+                    tmpFinishTime = tmpCalls.ElementAt(tmpIndex).MaxEndingCallTime; 
+
+                    //random end assinment
+                    tmpEndKind = (EndKinds)s_rand.Next(0, 2);
                 }
                 else
-                {
-                    tmpFinishTime = tmpCalls.ElementAt(tmpIndex).MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 2)); // the finish time of the assinment is more then the call
-                    tmpEndKind = EndKinds.expired_cancellation;//5 expired calls
+                {   
+                    // the finish time of the assinment is more then the call
+                    tmpFinishTime = tmpCalls.ElementAt(tmpIndex).MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 2));
+
+                    //5 expired calls
+                    tmpEndKind = EndKinds.expired_cancellation;
                 }
                 s_dal.assignment!.Create(new Assignment
                 {

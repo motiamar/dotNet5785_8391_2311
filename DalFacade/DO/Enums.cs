@@ -1,34 +1,42 @@
 ﻿namespace DO;
 
-public enum Roles // define the character of the volunteer
+// define the character of the volunteer
+public enum Roles 
 {
     volunteer,  // default
     manager,
 }
-// 
 
-public enum DistanceTypes // define in what means the distance get measured
+
+// define in what means the distance get measured
+public enum DistanceTypes 
 {
     air, // default
     walk,
     car,
 }
-public enum TypeCalls // define the type of call that enterd the system
+
+// define the type of call that enterd the system
+public enum TypeCalls 
 {
     medical_situation, // default
     car_accident,
     fall_from_hight,
     violent_event,
     domestic_violent,
-}
-public enum EndKinds // tells how the assiment ended
+} 
+
+// tells how the assiment ended
+public enum EndKinds
 {
     treated, // default
     self_cancellation,
     administrator_cancellation,
     expired_cancellation,
 }
-public enum MainMenu //  choises for the menu
+
+//  choises for the menu
+public enum MainMenu 
 {
     exit,
     sub_volunteer,
@@ -40,7 +48,10 @@ public enum MainMenu //  choises for the menu
     reset
 
 }
-public enum SubMenu  //  choises for the sub menu
+
+
+//  choises for the sub menu
+public enum SubMenu  
 { 
     exit,
     add,
@@ -50,7 +61,9 @@ public enum SubMenu  //  choises for the sub menu
     delete,
     delete_all
 }
-public enum ConfingSubMenu  //  choises for the confing sub menu
+
+ //  choises for the confing sub menu
+public enum ConfingSubMenu 
 {
     exit,
     minutes,

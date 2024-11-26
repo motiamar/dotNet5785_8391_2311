@@ -8,8 +8,9 @@ using System.Security.Cryptography.X509Certificates;
 
 internal class CallImplementation : ICall
 {
-    
-    public int Create(Call item)   // the func crate a new spot in the list and add the new entity to the spot with a new Id and return the new Id.
+
+     // the func crate a new spot in the list and add the new entity to the spot with a new Id and return the new Id.
+    public int Create(Call item)  
     {
         int NewId = Config.NextCallId;
         var copy = item with { Id = NewId };
@@ -18,8 +19,8 @@ internal class CallImplementation : ICall
     }
 
 
-   
-    public void Delete(int id)  // the func search for the entity in the list by the id and remove it
+   // the func search for the entity in the list by the id and remove it
+    public void Delete(int id)  
     {
         bool flag = false;
         foreach (var item in DataSource.Calls)
@@ -36,34 +37,39 @@ internal class CallImplementation : ICall
     }
 
    
-
-    public void DeleteAll()   // the func remove all the entities in the list
+ // the func remove all the entities in the list
+    public void DeleteAll()  
     {
         DataSource.Calls.Clear();
     }
 
-    public Call? Read(int id)   // return if the item with the corrent id exist
+
+// return if the item with the corrent id exist
+    public Call? Read(int id)   
     {
         return DataSource.Calls.FirstOrDefault(item => item.Id == id);
     }
 
 
-    public Call? Read(Func<Call, bool> filter) // the func search a entity in the list end return a pointer, depend on the filter func, if it not exsist it return null
+// the func search a entity in the list end return a pointer, depend on the filter func, if it not exsist it return null
+    public Call? Read(Func<Call, bool> filter) 
     {
         
         return DataSource.Calls.FirstOrDefault(filter);
     }
 
-    public IEnumerable<Call> ReadAll(Func<Call, bool>? filter = null)  // the func return the list with/without the filter func pointer
+// the func return the list with/without the filter func pointer
+    public IEnumerable<Call> ReadAll(Func<Call, bool>? filter = null)  
          => filter == null
              ? DataSource.Calls.Select(item => item)
             : DataSource.Calls.Where(filter);
 
-   
-    public void Update(Call item)  // the func updatr a entity in the list by the new parameters that in the given entity
-    {
-        Delete(item.Id);
-        Create(item);
-    }
 
+   // the func updatr a entity in the list by the new parameters that in the given entity
+    public void Update(Call item)  
+    {
+        var copy = item;
+        Delete(item.Id);
+        DataSource.Calls.Add(copy);
+    }
 }

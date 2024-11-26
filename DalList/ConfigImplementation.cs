@@ -2,7 +2,9 @@
 using DalApi;
 using System;
 
-internal class ConfigImplementation : IConfig // realizing the original methhods to the serfce
+
+// realizing the original methhods to the serfce
+internal class ConfigImplementation : IConfig 
 {
     public DateTime Clock
     {

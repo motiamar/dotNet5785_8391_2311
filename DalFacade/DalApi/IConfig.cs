@@ -1,7 +1,9 @@
 ﻿namespace DalApi;
 using DO;
 
-public interface IConfig // revealing the methhods to the serfce
+
+// revealing the methhods to the serfce
+public interface IConfig 
 {
     DateTime Clock { get; set; } 
     void Reset();
