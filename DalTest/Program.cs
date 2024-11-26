@@ -489,7 +489,7 @@ internal class Program
         Console.WriteLine("enter end call time please");
         int time = int.Parse(Console.ReadLine());
         DateTime tmpEndCallTime = DateTime.Now.AddMinutes(time);
-        Call updateCall = new Call(0, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
+        Call updateCall = new Call(Id, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
         s_dal.call.Update(updateCall);
     }
     
@@ -530,7 +530,7 @@ internal class Program
         DateTime tmpFinishTime = bdt;
         Console.WriteLine("enter Assignment end kind, 0 to treated, 1 to self_cancellation, 2 to administrator_cancellation, 3 to expired_cancellation");
         EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine());
-        Assignment UpdateAssignment = new Assignment(0, tmpCallId, tmpVolunteerId, tmpStartTime, tmpFinishTime, tmpEndKind);
+        Assignment UpdateAssignment = new Assignment(Id, tmpCallId, tmpVolunteerId, tmpStartTime, tmpFinishTime, tmpEndKind);
         s_dal.assignment.Update(UpdateAssignment);
     }
     
