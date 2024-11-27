@@ -65,8 +65,7 @@ internal class AssignmentImplementation : IAssignment
 // the func updatr a entity in the list by the new parameters that in the given entity
     public void Update(Assignment item) 
     {
-        var copy = item;
         Delete(item.Id);
-        DataSource.Assignments.Add(copy);
-       }
+        DataSource.Assignments.Add(item);
+    }
 }
