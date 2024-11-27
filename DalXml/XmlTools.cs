@@ -113,6 +113,21 @@ static class XMLTools
         root.Element(elemName)?.SetValue((elemVal).ToString());
         XMLTools.SaveListToXMLElement(root, xmlFileName);
     }
+
+    // we added a functions for the TimeSpand
+    public static TimeSpan GetConfigTimeVal(string xmlFileName, string elemName)
+    {
+        XElement root = XMLTools.LoadListFromXMLElement(xmlFileName);
+        TimeSpan dt = root.ToTimeSpanNullable(elemName) ?? throw new FormatException($"can't convert:  {xmlFileName}, {elemName}");
+        return dt;
+    }
+    public static void SetConfigTimeVal(string xmlFileName, string elemName, TimeSpan elemVal)
+    {
+        XElement root = XMLTools.LoadListFromXMLElement(xmlFileName);
+        root.Element(elemName)?.SetValue((elemVal).ToString());
+        XMLTools.SaveListToXMLElement(root, xmlFileName);
+    }
+
     #endregion
 
 
@@ -125,6 +140,10 @@ static class XMLTools
         double.TryParse((string?)element.Element(name), out var result) ? (double?)result : null;
     public static int? ToIntNullable(this XElement element, string name) =>
         int.TryParse((string?)element.Element(name), out var result) ? (int?)result : null;
+
+    // we added a convert func for the TimeSpand
+    public static TimeSpan? ToTimeSpanNullable(this XElement element, string name) =>
+        TimeSpan.TryParse((string?)element.Element(name), out var result) ? (TimeSpan?)result : null;
     #endregion
 
 }
