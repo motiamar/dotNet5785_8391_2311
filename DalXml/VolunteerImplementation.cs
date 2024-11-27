@@ -61,7 +61,7 @@ internal class VolunteerImplementation : IVolunteer
     {
         List<Volunteer> TmpVolunteers = XMLTools.LoadListFromXMLSerializer<Volunteer>(Config.s_volunteers_xml);
         if (filter == null)
-            return TmpVolunteers.Select(item => item);
+            return TmpVolunteers;
         return TmpVolunteers.Where(filter);
     }
 

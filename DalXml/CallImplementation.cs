@@ -15,14 +15,14 @@ internal class CallImplementation : ICall
         XElement callsRootElem = XMLTools.LoadListFromXMLElement(Config.s_calls_xml);
         int NewId = Config.NextCallId;
         XElement createCallElement = new XElement("Call",
-            new XElement("Id", NewId),
-            new XElement("TypeCall", item.TypeCall),
+            new XElement("Id", NewId.ToString()),
+            new XElement("TypeCall", item.TypeCall.ToString()),
             new XElement("VerbalDecription", item.VerbalDecription),
             new XElement("FullAddressOfTheCall", item.FullAddressOfTheCall),
-            new XElement("Latitude", item.Latitude),
-            new XElement("Longitude", item.Longitude),
-            new XElement("OpeningCallTime", item.OpeningCallTime),
-            new XElement("MaxEndingCallTime", item.MaxEndingCallTime)
+            new XElement("Latitude", item.Latitude.ToString()),
+            new XElement("Longitude", item.Longitude.ToString()),
+            new XElement("OpeningCallTime", item.OpeningCallTime.ToString()),
+            new XElement("MaxEndingCallTime", item.MaxEndingCallTime.ToString())
             );
         callsRootElem.Add(createCallElement);
         XMLTools.SaveListToXMLElement(callsRootElem, Config.s_calls_xml);
@@ -81,14 +81,14 @@ internal class CallImplementation : ICall
         (callsRootElem.Elements().FirstOrDefault(st => (int?)st.Element("Id") == item.Id)
         ?? throw new DO.DalDoesNotExistException($"call with ID={item.Id} does Not exist")).Remove();
         callsRootElem.Add(new XElement("Call",
-            new XElement("Id", item.Id),
-            new XElement("TypeCall", item.TypeCall),
+            new XElement("Id", item.Id.ToString()),
+            new XElement("TypeCall", item.TypeCall.ToString()),
             new XElement("VerbalDecription", item.VerbalDecription),
             new XElement("FullAddressOfTheCall", item.FullAddressOfTheCall),
-            new XElement("Latitude", item.Latitude),
+            new XElement("Latitude", item.Latitude.ToString()),
             new XElement("Longitude", item.Longitude),
-            new XElement("OpeningCallTime", item.OpeningCallTime),
-            new XElement("MaxEndingCallTime", item.MaxEndingCallTime)
+            new XElement("OpeningCallTime", item.OpeningCallTime.ToString()),
+            new XElement("MaxEndingCallTime", item.MaxEndingCallTime.ToString())
             )); 
         XMLTools.SaveListToXMLElement(callsRootElem, Config.s_calls_xml);
     }
@@ -105,13 +105,12 @@ internal class CallImplementation : ICall
             FullAddressOfTheCall = (string?)s.Element("FullAddressOfTheCall") ?? "",
             Latitude = s.ToDoubleNullable("Latitude") ?? 0,
             Longitude = s.ToDoubleNullable("Longitude") ?? 0,
-            OpeningCallTime = s.ToDateTimeNullable("OpeningCallTime") ?? default,
-            MaxEndingCallTime = s.ToDateTimeNullable("MaxEndingCallTime"),
+            OpeningCallTime = s.ToDateTimeNullable("OpeningCallTime") ?? DateTime.Now,
+            MaxEndingCallTime = s.ToDateTimeNullable("MaxEndingCallTime") ?? null,
            
         };
     }
 
 }
 
-/////////////////////////////// אולי נצטרך להוסיף חריגה מסוג פורמט לא נכון
 
