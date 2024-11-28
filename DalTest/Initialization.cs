@@ -5,10 +5,6 @@ using DO;
 using Dal;
 public static class Initialization
 {
-    //private static IAssignment? s_dalAssignment; 
-    //private static ICall? s_dalCall;
-    //private static IVolunteer? s_dalVolunteer;
-    //private static IConfig? s_dalConfig;
     private static IDal? s_dal;
     private static readonly Random s_rand = new(); // createing random numbers for the entities
 
@@ -532,6 +528,7 @@ public static class Initialization
         DateTime ? tmpFinishTime = null;
         DateTime tmpStartTime;
         EndKinds tmpEndKind = default;
+
         IEnumerable <Call> tmpCalls = s_dal.call!.ReadAll();
         IEnumerable <Volunteer> tmpVolenteers = s_dal.volunteer!.ReadAll();
 
@@ -561,6 +558,7 @@ public static class Initialization
                     //5 expired calls
                     tmpEndKind = EndKinds.expired_cancellation;
                 }
+
                 s_dal.assignment!.Create(new Assignment
                 {
                     Id = tmpId,
@@ -576,21 +574,9 @@ public static class Initialization
 
     public static void Do(IDal dal)
     {
-    //    s_dalAssignment = dalAssignment ?? throw new NullReferenceException("DAL can not be null!");
-    //    s_dalCall = dalCall ?? throw new NullReferenceException("DAL can not be null!");
-    //    s_dalVolunteer = dalVolunteer ?? throw new NullReferenceException("DAL can not be null!");
-    //    s_dalConfig = dalConfig ?? throw new NullReferenceException("DAL can not be null!");
-        // assingd entities to use 
-
         s_dal=dal??throw new NullReferenceException("Reset configuration and List value...");  
         Console.WriteLine("Reset Configuration values and List values");
-
-        //s_dalConfig.Reset();
-        //s_dalCall.DeleteAll();
-        //s_dalVolunteer.DeleteAll();
-        //s_dalAssignment.DeleteAll();
-        // reset and delete all the lists
-        s_dal.RestDB();
+        s_dal.ResetDB();
         Console.WriteLine("Initializing Volunteer list");
         CreateVolunteers();
         Console.WriteLine("Initializing Call list");

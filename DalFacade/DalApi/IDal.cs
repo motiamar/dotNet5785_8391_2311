@@ -13,5 +13,5 @@ public interface IDal
     ICall call { get; } 
     IConfig config { get; }
 
-    void RestDB();
+    void ResetDB();
 }

@@ -14,6 +14,7 @@ internal class CallImplementation : ICall
     {
         XElement callsRootElem = XMLTools.LoadListFromXMLElement(Config.s_calls_xml);
         int NewId = Config.NextCallId;
+
         XElement createCallElement = new XElement("Call",
             new XElement("Id", NewId.ToString()),
             new XElement("TypeCall", item.TypeCall.ToString()),
@@ -24,7 +25,9 @@ internal class CallImplementation : ICall
             new XElement("OpeningCallTime", item.OpeningCallTime.ToString()),
             new XElement("MaxEndingCallTime", item.MaxEndingCallTime.ToString())
             );
-        callsRootElem.Add(createCallElement);
+
+        callsRootElem.Add( createCallElement);
+
         XMLTools.SaveListToXMLElement(callsRootElem, Config.s_calls_xml);
         return NewId;
     }
@@ -45,6 +48,7 @@ internal class CallImplementation : ICall
     {
         XElement callsRootElem = XMLTools.LoadListFromXMLElement(Config.s_calls_xml);
         callsRootElem.Elements().Remove();
+        XMLTools.SaveListToXMLElement(callsRootElem, Config.s_calls_xml);
     }
 
 
@@ -67,12 +71,9 @@ internal class CallImplementation : ICall
     // the func search a entity in the list end return a pointer, depend on the filter func, if it not exsist it return null
     public IEnumerable<Call> ReadAll(Func<Call, bool>? filter = null)
     {
-        List<Call> TmpCalls = XMLTools.LoadListFromXMLSerializer<Call>(Config.s_calls_xml);
-        if (filter == null)
-            return TmpCalls.Select(item => item);
-        return TmpCalls.Where(filter);
+        return XMLTools.LoadListFromXMLElement(Config.s_calls_xml).Elements().Where(c => filter == null || filter(getCall(c))).Select(c => getCall(c));
+        
     }
-
 
     // update a entity in the XML file with the corrent id
     public void Update(Call item)

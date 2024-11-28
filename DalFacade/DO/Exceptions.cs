@@ -28,9 +28,3 @@ public class  DalXMLFileLoadCreateException : Exception
     public DalXMLFileLoadCreateException(string message) : base(message) { }
 }
 
-
-// exception for the XML converts
-public class FormatException : Exception
-{
-    public FormatException(string message) : base(message) { }
-}

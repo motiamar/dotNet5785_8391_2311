@@ -8,14 +8,11 @@ using DalTest;
 
 internal class Program
 {
-    // set gonpinf entities to use in the main
-    //private static IConfig? s_dalConfig = new ConfigImplementation();
-    //private static IAssignment? s_dalAssignment = new AssignmentImplementation();
-    //private static ICall? s_dalCall = new CallImplementation();
-    //private static IVolunteer? s_dalVolunteer = new VolunteerImplementation();
-    static readonly IDal s_dal = new DalList();
+    //static readonly IDal s_dal = new DalList(); // stage 2 list only
+    static readonly IDal s_dal = new DalXml(); // stage 3 xml only
 
     static void Main(string[] args)
+
     {
         bool logOut = true;
         do
@@ -325,11 +322,11 @@ internal class Program
                         break;
 
                     case ConfingSubMenu.minutes:
-                        s_dal.config.Clock.AddMinutes(1);
+                        s_dal.config.Clock = s_dal.config.Clock.AddMinutes(1);
                         break;
 
                     case ConfingSubMenu.hours:
-                        s_dal.config.Clock.AddHours(1);
+                        s_dal.config.Clock = s_dal.config.Clock.AddHours(1);
                         break;
 
                     case ConfingSubMenu.show_time:

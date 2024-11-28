@@ -1,5 +1,4 @@
 ﻿namespace Dal;
-
 using DO;
 using System.Xml;
 using System.Xml.Linq;
@@ -36,8 +35,8 @@ static class XMLTools
         try
         {
             if (!File.Exists(xmlFilePath)) return new();
-            using FileStream file = new(xmlFilePath, FileMode.Open);
-            XmlSerializer x = new(typeof(List<T>));
+            using FileStream file = new FileStream( xmlFilePath, FileMode.Open);
+            XmlSerializer x = new XmlSerializer(typeof(List<T>));
             return x.Deserialize(file) as List<T> ?? new();
         }
         catch (Exception ex)

@@ -11,13 +11,14 @@ internal class VolunteerImplementation : IVolunteer
     // if entitiy with this ID exist, it send an ERROR masage, if not it add it to the XML file
     public int Create(Volunteer item)
     {
+      
         List<Volunteer> TmpVolunteers = XMLTools.LoadListFromXMLSerializer<Volunteer>(Config.s_volunteers_xml);
-        if (TmpVolunteers.Any(p => p.Id == item.Id)) 
-        { throw new DalAlreadyExistException($"Course with ID={item.Id} is already exist"); }
+        bool exist = TmpVolunteers.Any(v => v.Id == item.Id);
+        if (exist)
+            throw new DalAlreadyExistException($"Course with ID={item.Id} is already exist"); 
         TmpVolunteers.Add(item);
         XMLTools.SaveListToXMLSerializer(TmpVolunteers, Config.s_volunteers_xml);
         return item.Id;
-
 
     }
 
