@@ -9,10 +9,10 @@ using DalTest;
 internal class Program
 {
     //static readonly IDal s_dal = new DalList(); // stage 2 list only
-    static readonly IDal s_dal = new DalXml(); // stage 3 xml only
+    //static readonly IDal s_dal = new DalXml(); // stage 3 xml only
+    static readonly IDal s_dal = Factory.Get; //stage 4
 
     static void Main(string[] args)
-
     {
         bool logOut = true;
         do
@@ -42,7 +42,7 @@ internal class Program
                         break;
 
                     case MainMenu.initialization:  // initiolztion all the data
-                        Initialization.Do(s_dal);
+                        Initialization.Do();
                         break;
 
                     case MainMenu.show_all:   // print all the lists

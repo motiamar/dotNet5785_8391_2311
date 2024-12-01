@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace Dal;
 
-sealed public class DalList : IDal
+sealed internal class DalList : IDal
 {
+    
+    public static IDal Instance { get; } = new DalList();
+    private DalList() { }
+
     public IVolunteer volunteer { get; } = new VolunteerImplementation();
-
     public IAssignment assignment { get; } = new AssignmentImplementation();
-
     public ICall call { get; } = new CallImplementation();
-
     public IConfig config {  get; } = new ConfigImplementation();
 
     public void ResetDB()

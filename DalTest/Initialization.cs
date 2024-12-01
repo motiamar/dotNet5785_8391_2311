@@ -6,7 +6,9 @@ using Dal;
 public static class Initialization
 {
     private static IDal? s_dal;
-    private static readonly Random s_rand = new(); // createing random numbers for the entities
+
+   // createing random numbers for the entities
+    private static readonly Random s_rand = new(); 
 
 
 
@@ -29,19 +31,14 @@ public static class Initialization
             do
                 tmpid = s_rand.Next(200000000, 400000000);
             while (s_dal.volunteer.Read(tmpid) != null);
-           
-
 
              // active choise
             bool tmpaActive = (tmpid % 2) == 0 ? true : false;
            
             // random password
             string? password = name + "pass" + (i*4);
-            
-
-
+           
             // 15 volunteers and one manager
-
             Roles tmpRole = default(Roles);
             if(i == volunteerName.Length-1)
             {
@@ -49,12 +46,10 @@ public static class Initialization
                 tmpRole = tmpRoleManager;
             }  
 
-
             // random distance
             double tmpMaximumDistance = s_rand.Next(50000, 100000); 
 
             DistanceTypes tmpDistanceType = default(DistanceTypes);
-
 
             // create a new volunteer with all the tmp arguments
             s_dal.volunteer.Create(new Volunteer 
@@ -75,7 +70,6 @@ public static class Initialization
             i++;
         }
     }
-
 
 
      // creating 50 calls
@@ -474,7 +468,6 @@ public static class Initialization
         {
             TypeCalls tmpTypeCall = (TypeCalls)s_rand.Next(0, Enum.GetValues(typeof(TypeCalls)).Length);
 
-
              // Matches event description to event randomly
             switch (tmpTypeCall)
             {
@@ -534,15 +527,12 @@ public static class Initialization
 
         for (int i = 0; i < 50; i++)
         {
-       
-            
                 tmpIndex = s_rand.Next(0, 50);
                 tmpCallId = tmpCalls.ElementAt(tmpIndex).Id;
                 tmpVolunteerId = tmpVolenteers.ElementAt(s_rand.Next(0, 16)).Id;
                 tmpStartTime = tmpCalls.ElementAt(tmpIndex).OpeningCallTime.AddMinutes(1);
                 if ((tmpCallId % 2) == 0)
                 {
-                
                 
                     // the finish time of the assinment is exact like the call
                     tmpFinishTime = tmpCalls.ElementAt(tmpIndex).MaxEndingCallTime; 
@@ -572,9 +562,10 @@ public static class Initialization
         }
     }
 
-    public static void Do(IDal dal)
+    // reset all the config value and create all the new lists with the entities inside
+    public static void Do()
     {
-        s_dal=dal??throw new NullReferenceException("Reset configuration and List value...");  
+        s_dal = DalApi.Factory.Get;
         Console.WriteLine("Reset Configuration values and List values");
         s_dal.ResetDB();
         Console.WriteLine("Initializing Volunteer list");
@@ -583,6 +574,5 @@ public static class Initialization
         CreateCalls();
         Console.WriteLine("Initializing Assignment list");
         CreateAssignments();
-        // create all the new list with the entities inside
     }
 }
