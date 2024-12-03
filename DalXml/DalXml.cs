@@ -13,8 +13,9 @@ namespace Dal;
 /// </summary>
 sealed internal class DalXml : IDal
 {
-    
-    public static IDal Instance { get; } = new DalXml();
+    // we use a lazy singlton with a thread safe 
+    private static readonly Lazy<IDal> _instance = new Lazy<IDal>(new DalXml());
+    public static IDal Instance => _instance.Value;
     private DalXml() { }
     public IVolunteer volunteer { get; } = new VolunteerImplementation(); 
 

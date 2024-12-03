@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace DalApi;
 
 /// <summary>
-/// an interfce that alow to use the entities 
+/// an interfce that alow to use the entities methuds
 /// </summary>
 public interface IDal
 {
