@@ -8,7 +8,6 @@ public enum BRoles
     manager,
 }
 
-
 // define in what means the distance get measured
 public enum BDistanceTypes
 {
