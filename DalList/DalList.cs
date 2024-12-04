@@ -16,6 +16,7 @@ sealed internal class DalList : IDal
     public static IDal Instance => _instance.Value;
     private DalList() { }
 
+
     public IVolunteer volunteer { get; } = new VolunteerImplementation();
     public IAssignment assignment { get; } = new AssignmentImplementation();
     public ICall call { get; } = new CallImplementation();

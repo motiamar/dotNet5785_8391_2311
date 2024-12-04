@@ -461,7 +461,7 @@ public static class Initialization
     35.2356295,
     35.2178825
  };
-        string tmpVerbalDecription = null;
+        string? tmpVerbalDecription = null;
         int tmpId = 0;
         // create a new call with all the tmp arguments
         for (int i = 0; i < 70; i++) 
@@ -491,7 +491,7 @@ public static class Initialization
             } 
             
             // define the random time
-            DateTime start = s_dal.config!.Clock.AddMinutes(s_rand.Next(5, 10));
+            DateTime start = s_dal!.config.Clock.AddMinutes(s_rand.Next(5, 10));
             
             
             // define the random ending time
@@ -522,7 +522,7 @@ public static class Initialization
         DateTime tmpStartTime;
         EndKinds tmpEndKind = default;
 
-        IEnumerable <Call> tmpCalls = s_dal.call!.ReadAll();
+        IEnumerable <Call> tmpCalls = s_dal!.call.ReadAll();
         IEnumerable <Volunteer> tmpVolenteers = s_dal.volunteer!.ReadAll();
 
         for (int i = 0; i < 50; i++)

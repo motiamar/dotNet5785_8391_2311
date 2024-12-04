@@ -21,7 +21,7 @@ internal class Program
             {
                 // print func
                 ShowMainMenu(); 
-                string input = Console.ReadLine();
+                string input = Console.ReadLine()!;
                 int key = int.Parse(input);
                 switch ((MainMenu)key)
                 {
@@ -105,7 +105,7 @@ internal class Program
             Console.WriteLine($"enter 6 to delete all the {type}");
             try
             {
-                string input = Console.ReadLine();
+                string input = Console.ReadLine()!;
                 int key = int.Parse(input);
 
                 switch ((SubMenu)key)
@@ -120,8 +120,8 @@ internal class Program
 
                     case SubMenu.show:
                         Console.WriteLine("Enter volunteer Id");
-                        Id = int.Parse(Console.ReadLine());
-                        Volunteer item = s_dal.volunteer.Read(Id);
+                        Id = int.Parse(Console.ReadLine()!);
+                        Volunteer item = s_dal.volunteer.Read(Id)!;
                         Console.WriteLine(item);
                         break;
 
@@ -139,7 +139,7 @@ internal class Program
 
                     case SubMenu.delete:
                         Console.WriteLine("enter ID please");
-                        Id = int.Parse(Console.ReadLine());
+                        Id = int.Parse(Console.ReadLine()!);
                         s_dal.volunteer!.Delete(Id);
                         break;
 
@@ -176,7 +176,7 @@ internal class Program
             Console.WriteLine($"enter 6 to delete all the {type}");
             try
             {
-                string input = Console.ReadLine();
+                string input = Console.ReadLine()!;
                 int key = int.Parse(input);
                 switch ((SubMenu)key)
                 {
@@ -190,8 +190,8 @@ internal class Program
 
                     case SubMenu.show:
                         Console.WriteLine("Enter Call Id");
-                        Id = int.Parse(Console.ReadLine());
-                        Call item = s_dal.call.Read(Id);
+                        Id = int.Parse(Console.ReadLine()!);
+                        Call item = s_dal.call.Read(Id)!;
                         Console.WriteLine(item);
                         break;
 
@@ -209,7 +209,7 @@ internal class Program
 
                     case SubMenu.delete:
                         Console.WriteLine("enter ID please");
-                        Id = int.Parse(Console.ReadLine());
+                        Id = int.Parse(Console.ReadLine()!);
                         s_dal.call!.Delete(Id);
                         break;
 
@@ -245,7 +245,7 @@ internal class Program
             Console.WriteLine($"enter 6 to delete all the {type}");
             try
             {
-                string input = Console.ReadLine();
+                string input = Console.ReadLine()!;
                 int key = int.Parse(input);
                 switch ((SubMenu)key)
                 {
@@ -259,8 +259,8 @@ internal class Program
 
                     case SubMenu.show:
                         Console.WriteLine("Enter Assignment Id");
-                        Id = int.Parse(Console.ReadLine());
-                        Assignment item = s_dal.assignment.Read(Id);
+                        Id = int.Parse(Console.ReadLine()!);
+                        Assignment item = s_dal.assignment.Read(Id)!;
                         Console.WriteLine(item);
                         break;
 
@@ -278,7 +278,7 @@ internal class Program
 
                     case SubMenu.delete:
                         Console.WriteLine("enter ID please");
-                        Id = int.Parse(Console.ReadLine());
+                        Id = int.Parse(Console.ReadLine()!);
                         s_dal.assignment!.Delete(Id);
                         break;
 
@@ -313,7 +313,7 @@ internal class Program
             Console.WriteLine($"enter 6 to reset all values");
             try
             {
-                string input = Console.ReadLine();
+                string input = Console.ReadLine()!;
                 int key = int.Parse(input);
                 switch ((ConfingSubMenu)key)
                 {
@@ -336,7 +336,7 @@ internal class Program
                     case ConfingSubMenu.set_new_value:
                         int choise;
                         Console.WriteLine("to change the time press 1, to change the Risk Rnge press 2");
-                        choise = int.Parse(Console.ReadLine());
+                        choise = int.Parse(Console.ReadLine()!);
                         if (choise == 1)
                         {
                             Console.WriteLine("Enter a new time");
@@ -355,7 +355,7 @@ internal class Program
                     case ConfingSubMenu.show_spesific_value:
                         int choise2;
                         Console.WriteLine("to see the time press 1, to see the Risk Rnge press 2");
-                        choise2 = int.Parse(Console.ReadLine());
+                        choise2 = int.Parse(Console.ReadLine()!);
                         if (choise2 == 1)
                             Console.WriteLine(s_dal.config.Clock);
                         else if (choise2 == 2)
@@ -382,7 +382,7 @@ internal class Program
     private static void AddVolunteer()
     {
         Console.WriteLine("enter ID please");
-        int Id = int.Parse(Console.ReadLine());
+        int Id = int.Parse(Console.ReadLine()!);
         Console.WriteLine("enter Full Name please");
         string FullName = Console.ReadLine()!;
         Console.WriteLine("enter Phone please");
@@ -394,15 +394,15 @@ internal class Program
         Console.WriteLine("enter Address please");
         string? Address = Console.ReadLine()!;
         Console.WriteLine("enter Latitude please");
-        double? Latitude = double.Parse(Console.ReadLine());
+        double? Latitude = double.Parse(Console.ReadLine()!);
         Console.WriteLine("enter Longitude please");
-        double? Longitude = double.Parse(Console.ReadLine());
+        double? Longitude = double.Parse(Console.ReadLine()!);
         Console.WriteLine("enter Distance Type, 0 to air, 1 to walk, 2 to car ");
-        string input = Console.ReadLine();
+        string input = Console.ReadLine()!;
         int key = int.Parse(input);
         DistanceTypes distanceTypes = (DistanceTypes)key;
         Console.WriteLine("enter Maximum Distance please");
-        double? MaximumDistance = double.Parse(Console.ReadLine());
+        double? MaximumDistance = double.Parse(Console.ReadLine()!);
         Volunteer addvolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer, true, MaximumDistance, distanceTypes);
         s_dal.volunteer!.Create(addvolunteer);
     }
@@ -411,8 +411,8 @@ internal class Program
     private static void UpdateVolunteer() 
     {
         Console.WriteLine("enter ID please");
-        int Id = int.Parse(Console.ReadLine());
-        Volunteer tmp = s_dal.volunteer.Read(Id);
+        int Id = int.Parse(Console.ReadLine()!);
+        Volunteer tmp = s_dal.volunteer.Read(Id)!;
         Console.WriteLine(tmp);
         // show the entity first
         Console.WriteLine("enter Full Name please");
@@ -426,15 +426,15 @@ internal class Program
         Console.WriteLine("enter Address please");
         string? Address = Console.ReadLine()!;
         Console.WriteLine("enter Latitude please");
-        double? Latitude = double.Parse(Console.ReadLine());
+        double? Latitude = double.Parse(Console.ReadLine()!);
         Console.WriteLine("enter Longitude please");
-        double? Longitude = double.Parse(Console.ReadLine());
+        double? Longitude = double.Parse(Console.ReadLine()!);
         Console.WriteLine("enter Distance Type, 0 to air, 1 to walk, 2 to car ");
-        string input = Console.ReadLine();
-        int key = int.Parse(input);
+        string input = Console.ReadLine()!;
+        int key = int.Parse(input!);
         DistanceTypes distanceTypes = (DistanceTypes)key;
         Console.WriteLine("enter Maximum Distance please");
-        double? MaximumDistance = double.Parse(Console.ReadLine());
+        double? MaximumDistance = double.Parse(Console.ReadLine()!);
         Volunteer Updatevolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer, true, MaximumDistance, distanceTypes);
         s_dal.volunteer.Update(Updatevolunteer);
     }
@@ -444,7 +444,7 @@ internal class Program
     private static void AddCall()  
     {
         Console.WriteLine("enter Type call, 0 to medical_situation, 1 to car_accident, 2 to fall_from_hight, 3 to violent_event, 4 to domestic_violent");
-        string input = Console.ReadLine();
+        string input = Console.ReadLine()!;
         int key = int.Parse(input);
         TypeCalls tmpTypeCall = (TypeCalls)key;
         Console.WriteLine("enter Verbal Decription please");
@@ -452,13 +452,13 @@ internal class Program
         Console.WriteLine("enter call adsress please");
         string? Address = Console.ReadLine()!;
         Console.WriteLine("enter Latitude please");
-        double Latitude = double.Parse(Console.ReadLine())!;
+        double Latitude = double.Parse(Console.ReadLine()!);
         Console.WriteLine("enter Longitude please");
-        double Longitude = double.Parse(Console.ReadLine())!;
-        DateTime tmpOpeningCallTime = DateTime.Now;
+        double Longitude = double.Parse(Console.ReadLine()!);
+        DateTime tmpOpeningCallTime = s_dal.config.Clock;
         Console.WriteLine("enter end call time please");
-        int time = int.Parse(Console.ReadLine());
-        DateTime tmpEndCallTime = DateTime.Now.AddMinutes(time);
+        int time = int.Parse(Console.ReadLine()!);
+        DateTime tmpEndCallTime = s_dal.config.Clock.AddMinutes(time);
         Call addcall = new Call(0, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
         s_dal.call!.Create(addcall);
     }
@@ -468,24 +468,24 @@ internal class Program
     private static void UpdateCall()  
     {
         Console.WriteLine("enter ID please");
-        int Id = int.Parse(Console.ReadLine());
-        Call tmp = s_dal.call.Read(Id);
+        int Id = int.Parse(Console.ReadLine()!);
+        Call tmp = s_dal.call.Read(Id)!;
         Console.WriteLine(tmp);
         // show the entity first
         Console.WriteLine("enter Type call, 0 to medical_situation, 1 to car_accident, 2 to fall_from_hight, 3 to violent_event, 4 to domestic_violent");
-        TypeCalls tmpTypeCall = (TypeCalls)Enum.Parse(typeof(TypeCalls), Console.ReadLine());
+        TypeCalls tmpTypeCall = (TypeCalls)Enum.Parse(typeof(TypeCalls), Console.ReadLine()!);
         Console.WriteLine("enter Verbal Decription please");
         string? tmpVerabal = Console.ReadLine();
         Console.WriteLine("enter call adsress please");
         string? Address = Console.ReadLine()!;
         Console.WriteLine("enter Latitude please");
-        double Latitude = double.Parse(Console.ReadLine())!;
+        double Latitude = double.Parse(Console.ReadLine()!);
         Console.WriteLine("enter Longitude please");
-        double Longitude = double.Parse(Console.ReadLine());
-        DateTime tmpOpeningCallTime = DateTime.Now;
+        double Longitude = double.Parse(Console.ReadLine()!);
+        DateTime tmpOpeningCallTime = s_dal.config.Clock;
         Console.WriteLine("enter end call time please");
-        int time = int.Parse(Console.ReadLine());
-        DateTime tmpEndCallTime = DateTime.Now.AddMinutes(time);
+        int time = int.Parse(Console.ReadLine()!);
+        DateTime tmpEndCallTime = s_dal.config.Clock.AddMinutes(time);
         Call updateCall = new Call(Id, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
         s_dal.call.Update(updateCall);
     }
@@ -495,16 +495,13 @@ internal class Program
     private static void AddAssignment()  
     {
         Console.WriteLine("enter call Id please");
-        int tmpCallId = int.Parse(Console.ReadLine());
+        int tmpCallId = int.Parse(Console.ReadLine()!);
         Console.WriteLine("enter volunteer Id please");
-        int tmpVolunteerId = int.Parse(Console.ReadLine());
-        DateTime tmpStartTime = DateTime.Now;
-        Console.WriteLine("enter time to finish the Assingment (in format dd/mm/yy hh:mm:ss): ");
-        if (!DateTime.TryParse(Console.ReadLine(), out DateTime bdt)) throw new FormatException("time is invalid!");
-        DateTime tmpFinishTime = bdt;
+        int tmpVolunteerId = int.Parse(Console.ReadLine()!);
+        DateTime tmpStartTime = s_dal.config.Clock;
         Console.WriteLine("enter Assignment end kind, 0 to treated, 1 to self_cancellation, 2 to administrator_cancellation, 3 to expired_cancellation");
-        EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine());
-        Assignment addAssignment = new Assignment(0, tmpCallId, tmpVolunteerId, tmpStartTime, tmpFinishTime, tmpEndKind);
+        EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine()!);
+        Assignment addAssignment = new Assignment(0, tmpCallId, tmpVolunteerId, tmpStartTime, null, tmpEndKind);
         s_dal.assignment!.Create(addAssignment);
     }
     
@@ -513,21 +510,18 @@ internal class Program
     private static void UpdateAssignment()  
     {
         Console.WriteLine("enter ID please");
-        int Id = int.Parse(Console.ReadLine());
+        int Id = int.Parse(Console.ReadLine()!);
         Assignment? tmp = s_dal.assignment.Read(Id);
         Console.WriteLine(tmp);
         // show the entity first
         Console.WriteLine("enter call Id please");
-        int tmpCallId = int.Parse(Console.ReadLine());
+        int tmpCallId = int.Parse(Console.ReadLine()!);
         Console.WriteLine("enter volunteer Id please");
-        int tmpVolunteerId = int.Parse(Console.ReadLine());
-        DateTime tmpStartTime = DateTime.Now;
-        Console.WriteLine("enter time to finish the Assingment (in format dd/mm/yy hh:mm:ss): ");
-        if (!DateTime.TryParse(Console.ReadLine(), out DateTime bdt)) throw new FormatException("time is invalid!"); // chek the time format that got
-        DateTime tmpFinishTime = bdt;
+        int tmpVolunteerId = int.Parse(Console.ReadLine()!);
+        DateTime tmpStartTime = s_dal.config.Clock;
         Console.WriteLine("enter Assignment end kind, 0 to treated, 1 to self_cancellation, 2 to administrator_cancellation, 3 to expired_cancellation");
-        EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine());
-        Assignment UpdateAssignment = new Assignment(Id, tmpCallId, tmpVolunteerId, tmpStartTime, tmpFinishTime, tmpEndKind);
+        EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine()!);
+        Assignment UpdateAssignment = new Assignment(Id, tmpCallId, tmpVolunteerId, tmpStartTime, null, tmpEndKind);
         s_dal.assignment.Update(UpdateAssignment);
     }
     
