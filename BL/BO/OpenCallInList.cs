@@ -4,7 +4,7 @@ namespace BO;
 /// <summary>
 /// represent a call in the open calls list, entity the see only.
 /// </summary>
-internal class OpenCallInList
+public class OpenCallInList
 {
     /// <summary>
     /// uniquely readable ID representation of the call

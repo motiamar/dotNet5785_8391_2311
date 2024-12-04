@@ -54,9 +54,9 @@ internal class Program
                         break;
 
                     case MainMenu.reset:   // reset all the list and the conping setup
-                        s_dal.assignment!.DeleteAll();
-                        s_dal.call!.DeleteAll();
-                        s_dal.volunteer!.DeleteAll();
+                        s_dal.Assignment!.DeleteAll();
+                        s_dal.Call!.DeleteAll();
+                        s_dal.Volunteer!.DeleteAll();
                         s_dal.Config!.Reset();
                         break;
 
@@ -121,12 +121,12 @@ internal class Program
                     case SubMenu.show:
                         Console.WriteLine("Enter volunteer Id");
                         Id = int.Parse(Console.ReadLine()!);
-                        Volunteer item = s_dal.volunteer.Read(Id)!;
+                        Volunteer item = s_dal.Volunteer.Read(Id)!;
                         Console.WriteLine(item);
                         break;
 
                     case SubMenu.see_all:
-                        IEnumerable<Volunteer> tmpForShow = s_dal.volunteer.ReadAll();
+                        IEnumerable<Volunteer> tmpForShow = s_dal.Volunteer.ReadAll();
                         foreach (var item1 in tmpForShow)
                         {
                             Console.WriteLine(item1);
@@ -140,11 +140,11 @@ internal class Program
                     case SubMenu.delete:
                         Console.WriteLine("enter ID please");
                         Id = int.Parse(Console.ReadLine()!);
-                        s_dal.volunteer!.Delete(Id);
+                        s_dal.Volunteer!.Delete(Id);
                         break;
 
                     case SubMenu.delete_all:
-                        s_dal.volunteer!.DeleteAll();
+                        s_dal.Volunteer!.DeleteAll();
                         break;
 
                     default:
@@ -191,12 +191,12 @@ internal class Program
                     case SubMenu.show:
                         Console.WriteLine("Enter Call Id");
                         Id = int.Parse(Console.ReadLine()!);
-                        Call item = s_dal.call.Read(Id)!;
+                        Call item = s_dal.Call.Read(Id)!;
                         Console.WriteLine(item);
                         break;
 
                     case SubMenu.see_all:
-                        IEnumerable<Call> tmpForShow = s_dal.call.ReadAll();
+                        IEnumerable<Call> tmpForShow = s_dal.Call.ReadAll();
                         foreach (var item1 in tmpForShow)
                         {
                             Console.WriteLine(item1);
@@ -210,11 +210,11 @@ internal class Program
                     case SubMenu.delete:
                         Console.WriteLine("enter ID please");
                         Id = int.Parse(Console.ReadLine()!);
-                        s_dal.call!.Delete(Id);
+                        s_dal.Call!.Delete(Id);
                         break;
 
                     case SubMenu.delete_all:
-                        s_dal.call!.DeleteAll();
+                        s_dal.Call!.DeleteAll();
                         break;
 
                     default:
@@ -260,12 +260,12 @@ internal class Program
                     case SubMenu.show:
                         Console.WriteLine("Enter Assignment Id");
                         Id = int.Parse(Console.ReadLine()!);
-                        Assignment item = s_dal.assignment.Read(Id)!;
+                        Assignment item = s_dal.Assignment.Read(Id)!;
                         Console.WriteLine(item);
                         break;
 
                     case SubMenu.see_all:
-                        IEnumerable<Assignment> tmpForShow = s_dal.assignment.ReadAll();
+                        IEnumerable<Assignment> tmpForShow = s_dal.Assignment.ReadAll();
                         foreach (var item1 in tmpForShow)
                         {
                             Console.WriteLine(item1);
@@ -279,11 +279,11 @@ internal class Program
                     case SubMenu.delete:
                         Console.WriteLine("enter ID please");
                         Id = int.Parse(Console.ReadLine()!);
-                        s_dal.assignment!.Delete(Id);
+                        s_dal.Assignment!.Delete(Id);
                         break;
 
                     case SubMenu.delete_all:
-                        s_dal.assignment!.DeleteAll();
+                        s_dal.Assignment!.DeleteAll();
                         break;
 
                     default:
@@ -404,7 +404,7 @@ internal class Program
         Console.WriteLine("enter Maximum Distance please");
         double? MaximumDistance = double.Parse(Console.ReadLine()!);
         Volunteer addvolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer, true, MaximumDistance, distanceTypes);
-        s_dal.volunteer!.Create(addvolunteer);
+        s_dal.Volunteer!.Create(addvolunteer);
     }
     
     // func to update a existing entity
@@ -412,7 +412,7 @@ internal class Program
     {
         Console.WriteLine("enter ID please");
         int Id = int.Parse(Console.ReadLine()!);
-        Volunteer tmp = s_dal.volunteer.Read(Id)!;
+        Volunteer tmp = s_dal.Volunteer.Read(Id)!;
         Console.WriteLine(tmp);
         // show the entity first
         Console.WriteLine("enter Full Name please");
@@ -436,7 +436,7 @@ internal class Program
         Console.WriteLine("enter Maximum Distance please");
         double? MaximumDistance = double.Parse(Console.ReadLine()!);
         Volunteer Updatevolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer, true, MaximumDistance, distanceTypes);
-        s_dal.volunteer.Update(Updatevolunteer);
+        s_dal.Volunteer.Update(Updatevolunteer);
     }
     
     
@@ -460,7 +460,7 @@ internal class Program
         int time = int.Parse(Console.ReadLine()!);
         DateTime tmpEndCallTime = s_dal.Config.Clock.AddMinutes(time);
         Call addcall = new Call(0, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
-        s_dal.call!.Create(addcall);
+        s_dal.Call!.Create(addcall);
     }
     
     
@@ -469,7 +469,7 @@ internal class Program
     {
         Console.WriteLine("enter ID please");
         int Id = int.Parse(Console.ReadLine()!);
-        Call tmp = s_dal.call.Read(Id)!;
+        Call tmp = s_dal.Call.Read(Id)!;
         Console.WriteLine(tmp);
         // show the entity first
         Console.WriteLine("enter Type call, 0 to medical_situation, 1 to car_accident, 2 to fall_from_hight, 3 to violent_event, 4 to domestic_violent");
@@ -487,7 +487,7 @@ internal class Program
         int time = int.Parse(Console.ReadLine()!);
         DateTime tmpEndCallTime = s_dal.Config.Clock.AddMinutes(time);
         Call updateCall = new Call(Id, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
-        s_dal.call.Update(updateCall);
+        s_dal.Call.Update(updateCall);
     }
     
     
@@ -502,7 +502,7 @@ internal class Program
         Console.WriteLine("enter Assignment end kind, 0 to treated, 1 to self_cancellation, 2 to administrator_cancellation, 3 to expired_cancellation");
         EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine()!);
         Assignment addAssignment = new Assignment(0, tmpCallId, tmpVolunteerId, tmpStartTime, null, tmpEndKind);
-        s_dal.assignment!.Create(addAssignment);
+        s_dal.Assignment!.Create(addAssignment);
     }
     
     
@@ -511,7 +511,7 @@ internal class Program
     {
         Console.WriteLine("enter ID please");
         int Id = int.Parse(Console.ReadLine()!);
-        Assignment? tmp = s_dal.assignment.Read(Id);
+        Assignment? tmp = s_dal.Assignment.Read(Id);
         Console.WriteLine(tmp);
         // show the entity first
         Console.WriteLine("enter call Id please");
@@ -522,7 +522,7 @@ internal class Program
         Console.WriteLine("enter Assignment end kind, 0 to treated, 1 to self_cancellation, 2 to administrator_cancellation, 3 to expired_cancellation");
         EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine()!);
         Assignment UpdateAssignment = new Assignment(Id, tmpCallId, tmpVolunteerId, tmpStartTime, null, tmpEndKind);
-        s_dal.assignment.Update(UpdateAssignment);
+        s_dal.Assignment.Update(UpdateAssignment);
     }
     
     
@@ -530,17 +530,17 @@ internal class Program
     // print all the lists of all the entities
     private static void ShowAllTheData() 
     {
-        IEnumerable <Volunteer> tmpForShow = s_dal.volunteer.ReadAll();
+        IEnumerable <Volunteer> tmpForShow = s_dal.Volunteer.ReadAll();
         foreach (var item in tmpForShow)
         {
             Console.WriteLine(item);
         }
-        IEnumerable <Call> tmpForShow1 = s_dal.call.ReadAll();
+        IEnumerable <Call> tmpForShow1 = s_dal.Call.ReadAll();
         foreach (var item1 in tmpForShow1)
         {
             Console.WriteLine(item1);
         }
-        IEnumerable <Assignment> tmpForShow2 = s_dal.assignment.ReadAll();
+        IEnumerable <Assignment> tmpForShow2 = s_dal.Assignment.ReadAll();
         foreach (var item2 in tmpForShow2)
         {
             Console.WriteLine(item2);

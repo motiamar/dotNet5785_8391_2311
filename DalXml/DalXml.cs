@@ -17,20 +17,20 @@ sealed internal class DalXml : IDal
     private static readonly Lazy<IDal> _instance = new Lazy<IDal>(new DalXml());
     public static IDal Instance => _instance.Value;
     private DalXml() { }
-    public IVolunteer volunteer { get; } = new VolunteerImplementation(); 
+    public IVolunteer Volunteer { get; } = new VolunteerImplementation(); 
 
-    public IAssignment assignment { get; } = new AssignmentImplementation();
+    public IAssignment Assignment { get; } = new AssignmentImplementation();
 
-    public ICall call { get; } = new CallImplementation();
+    public ICall Call { get; } = new CallImplementation();
 
     public IConfig Config { get; } = new ConfigImplementation();
 
     // reset all the xml files from the entities.
     public void ResetDB()
     {
-        volunteer.DeleteAll();
-        assignment.DeleteAll();
-        call.DeleteAll();
+        Volunteer.DeleteAll();
+        Assignment.DeleteAll();
+        Call.DeleteAll();
         Config.Reset();
     }
 }

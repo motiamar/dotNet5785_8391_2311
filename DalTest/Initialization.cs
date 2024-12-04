@@ -30,7 +30,7 @@ public static class Initialization
             int tmpid;
             do
                 tmpid = s_rand.Next(200000000, 400000000);
-            while (s_dal.volunteer.Read(tmpid) != null);
+            while (s_dal.Volunteer.Read(tmpid) != null);
 
              // active choise
             bool tmpaActive = (tmpid % 2) == 0 ? true : false;
@@ -52,7 +52,7 @@ public static class Initialization
             DistanceTypes tmpDistanceType = default(DistanceTypes);
 
             // create a new volunteer with all the tmp arguments
-            s_dal.volunteer.Create(new Volunteer 
+            s_dal.Volunteer.Create(new Volunteer 
             {
                 Id = tmpid,
                 FullName = name,
@@ -496,7 +496,7 @@ public static class Initialization
             
             // define the random ending time
             DateTime finish = start.AddMinutes(s_rand.Next(5, 10));  
-            s_dal.call!.Create(new Call
+            s_dal.Call!.Create(new Call
             {
                 Id = tmpId,
                 TypeCall = tmpTypeCall,
@@ -522,8 +522,8 @@ public static class Initialization
         DateTime tmpStartTime;
         EndKinds tmpEndKind = default;
 
-        IEnumerable <Call> tmpCalls = s_dal!.call.ReadAll();
-        IEnumerable <Volunteer> tmpVolenteers = s_dal.volunteer!.ReadAll();
+        IEnumerable <Call> tmpCalls = s_dal!.Call.ReadAll();
+        IEnumerable <Volunteer> tmpVolenteers = s_dal.Volunteer!.ReadAll();
 
         for (int i = 0; i < 50; i++)
         {
@@ -549,7 +549,7 @@ public static class Initialization
                     tmpEndKind = EndKinds.expired_cancellation;
                 }
 
-                s_dal.assignment!.Create(new Assignment
+                s_dal.Assignment!.Create(new Assignment
                 {
                     Id = tmpId,
                     CallId = tmpCallId,

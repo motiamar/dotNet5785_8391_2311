@@ -10,9 +10,9 @@ namespace DalApi;
 /// </summary>
 public interface IDal
 {
-    IVolunteer volunteer { get; }
-    IAssignment assignment { get; }
-    ICall call { get; } 
+    IVolunteer Volunteer { get; }
+    IAssignment Assignment { get; }
+    ICall Call { get; } 
     IConfig Config { get; }
 
     void ResetDB();

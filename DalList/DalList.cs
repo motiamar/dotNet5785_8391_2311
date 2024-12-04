@@ -17,16 +17,16 @@ sealed internal class DalList : IDal
     private DalList() { }
 
 
-    public IVolunteer volunteer { get; } = new VolunteerImplementation();
-    public IAssignment assignment { get; } = new AssignmentImplementation();
-    public ICall call { get; } = new CallImplementation();
+    public IVolunteer Volunteer { get; } = new VolunteerImplementation();
+    public IAssignment Assignment { get; } = new AssignmentImplementation();
+    public ICall Call { get; } = new CallImplementation();
     public IConfig Config {  get; } = new ConfigImplementation();
 
     public void ResetDB()
     {
-        volunteer.DeleteAll();
-        assignment.DeleteAll();
-        call.DeleteAll();
+        Volunteer.DeleteAll();
+        Assignment.DeleteAll();
+        Call.DeleteAll();
         Config.Reset();
     }
 }

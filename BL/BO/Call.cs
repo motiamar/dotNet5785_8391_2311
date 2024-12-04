@@ -4,7 +4,7 @@ namespace BO;
 /// <summary>
 /// represent a call in the system. entity the see, update, add and delete.
 /// </summary>
-internal class Call
+public class Call
 {
     /// <summary>
     /// uniquely readable ID representation of the assingment
