@@ -5,15 +5,15 @@ namespace Helpers;
 /// <summary>
 /// Internal BL manager for all Application's Clock logic policies
 /// </summary>
-internal static class ClockManager //stage 4
+internal static class ClockManager 
 {
     #region Stage 4
-    private static readonly DalApi.IDal _dal = DalApi.Factory.Get; //stage 4
+    private static readonly DalApi.IDal _dal = DalApi.Factory.Get;
 
     /// <summary>
     /// Property for providing current application's clock value for any BL class that may need it
     /// </summary>
-    internal static DateTime Now { get => _dal.Config.Clock; } //stage 4
+    internal static DateTime Now { get => _dal.Config.Clock; }
 
     /// <summary>
     /// Method to perform application's clock from any BL class as may be required
@@ -38,11 +38,11 @@ internal static class ClockManager //stage 4
         //Go through all students to update properties that are affected by the clock update
         //(students becomes not active after 5 years etc.)
         
-        StudentManager.PeriodicStudentsUpdates(oldClock, newClock); //stage 4
+        //StudentManager.PeriodicStudentsUpdates(oldClock, newClock); //stage 4
         //etc ...
 
         //Calling all the observers of clock update
-        ClockUpdatedObservers?.Invoke(); //prepared for stage 5
+        //ClockUpdatedObservers?.Invoke(); //prepared for stage 5
     }
     #endregion Stage 4
 
