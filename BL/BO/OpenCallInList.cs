@@ -1,4 +1,5 @@
-﻿namespace BO;
+﻿using Helpers;
+namespace BO;
 
 /// <summary>
 /// represent a call in the open calls list, entity the see only.

@@ -57,7 +57,7 @@ internal class Program
                         s_dal.assignment!.DeleteAll();
                         s_dal.call!.DeleteAll();
                         s_dal.volunteer!.DeleteAll();
-                        s_dal.config!.Reset();
+                        s_dal.Config!.Reset();
                         break;
 
                     default:
@@ -322,15 +322,15 @@ internal class Program
                         break;
 
                     case ConfingSubMenu.minutes:
-                        s_dal.config.Clock = s_dal.config.Clock.AddMinutes(1);
+                        s_dal.Config.Clock = s_dal.Config.Clock.AddMinutes(1);
                         break;
 
                     case ConfingSubMenu.hours:
-                        s_dal.config.Clock = s_dal.config.Clock.AddHours(1);
+                        s_dal.Config.Clock = s_dal.Config.Clock.AddHours(1);
                         break;
 
                     case ConfingSubMenu.show_time:
-                        Console.WriteLine(s_dal.config.Clock);
+                        Console.WriteLine(s_dal.Config.Clock);
                         break;
 
                     case ConfingSubMenu.set_new_value:
@@ -342,13 +342,13 @@ internal class Program
                             Console.WriteLine("Enter a new time");
                             if (!DateTime.TryParse(Console.ReadLine(), out DateTime bdt)) throw new FormatException("time is invalid!");
                             DateTime tmpFinishTime = bdt;
-                            s_dal.config.Clock = bdt;
+                            s_dal.Config.Clock = bdt;
                         }
                         else if (choise == 2)
                         {
                             Console.WriteLine("Enter a new risk range (in secondes) ");
                             if (int.TryParse(Console.ReadLine(), out int riskrangeInsecondes))
-                                s_dal.config.RiskRnge = TimeSpan.FromSeconds(riskrangeInsecondes);
+                                s_dal.Config.RiskRnge = TimeSpan.FromSeconds(riskrangeInsecondes);
                         }
                         break;
 
@@ -357,13 +357,13 @@ internal class Program
                         Console.WriteLine("to see the time press 1, to see the Risk Rnge press 2");
                         choise2 = int.Parse(Console.ReadLine()!);
                         if (choise2 == 1)
-                            Console.WriteLine(s_dal.config.Clock);
+                            Console.WriteLine(s_dal.Config.Clock);
                         else if (choise2 == 2)
-                            Console.WriteLine(s_dal.config.RiskRnge);
+                            Console.WriteLine(s_dal.Config.RiskRnge);
                         break;
 
                     case ConfingSubMenu.reset:
-                        s_dal.config!.Reset();
+                        s_dal.Config!.Reset();
                         break;
 
                     default:
@@ -455,10 +455,10 @@ internal class Program
         double Latitude = double.Parse(Console.ReadLine()!);
         Console.WriteLine("enter Longitude please");
         double Longitude = double.Parse(Console.ReadLine()!);
-        DateTime tmpOpeningCallTime = s_dal.config.Clock;
+        DateTime tmpOpeningCallTime = s_dal.Config.Clock;
         Console.WriteLine("enter end call time please");
         int time = int.Parse(Console.ReadLine()!);
-        DateTime tmpEndCallTime = s_dal.config.Clock.AddMinutes(time);
+        DateTime tmpEndCallTime = s_dal.Config.Clock.AddMinutes(time);
         Call addcall = new Call(0, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
         s_dal.call!.Create(addcall);
     }
@@ -482,10 +482,10 @@ internal class Program
         double Latitude = double.Parse(Console.ReadLine()!);
         Console.WriteLine("enter Longitude please");
         double Longitude = double.Parse(Console.ReadLine()!);
-        DateTime tmpOpeningCallTime = s_dal.config.Clock;
+        DateTime tmpOpeningCallTime = s_dal.Config.Clock;
         Console.WriteLine("enter end call time please");
         int time = int.Parse(Console.ReadLine()!);
-        DateTime tmpEndCallTime = s_dal.config.Clock.AddMinutes(time);
+        DateTime tmpEndCallTime = s_dal.Config.Clock.AddMinutes(time);
         Call updateCall = new Call(Id, tmpTypeCall, tmpVerabal, Address, Latitude, Longitude, tmpOpeningCallTime, tmpEndCallTime);
         s_dal.call.Update(updateCall);
     }
@@ -498,7 +498,7 @@ internal class Program
         int tmpCallId = int.Parse(Console.ReadLine()!);
         Console.WriteLine("enter volunteer Id please");
         int tmpVolunteerId = int.Parse(Console.ReadLine()!);
-        DateTime tmpStartTime = s_dal.config.Clock;
+        DateTime tmpStartTime = s_dal.Config.Clock;
         Console.WriteLine("enter Assignment end kind, 0 to treated, 1 to self_cancellation, 2 to administrator_cancellation, 3 to expired_cancellation");
         EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine()!);
         Assignment addAssignment = new Assignment(0, tmpCallId, tmpVolunteerId, tmpStartTime, null, tmpEndKind);
@@ -518,7 +518,7 @@ internal class Program
         int tmpCallId = int.Parse(Console.ReadLine()!);
         Console.WriteLine("enter volunteer Id please");
         int tmpVolunteerId = int.Parse(Console.ReadLine()!);
-        DateTime tmpStartTime = s_dal.config.Clock;
+        DateTime tmpStartTime = s_dal.Config.Clock;
         Console.WriteLine("enter Assignment end kind, 0 to treated, 1 to self_cancellation, 2 to administrator_cancellation, 3 to expired_cancellation");
         EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine()!);
         Assignment UpdateAssignment = new Assignment(Id, tmpCallId, tmpVolunteerId, tmpStartTime, null, tmpEndKind);

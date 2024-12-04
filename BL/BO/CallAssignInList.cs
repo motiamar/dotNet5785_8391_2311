@@ -1,4 +1,5 @@
-﻿namespace BO;
+﻿using Helpers;
+namespace BO;
 
 /// <summary>
 /// represent a call assign in the list, entity the see only.

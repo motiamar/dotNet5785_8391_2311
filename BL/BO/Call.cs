@@ -1,4 +1,5 @@
-﻿namespace BO;
+﻿using Helpers;
+namespace BO;
 
 /// <summary>
 /// represent a call in the system. entity the see, update, add and delete.

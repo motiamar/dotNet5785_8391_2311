@@ -20,13 +20,13 @@ sealed internal class DalList : IDal
     public IVolunteer volunteer { get; } = new VolunteerImplementation();
     public IAssignment assignment { get; } = new AssignmentImplementation();
     public ICall call { get; } = new CallImplementation();
-    public IConfig config {  get; } = new ConfigImplementation();
+    public IConfig Config {  get; } = new ConfigImplementation();
 
     public void ResetDB()
     {
         volunteer.DeleteAll();
         assignment.DeleteAll();
         call.DeleteAll();
-        config.Reset();
+        Config.Reset();
     }
 }

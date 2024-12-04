@@ -1,4 +1,5 @@
-﻿namespace BO;
+﻿using Helpers;
+namespace BO;
 
 /// <summary>
 /// represent a volunteer in a list. entity the see only.

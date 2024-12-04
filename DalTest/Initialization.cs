@@ -491,7 +491,7 @@ public static class Initialization
             } 
             
             // define the random time
-            DateTime start = s_dal!.config.Clock.AddMinutes(s_rand.Next(5, 10));
+            DateTime start = s_dal!.Config.Clock.AddMinutes(s_rand.Next(5, 10));
             
             
             // define the random ending time

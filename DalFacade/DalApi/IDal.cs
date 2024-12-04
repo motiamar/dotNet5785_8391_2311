@@ -13,7 +13,7 @@ public interface IDal
     IVolunteer volunteer { get; }
     IAssignment assignment { get; }
     ICall call { get; } 
-    IConfig config { get; }
+    IConfig Config { get; }
 
     void ResetDB();
 }

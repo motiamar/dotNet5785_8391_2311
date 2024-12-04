@@ -23,7 +23,7 @@ sealed internal class DalXml : IDal
 
     public ICall call { get; } = new CallImplementation();
 
-    public IConfig config { get; } = new ConfigImplementation();
+    public IConfig Config { get; } = new ConfigImplementation();
 
     // reset all the xml files from the entities.
     public void ResetDB()
@@ -31,6 +31,6 @@ sealed internal class DalXml : IDal
         volunteer.DeleteAll();
         assignment.DeleteAll();
         call.DeleteAll();
-        config.Reset();
+        Config.Reset();
     }
 }
