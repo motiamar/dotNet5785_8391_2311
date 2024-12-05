@@ -29,7 +29,12 @@ internal class VolunteerImplementation : IVolunteer
 
     public string SystemEnter(string username, string password)
     {
-        throw new NotImplementedException();
+        string? role = Helpers.VolunteerManager.GetVolunteerRole(username, password);
+        if (role != null)
+        {
+            return role;
+        }
+        throw new Exception($"Username: {username} or password: {password} is incorrect");
     }
 
     public void Update(int volunteerId, Volunteer change)

@@ -5,6 +5,7 @@ using BO;
 
 internal class AdminImplementation : IAdmin
 {
+    private readonly DalApi.IDal _dal = DalApi.Factory.Get;
     public void ForwordClock(TimeUnit unit)
     {
         throw new NotImplementedException();
