@@ -1,5 +1,4 @@
 ﻿using System.Data.SqlTypes;
-
 namespace BlApi;
 
 public interface IVolunteer

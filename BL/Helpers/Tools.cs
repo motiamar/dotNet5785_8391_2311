@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-
 namespace Helpers;
 
 internal static class Tools

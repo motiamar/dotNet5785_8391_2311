@@ -9,7 +9,7 @@ public class CallInList
     /// <summary>
     /// uniquely readable ID representation of the assingment
     /// </summary>
-    public int Id { get; init; }
+    public int? Id { get; init; }
     /// <summary>
     /// uniquely readable ID representation of the call
     /// </summary>

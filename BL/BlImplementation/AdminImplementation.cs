@@ -1,5 +1,4 @@
 ﻿namespace BlImplementation;
-
 using System;
 using BlApi;
 using BO;
