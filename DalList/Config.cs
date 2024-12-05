@@ -19,7 +19,7 @@ internal static class Config
     internal static DateTime Clock {  get; set; } = DateTime.Now;
 
 
-    internal static TimeSpan RiskRnge { get; set; } = TimeSpan.FromHours(1);
+    internal static TimeSpan RiskRnge { get; set; } = new TimeSpan(0,30,0);
 
 
 // rest function for all the entitis
