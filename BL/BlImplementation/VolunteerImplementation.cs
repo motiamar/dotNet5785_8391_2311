@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BlApi;
 using BO;
+using static BO.Exceptions;
 
 internal class VolunteerImplementation : IVolunteer
 {
@@ -19,26 +20,52 @@ internal class VolunteerImplementation : IVolunteer
 
     public Volunteer? Read(int id)
     {
+    //    var volunteer = _dal.Volunteer.Read(id);
+    //    if (volunteer != null)
+    //    {
+    //        return volunteer;
+    //    }
+    //    else
+    //    {
+    //        throw new BlDoesNotExistException($"can't find volunteer with id : {id}");
+    //    }
         throw new NotImplementedException();
     }
 
     public IEnumerable<VolunteerInList> ReadAll(bool? active = null, CallInListFilter? sort = null)
     {
-        if (active == null)
+        try
         {
-            return _dal.Volunteer.ReadAll().Select(v => new VolunteerInList(v));
+            var volunteers = _dal.Volunteer.ReadAll(v => v.Active == active);
+            
+            
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BlDoesNotExistException($"can't find any volunteers : {ex}");
         }
         throw new NotImplementedException();
     }
 
     public string SystemEnter(string username, string password)
     {
-        string? role = Helpers.VolunteerManager.GetVolunteerRole(username, password);
-        if (role != null)
+        try
         {
-            return role;
+            string? role = Helpers.VolunteerManager.GetVolunteerRole(username, password);
+            if (role != null)
+            {
+                return role;
+            }
+            else
+            {
+                throw new BlDoesNotExistException($"can't find username : {username} with password : {password}");
+            }
         }
-        throw new Exception($"Username: {username} or password: {password} is incorrect");
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BlDoesNotExistException($"can't find {username} : {ex}");
+        }
+
     }
 
     public void Update(int volunteerId, Volunteer change)

@@ -2,9 +2,10 @@
 
 internal class Exceptions
 {
-    public class VolunteerException : Exception
+
+    public class BlDoesNotExistException : Exception
     {
-        public VolunteerException(string message) : base(message) { }
+        public BlDoesNotExistException(string message) : base(message) { }
     }
     public class StationException : Exception
     {
@@ -14,4 +15,5 @@ internal class Exceptions
     {
         public LineException(string message) : base(message) { }
     }
+
 }
