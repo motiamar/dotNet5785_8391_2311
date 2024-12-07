@@ -24,6 +24,10 @@ internal class VolunteerImplementation : IVolunteer
 
     public IEnumerable<VolunteerInList> ReadAll(bool? active = null, CallInListFilter? sort = null)
     {
+        if (active == null)
+        {
+            return _dal.Volunteer.ReadAll().Select(v => new VolunteerInList(v));
+        }
         throw new NotImplementedException();
     }
 
