@@ -8,7 +8,7 @@ using System.Xml.Linq;
 internal class VolunteerImplementation : IVolunteer
 {
 
-    // if entitiy with this ID exist, it send an ERROR masage, if not it add it to the XML file
+    // if entitiy with this ID exist, it send an ERROR masage, if not it Add it to the XML file
     public int Create(Volunteer item)
     {
       
@@ -67,7 +67,7 @@ internal class VolunteerImplementation : IVolunteer
     }
 
 
-    // update a entity in the XML file 
+    // Update a entity in the XML file 
     public void Update(Volunteer item)
     {
         List<Volunteer> TmpVolunteers = XMLTools.LoadListFromXMLSerializer<Volunteer>(Config.s_volunteers_xml);

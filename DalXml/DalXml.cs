@@ -25,7 +25,7 @@ sealed internal class DalXml : IDal
 
     public IConfig Config { get; } = new ConfigImplementation();
 
-    // reset all the xml files from the entities.
+    // Reset all the xml files from the entities.
     public void ResetDB()
     {
         Volunteer.DeleteAll();

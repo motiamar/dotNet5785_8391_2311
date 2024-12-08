@@ -6,7 +6,7 @@ public interface IVolunteer
     /// <summary>
     /// method to enter the system
     /// </summary>
-    /// <returns>the role of the volunteer and exeption if he doesn't exist or the password is wrong </returns>
+    /// <returns>the role of the Volunteer and exeption if he doesn't exist or the password is wrong </returns>
     string SystemEnter(string username, string password);
 
     /// <summary>
@@ -20,24 +20,24 @@ public interface IVolunteer
     /// <summary>
     /// create a BO.Volunteer entity if the id exist in the data base 
     /// </summary>
-    /// <param name="id"> get the id of the volunteer</param>
-    /// <returns> return the copy of the entity by BO.volunteer entity if it exist</returns>
+    /// <param name="id"> get the id of the Volunteer</param>
+    /// <returns> return the copy of the entity by BO.Volunteer entity if it exist</returns>
     BO.Volunteer? Read(int id);
 
     /// <summary>
-    /// func to update an exist volunteer by the manager or the self volunteer
+    /// func to Update an exist Volunteer by the Manager or the self Volunteer
     /// </summary>
-    /// <param name="volunteerId"> the Id of the volunteer</param>
+    /// <param name="volunteerId"> the Id of the Volunteer</param>
     /// <param name="change">the new entity we want to switch to</param>
     void Update(int volunteerId, BO.Volunteer change);
 
     /// <summary>
-    /// delete the Volunteer if it exist and not hendel a call right now or never 
+    /// Delete the Volunteer if it exist and not hendel a call right now or never 
     /// </summary>
     void Delete (int volunteerId);
 
     /// <summary>
-    /// add a new volunteer to the data leir if the details are correct
+    /// Add a new Volunteer to the data leir if the details are correct
     /// </summary>
     void Create(BO.Volunteer volunteer);
 

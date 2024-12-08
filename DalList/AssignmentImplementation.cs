@@ -8,7 +8,7 @@ internal class AssignmentImplementation : IAssignment
 
 {
     
- // the func crate a new spot in the list and add the new entity to the spot with a new Id and return the new Id.
+ // the func crate a new spot in the list and Add the new entity to the spot with a new Id and return the new Id.
     public int Create(Assignment item)  
     {
         int NewId = Config.NextAssignmentId;

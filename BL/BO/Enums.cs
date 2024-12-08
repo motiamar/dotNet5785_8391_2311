@@ -1,49 +1,49 @@
 ﻿namespace BO;
 
 
-// define the character of the volunteer
+// define the character of the Volunteer
 public enum BRoles
 {
-    volunteer,  // default
-    manager
+    Volunteer,  // default
+    Manager
 }
 
 // define in what means the distance get measured
 public enum BDistanceTypes
 {
-    air, // default
-    walk,
-    car
+    Air, // default
+    Walk,
+    Car
 }
 
 // define the type of call that enterd the system
 public enum BTypeCalls
 {
-    medical_situation, // default
-    car_accident,
-    fall_from_hight,
-    violent_event,
-    domestic_violent,
+    Medical_situation, // default
+    Car_accident,
+    Fall_from_hight,
+    Violent_event,
+    Domestic_violent,
     None
 }
 
 public enum BCallStatus
 {
-    open,// default
-    in_treatment,
-    closed,
-    expired,
-    open_in_risk,
-    in_treatment_in_risk
+    Open,// default
+    In_treatment,
+    Closed,
+    Expired,
+    Open_in_risk,
+    In_treatment_in_risk
 }
 
 // tells how the assiment ended
 public enum BEndKinds
 {
-    treated, // default
-    self_cancellation,
-    administrator_cancellation,
-    expired_cancellation
+    Treated, // default
+    Self_cancellation,
+    Administrator_cancellation,
+    Expired_cancellation
 }
 
 // enum to choose a filed to sort/filter by
@@ -86,9 +86,9 @@ public enum OpenCallInListFilter
 
 public enum TimeUnit
 {
-    minute,
-    hour,
-    day,
-    month,
-    year
+    Minute,
+    Hour,
+    Day,
+    Month,
+    Year
 }

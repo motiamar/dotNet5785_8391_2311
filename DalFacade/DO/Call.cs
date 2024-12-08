@@ -7,14 +7,14 @@ namespace DO;
 /// <param name="TypeCall">the type of the call to the name of the system</param>
 /// <param name="VerbalDecription">a description of the reading received</param>
 /// <param name="FullAddressOfTheCall">full address of the call according to the format: street(+number) ,city ,country</param>
-/// <param name="Latitude"> number that show the distance between the point and the north or sout of the wquator</param>
-/// <param name="Longitude">number that show the distance between the point and the east or west of the wquator</param>
-/// <param name="OpeningCallTime">the time when the call was opened by the manager</param>
+/// <param name="Latitude"> number that Show the distance between the point and the north or sout of the wquator</param>
+/// <param name="Longitude">number that Show the distance between the point and the east or west of the wquator</param>
+/// <param name="OpeningCallTime">the time when the call was opened by the Manager</param>
 /// <param name="MaxEndingCallTime">the maximom time a call should close</param>
 public record Call
 (
     int Id,
-    TypeCalls TypeCall = TypeCalls.medical_situation,
+    TypeCalls TypeCall = TypeCalls.Medical_situation,
     string? VerbalDecription = null,
     string FullAddressOfTheCall = " ",
     double Latitude = 0,

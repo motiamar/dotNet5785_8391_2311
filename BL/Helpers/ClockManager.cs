@@ -3,7 +3,7 @@ using BO;
 namespace Helpers;
 
 /// <summary>
-/// Internal BL manager for all Application's Clock logic policies
+/// Internal BL Manager for all Application's Clock logic policies
 /// </summary>
 internal static class ClockManager 
 {
@@ -33,15 +33,15 @@ internal static class ClockManager
 
         //TO_DO:
         //Add calls here to any logic method that should be called periodically,
-        //after each clock update
+        //after each clock Update
         //for example, Periodic students' updates:
-        //Go through all students to update properties that are affected by the clock update
+        //Go through all students to Update properties that are affected by the clock Update
         //(students becomes not active after 5 years etc.)
         
         //StudentManager.PeriodicStudentsUpdates(oldClock, newClock); //stage 4
         //etc ...
 
-        //Calling all the observers of clock update
+        //Calling all the observers of clock Update
         //ClockUpdatedObservers?.Invoke(); //prepared for stage 5
     }
     #endregion Stage 4
@@ -49,7 +49,7 @@ internal static class ClockManager
 
     #region Stage 5
 
-    internal static event Action? ClockUpdatedObservers; //prepared for stage 5 - for clock update observers
+    internal static event Action? ClockUpdatedObservers; //prepared for stage 5 - for clock Update observers
 
     #endregion Stage 5
 
@@ -57,7 +57,7 @@ internal static class ClockManager
     #region Stage 7 base
     internal static readonly object blMutex = new();
     private static Thread? s_thread;
-    private static int s_interval { get; set; } = 1; //in minutes by second    
+    private static int s_interval { get; set; } = 1; //in Minutes by second    
     private static volatile bool s_stop = false;
     private static object mutex = new();
 

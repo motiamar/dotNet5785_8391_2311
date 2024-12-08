@@ -20,14 +20,14 @@ internal class VolunteerImplementation : IVolunteer
 
     public Volunteer? Read(int id)
     {
-    //    var volunteer = _dal.Volunteer.Read(id);
-    //    if (volunteer != null)
+    //    var Volunteer = _dal.Volunteer.Read(id);
+    //    if (Volunteer != null)
     //    {
-    //        return volunteer;
+    //        return Volunteer;
     //    }
     //    else
     //    {
-    //        throw new BlDoesNotExistException($"can't find volunteer with id : {id}");
+    //        throw new BlDoesNotExistException($"can't find Volunteer with id : {id}");
     //    }
         throw new NotImplementedException();
     }
