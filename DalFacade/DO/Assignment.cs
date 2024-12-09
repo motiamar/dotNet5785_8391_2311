@@ -16,7 +16,7 @@ public record Assignment
     int VolunteerId,
     DateTime StartTime = default, 
     DateTime? FinishTime = null, 
-    EndKinds EndKind = EndKinds.treated
+    EndKinds EndKind = EndKinds.Treated
 )
 
 { 

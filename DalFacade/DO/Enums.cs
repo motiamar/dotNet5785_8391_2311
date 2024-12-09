@@ -29,7 +29,7 @@ public enum TypeCalls
 // tells how the assiment ended
 public enum EndKinds
 {
-    treated, // default
+    Treated, // default
     self_cancellation,
     administrator_cancellation,
     expired_cancellation,
