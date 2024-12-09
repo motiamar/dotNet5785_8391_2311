@@ -22,6 +22,16 @@ internal static class Tools
         }
          return result.ToString();
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="distanceType"></param>
+    /// <param name="VolLatitude"></param>
+    /// <param name="VolLongitude"></param>
+    /// <param name="CallLatitude"></param>
+    /// <param name="CallLongitude"></param>
+    /// <returns></returns>
     public static double Distance(DO.DistanceTypes distanceType, double VolLatitude, double VolLongitude, double CallLatitude, double CallLongitude)
     {
         return 0.0;

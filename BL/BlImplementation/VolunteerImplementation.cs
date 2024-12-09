@@ -71,17 +71,58 @@ internal class VolunteerImplementation : BlApi.IVolunteer
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// delete the volunteer by the id
+    /// </summary>
     public void Delete(int volunteerId)
     {
+        try
+        {
+            var volunteer = _dal.Volunteer.Read(volunteerId);
+            int? correntCallId = _dal.Assignment.ReadAll(a => a.VolunteerId == volunteerId).FirstOrDefault(v => v.FinishTime == null)?.CallId;
+            if (volunteer != null && correntCallId == null)
+            {
+                _dal.Volunteer.Delete(volunteerId);
+                return;
+            }
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BlDoesNotExistException($"can't find volunteer with id : {volunteerId} : {ex}");
+        }
+        catch (DO.DalXMLFileLoadCreateException)
+        {
+            throw new BlCantLoadException("can't load the volunteers");
+        }
         throw new NotImplementedException();
     }
 
     
     public void Update(int volunteerId, BO.Volunteer change)
     {
+        try
+        {
+            //var volunteer = _dal.Volunteer.Read(volunteerId);
+            //if (volunteer != null)
+            //{
+            //    _dal.Volunteer.Update(Helpers.VolunteerManager.GetDOVolunteer(change));
+            //    return;
+            //}
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BlDoesNotExistException($"can't find volunteer with id : {volunteerId} : {ex}");
+        }
+        catch (DO.DalXMLFileLoadCreateException)
+        {
+            throw new BlCantLoadException("can't load the volunteers");
+        }
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// return the BO.Volunteer entity by the id
+    /// </summary>
     BO.Volunteer? BlApi.IVolunteer.Read(int id)
     {
         try
@@ -95,7 +136,7 @@ internal class VolunteerImplementation : BlApi.IVolunteer
         }
         catch(DO.DalDoesNotExistException ex)
         {
-            throw new BlDoesNotExistException($"can't find volunteer with id : {id} : {ex}"););
+            throw new BlDoesNotExistException($"can't find volunteer with id : {id} : {ex}");
         }
     }
 }
