@@ -2,7 +2,7 @@
 namespace BO;
 
 /// <summary>
-/// represent a call in the system. entity the see, update, add and delete.
+/// represent a call in the system. entity the see, Update, Add and Delete.
 /// </summary>
 public class Call
 {
@@ -23,15 +23,15 @@ public class Call
     /// </summary>
     public string? CallAddress { get; set; }
     /// <summary>
-    /// number that show the distance between the point and the north or sout of the wquator
+    /// number that Show the distance between the point and the north or sout of the wquator
     /// </summary>
     public double? Latitude { get; set; }
     /// <summary>
-    /// number that show the distance between the point and the east or west of the wquator
+    /// number that Show the distance between the point and the east or west of the wquator
     /// </summary>
     public double? Longitude { get; set; }
     /// <summary>
-    /// the call open time in the system
+    /// the call Open time in the system
     /// </summary>
     public DateTime CallOpenTime { get; init; }
     /// <summary>
@@ -44,7 +44,7 @@ public class Call
     public BCallStatus CallStatus { get; set; }
     public List<BO.CallAssignInList>? callAssignInLists { get; init; } = null;
     /// <summary>
-    /// show a list of assignment that assign to that call if there is
+    /// Show a list of assignment that assign to that call if there is
     /// </summary>
     /// <returns></returns>
     public override string ToString() => this.TostringProperty();

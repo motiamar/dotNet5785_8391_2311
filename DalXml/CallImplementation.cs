@@ -9,7 +9,7 @@ using System.Xml.Linq;
 internal class CallImplementation : ICall
 {
 
-    // the func crate a new spot in the XML file and add the new entity to the spot with a new Id and return the new Id.
+    // the func crate a new spot in the XML file and Add the new entity to the spot with a new Id and return the new Id.
     public int Create(Call item)
     {
         XElement callsRootElem = XMLTools.LoadListFromXMLElement(Config.s_calls_xml);
@@ -75,7 +75,7 @@ internal class CallImplementation : ICall
         
     }
 
-    // update a entity in the XML file with the corrent id
+    // Update a entity in the XML file with the corrent id
     public void Update(Call item)
     {
         XElement callsRootElem = XMLTools.LoadListFromXMLElement(Config.s_calls_xml);
@@ -101,7 +101,7 @@ internal class CallImplementation : ICall
         return new DO.Call()
         {
             Id = s.ToIntNullable("Id") ?? throw new FormatException("can't convert id"),
-            TypeCall = s.ToEnumNullable<TypeCalls>("TypeCall") ?? TypeCalls.medical_situation,
+            TypeCall = s.ToEnumNullable<TypeCalls>("TypeCall") ?? TypeCalls.Medical_situation,
             VerbalDecription = (string?)s.Element("VerbalDecription") ?? null,
             FullAddressOfTheCall = (string?)s.Element("FullAddressOfTheCall") ?? "",
             Latitude = s.ToDoubleNullable("Latitude") ?? 0,

@@ -7,7 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 internal class VolunteerImplementation : IVolunteer
 {
     
-    // the func crate a new spot in the list and add the new entity to the spot
+    // the func crate a new spot in the list and Add the new entity to the spot
     public int Create(Volunteer item)    
     {
         if (Read(item.Id) != null)

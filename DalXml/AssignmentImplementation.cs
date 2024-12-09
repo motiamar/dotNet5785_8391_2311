@@ -8,7 +8,7 @@ using System.Linq;
 internal class AssignmentImplementation : IAssignment
 {
 
-    // the func crate a new spot in the XML file and add the new entity to the spot with a new Id and return the new Id.
+    // the func crate a new spot in the XML file and Add the new entity to the spot with a new Id and return the new Id.
     public int Create(Assignment item)
     { 
         int NewId = Config.NextAssignmentId;
@@ -63,7 +63,7 @@ internal class AssignmentImplementation : IAssignment
     }
 
 
-    // update a entity in the XML file 
+    // Update a entity in the XML file 
     public void Update(Assignment item)
     {
         Delete(item.Id);

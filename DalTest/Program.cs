@@ -25,35 +25,35 @@ internal class Program
                 int key = int.Parse(input);
                 switch ((MainMenu)key)
                 {
-                    case MainMenu.exit:
+                    case MainMenu.Exit:
                         logOut = false;
                         break;
 
-                    case MainMenu.sub_volunteer:   // sub menu
+                    case MainMenu.Sub_volunteer:   // sub menu
                         ShowVolunteerSubMenu("Volunteer");
                         break;
 
-                    case MainMenu.sub_call:   // sub menu
+                    case MainMenu.Sub_call:   // sub menu
                         ShowCallSubMenu("Call");
                         break;
 
-                    case MainMenu.sub_assignment:   // sub menu
+                    case MainMenu.Sub_assignment:   // sub menu
                         ShowAssignmentSubMenu("Assignment");
                         break;
 
-                    case MainMenu.initialization:  // initiolztion all the data
+                    case MainMenu.Initialization:  // initiolztion all the data
                         Initialization.Do();
                         break;
 
-                    case MainMenu.show_all:   // print all the lists
+                    case MainMenu.Show_all:   // print all the lists
                         ShowAllTheData();
                         break;
 
-                    case MainMenu.sub_confing:   // sub menu
+                    case MainMenu.Sub_confing:   // sub menu
                         ShowConfingSubMenu();
                         break;
 
-                    case MainMenu.reset:   // reset all the list and the conping setup
+                    case MainMenu.Reset:   // Reset all the list and the conping setup
                         s_dal.Assignment!.DeleteAll();
                         s_dal.Call!.DeleteAll();
                         s_dal.Volunteer!.DeleteAll();
@@ -74,21 +74,21 @@ internal class Program
     }
 
 
-    // func to show the main menu
+    // func to Show the main menu
     private static void ShowMainMenu() 
     {
-        Console.WriteLine("Enter 0 to exit the main menu");
-        Console.WriteLine("Enter 1 to show sub menu for volunteer");
-        Console.WriteLine("Enter 2 to show sub menu for call");
-        Console.WriteLine("Enter 3 show sub menu for assignment");
-        Console.WriteLine("Enter 4 preforming data initialization");
-        Console.WriteLine("Enter 5 to show all the data in the data base");
-        Console.WriteLine("Enter 6 to show sub menu for confing");
-        Console.WriteLine("Enter 7 to reset the data base and the confing");
+        Console.WriteLine("Enter 0 to Exit the main menu");
+        Console.WriteLine("Enter 1 to Show sub menu for Volunteer");
+        Console.WriteLine("Enter 2 to Show sub menu for call");
+        Console.WriteLine("Enter 3 Show sub menu for assignment");
+        Console.WriteLine("Enter 4 preforming data Initialization");
+        Console.WriteLine("Enter 5 to Show all the data in the data base");
+        Console.WriteLine("Enter 6 to Show sub menu for confing");
+        Console.WriteLine("Enter 7 to Reset the data base and the confing");
     }
     
     
-    // func to show the volunteer sub menu
+    // func to Show the Volunteer sub menu
     private static void ShowVolunteerSubMenu(string type) 
     {
         bool flag = true;
@@ -96,13 +96,13 @@ internal class Program
 
         do
         {
-            Console.WriteLine("enter 0 to exit the sub menu");
-            Console.WriteLine($"enter 1 to add a new {type} to the list");
-            Console.WriteLine($"enter 2 to show the {type} data");
+            Console.WriteLine("enter 0 to Exit the sub menu");
+            Console.WriteLine($"enter 1 to Add a new {type} to the list");
+            Console.WriteLine($"enter 2 to Show the {type} data");
             Console.WriteLine($"enter 3 to see all the list of {type}");
-            Console.WriteLine($"enter 4 to update the {type}");
-            Console.WriteLine($"enter 5 to delete the {type}");
-            Console.WriteLine($"enter 6 to delete all the {type}");
+            Console.WriteLine($"enter 4 to Update the {type}");
+            Console.WriteLine($"enter 5 to Delete the {type}");
+            Console.WriteLine($"enter 6 to Delete all the {type}");
             try
             {
                 string input = Console.ReadLine()!;
@@ -110,22 +110,22 @@ internal class Program
 
                 switch ((SubMenu)key)
                 {
-                    case SubMenu.exit:
+                    case SubMenu.Exit:
                         flag = false;
                         break;
 
-                    case SubMenu.add:
+                    case SubMenu.Add:
                         AddVolunteer();
                         break;
 
-                    case SubMenu.show:
-                        Console.WriteLine("Enter volunteer Id");
+                    case SubMenu.Show:
+                        Console.WriteLine("Enter Volunteer Id");
                         Id = int.Parse(Console.ReadLine()!);
                         Volunteer item = s_dal.Volunteer.Read(Id)!;
                         Console.WriteLine(item);
                         break;
 
-                    case SubMenu.see_all:
+                    case SubMenu.See_all:
                         IEnumerable<Volunteer> tmpForShow = s_dal.Volunteer.ReadAll();
                         foreach (var item1 in tmpForShow)
                         {
@@ -133,17 +133,17 @@ internal class Program
                         }
                         break;
 
-                    case SubMenu.update:
+                    case SubMenu.Update:
                         UpdateVolunteer();
                         break;
 
-                    case SubMenu.delete:
+                    case SubMenu.Delete:
                         Console.WriteLine("enter ID please");
                         Id = int.Parse(Console.ReadLine()!);
                         s_dal.Volunteer!.Delete(Id);
                         break;
 
-                    case SubMenu.delete_all:
+                    case SubMenu.Delete_all:
                         s_dal.Volunteer!.DeleteAll();
                         break;
 
@@ -160,42 +160,42 @@ internal class Program
     }
     
     
-    // func to show the call sub menu
+    // func to Show the call sub menu
     private static void ShowCallSubMenu(string type)  
     {
         bool flag = true;
         int Id;
         do
         {
-            Console.WriteLine("enter 0 to exit the sub menu");
-            Console.WriteLine($"enter 1 to add a new {type} to the list");
-            Console.WriteLine($"enter 2 to show the {type} data");
+            Console.WriteLine("enter 0 to Exit the sub menu");
+            Console.WriteLine($"enter 1 to Add a new {type} to the list");
+            Console.WriteLine($"enter 2 to Show the {type} data");
             Console.WriteLine($"enter 3 to see all the list of {type}");
-            Console.WriteLine($"enter 4 to update the {type}");
-            Console.WriteLine($"enter 5 to delete the {type}");
-            Console.WriteLine($"enter 6 to delete all the {type}");
+            Console.WriteLine($"enter 4 to Update the {type}");
+            Console.WriteLine($"enter 5 to Delete the {type}");
+            Console.WriteLine($"enter 6 to Delete all the {type}");
             try
             {
                 string input = Console.ReadLine()!;
                 int key = int.Parse(input);
                 switch ((SubMenu)key)
                 {
-                    case SubMenu.exit:
+                    case SubMenu.Exit:
                         flag = false;
                         break;
 
-                    case SubMenu.add:
+                    case SubMenu.Add:
                         AddCall();
                         break;
 
-                    case SubMenu.show:
+                    case SubMenu.Show:
                         Console.WriteLine("Enter Call Id");
                         Id = int.Parse(Console.ReadLine()!);
                         Call item = s_dal.Call.Read(Id)!;
                         Console.WriteLine(item);
                         break;
 
-                    case SubMenu.see_all:
+                    case SubMenu.See_all:
                         IEnumerable<Call> tmpForShow = s_dal.Call.ReadAll();
                         foreach (var item1 in tmpForShow)
                         {
@@ -203,17 +203,17 @@ internal class Program
                         }
                         break;
 
-                    case SubMenu.update:
+                    case SubMenu.Update:
                         UpdateCall();
                         break;
 
-                    case SubMenu.delete:
+                    case SubMenu.Delete:
                         Console.WriteLine("enter ID please");
                         Id = int.Parse(Console.ReadLine()!);
                         s_dal.Call!.Delete(Id);
                         break;
 
-                    case SubMenu.delete_all:
+                    case SubMenu.Delete_all:
                         s_dal.Call!.DeleteAll();
                         break;
 
@@ -229,42 +229,42 @@ internal class Program
     }
     
     
-    // func to show the assignment sub menu
+    // func to Show the assignment sub menu
     private static void ShowAssignmentSubMenu(string type)  
     {
         bool flag = true;
         int Id;
         do
         {
-            Console.WriteLine("enter 0 to exit the sub menu");
-            Console.WriteLine($"enter 1 to add a new {type} to the list");
-            Console.WriteLine($"enter 2 to show the {type} data");
+            Console.WriteLine("enter 0 to Exit the sub menu");
+            Console.WriteLine($"enter 1 to Add a new {type} to the list");
+            Console.WriteLine($"enter 2 to Show the {type} data");
             Console.WriteLine($"enter 3 to see all the list of {type}");
-            Console.WriteLine($"enter 4 to update the {type}");
-            Console.WriteLine($"enter 5 to delete the {type}");
-            Console.WriteLine($"enter 6 to delete all the {type}");
+            Console.WriteLine($"enter 4 to Update the {type}");
+            Console.WriteLine($"enter 5 to Delete the {type}");
+            Console.WriteLine($"enter 6 to Delete all the {type}");
             try
             {
                 string input = Console.ReadLine()!;
                 int key = int.Parse(input);
                 switch ((SubMenu)key)
                 {
-                    case SubMenu.exit:
+                    case SubMenu.Exit:
                         flag = false;
                         break;
 
-                    case SubMenu.add:
+                    case SubMenu.Add:
                         AddAssignment();
                         break;
 
-                    case SubMenu.show:
+                    case SubMenu.Show:
                         Console.WriteLine("Enter Assignment Id");
                         Id = int.Parse(Console.ReadLine()!);
                         Assignment item = s_dal.Assignment.Read(Id)!;
                         Console.WriteLine(item);
                         break;
 
-                    case SubMenu.see_all:
+                    case SubMenu.See_all:
                         IEnumerable<Assignment> tmpForShow = s_dal.Assignment.ReadAll();
                         foreach (var item1 in tmpForShow)
                         {
@@ -272,17 +272,17 @@ internal class Program
                         }
                         break;
 
-                    case SubMenu.update:
+                    case SubMenu.Update:
                         UpdateAssignment();
                         break;
 
-                    case SubMenu.delete:
+                    case SubMenu.Delete:
                         Console.WriteLine("enter ID please");
                         Id = int.Parse(Console.ReadLine()!);
                         s_dal.Assignment!.Delete(Id);
                         break;
 
-                    case SubMenu.delete_all:
+                    case SubMenu.Delete_all:
                         s_dal.Assignment!.DeleteAll();
                         break;
 
@@ -298,42 +298,42 @@ internal class Program
     } 
     
     
-    // func to show the config sub menu
+    // func to Show the config sub menu
     private static void ShowConfingSubMenu() 
     {
         bool flag = true;
         do
         {
-            Console.WriteLine("enter 0 to exit the sub menu");
-            Console.WriteLine($"enter 1 to add a minute to the clock");
-            Console.WriteLine($"enter 2 to add a hour to the clock");
+            Console.WriteLine("enter 0 to Exit the sub menu");
+            Console.WriteLine($"enter 1 to Add a minute to the clock");
+            Console.WriteLine($"enter 2 to Add a hour to the clock");
             Console.WriteLine($"enter 3 to see the corrent clock time");
-            Console.WriteLine($"enter 4 to update a value");
+            Console.WriteLine($"enter 4 to Update a value");
             Console.WriteLine($"enter 5 to see a specific value");
-            Console.WriteLine($"enter 6 to reset all values");
+            Console.WriteLine($"enter 6 to Reset all values");
             try
             {
                 string input = Console.ReadLine()!;
                 int key = int.Parse(input);
                 switch ((ConfingSubMenu)key)
                 {
-                    case ConfingSubMenu.exit:
+                    case ConfingSubMenu.Exit:
                         flag = false;
                         break;
 
-                    case ConfingSubMenu.minutes:
+                    case ConfingSubMenu.Minutes:
                         s_dal.Config.Clock = s_dal.Config.Clock.AddMinutes(1);
                         break;
 
-                    case ConfingSubMenu.hours:
+                    case ConfingSubMenu.Hours:
                         s_dal.Config.Clock = s_dal.Config.Clock.AddHours(1);
                         break;
 
-                    case ConfingSubMenu.show_time:
+                    case ConfingSubMenu.Show_time:
                         Console.WriteLine(s_dal.Config.Clock);
                         break;
 
-                    case ConfingSubMenu.set_new_value:
+                    case ConfingSubMenu.Set_new_value:
                         int choise;
                         Console.WriteLine("to change the time press 1, to change the Risk Rnge press 2");
                         choise = int.Parse(Console.ReadLine()!);
@@ -352,7 +352,7 @@ internal class Program
                         }
                         break;
 
-                    case ConfingSubMenu.show_spesific_value:
+                    case ConfingSubMenu.Show_spesific_value:
                         int choise2;
                         Console.WriteLine("to see the time press 1, to see the Risk Rnge press 2");
                         choise2 = int.Parse(Console.ReadLine()!);
@@ -362,7 +362,7 @@ internal class Program
                             Console.WriteLine(s_dal.Config.RiskRnge);
                         break;
 
-                    case ConfingSubMenu.reset:
+                    case ConfingSubMenu.Reset:
                         s_dal.Config!.Reset();
                         break;
 
@@ -378,7 +378,7 @@ internal class Program
     }
     
     
-    // func to add entity to rhe list
+    // func to Add entity to rhe list
     private static void AddVolunteer()
     {
         Console.WriteLine("enter ID please");
@@ -397,24 +397,24 @@ internal class Program
         double? Latitude = double.Parse(Console.ReadLine()!);
         Console.WriteLine("enter Longitude please");
         double? Longitude = double.Parse(Console.ReadLine()!);
-        Console.WriteLine("enter Distance Type, 0 to air, 1 to walk, 2 to car ");
+        Console.WriteLine("enter Distance Type, 0 to Air, 1 to Walk, 2 to Car ");
         string input = Console.ReadLine()!;
         int key = int.Parse(input);
         DistanceTypes distanceTypes = (DistanceTypes)key;
         Console.WriteLine("enter Maximum Distance please");
         double? MaximumDistance = double.Parse(Console.ReadLine()!);
-        Volunteer addvolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer, true, MaximumDistance, distanceTypes);
+        Volunteer addvolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.Volunteer, true, MaximumDistance, distanceTypes);
         s_dal.Volunteer!.Create(addvolunteer);
     }
     
-    // func to update a existing entity
+    // func to Update a existing entity
     private static void UpdateVolunteer() 
     {
         Console.WriteLine("enter ID please");
         int Id = int.Parse(Console.ReadLine()!);
         Volunteer tmp = s_dal.Volunteer.Read(Id)!;
         Console.WriteLine(tmp);
-        // show the entity first
+        // Show the entity first
         Console.WriteLine("enter Full Name please");
         string FullName = Console.ReadLine()!;
         Console.WriteLine("enter Phone please");
@@ -429,21 +429,21 @@ internal class Program
         double? Latitude = double.Parse(Console.ReadLine()!);
         Console.WriteLine("enter Longitude please");
         double? Longitude = double.Parse(Console.ReadLine()!);
-        Console.WriteLine("enter Distance Type, 0 to air, 1 to walk, 2 to car ");
+        Console.WriteLine("enter Distance Type, 0 to Air, 1 to Walk, 2 to Car ");
         string input = Console.ReadLine()!;
         int key = int.Parse(input!);
         DistanceTypes distanceTypes = (DistanceTypes)key;
         Console.WriteLine("enter Maximum Distance please");
         double? MaximumDistance = double.Parse(Console.ReadLine()!);
-        Volunteer Updatevolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.volunteer, true, MaximumDistance, distanceTypes);
+        Volunteer Updatevolunteer = new Volunteer(Id, FullName, Phone, Email, Password, Address, Latitude, Longitude, Roles.Volunteer, true, MaximumDistance, distanceTypes);
         s_dal.Volunteer.Update(Updatevolunteer);
     }
     
     
-    // func to add entity to rhe list
+    // func to Add entity to rhe list
     private static void AddCall()  
     {
-        Console.WriteLine("enter Type call, 0 to medical_situation, 1 to car_accident, 2 to fall_from_hight, 3 to violent_event, 4 to domestic_violent");
+        Console.WriteLine("enter Type call, 0 to Medical_situation, 1 to Car_accident, 2 to Fall_from_hight, 3 to Violent_event, 4 to Domestic_violent");
         string input = Console.ReadLine()!;
         int key = int.Parse(input);
         TypeCalls tmpTypeCall = (TypeCalls)key;
@@ -464,15 +464,15 @@ internal class Program
     }
     
     
-    // func to update a existing entity
+    // func to Update a existing entity
     private static void UpdateCall()  
     {
         Console.WriteLine("enter ID please");
         int Id = int.Parse(Console.ReadLine()!);
         Call tmp = s_dal.Call.Read(Id)!;
         Console.WriteLine(tmp);
-        // show the entity first
-        Console.WriteLine("enter Type call, 0 to medical_situation, 1 to car_accident, 2 to fall_from_hight, 3 to violent_event, 4 to domestic_violent");
+        // Show the entity first
+        Console.WriteLine("enter Type call, 0 to Medical_situation, 1 to Car_accident, 2 to Fall_from_hight, 3 to Violent_event, 4 to Domestic_violent");
         TypeCalls tmpTypeCall = (TypeCalls)Enum.Parse(typeof(TypeCalls), Console.ReadLine()!);
         Console.WriteLine("enter Verbal Decription please");
         string? tmpVerabal = Console.ReadLine();
@@ -491,35 +491,35 @@ internal class Program
     }
     
     
-    // func to add entity to rhe list
+    // func to Add entity to rhe list
     private static void AddAssignment()  
     {
         Console.WriteLine("enter call Id please");
         int tmpCallId = int.Parse(Console.ReadLine()!);
-        Console.WriteLine("enter volunteer Id please");
+        Console.WriteLine("enter Volunteer Id please");
         int tmpVolunteerId = int.Parse(Console.ReadLine()!);
         DateTime tmpStartTime = s_dal.Config.Clock;
-        Console.WriteLine("enter Assignment end kind, 0 to treated, 1 to self_cancellation, 2 to administrator_cancellation, 3 to expired_cancellation");
+        Console.WriteLine("enter Assignment end kind, 0 to Treated, 1 to Self_cancellation, 2 to Administrator_cancellation, 3 to Expired_cancellation");
         EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine()!);
         Assignment addAssignment = new Assignment(0, tmpCallId, tmpVolunteerId, tmpStartTime, null, tmpEndKind);
         s_dal.Assignment!.Create(addAssignment);
     }
     
     
-    // func to update a existing entity
+    // func to Update a existing entity
     private static void UpdateAssignment()  
     {
         Console.WriteLine("enter ID please");
         int Id = int.Parse(Console.ReadLine()!);
         Assignment? tmp = s_dal.Assignment.Read(Id);
         Console.WriteLine(tmp);
-        // show the entity first
+        // Show the entity first
         Console.WriteLine("enter call Id please");
         int tmpCallId = int.Parse(Console.ReadLine()!);
-        Console.WriteLine("enter volunteer Id please");
+        Console.WriteLine("enter Volunteer Id please");
         int tmpVolunteerId = int.Parse(Console.ReadLine()!);
         DateTime tmpStartTime = s_dal.Config.Clock;
-        Console.WriteLine("enter Assignment end kind, 0 to treated, 1 to self_cancellation, 2 to administrator_cancellation, 3 to expired_cancellation");
+        Console.WriteLine("enter Assignment end kind, 0 to Treated, 1 to Self_cancellation, 2 to Administrator_cancellation, 3 to Expired_cancellation");
         EndKinds tmpEndKind = (EndKinds)Enum.Parse(typeof(EndKinds), Console.ReadLine()!);
         Assignment UpdateAssignment = new Assignment(Id, tmpCallId, tmpVolunteerId, tmpStartTime, null, tmpEndKind);
         s_dal.Assignment.Update(UpdateAssignment);

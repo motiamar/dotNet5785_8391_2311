@@ -44,7 +44,7 @@ internal static class Config
         set => XMLTools.SetConfigTimeVal(s_data_config_xml, "RiskRnge", value);
     }
 
-    // reset all the value in the file
+    // Reset all the value in the file
     internal static void Reset()
     {
         NextCallId = 1000;

@@ -19,7 +19,7 @@ public class CallInList
     /// </summary>
     public BTypeCalls Type { get; set; }
     /// <summary>
-    /// the call open time in the system
+    /// the call Open time in the system
     /// </summary>
     public DateTime CallOpenTime { get; init; }
     /// <summary>
@@ -27,11 +27,11 @@ public class CallInList
     /// </summary>
     public TimeSpan? CallMaxCloseTime { get; set; }
     /// <summary>
-    /// the last volunteer who handle the call
+    /// the last Volunteer who handle the call
     /// </summary>
     public string? LastVolunteerName { get; set; }
     /// <summary>
-    /// if the call treated, how much time did it take
+    /// if the call Treated, how much time did it take
     /// </summary>
     public TimeSpan? TotalTreatmentTime { get; set; }
     /// <summary>
@@ -39,7 +39,7 @@ public class CallInList
     /// </summary>
     public BCallStatus CallStatus { get; set; }
     /// <summary>
-    /// show how many time the call gut cenceled
+    /// Show how many time the call gut cenceled
     /// </summary>
     public int SumOfAssignments { get; set; }
     public override string ToString() => this.TostringProperty();

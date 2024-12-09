@@ -1,51 +1,51 @@
 ﻿namespace DO;
 
-// define the character of the volunteer
+// define the character of the Volunteer
 public enum Roles 
 {
-    volunteer,  // default
-    manager,
+    Volunteer,  // default
+    Manager,
 }
 
 
 // define in what means the distance get measured
 public enum DistanceTypes 
 {
-    air, // default
-    walk,
-    car,
+    Air, // default
+    Walk,
+    Car,
 }
 
 // define the type of call that enterd the system
 public enum TypeCalls 
 {
-    medical_situation, // default
-    car_accident,
-    fall_from_hight,
-    violent_event,
-    domestic_violent,
+    Medical_situation, // default
+    Car_accident,
+    Fall_from_hight,
+    Violent_event,
+    Domestic_violent,
 } 
 
 // tells how the assiment ended
 public enum EndKinds
 {
     Treated, // default
-    self_cancellation,
-    administrator_cancellation,
-    expired_cancellation,
+    Self_cancellation,
+    Administrator_cancellation,
+    Expired_cancellation,
 }
 
 //  choises for the menu
 public enum MainMenu 
 {
-    exit,
-    sub_volunteer,
-    sub_call,
-    sub_assignment,
-    initialization,
-    show_all,
-    sub_confing,
-    reset
+    Exit,
+    Sub_volunteer,
+    Sub_call,
+    Sub_assignment,
+    Initialization,
+    Show_all,
+    Sub_confing,
+    Reset
 
 }
 
@@ -53,25 +53,25 @@ public enum MainMenu
 //  choises for the sub menu
 public enum SubMenu  
 { 
-    exit,
-    add,
-    show,
-    see_all,
-    update,
-    delete,
-    delete_all
+    Exit,
+    Add,
+    Show,
+    See_all,
+    Update,
+    Delete,
+    Delete_all
 }
 
  //  choises for the confing sub menu
 public enum ConfingSubMenu 
 {
-    exit,
-    minutes,
-    hours,
-    show_time,
-    set_new_value,
-    show_spesific_value,
-    reset
+    Exit,
+    Minutes,
+    Hours,
+    Show_time,
+    Set_new_value,
+    Show_spesific_value,
+    Reset
 }
 
 

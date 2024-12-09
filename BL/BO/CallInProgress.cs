@@ -2,7 +2,7 @@
 namespace BO;
 
 /// <summary>
-/// represent a call in the volunteer treatment. entity the see only.
+/// represent a call in the Volunteer treatment. entity the see only.
 /// </summary>
 public class CallInProgress
 {
@@ -27,7 +27,7 @@ public class CallInProgress
     /// </summary>
     public string CallAddress { get; set; }
     /// <summary>
-    /// the call open time in the system
+    /// the call Open time in the system
     /// </summary>
     public DateTime CallOpenTime { get; init; }
     /// <summary>
@@ -35,11 +35,11 @@ public class CallInProgress
     /// </summary>
     public DateTime? CallMaxCloseTime { get; set; }
     /// <summary>
-    /// time the call started to get treated
+    /// time the call started to get Treated
     /// </summary>
     public DateTime CallEnterTime { get; set; }
     /// <summary>
-    /// the distance between the volunteer address and the call address
+    /// the distance between the Volunteer address and the call address
     /// </summary>
     public double CallDistance { get; set; }
     /// <summary>

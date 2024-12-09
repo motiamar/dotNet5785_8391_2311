@@ -38,7 +38,7 @@ public static class Initialization
             // random password
             string? password = name + "pass" + (i*4);
            
-            // 15 volunteers and one manager
+            // 15 volunteers and one Manager
             Roles tmpRole = default(Roles);
             if(i == volunteerName.Length-1)
             {
@@ -51,7 +51,7 @@ public static class Initialization
 
             DistanceTypes tmpDistanceType = default(DistanceTypes);
 
-            // create a new volunteer with all the tmp arguments
+            // create a new Volunteer with all the tmp arguments
             s_dal.Volunteer.Create(new Volunteer 
             {
                 Id = tmpid,
@@ -76,7 +76,7 @@ public static class Initialization
     private static void CreateCalls() 
     {
         string[] medical_Descriptions = { "Man aged 60 unconscious in critical condition","Young woman complaining of severe pain",  "Infant with high fever and instability", "Elderly person reporting severe shortness of breath", "Teenager unconscious after sudden fainting episode" };
-        string[] accident_Descriptions = {"Car overturned with injured passengers inside", "Motorcyclist unconscious after severe accident", "Head-on collision between two vehicles", "Pedestrian hit at a crosswalk", "Woman injured by a car, moderate condition" };
+        string[] accident_Descriptions = {"Car overturned with injured passengers inside", "Motorcyclist unconscious after severe accident", "Head-on collision between two vehicles", "Pedestrian hit at a crosswalk", "Woman injured by a Car, moderate condition" };
         string[] fall_Descriptions = {"Worker fell from five-story height", "Girl fell from third-floor window", "Elderly person slipped and fell down stairs", "Person lost balance and fell off roof", "Child fell from a tree, lightly injured" };
         string[] violence_Descriptions = {"Man stabbed in the upper body", "Mass brawl with injured individuals in city center", "Young man attacked by several suspects on the street",  "Man injured following an attack with a sharp weapon","Assault victim reporting head and facial injuries"};
         string[] domestic_Descriptions = {"Woman reports assault inside her home", "Child with visible bruises on their face","Man reports violence by a family member", "Elderly person injured following family member's assault", "Teenager bruised due to ongoing domestic violence"};
@@ -471,19 +471,19 @@ public static class Initialization
              // Matches event description to event randomly
             switch (tmpTypeCall)
             {
-                case TypeCalls.medical_situation:
+                case TypeCalls.Medical_situation:
                     tmpVerbalDecription = medical_Descriptions[s_rand.Next(0, medical_Descriptions.Length)];
                     break;
-                case TypeCalls.car_accident:
+                case TypeCalls.Car_accident:
                     tmpVerbalDecription = accident_Descriptions[s_rand.Next(0, accident_Descriptions.Length)];
                     break;
-                case TypeCalls.fall_from_hight:
+                case TypeCalls.Fall_from_hight:
                     tmpVerbalDecription = fall_Descriptions[s_rand.Next(0, fall_Descriptions.Length)];
                     break;
-                case TypeCalls.violent_event:
+                case TypeCalls.Violent_event:
                     tmpVerbalDecription = violence_Descriptions[s_rand.Next(0, violence_Descriptions.Length)];
                     break;
-                case TypeCalls.domestic_violent:
+                case TypeCalls.Domestic_violent:
                     tmpVerbalDecription = domestic_Descriptions[s_rand.Next(0, domestic_Descriptions.Length)];
                     break;
                 default:
@@ -546,7 +546,7 @@ public static class Initialization
                     tmpFinishTime = tmpCalls.ElementAt(tmpIndex).MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 2));
 
                     //5 expired calls
-                    tmpEndKind = EndKinds.expired_cancellation;
+                    tmpEndKind = EndKinds.Expired_cancellation;
                 }
 
                 s_dal.Assignment!.Create(new Assignment
@@ -562,7 +562,7 @@ public static class Initialization
         }
     }
 
-    // reset all the config value and create all the new lists with the entities inside
+    // Reset all the config value and create all the new lists with the entities inside
     public static void Do()
     {
         s_dal = DalApi.Factory.Get;

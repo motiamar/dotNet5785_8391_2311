@@ -15,7 +15,7 @@ public class DalAlreadyExistException : Exception
 }
 
 
-// exception for not able to delete items
+// exception for not able to Delete items
 public class DalDeletionImpossible : Exception
 {
     public DalDeletionImpossible(string message) : base(message) { }

@@ -23,7 +23,7 @@ public interface IAdmin
     void SetMaxRange(TimeSpan maxRange);
 
     /// <summary>
-    /// reset all the data base
+    /// Reset all the data base
     /// </summary>
     void ResetDB();
 

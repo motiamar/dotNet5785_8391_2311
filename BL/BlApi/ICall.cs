@@ -23,25 +23,25 @@ public interface ICall
     BO.Call? Read(int id);
 
     /// <summary>
-    /// func to update an exist call by the manager or the self call
+    /// func to Update an exist call by the Manager or the self call
     /// </summary>
     /// <param name="change">the new entity we want to switch to</param>
     void Update(BO.Call change);
 
     /// <summary>
-    /// delete the call if it exist and open or never assignt 
+    /// Delete the call if it exist and Open or never assignt 
     /// </summary>
     void Delete(int callId);
 
     /// <summary>
-    /// add a new call to the data leir if the details are correct
+    /// Add a new call to the data leir if the details are correct
     /// </summary>
     void Create(BO.Call call);
 
     /// <summary>
     /// func to create a new list by the recived parameters
     /// </summary>
-    /// <param name="volunteerId"> the id of the volunteer</param>
+    /// <param name="volunteerId"> the id of the Volunteer</param>
     /// <param name="filter"> the kind of the call that the list filter by</param>
     /// <param name="sort">the kind of the call filed that the list sorted by </param>
     /// <returns>return the new list</returns>
@@ -50,28 +50,28 @@ public interface ICall
     /// <summary>
     /// func that return a sorted list of the calls in list, sorted by filter Booleany and a enum fild 
     /// </summary>
-    /// <param name="volunteerId"> the id of the volunteer</param>
+    /// <param name="volunteerId"> the id of the Volunteer</param>
     /// <param name="filter"> filterd the list by the given parameter</param>
     /// <param name="sort"> soreted the list by the given parameter</param>
     /// <returns>return the new list</returns>
     IEnumerable<BO.OpenCallInList> GetOpenCallList(int volunteerId, BO.BTypeCalls? filter = null, BO.OpenCallInListFilter? sort = null); 
 
     /// <summary>
-    /// chek if exist and end the assignment of the volunteer
+    /// chek if exist and end the assignment of the Volunteer
     /// </summary>
-    /// <param name="volunteerId"> the volunteer who want to end the assignemnt</param>
+    /// <param name="volunteerId"> the Volunteer who want to end the assignemnt</param>
     /// <param name="assignmentId"> the assignment that need to close</param>
     void EndAssignment (int volunteerId, int assignmentId);
 
     /// <summary>
-    /// func to cancale an assignment by the volunteer who handle it or the managar if the conditions are good
+    /// func to cancale an assignment by the Volunteer who handle it or the managar if the conditions are good
     /// </summary>
-    /// <param name="volunteerId">the volunteer who want to cencele the assignemnt</param>
+    /// <param name="volunteerId">the Volunteer who want to cencele the assignemnt</param>
     /// <param name="assignmentId">the assignment that need to cancaled</param>
     void CanceleAssignment(int volunteerId, int assignmentId);
 
     /// <summary>
-    /// func that assignet volunteer to a call if it available and not taken 
+    /// func that assignet Volunteer to a call if it available and not taken 
     /// </summary>
     /// <param name="volunteerId"></param>
     /// <param name="CallId"></param>

@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 internal class CallImplementation : ICall
 {
 
-     // the func crate a new spot in the list and add the new entity to the spot with a new Id and return the new Id.
+     // the func crate a new spot in the list and Add the new entity to the spot with a new Id and return the new Id.
     public int Create(Call item)  
     {
         int NewId = Config.NextCallId;
