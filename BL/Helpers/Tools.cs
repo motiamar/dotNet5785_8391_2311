@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using DO;
+using System.Runtime.CompilerServices;
 namespace Helpers;
 
 internal static class Tools
@@ -21,5 +22,9 @@ internal static class Tools
         }
          return result.ToString();
     }
-
+    public static double Distance(DO.DistanceTypes distanceType, double VolLatitude, double VolLongitude, double CallLatitude, double CallLongitude)
+    {
+        return 0.0;
+    }
+  
 }

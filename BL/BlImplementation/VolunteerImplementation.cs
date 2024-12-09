@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using BlApi;
 using BO;
 using DalApi;
+using DO;
 using static BO.Exceptions;
 
 internal class VolunteerImplementation : BlApi.IVolunteer
@@ -19,17 +20,22 @@ internal class VolunteerImplementation : BlApi.IVolunteer
         try
         {
             string? role = Helpers.VolunteerManager.GetVolunteerRole(username, password);
-            if (role != null)          
+            if (role != null)
                 return role;
-            else           
-                throw new BlDoesNotExistException($"can't find username : {username} with password : {password}");          
+            else
+                throw new BlDoesNotExistException($"can't find username : {username} with password : {password}");
         }
         catch (DO.DalDoesNotExistException ex)
         {
-            throw new BlDoesNotExistException($"can't find {username} : {ex}");
+            throw new BlDoesNotExistException($"can't find username: {username} : {ex}");
+        }
+        catch (DO.DalXMLFileLoadCreateException ex)
+        {
+
+            throw new BlCantLoadException($"can't load username: {username} : {ex}");
+
         }
     }
-
 
     /// <summary>
     /// func that return a sorted list of the volunteers in list, sorted by filter Booleany and a enum fild 
@@ -81,10 +87,11 @@ internal class VolunteerImplementation : BlApi.IVolunteer
         try
         {
             if(_dal.Volunteer.Read(id) != null)
+            {
                 BO.Volunteer volunteer = Helpers.VolunteerManager.GetBOVolunteer(id);
-            else
-                throw new BlDoesNotExistException($"can't find volunteer with id : {id}");
-            return null;
+                return null;
+            }
+            throw new BlDoesNotExistException($"can't find volunteer with id : {id}");           
         }
         catch(DO.DalDoesNotExistException ex)
         {
