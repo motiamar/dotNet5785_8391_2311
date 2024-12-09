@@ -89,7 +89,7 @@ internal class VolunteerImplementation : BlApi.IVolunteer
             if(_dal.Volunteer.Read(id) != null)
             {
                 BO.Volunteer volunteer = Helpers.VolunteerManager.GetBOVolunteer(id);
-                return null;
+                return volunteer;
             }
             throw new BlDoesNotExistException($"can't find volunteer with id : {id}");           
         }

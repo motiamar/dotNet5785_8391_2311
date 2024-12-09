@@ -51,7 +51,7 @@ internal static class VolunteerManager
 
 
     /// <summary>
-    /// 
+    /// return BO.Volunteer by id
     /// </summary>
     public static BO.Volunteer GetBOVolunteer(int Id)
     {
@@ -79,11 +79,13 @@ internal static class VolunteerManager
         };
 
 
-        return null;
+        return Bvolunteer;
     }
 
 
-
+    /// <summary>
+    /// return the call in progress by id
+    /// </summary>
     public static BO.CallInProgress? GetCallInProgress(int id)
     {
         DO.Assignment assignment = s_dal.Assignment.Read(id)!;
