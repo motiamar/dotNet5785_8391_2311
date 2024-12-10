@@ -1,5 +1,8 @@
 ﻿namespace BlImplementation;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Numerics;
 using System.Security.Cryptography;
 using BlApi;
 using BO;
@@ -61,53 +64,78 @@ internal class VolunteerImplementation : BlApi.IVolunteer
 
 
     /// <summary>
-    /// create a BO.Volunteer entity if the id exist in the data base 
+    /// create a DO.Volunteer entity if the id is not exist in the data base 
     /// </summary>
-    /// <param name="id"> get the id of the volunteer</param>
-    /// <returns> return the copy of the entity by BO.volunteer entity if it exist</returns>
-
     public void Create(BO.Volunteer volunteer)
     {
-        throw new NotImplementedException();
+        try
+        {
+            // check the incoming details
+            Helpers.VolunteerManager.VolunteerChek(volunteer);
+            double? latitude = Helpers.Tools.GetLatitudeFromAddressAsync(volunteer.Address!).Result;
+            double? longitude = Helpers.Tools.GetLongitudeFromAddressAsync(volunteer.Address!).Result;
+            var role = (Roles)Enum.Parse(typeof(BRoles), volunteer.role.ToString());
+            var distanceType = (DistanceTypes)Enum.Parse(typeof(BDistanceTypes), volunteer.DistanceType.ToString());
+            var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = volunteer.FullName, Phone = volunteer.Phone, Email = volunteer.Email, Password = volunteer.Password, Address = volunteer.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = volunteer.Active, MaximumDistance = volunteer.MaximumDistance, DistanceType = distanceType };
+            _dal.Volunteer.Create(newVolunteer);
+        }
+        catch ( DO.DalAlreadyExistException ex)
+        {
+            throw new BlVolAllreadyExist($"volunteer with id : {volunteer.Id} is already exist: {ex}");
+        }
     }
 
     /// <summary>
-    /// delete the volunteer by the id
+    /// delete the volunteer by the id if is not assignd now or ever
     /// </summary>
     public void Delete(int volunteerId)
     {
         try
         {
             var volunteer = _dal.Volunteer.Read(volunteerId);
-            int? correntCallId = _dal.Assignment.ReadAll(a => a.VolunteerId == volunteerId).FirstOrDefault(v => v.FinishTime == null)?.CallId;
-            if (volunteer != null && correntCallId == null)
-            {
+            var assignment = _dal.Assignment.ReadAll();
+            int? correntCallId = assignment.FirstOrDefault(v => v.VolunteerId == volunteerId)?.CallId;
+            if (correntCallId is null)
                 _dal.Volunteer.Delete(volunteerId);
-                return;
-            }
+            else
+                throw new BLVolunteerIsAssign($"cant delete volunteer: {volunteerId}, the volunteer is assign");
         }
         catch (DO.DalDoesNotExistException ex)
         {
             throw new BlDoesNotExistException($"can't find volunteer with id : {volunteerId} : {ex}");
         }
-        catch (DO.DalXMLFileLoadCreateException)
-        {
-            throw new BlCantLoadException("can't load the volunteers");
-        }
-        throw new NotImplementedException();
     }
 
-    
-    public void Update(int volunteerId, BO.Volunteer change)
+    /// <summary>
+    /// func to update the datiles of an existing volunteer
+    /// </summary>
+    public void  Update(int volunteerId, BO.Volunteer change)
     {
         try
         {
-            //var volunteer = _dal.Volunteer.Read(volunteerId);
-            //if (volunteer != null)
-            //{
-            //    _dal.Volunteer.Update(Helpers.VolunteerManager.GetDOVolunteer(change));
-            //    return;
-            //}
+            var volunteer = _dal.Volunteer.Read(volunteerId);
+            if (volunteer == null)
+                throw new BlDoesNotExistException($"can't find volunteer with id : {volunteerId}");
+            if (volunteerId != change.Id && volunteer!.Role != Roles.Manager)
+                throw new BlNotAllowException("you can't change the details of the volunteer");
+            // func to chek all the incoming details    
+            Helpers.VolunteerManager.VolunteerChek(change);
+            double? latitude =  Helpers.Tools.GetLatitudeFromAddressAsync(change.Address!).Result;
+            double? longitude = Helpers.Tools.GetLongitudeFromAddressAsync(change.Address!).Result;
+            var role = (Roles)Enum.Parse(typeof(BRoles), change.role.ToString());
+            var distanceType = (DistanceTypes)Enum.Parse(typeof(BDistanceTypes), change.DistanceType.ToString());
+            if (volunteer.Role == Roles.Manager)
+            {
+                // if the volunteer is a manager is can change the role
+                var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = change.FullName, Phone = change.Phone, Email = change.Email, Password = change.Password, Address = change.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = change.Active, MaximumDistance = change.MaximumDistance, DistanceType = distanceType};
+                _dal.Volunteer.Update(newVolunteer);
+            }
+            else
+            {
+                //if the volunteer is not a manager is can't change the role
+                var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = change.FullName, Phone = change.Phone, Email = change.Email, Password = change.Password, Address = change.Address, Role = volunteer.Role, Latitude = latitude, Longitude = longitude, Active = change.Active, MaximumDistance = change.MaximumDistance, DistanceType = distanceType };
+                _dal.Volunteer.Update(newVolunteer);
+            }              
         }
         catch (DO.DalDoesNotExistException ex)
         {
@@ -117,7 +145,6 @@ internal class VolunteerImplementation : BlApi.IVolunteer
         {
             throw new BlCantLoadException("can't load the volunteers");
         }
-        throw new NotImplementedException();
     }
 
     /// <summary>

@@ -11,13 +11,21 @@ internal class Exceptions
     {
         public BlCantLoadException(string message) : base(message) { }
     }
-    public class StationException : Exception
+    public class BLVolunteerIsAssign : Exception
     {
-        public StationException(string message) : base(message) { }
+        public BLVolunteerIsAssign(string message) : base(message) { }
     }
-    public class LineException : Exception
+    public class BlNotAllowException : Exception
     {
-        public LineException(string message) : base(message) { }
+        public BlNotAllowException(string message) : base(message) { }
+    }
+    public class BlinCorrectException : Exception
+    {
+        public BlinCorrectException(string message) : base(message) { }
+    }
+    public class BlVolAllreadyExist : Exception
+    {
+        public BlVolAllreadyExist(string message) : base(message) { }
     }
 
 }

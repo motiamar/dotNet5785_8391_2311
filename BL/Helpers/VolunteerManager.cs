@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
+using static BO.Exceptions;
 namespace Helpers;
 
 internal static class VolunteerManager
@@ -27,7 +28,7 @@ internal static class VolunteerManager
     }
 
     /// <summary>
-    /// func to get all the volunteer in list
+    /// func to get all the BO.VolunteerInList
     /// </summary>
     public static IEnumerable<VolunteerInList> GetAllVolunteerInList()
     {
@@ -84,7 +85,7 @@ internal static class VolunteerManager
 
 
     /// <summary>
-    /// return the call in progress by id
+    /// return the  BO.CallInProgress by id 
     /// </summary>
     public static BO.CallInProgress? GetCallInProgress(int id)
     {
@@ -105,5 +106,25 @@ internal static class VolunteerManager
             CallStatus = Helpers.CallManager.GetStatus(call)
         };
         return callInProgress;
+    }
+
+
+    /// <summary>
+    /// func to chek if all the fileds in the entity are valid
+    /// </summary>
+    public async static void VolunteerChek(BO.Volunteer volunteer)
+    {
+        if(!Helpers.Tools.VaildId(volunteer.Id))
+            throw new BlinCorrectException("the id is not valid");
+        if(!Helpers.Tools.VailPhone(volunteer.Phone))
+            throw new BlinCorrectException("the Phone is not valid");
+        if(!Helpers.Tools.VaildEmail(volunteer.Email))
+            throw new BlinCorrectException("the Email is not valid");
+        if (!Helpers.Tools.VaildPassword(volunteer.Password!))
+            throw new BlinCorrectException("the Password is not strong enough");
+        if (!await Helpers.Tools.IsValidAddressAsync(volunteer.Address!))
+            throw new BlinCorrectException("the Address is not valid");
+        if (!Helpers.Tools.VaildMaxDistance(volunteer.MaximumDistance))
+            throw new BlinCorrectException("the Maximum Distance is not valid");
     }
 }   
