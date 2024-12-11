@@ -42,11 +42,11 @@ public class Call
     /// if the call is in treatment or in a risk treatment
     /// </summary>
     public BCallStatus CallStatus { get; set; }
-    public List<BO.CallAssignInList>? callAssignInLists { get; init; } = null;
     /// <summary>
     /// Show a list of assignment that assign to that call if there is
     /// </summary>
-    /// <returns></returns>
+    public List<BO.CallAssignInList>? callAssignInLists { get; init; } = null;
+
     public override string ToString() => this.TostringProperty();
 
 }
