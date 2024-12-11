@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
+using System.Text.RegularExpressions;
 using static BO.Exceptions;
 namespace Helpers;
 
@@ -76,55 +77,107 @@ internal static class VolunteerManager
             TreatedCalls = assignments.Count(v => v.EndKind == DO.EndKinds.Treated),
             CanceledCalls = assignments.Count(v => v.EndKind == DO.EndKinds.Administrator_cancellation || v.EndKind == DO.EndKinds.Self_cancellation),
             ExpiredCalls = assignments.Count(v => v.EndKind == DO.EndKinds.Expired_cancellation),
-            CorrentCall = correntCall == null ? null : GetCallInProgress(correntCall.Value)
+            CorrentCall = correntCall == null ? null : Helpers.CallManager.GetCallInProgress(correntCall.Value)
         };
-
-
         return Bvolunteer;
-    }
-
-
-    /// <summary>
-    /// return the  BO.CallInProgress by id 
-    /// </summary>
-    public static BO.CallInProgress? GetCallInProgress(int id)
-    {
-        DO.Assignment assignment = s_dal.Assignment.Read(id)!;
-        DO.Volunteer volunteer = s_dal.Volunteer.Read(assignment.VolunteerId)!;
-        DO.Call call = s_dal.Call.Read(assignment.CallId)!;
-        var callInProgress = new BO.CallInProgress
-        {
-            Id = id,
-            CallId = assignment.CallId,
-            Type = (BTypeCalls)call.TypeCall,
-            Description = call.VerbalDecription,
-            CallAddress = call.FullAddressOfTheCall,
-            CallOpenTime = call.OpeningCallTime,
-            CallMaxCloseTime = call.MaxEndingCallTime,
-            CallEnterTime = assignment.StartTime,
-            CallDistance = Helpers.Tools.Distance(volunteer.DistanceType, volunteer.Latitude!.Value, volunteer.Longitude!.Value, call.Latitude, call.Longitude),
-            CallStatus = Helpers.CallManager.GetStatus(call)
-        };
-        return callInProgress;
     }
 
 
     /// <summary>
     /// func to chek if all the fileds in the entity are valid
     /// </summary>
-    public async static void VolunteerChek(BO.Volunteer volunteer)
+    public static void VolunteerChek(BO.Volunteer volunteer)
     {
-        if(!Helpers.Tools.VaildId(volunteer.Id))
+        if(!VaildId(volunteer.Id))
             throw new BlinCorrectException("the id is not valid");
-        if(!Helpers.Tools.VailPhone(volunteer.Phone))
+        if(!VailPhone(volunteer.Phone))
             throw new BlinCorrectException("the Phone is not valid");
-        if(!Helpers.Tools.VaildEmail(volunteer.Email))
+        if(!VaildEmail(volunteer.Email))
             throw new BlinCorrectException("the Email is not valid");
-        if (!Helpers.Tools.VaildPassword(volunteer.Password!))
+        if (!VaildPassword(volunteer.Password!))
             throw new BlinCorrectException("the Password is not strong enough");
-        if (!await Helpers.Tools.IsValidAddressAsync(volunteer.Address!))
+        if (! Helpers.Tools.IsValidAddress(volunteer.Address!))
             throw new BlinCorrectException("the Address is not valid");
-        if (!Helpers.Tools.VaildMaxDistance(volunteer.MaximumDistance))
-            throw new BlinCorrectException("the Maximum Distance is not valid");
+        if(volunteer.MaximumDistance is not null)
+        {
+            if (!VaildMaxDistance(volunteer.MaximumDistance))
+                throw new BlinCorrectException("the Maximum Distance is not valid");
+        }
     }
-}   
+
+    /// <summary>
+    /// func to check if the id is valid
+    /// </summary>
+    public static bool VaildId(int id)
+    {
+        if (id < 100000000 || id > 999999999)
+            return false;
+        int sum = 0;
+        bool even = true;
+        for (int i = 0; i < 9; i++)
+        {
+            int num = id % 10;
+            id /= 10;
+            if (even)
+            {
+                sum += num;
+            }
+            else
+            {
+                int doubled = num * 2;
+                sum += (doubled > 9) ? doubled - 9 : doubled;
+            }
+            even = !even;
+        }
+        return sum % 10 == 0;
+    }
+
+    /// <summary>
+    /// func to check if the phone is valid
+    /// </summary>
+    public static bool VailPhone(string phone)
+    {
+        phone = phone.Replace(" ", "");
+        string pattern = @"^05[0-9]{8}$";
+        return Regex.IsMatch(phone, pattern);
+    }
+
+    /// <summary>
+    /// func to check if the email is valid
+    /// </summary>
+    public static bool VaildEmail(string email)
+    {
+        string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+        return Regex.IsMatch(email, pattern);
+    }
+
+    /// <summary>
+    /// func to check if the password is strong enoungh
+    /// </summary>
+    public static bool VaildPassword(string password)
+    {
+        if (string.IsNullOrEmpty(password))
+            return false;
+        if (password.Length < 8)
+            return false;
+        if (!Regex.IsMatch(password, @"[A-Z]"))
+            return false;
+        if (!Regex.IsMatch(password, @"[a-z]"))
+            return false;
+        if (!Regex.IsMatch(password, @"[0-9]"))
+            return false;
+        if (!Regex.IsMatch(password, @"[!@#$%^&*(),?\""]"))
+            return false;
+        return true;
+    }
+
+    /// <summary>
+    /// func to check if the maximum distance is valid
+    /// </summary>
+    public static bool VaildMaxDistance(double? MaxDistance)
+    {
+        if (MaxDistance.Value < 0)
+            return false;
+        return true;
+    }
+}

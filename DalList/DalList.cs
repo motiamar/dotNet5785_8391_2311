@@ -22,6 +22,10 @@ sealed internal class DalList : IDal
     public ICall Call { get; } = new CallImplementation();
     public IConfig Config {  get; } = new ConfigImplementation();
 
+
+    /// <summary>
+    /// reset all the data base
+    /// </summary>
     public void ResetDB()
     {
         Volunteer.DeleteAll();

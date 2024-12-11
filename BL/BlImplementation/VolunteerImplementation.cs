@@ -72,8 +72,8 @@ internal class VolunteerImplementation : BlApi.IVolunteer
         {
             // check the incoming details
             Helpers.VolunteerManager.VolunteerChek(volunteer);
-            double? latitude = Helpers.Tools.GetLatitudeFromAddressAsync(volunteer.Address!).Result;
-            double? longitude = Helpers.Tools.GetLongitudeFromAddressAsync(volunteer.Address!).Result;
+            double? latitude = Helpers.Tools.GetLatitudeFromAddress(volunteer.Address!);
+            double? longitude = Helpers.Tools.GetLongitudeFromAddress(volunteer.Address!);
             var role = (Roles)Enum.Parse(typeof(BRoles), volunteer.role.ToString());
             var distanceType = (DistanceTypes)Enum.Parse(typeof(BDistanceTypes), volunteer.DistanceType.ToString());
             var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = volunteer.FullName, Phone = volunteer.Phone, Email = volunteer.Email, Password = volunteer.Password, Address = volunteer.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = volunteer.Active, MaximumDistance = volunteer.MaximumDistance, DistanceType = distanceType };
@@ -120,8 +120,8 @@ internal class VolunteerImplementation : BlApi.IVolunteer
                 throw new BlNotAllowException("you can't change the details of the volunteer");
             // func to chek all the incoming details    
             Helpers.VolunteerManager.VolunteerChek(change);
-            double? latitude =  Helpers.Tools.GetLatitudeFromAddressAsync(change.Address!).Result;
-            double? longitude = Helpers.Tools.GetLongitudeFromAddressAsync(change.Address!).Result;
+            double? latitude = Helpers.Tools.GetLatitudeFromAddress(change.Address!);
+            double? longitude = Helpers.Tools.GetLongitudeFromAddress(change.Address!);
             var role = (Roles)Enum.Parse(typeof(BRoles), change.role.ToString());
             var distanceType = (DistanceTypes)Enum.Parse(typeof(BDistanceTypes), change.DistanceType.ToString());
             if (volunteer.Role == Roles.Manager)

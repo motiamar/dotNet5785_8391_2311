@@ -1,14 +1,18 @@
 ﻿namespace BO;
 
 
-// define the character of the Volunteer
+/// <summary>
+/// define the character of the Volunteer
+/// </summary>
 public enum BRoles
 {
     Volunteer,  // default
     Manager
 }
 
-// define in what means the distance get measured
+/// <summary>
+/// define in what means the distance get measured
+/// </summary>
 public enum BDistanceTypes
 {
     Air, // default
@@ -16,7 +20,9 @@ public enum BDistanceTypes
     Car
 }
 
-// define the type of call that enterd the system
+/// <summary>
+/// define the type of call that enterd the system
+/// </summary>
 public enum BTypeCalls
 {
     Medical_situation, // default
@@ -27,6 +33,9 @@ public enum BTypeCalls
     None
 }
 
+/// <summary>
+///  define the type of call status in the system
+/// </summary>
 public enum BCallStatus
 {
     Open,// default
@@ -37,7 +46,9 @@ public enum BCallStatus
     In_treatment_in_risk
 }
 
-// tells how the assiment ended
+/// <summary>
+/// tells how the assiment ended
+/// </summary>
 public enum BEndKinds
 {
     Treated, // default
@@ -46,7 +57,9 @@ public enum BEndKinds
     Expired_cancellation
 }
 
-// enum to choose a filed to sort/filter by
+/// <summary>
+/// enum to choose a filed to sort/filter by
+/// </summary>
 public enum CallInListFilter
 {
     Id,
@@ -60,7 +73,9 @@ public enum CallInListFilter
     SumOfAssignments
 }
 
-// enum to choose a filed to sort/filter by
+/// <summary>
+/// enum to choose a filed to sort/filter by
+/// </summary>
 public enum CloseCallInListFilter
 {
     Id,
@@ -72,7 +87,9 @@ public enum CloseCallInListFilter
     EndKind
 }
 
-// enum to choose a filed to sort/filter by
+/// <summary>
+/// enum to choose a filed to sort/filter by
+/// </summary>
 public enum OpenCallInListFilter
 {
     Id,
@@ -84,6 +101,9 @@ public enum OpenCallInListFilter
     CallDistance
 }
 
+/// <summary>
+/// enum to choose a unit time to cgange by
+/// </summary>
 public enum TimeUnit
 {
     Minute,
