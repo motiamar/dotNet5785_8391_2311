@@ -1,5 +1,6 @@
 ﻿using BO;
 using DalApi;
+using DO;
 namespace Helpers;
 
 internal static class CallManager
@@ -15,28 +16,48 @@ internal static class CallManager
         return currentRiskTime < call.MaxEndingCallTime ? BO.BCallStatus.In_treatment : BO.BCallStatus.In_treatment_in_risk;
     }
 
-
     /// <summary>
-    /// return the  BO.CallInProgress by id 
+    /// create a spzsific call with the given id 
     /// </summary>
-    public static BO.CallInProgress? GetCallInProgress(int id)
+    public static BO.Call? GetSpasificCall(int id)
     {
-        DO.Assignment assignment = s_dal.Assignment.Read(id)!;
-        DO.Volunteer volunteer = s_dal.Volunteer.Read(assignment.VolunteerId)!;
-        DO.Call call = s_dal.Call.Read(assignment.CallId)!;
-        var callInProgress = new BO.CallInProgress
+        var call = s_dal.Call.Read(id);
+
+        if (call == null)
+            return null;
+        return new BO.Call
         {
-            Id = id,
-            CallId = assignment.CallId,
+            Id = call.Id,
             Type = (BTypeCalls)call.TypeCall,
             Description = call.VerbalDecription,
             CallAddress = call.FullAddressOfTheCall,
+            Latitude = call.Latitude,
+            Longitude = call.Longitude,
             CallOpenTime = call.OpeningCallTime,
             CallMaxCloseTime = call.MaxEndingCallTime,
-            CallEnterTime = assignment.StartTime,
-            CallDistance = Helpers.Tools.Distance(volunteer.DistanceType, volunteer.Latitude!.Value, volunteer.Longitude!.Value, call.Latitude, call.Longitude), fix
-            CallStatus = Helpers.CallManager.GetStatus(call)
+            CallStatus = GetStatus(call),
+            callAssignInLists = GetCallAssignInList(id)
         };
-        return callInProgress;
+    }
+
+    /// <summary>
+    /// create a list of all assignments by the id of the call
+    /// </summary>
+    public static List<BO.CallAssignInList>? GetCallAssignInList(int id)
+    {
+       var callAssignInLists = (from a in s_dal.Assignment.ReadAll()
+                               where a.CallId == id
+                                let call = s_dal.Call.Read(a.CallId)
+                                select new BO.CallAssignInList
+                               {
+                                   Id = a.Id,
+                                   VolunteerFullName = s_dal.Volunteer.Read(a.VolunteerId)?.FullName,
+                                   CallEnterTime = call.OpeningCallTime,
+                                    CallCloseTime = call.MaxEndingCallTime,
+                                    EndKind = (BO.BEndKinds)a.EndKind
+                               }).ToList();
+        return callAssignInLists;
     }
 }
+
+    
