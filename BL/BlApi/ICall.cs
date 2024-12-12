@@ -10,10 +10,10 @@ public interface ICall
     /// <summary>
     /// a func to create a filter and sorted list and return the list 
     /// </summary>
-    /// <param name="filert"> if it exist, filter the list by the BTypeCalls prameter </param>
+    /// <param name="filter"> if it exist, filter the list by the BTypeCalls prameter </param>
     /// <param name="value"> if it exist, filter the list by the value object</param>
     /// <param name="sort"> sorted the list by the BCallStatus prameter if it exist </param>
-    IEnumerable<BO.CallInList> ReadAll(BO.CallInListFilter? filter = null, object? value = null, BO.CallInListFilter? sort = null);
+    IEnumerable<BO.CallInList> ReadAll(BO.CallInListFilter? sort = null, object? value = null, BO.CallInListFilter? filter = null);
 
     /// <summary>
     /// create a BO.Call entity if the id exist in the data base 

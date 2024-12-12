@@ -37,7 +37,7 @@ internal static class Tools
     /// func to calculate the distance between the volunteer and the call by Latitude and Longitude depend on the distance type
     /// </summary>
     /// <returns></returns>
-    public static double Distance(DO.DistanceTypes distanceType, double VolLatitude, double VolLongitude, double CallLatitude, double CallLongitude)
+    public static double Distance(DO.DistanceTypes distanceType, double? VolLatitude, double? VolLongitude, double CallLatitude, double CallLongitude)
     {
         return 0.0;
     }
@@ -57,7 +57,7 @@ internal static class Tools
                 string content = response.Content.ReadAsStringAsync().Result; // block the result until it return
                 JObject jsonResponse = JObject.Parse(content);
                 var results = jsonResponse["results"];
-                return results.HasValues;
+                return results!.HasValues;
             }
             else
             {
@@ -75,7 +75,7 @@ internal static class Tools
     /// <summary>
     /// func to get the latitude of the address
     /// </summary>
-    public static double? GetLatitudeFromAddress(string address)
+    public static double GetLatitudeFromAddress(string address)
     {
         try
         {
@@ -88,11 +88,11 @@ internal static class Tools
                     string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                     JObject json = JObject.Parse(content);
                     var results = json["results"];
-                    if (results.HasValues)
+                    if (results!.HasValues)
                     {
-                        var geometry = results[0]["geometry"];
-                        var location = geometry["location"];
-                        double? latitude = location["lat"]?.ToObject<double>();
+                        var geometry = results[0]!["geometry"];
+                        var location = geometry!["location"];
+                        double latitude = location!["lat"]!.ToObject<double>();
                         return latitude;
                     }
                 }
@@ -103,13 +103,13 @@ internal static class Tools
             // במקרה של שגיאה כלשהי (כמו בעיית חיבור)
             Console.WriteLine("Error: " + ex.Message);
         }
-        return null;
+        return 0;
     }
 
     /// <summary>
     /// func to get the longitude of the address
     /// </summary>
-    public static double? GetLongitudeFromAddress(string address)
+    public static double GetLongitudeFromAddress(string address)
     {
         try
         {
@@ -122,11 +122,11 @@ internal static class Tools
                     string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                     JObject json = JObject.Parse(content);
                     var results = json["results"];
-                    if (results.HasValues)
+                    if (results!.HasValues)
                     {
-                        var geometry = results[0]["geometry"];
-                        var location = geometry["location"];
-                        double? longitude = location["lng"]?.ToObject<double>();
+                        var geometry = results[0]!["geometry"];
+                        var location = geometry!["location"];
+                        double longitude = location!["lng"]!.ToObject<double>();
                         return longitude;
                     }
                 }
@@ -137,7 +137,7 @@ internal static class Tools
             // במקרה של שגיאה כלשהי (כמו בעיית חיבור)
             Console.WriteLine("Error: " + ex.Message);
         }
-        return null;
+        return 0;
     }
 
 };

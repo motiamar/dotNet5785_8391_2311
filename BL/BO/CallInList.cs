@@ -25,7 +25,7 @@ public class CallInList
     /// <summary>
     /// max time to close the call
     /// </summary>
-    public TimeSpan? CallMaxCloseTime { get; set; }
+    public TimeSpan? CallLeftTime { get; set; }
     /// <summary>
     /// the last Volunteer who handle the call
     /// </summary>

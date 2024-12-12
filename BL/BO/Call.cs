@@ -21,15 +21,15 @@ public class Call
     /// <summary>
     /// full address of the call
     /// </summary>
-    public string? CallAddress { get; set; }
+    public string CallAddress { get; set; }
     /// <summary>
     /// number that Show the distance between the point and the north or sout of the wquator
     /// </summary>
-    public double? Latitude { get; set; }
+    public double Latitude { get; set; }
     /// <summary>
     /// number that Show the distance between the point and the east or west of the wquator
     /// </summary>
-    public double? Longitude { get; set; }
+    public double Longitude { get; set; }
     /// <summary>
     /// the call Open time in the system
     /// </summary>
@@ -45,7 +45,7 @@ public class Call
     /// <summary>
     /// Show a list of assignment that assign to that call if there is
     /// </summary>
-    public List<BO.CallAssignInList>? callAssignInLists { get; init; } = null;
+    public List<BO.CallAssignInList>? callAssignInLists { get; set; } = null;
 
     public override string ToString() => this.TostringProperty();
 

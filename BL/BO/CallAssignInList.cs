@@ -7,9 +7,9 @@ namespace BO;
 public class CallAssignInList
 {
     /// <summary>
-    /// uniquely readable ID representation of the assingment
+    /// the volunteer id that treating the call
     /// </summary>
-    public int? Id { get; init; }
+    public int? VolunteerId { get; init; }
     /// <summary>
     /// the name of the Volunteer who treating the call
     /// </summary>
