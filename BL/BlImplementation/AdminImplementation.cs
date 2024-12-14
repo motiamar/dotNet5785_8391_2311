@@ -2,37 +2,81 @@
 using System;
 using BlApi;
 using BO;
+using DalApi;
+using Helpers;
 
 internal class AdminImplementation : IAdmin
 {
     private readonly DalApi.IDal _dal = DalApi.Factory.Get;
-    public void ForwordClock(TimeUnit unit)
-    {
-        throw new NotImplementedException();
-    }
 
+    /// <summary>
+    /// return the corrent clock system
+    /// </summary>
     public DateTime GetClock()
     {
-        throw new NotImplementedException();
+        return Helpers.ClockManager.Now;
     }
 
-    public int GetMaxRange()
+    /// <summary>
+    /// advance the clock bt the unit time that given
+    /// </summary>
+    public void ForwordClock(TimeUnit unit)
     {
-        throw new NotImplementedException();
+        DateTime newClock;
+        switch (unit)
+        {
+            case TimeUnit.Minute:
+                newClock = ClockManager.Now.AddMinutes(1);
+                break;
+            case TimeUnit.Hour:
+                newClock = ClockManager.Now.AddHours(1);
+                break;
+            case TimeUnit.Day:
+                newClock = ClockManager.Now.AddDays(1);
+                break;
+            case TimeUnit.Month:
+                newClock = ClockManager.Now.AddMonths(1);
+                break;
+            case TimeUnit.Year:
+                newClock = ClockManager.Now.AddYears(1);
+                break;  
+                default:
+                throw new ArgumentOutOfRangeException(nameof(unit), unit, null);
+        }
+        Helpers.ClockManager.UpdateClock(newClock);
     }
 
-    public void InitializeDB()
+    /// <summary>
+    /// return the value of the RiskRange
+    /// </summary>
+    public TimeSpan GetMaxRange()
     {
-        throw new NotImplementedException();
+        return _dal.Config.RiskRnge;
     }
 
-    public void ResetDB()
-    {
-        throw new NotImplementedException();
-    }
-
+    /// <summary>
+    /// set the RiskRane by new value
+    /// </summary>
     public void SetMaxRange(TimeSpan maxRange)
     {
-        throw new NotImplementedException();
+        _dal.Config.RiskRnge = maxRange;
+    }
+
+    /// <summary>
+    /// Reset all the data base
+    /// </summary>
+    public void ResetDB()
+    {
+        _dal.ResetDB();
+        ClockManager.UpdateClock(ClockManager.Now);
+    }
+
+    /// <summary>
+    /// initialize all the data base
+    /// </summary>
+    public void InitializeDB()
+    {
+        DalTest.Initialization.Do();
+        ClockManager.UpdateClock(ClockManager.Now);
     }
 }

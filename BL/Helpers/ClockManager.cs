@@ -28,18 +28,10 @@ internal static class ClockManager
 
     private static void updateClock(DateTime newClock) // prepared for stage 7 as DRY to eliminate needless repetition
     {
-        var oldClock = _dal.Config.Clock; //stage 4
-        _dal.Config.Clock = newClock; //stage 4
-
-        //TO_DO:
-        //Add calls here to any logic method that should be called periodically,
-        //after each clock Update
-        //for example, Periodic students' updates:
-        //Go through all students to Update properties that are affected by the clock Update
-        //(students becomes not active after 5 years etc.)
+        var oldClock = _dal.Config.Clock; 
+        _dal.Config.Clock = newClock;
+        Helpers.CallManager.UpdateCalls();
         
-        //StudentManager.PeriodicStudentsUpdates(oldClock, newClock); //stage 4
-        //etc ...
 
         //Calling all the observers of clock Update
         //ClockUpdatedObservers?.Invoke(); //prepared for stage 5

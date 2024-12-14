@@ -17,7 +17,7 @@ internal static class VolunteerManager
     /// <summary>
     /// return the role of the volunteer
     /// </summary>
-    public static string? GetVolunteerRole(string username, string password)
+    internal static string? GetVolunteerRole(string username, string password)
     {
         var volunteers = s_dal.Volunteer.ReadAll();
         var volunteer = volunteers.FirstOrDefault(v => v.FullName == username && v.Password == password);
@@ -31,7 +31,7 @@ internal static class VolunteerManager
     /// <summary>
     /// func to get all the BO.VolunteerInList
     /// </summary>
-    public static IEnumerable<VolunteerInList> GetAllVolunteerInList()
+    internal static IEnumerable<VolunteerInList> GetAllVolunteerInList()
     {
         var calls = s_dal.Call.ReadAll();
         var VolunteerInLists = from volunteer in s_dal.Volunteer.ReadAll()
@@ -55,7 +55,7 @@ internal static class VolunteerManager
     /// <summary>
     /// return BO.Volunteer by id
     /// </summary>
-    public static BO.Volunteer GetBOVolunteer(int Id)
+    internal static BO.Volunteer GetBOVolunteer(int Id)
     {
         DO.Volunteer volunteer = s_dal.Volunteer.Read(Id)!;
         var assignments = s_dal.Assignment.ReadAll(a => a.VolunteerId == Id);
@@ -86,7 +86,7 @@ internal static class VolunteerManager
     /// <summary>
     /// func to chek if all the fileds in the entity are valid
     /// </summary>
-    public static void VolunteerChek(BO.Volunteer volunteer)
+    internal static void VolunteerChek(BO.Volunteer volunteer)
     {
         if(!VaildId(volunteer.Id))
             throw new BlinCorrectException("the id is not valid");
@@ -108,7 +108,7 @@ internal static class VolunteerManager
     /// <summary>
     /// func to check if the id is valid
     /// </summary>
-    public static bool VaildId(int id)
+    internal static bool VaildId(int id)
     {
         if (id < 100000000 || id > 999999999)
             return false;
@@ -135,7 +135,7 @@ internal static class VolunteerManager
     /// <summary>
     /// func to check if the phone is valid
     /// </summary>
-    public static bool VailPhone(string phone)
+    internal static bool VailPhone(string phone)
     {
         phone = phone.Replace(" ", "");
         string pattern = @"^05[0-9]{8}$";
@@ -145,7 +145,7 @@ internal static class VolunteerManager
     /// <summary>
     /// func to check if the email is valid
     /// </summary>
-    public static bool VaildEmail(string email)
+    internal static bool VaildEmail(string email)
     {
         string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
         return Regex.IsMatch(email, pattern);
@@ -154,7 +154,7 @@ internal static class VolunteerManager
     /// <summary>
     /// func to check if the password is strong enoungh
     /// </summary>
-    public static bool VaildPassword(string password)
+    internal static bool VaildPassword(string password)
     {
         if (string.IsNullOrEmpty(password))
             return false;
@@ -174,9 +174,9 @@ internal static class VolunteerManager
     /// <summary>
     /// func to check if the maximum distance is valid
     /// </summary>
-    public static bool VaildMaxDistance(double? MaxDistance)
+    internal static bool VaildMaxDistance(double? MaxDistance)
     {
-        if (MaxDistance.Value < 0)
+        if (MaxDistance!.Value < 0)
             return false;
         return true;
     }

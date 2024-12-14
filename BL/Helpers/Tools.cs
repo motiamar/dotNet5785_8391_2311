@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using BO;
 
 
 internal static class Tools
@@ -37,12 +38,76 @@ internal static class Tools
     /// func to calculate the distance between the volunteer and the call by Latitude and Longitude depend on the distance type
     /// </summary>
     /// <returns></returns>
-    public static double Distance(DO.DistanceTypes distanceType, double? VolLatitude, double? VolLongitude, double CallLatitude, double CallLongitude)
+    public static double Distance(DO.DistanceTypes distanceType, double VolLatitude, double VolLongitude, double CallLatitude, double CallLongitude)
     {
-        return 0.0;
+        /// calculate the distance between the volunteer and the call by air
+        if (distanceType == DO.DistanceTypes.Air)
+        {
+            const double EarthRadiusKm = 6371.0;
+            double dLat = DegreesToRadians(CallLatitude - VolLatitude);
+            double dLon = DegreesToRadians(CallLongitude - VolLongitude);
+
+            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                       Math.Cos(DegreesToRadians(VolLatitude)) * Math.Cos(DegreesToRadians(CallLatitude)) *
+                       Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            return EarthRadiusKm * c;
+        }
+        /// calculate the distance between the volunteer and the call by walking
+        else if (distanceType == DO.DistanceTypes.Walk)
+        {
+
+            string apiUrl = $"https://maps.googleapis.com/maps/api/directions/json?origin={VolLatitude},{VolLongitude}&destination={CallLatitude},{CallLongitude}&mode=walking&key=AIzaSyDzEzuNVPxLv7EIKKvSU2b8GiAikFbV5jk";
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Failed to retrieve data from Google Maps API: {response.StatusCode}");
+                }
+                string responseBody = response.Content.ReadAsStringAsync().Result;
+                JObject json = JObject.Parse(responseBody);
+                var distanceToken = json["routes"]?[0]?["legs"]?[0]?["distance"]?["value"];
+                if (distanceToken == null)
+                {
+                    throw new Exception("Failed to find walking distance in the response.");
+                }
+                double distanceInMeters = distanceToken.Value<double>();
+                return distanceInMeters / 1000.0; // המר למטרים
+            }
+        }
+        /// calculate the distance between the volunteer and the call by car
+        else
+        {
+            string apiUrl = $"https://maps.googleapis.com/maps/api/directions/json?origin={VolLatitude},{VolLongitude}&destination={CallLatitude},{CallLongitude}&mode=driving&key=AIzaSyDzEzuNVPxLv7EIKKvSU2b8GiAikFbV5jk";
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = client.GetAsync(apiUrl).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Failed to retrieve data from Google Maps API: {response.StatusCode}");
+                }
+                string responseBody = response.Content.ReadAsStringAsync().Result;
+                JObject json = JObject.Parse(responseBody);
+                var distanceToken = json["routes"]?[0]?["legs"]?[0]?["distance"]?["value"];
+                if (distanceToken == null)
+                {
+                    throw new Exception("Failed to find driving distance in the response.");
+                }
+                double distanceInMeters = distanceToken.Value<double>();
+                return distanceInMeters / 1000.0; // המר למטרים
+            }
+        }
     }
 
-    
+    /// <summary>
+    /// func to transfer degrees to radians
+    /// </summary>
+    private static double DegreesToRadians(double degrees)
+    {
+        return degrees * Math.PI / 180.0;
+    }
+
     /// <summary>
     /// func to check if the address is valid (exist on arth by google maps)
     /// </summary>

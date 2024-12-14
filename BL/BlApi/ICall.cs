@@ -73,8 +73,8 @@ public interface ICall
     /// <summary>
     /// func that assignet Volunteer to a call if it available and not taken 
     /// </summary>
-    /// <param name="volunteerId"></param>
-    /// <param name="CallId"></param>
+    /// <param name="volunteerId">the volunteer who want to handle the call</param>
+    /// <param name="CallId">the call he want to choose</param>
     void ChooseCall(int  volunteerId, int CallId);
 }
 

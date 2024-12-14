@@ -5,6 +5,7 @@ using BlApi;
 using BO;
 using DalApi;
 using DO;
+using Newtonsoft.Json.Linq;
 using static BO.Exceptions;
 
 internal class CallImplementation : BlApi.ICall
@@ -77,7 +78,7 @@ internal class CallImplementation : BlApi.ICall
             var call = _dal.Call.Read(id);
 
             if (call is null)
-                throw new DO.DalDoesNotExistException($"call with the id : {id} doesn't exist");
+                return null;
             return new BO.Call
             {
                 Id = call.Id,
@@ -137,11 +138,20 @@ internal class CallImplementation : BlApi.ICall
         }
     }
 
+    /// <summary>
+    /// Delete the call if it exist and Open or never assignt 
+    /// </summary>
     public void Delete(int callId)
     {
         try
         {
-            DO.Call call = _dal.Call.Read(callId)!;  להמשיך מפה
+            DO.Call call = _dal.Call.Read(callId)!; 
+            if (call is null)   
+                throw new DO.DalDoesNotExistException($"call with id {callId} does not exist");
+            if (Helpers.CallManager.GetStatus(call) == BCallStatus.Open)
+                _dal.Call.Delete(callId);
+            else
+                throw new BlNotAllowException($"Failed to delete call with id {callId}: call is not open");
         }
         catch (DO.DalDoesNotExistException ex)
         {
@@ -150,42 +160,185 @@ internal class CallImplementation : BlApi.ICall
     }
 
     /// <summary>
-    /// 
+    /// Add a new call to the data leir if the details are correct
     /// </summary>
-    public void CanceleAssignment(int volunteerId, int assignmentId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void ChooseCall(int volunteerId, int CallId)
-    {
-        throw new NotImplementedException();
-    }
-
     public void Create(BO.Call call)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Helpers.CallManager.CallChek(call);
+            double latitude = Helpers.Tools.GetLatitudeFromAddress(call.CallAddress);
+            double longitude = Helpers.Tools.GetLongitudeFromAddress(call.CallAddress);
+            DO.Call newCall = new DO.Call
+            {
+                TypeCall = (DO.TypeCalls)call.Type,
+                VerbalDecription = call.Description,
+                FullAddressOfTheCall = call.CallAddress,
+                Latitude = latitude,
+                Longitude = longitude,
+                OpeningCallTime = call.CallOpenTime,
+                MaxEndingCallTime = call.CallMaxCloseTime
+            };
+            _dal.Call.Create(newCall);
+        }
+        catch(DO.DalXMLFileLoadCreateException)
+        {
+            throw new BlCantLoadException("Failed to create call");
+        }
+        catch (DO.DalAlreadyExistException ex)
+        {
+            throw new BlinCorrectException($"Failed to create call: {ex}");
+        }
     }
 
-    
+    /// <summary>
+    /// func to create a new list by the recived parameters
+    /// </summary>
+    /// <param name="volunteerId"> the id of the Volunteer</param>
+    /// <param name="filter"> the kind of the call that the list filter by</param>
+    /// <param name="sort">the kind of the call filed that the list sorted by </param>
+    /// <returns>return the new list</returns>
+    public IEnumerable<ClosedCallInList> GetCloseCallList(int volunteerId, BTypeCalls? sort = null, CloseCallInListFilter? filter = null)
+    {
+        try
+        {
+            IEnumerable<ClosedCallInList> closedCallsInList = Helpers.CallManager.GetClosedCallInLists(volunteerId);
+            string Filed = filter.ToString()!;
+            var property = typeof(BO.ClosedCallInList).GetProperty(Filed);
+            if(sort is not null)
+                closedCallsInList.Where(c => c.Type == sort);
+            return filter == null ? closedCallsInList.OrderBy(c => c.Id) : closedCallsInList.OrderBy(c => property!.GetValue(c));
+        }
+        catch (DO.DalXMLFileLoadCreateException ex)
+        {
+            throw new BlCantLoadException($"Failed to get closed call list: {ex}");
+        }
+    }
 
+    /// <summary>
+    /// func that return a sorted list of the calls in list, sorted by filter Booleany and a enum fild 
+    /// </summary>
+    /// <param name="volunteerId"> the id of the Volunteer</param>
+    /// <param name="filter"> filterd the list by the given parameter</param>
+    /// <param name="sort"> soreted the list by the given parameter</param>
+    /// <returns>return the new list</returns>
+    public IEnumerable<OpenCallInList> GetOpenCallList(int volunteerId, BTypeCalls? sort = null, OpenCallInListFilter? filter = null)
+    {
+        try
+        {
+            DO.Volunteer volunteer = _dal.Volunteer.Read(volunteerId)!;
+            IEnumerable<OpenCallInList> openCallsInList = Helpers.CallManager.GetOpenCallInLists(volunteer);
+            if (sort is not null)
+                openCallsInList.Where((c) => c.Type == sort);
+            string Filed = filter.ToString()!;
+            var property = typeof(BO.OpenCallInList).GetProperty(Filed);
+            return filter == null ? openCallsInList.OrderBy(c => c.Id) : openCallsInList.OrderBy(c => property!.GetValue(c));
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BlDoesNotExistException($"Failed to get open call list: {ex}");
+        }
+        catch(DO.DalXMLFileLoadCreateException ex)
+        {
+            throw new BlCantLoadException($"Failed to get open call list: {ex}");
+        }
+    }
+
+
+    /// <summary>
+    /// chek if exist and end the assignment of the Volunteer
+    /// </summary>
+    /// <param name="volunteerId"> the Volunteer who want to end the assignemnt</param>
+    /// <param name="assignmentId"> the assignment that need to close</param>
     public void EndAssignment(int volunteerId, int assignmentId)
     {
-        throw new NotImplementedException();
+        try
+        {
+            DO.Assignment assignment = _dal.Assignment.Read(assignmentId)!;
+            if (assignment is null)
+                throw new DO.DalDoesNotExistException($"assignment with id {assignmentId} does not exist");
+            if(assignment.VolunteerId !=  volunteerId)
+                throw new BlNotAllowException("Failed to end assignment: assignment does not belong to the volunteer");
+            if(assignment.FinishTime != null)
+                throw new BlNotAllowException("Failed to end assignment: assignment already ended");
+            DO.Assignment updateAssignment = new DO.Assignment
+            {
+                Id = assignment.Id,
+                CallId = assignment.CallId,
+                VolunteerId = assignment.VolunteerId,
+                StartTime = assignment.StartTime,
+                FinishTime = Helpers.ClockManager.Now,
+                EndKind = DO.EndKinds.Treated
+            };
+            _dal.Assignment.Update(updateAssignment);   
+        }
+        catch(DO.DalDoesNotExistException ex)
+        {
+            throw new BlDoesNotExistException($"Failed to end assignment with id {assignmentId}: {ex}");
+        }
     }
 
-    public IEnumerable<ClosedCallInList> GetCloseCallList(int volunteerId, BTypeCalls? filter = null, CloseCallInListFilter? sort = null)
+
+    /// <summary>
+    /// func to cancale an assignment by the Volunteer who handle it or the managar if the conditions are good
+    /// </summary>
+    /// <param name="volunteerId">the Volunteer who want to cencele the assignemnt</param>
+    /// <param name="assignmentId">the assignment that need to cancaled</param>
+    public void CanceleAssignment(int volunteerId, int assignmentId)
     {
-        throw new NotImplementedException();
+        try
+        {
+            DO.Assignment assignment = _dal.Assignment.Read(assignmentId)!;
+            if (assignment is null)
+                throw new DO.DalDoesNotExistException($"assignment with id {assignmentId} does not exist");
+            DO.Volunteer volunteer = _dal.Volunteer.Read(volunteerId)!;
+            string role = Helpers.VolunteerManager.GetVolunteerRole(volunteer.FullName, volunteer.Password!)!;          
+            if (assignment.VolunteerId != volunteerId && role != "Manager")
+                throw new BlNotAllowException($"the assignment is not belong to volunteer with id: {volunteerId} or he dosent a manager");
+            if (assignment.FinishTime != null)
+                throw new BlNotAllowException("Failed to cancel assignment: assignment already ended");
+            var update = new DO.Assignment
+            {
+                Id = assignment.Id,
+                CallId = assignment.CallId,
+                VolunteerId = assignment.VolunteerId,
+                StartTime = assignment.StartTime,
+                FinishTime = Helpers.ClockManager.Now,
+                EndKind = role == "Manager" ? EndKinds.Administrator_cancellation : EndKinds.Self_cancellation,
+            };
+            _dal.Assignment.Update(update);        
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BlDoesNotExistException($"Failed to cancel assignment with id {assignmentId}: {ex}");
+        }
     }
 
-    public IEnumerable<OpenCallInList> GetOpenCallList(int volunteerId, BTypeCalls? filter = null, OpenCallInListFilter? sort = null)
+
+    /// <summary>
+    /// func that assignet Volunteer to a call if it available and not taken 
+    /// </summary>
+    /// <param name="volunteerId">the volunteer who want to handle the call</param>
+    /// <param name="CallId">the call he want to choose</param>
+    public void ChooseCall(int volunteerId, int CallId)
     {
-        throw new NotImplementedException();
-    }
-
-    
-
-
-    
+        try
+        {
+            DO.Call call = _dal.Call.Read(CallId)!;
+            if (call is null)
+                throw new DO.DalDoesNotExistException($"call with id: {CallId} does not exist");
+            Helpers.CallManager.ChooseCallChek(call);
+            DO.Assignment assignment = new DO.Assignment
+            {
+                CallId = CallId,
+                VolunteerId = volunteerId,
+                StartTime = Helpers.ClockManager.Now
+            };
+            _dal.Assignment.Create(assignment);
+        }
+        catch (DO.DalAlreadyExistException)
+        {
+            throw new BlinCorrectException("Failed to choose call: assignment already exists");
+        }
+    }   
 }

@@ -15,7 +15,7 @@ public interface IAdmin
     /// <summary>
     /// return the value of the RiskRange
     /// </summary>
-    int GetMaxRange();
+    TimeSpan GetMaxRange();
 
     /// <summary>
     /// set the RiskRane by new value
