@@ -57,6 +57,18 @@ public enum BEndKinds
     Expired_cancellation
 }
 
+public enum VollInListFilter
+{
+    Id,
+    FullName,
+    Active,
+    TreatedCalls,
+    CanceledCalls,
+    ExpiredCalls,
+    CorrentCallId,
+    CorrentCallType
+}
+
 /// <summary>
 /// enum to choose a filed to sort/filter by
 /// </summary>
@@ -111,4 +123,62 @@ public enum TimeUnit
     Day,
     Month,
     Year
+}
+
+/// <summary>
+/// enum to choose a filed in the main menu
+/// </summary>
+public enum BMainMenu
+{
+    Exit,
+    Sub_volunteer,
+    Sub_call,
+    Sub_admin,
+}
+
+/// <summary>
+/// enum to choose a filed in the sub menu of the volunteer
+/// </summary>
+public enum BSubVolMenu
+{
+    Exit,
+    Login,
+    Show_volunteers,
+    Show_volunteer,
+    Update_volunteer,
+    Delete_volunteer,
+    Add_volunteer
+}
+
+/// <summary>
+/// enum to choose a filed in the sub menu of the call
+/// </summary>
+public enum BSubCallMenu
+{
+    Exit,
+    Array_calls,
+    Show_calls,
+    Show_call,
+    Update_call,
+    Delete_call,
+    Add_call,
+    Show_close_calls,
+    Show_open_calls,
+    End_call,
+    Cancel_call,
+    Choose_call
+}
+
+/// <summary>
+/// enum to choose a filed in the sub menu of the admin
+/// </summary>
+public enum BSubAdmMenu
+{
+    Exit,
+    See_clock,
+    Change_clock,
+    See_riskRange,
+    Change_RiskRange,
+    Reset,
+    Initialize
 }

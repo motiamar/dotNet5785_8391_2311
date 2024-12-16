@@ -1,6 +1,7 @@
 ﻿namespace BlImplementation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using BlApi;
 using BO;
 using DalApi;
@@ -46,18 +47,81 @@ internal class CallImplementation : BlApi.ICall
     /// <param name="filter"> if it exist, filter the list by the BTypeCalls prameter </param>
     /// <param name="value"> if it exist, filter the list by the value object</param>
     /// <param name="sort"> sorted the list by the BCallStatus prameter if it exist </param>
-    public IEnumerable<CallInList> ReadAll(CallInListFilter? sort = null, object? value = null, CallInListFilter? filter = null)
+    public IEnumerable<CallInList> ReadAll(CallInListFilter? filter = null, object? value = null, CallInListFilter? sort = null)
     {
         try
         {
             IEnumerable<CallInList> callsInList = Helpers.CallManager.GetAllCallInList();
-            string Filed = sort.ToString()!;
-            var property = typeof(BO.CallInList).GetProperty(Filed);
-            string Filed2 = filter.ToString()!;
-            var property2 = typeof(BO.CallInList).GetProperty(Filed2);
-            if (Filed is not null)
-                callsInList.Where(c => property!.GetValue(c)! == value);
-            return filter == null ? callsInList.OrderBy(c => c.Id) : callsInList.OrderBy(c => property2!.GetValue(c));
+            if (filter != null)
+            {
+                switch (filter)
+                {
+                    case CallInListFilter.Id:
+                        callsInList = callsInList.Where(c => c.Id == (int)value!);
+                        break;
+                    case CallInListFilter.CallId:
+                        callsInList = callsInList.Where(c => c.CallId == (int)value!);
+                        break;
+                    case CallInListFilter.Type:
+                        callsInList = callsInList.Where(c => c.Type == (BTypeCalls)value!);
+                        break;
+                    case CallInListFilter.CallOpenTime:
+                        callsInList = callsInList.Where(c => c.CallOpenTime == (DateTime)value!);
+                        break;
+                    case CallInListFilter.CallMaxCloseTime:
+                        callsInList = callsInList.Where(c => c.CallLeftTime == (TimeSpan)value!);
+                        break;
+                    case CallInListFilter.LastVolunteerName:
+                        callsInList = callsInList.Where(c => c.LastVolunteerName == (string)value!);
+                        break;
+                        case CallInListFilter.TotalTreatmentTime:
+                        callsInList = callsInList.Where(c => c.TotalTreatmentTime == (TimeSpan)value!);
+                        break;
+                    case CallInListFilter.CallStatus:
+                        callsInList = callsInList.Where(c => c.CallStatus == (BCallStatus)value!);
+                        break;
+                    case CallInListFilter.SumOfAssignments:
+                        callsInList = callsInList.Where(c => c.SumOfAssignments == (int)value!);
+                        break;
+                }
+            }
+            if (sort != null)
+            {
+                switch (sort)
+                {
+                    case CallInListFilter.Id:
+                        callsInList = callsInList.OrderBy(c => c.Id);
+                        break;
+                    case CallInListFilter.CallId:
+                        callsInList = callsInList.OrderBy(c => c.CallId);
+                        break;
+                    case CallInListFilter.Type:
+                        callsInList = callsInList.OrderBy(c => c.Type);
+                        break;
+                    case CallInListFilter.CallOpenTime:
+                        callsInList = callsInList.OrderBy(c => c.CallOpenTime);
+                        break;
+                    case CallInListFilter.CallMaxCloseTime:
+                        callsInList = callsInList.OrderBy(c => c.CallLeftTime);
+                        break;
+                    case CallInListFilter.LastVolunteerName:
+                        callsInList = callsInList.OrderBy(c => c.LastVolunteerName);
+                        break;
+                    case CallInListFilter.TotalTreatmentTime:
+                        callsInList = callsInList.OrderBy(c => c.TotalTreatmentTime);
+                        break;
+                    case CallInListFilter.CallStatus:
+                        callsInList = callsInList.OrderBy(c => c.CallStatus);
+                        break;
+                    case CallInListFilter.SumOfAssignments:
+                        callsInList = callsInList.OrderBy(c => c.SumOfAssignments);
+                        break;
+                        default:
+                        callsInList = callsInList.OrderBy(c => c.Id);
+                        break;
+                }
+            }
+            return callsInList;
         }
         catch (DO.DalXMLFileLoadCreateException ex)
         {
@@ -198,16 +262,62 @@ internal class CallImplementation : BlApi.ICall
     /// <param name="filter"> the kind of the call that the list filter by</param>
     /// <param name="sort">the kind of the call filed that the list sorted by </param>
     /// <returns>return the new list</returns>
-    public IEnumerable<ClosedCallInList> GetCloseCallList(int volunteerId, BTypeCalls? sort = null, CloseCallInListFilter? filter = null)
+    public IEnumerable<ClosedCallInList> GetCloseCallList(int volunteerId, BTypeCalls? filter = null, CloseCallInListFilter? sort = null)
     {
         try
         {
             IEnumerable<ClosedCallInList> closedCallsInList = Helpers.CallManager.GetClosedCallInLists(volunteerId);
-            string Filed = filter.ToString()!;
-            var property = typeof(BO.ClosedCallInList).GetProperty(Filed);
-            if(sort is not null)
-                closedCallsInList.Where(c => c.Type == sort);
-            return filter == null ? closedCallsInList.OrderBy(c => c.Id) : closedCallsInList.OrderBy(c => property!.GetValue(c));
+           if(filter is not null)
+            {
+                switch (filter)
+                {
+                    case BTypeCalls.Medical_situation:
+                        closedCallsInList = closedCallsInList.Where(c => c.Type == BTypeCalls.Medical_situation);
+                        break;
+                    case BTypeCalls.Car_accident:
+                        closedCallsInList = closedCallsInList.Where(c => c.Type == BTypeCalls.Car_accident);
+                        break;
+                    case BTypeCalls.Fall_from_hight:
+                        closedCallsInList = closedCallsInList.Where(c => c.Type == BTypeCalls.Fall_from_hight);
+                        break;
+                    case BTypeCalls.Violent_event:
+                        closedCallsInList = closedCallsInList.Where(c => c.Type == BTypeCalls.Violent_event);
+                        break;
+                    case BTypeCalls.Domestic_violent:
+                        closedCallsInList = closedCallsInList.Where(c => c.Type == BTypeCalls.Domestic_violent);
+                        break;
+                }
+            }
+           if(sort is not null)
+            {
+                switch(sort)
+                {
+                    case CloseCallInListFilter.Id:
+                        closedCallsInList = closedCallsInList.OrderBy(c => c.Id);
+                        break;                   
+                    case CloseCallInListFilter.Type:
+                        closedCallsInList = closedCallsInList.OrderBy(c => c.Type);
+                        break;
+                    case CloseCallInListFilter.CallAddress:
+                        closedCallsInList = closedCallsInList.OrderBy(c => c.CallAddress);
+                        break;
+                    case CloseCallInListFilter.CallOpenTime:
+                        closedCallsInList = closedCallsInList.OrderBy(c => c.CallOpenTime);
+                        break;
+                    case CloseCallInListFilter.CallEnterTime:
+                        closedCallsInList = closedCallsInList.OrderBy(c => c.CallEnterTime);
+                        break;
+                    case CloseCallInListFilter.CallCloseTime:
+                        closedCallsInList = closedCallsInList.OrderBy(c => c.CallCloseTime);
+                        break;
+                    case CloseCallInListFilter.EndKind:
+                        closedCallsInList = closedCallsInList.OrderBy(c => c.EndKind);
+                        break;
+                }
+            }
+           else
+                closedCallsInList = closedCallsInList.OrderBy(c => c.Id);
+            return closedCallsInList;
         }
         catch (DO.DalXMLFileLoadCreateException ex)
         {
@@ -222,23 +332,69 @@ internal class CallImplementation : BlApi.ICall
     /// <param name="filter"> filterd the list by the given parameter</param>
     /// <param name="sort"> soreted the list by the given parameter</param>
     /// <returns>return the new list</returns>
-    public IEnumerable<OpenCallInList> GetOpenCallList(int volunteerId, BTypeCalls? sort = null, OpenCallInListFilter? filter = null)
+    public IEnumerable<OpenCallInList> GetOpenCallList(int volunteerId, BTypeCalls? filter = null, OpenCallInListFilter? sort = null)
     {
         try
         {
             DO.Volunteer volunteer = _dal.Volunteer.Read(volunteerId)!;
             IEnumerable<OpenCallInList> openCallsInList = Helpers.CallManager.GetOpenCallInLists(volunteer);
+            if (filter is not null)
+            {
+                switch (filter)
+                {
+                    case BTypeCalls.Medical_situation:
+                        openCallsInList = openCallsInList.Where(c => c.Type == BTypeCalls.Medical_situation);
+                        break;
+                    case BTypeCalls.Car_accident:
+                        openCallsInList = openCallsInList.Where(c => c.Type == BTypeCalls.Car_accident);
+                        break;
+                    case BTypeCalls.Fall_from_hight:
+                        openCallsInList = openCallsInList.Where(c => c.Type == BTypeCalls.Fall_from_hight);
+                        break;
+                    case BTypeCalls.Violent_event:
+                        openCallsInList = openCallsInList.Where(c => c.Type == BTypeCalls.Violent_event);
+                        break;
+                    case BTypeCalls.Domestic_violent:
+                        openCallsInList = openCallsInList.Where(c => c.Type == BTypeCalls.Domestic_violent);
+                        break;
+                }
+            }
             if (sort is not null)
-                openCallsInList.Where((c) => c.Type == sort);
-            string Filed = filter.ToString()!;
-            var property = typeof(BO.OpenCallInList).GetProperty(Filed);
-            return filter == null ? openCallsInList.OrderBy(c => c.Id) : openCallsInList.OrderBy(c => property!.GetValue(c));
+            {
+                switch (sort)
+                {
+                    case OpenCallInListFilter.Id:
+                        openCallsInList = openCallsInList.OrderBy(c => c.Id);
+                        break;
+                    case OpenCallInListFilter.Type:
+                        openCallsInList = openCallsInList.OrderBy(c => c.Type);
+                        break;
+                    case OpenCallInListFilter.Description:
+                        openCallsInList = openCallsInList.OrderBy(c => c.Description);
+                        break;
+                    case OpenCallInListFilter.CallAddress:
+                        openCallsInList = openCallsInList.OrderBy(c => c.CallAddress);
+                        break;
+                    case OpenCallInListFilter.CallOpenTime:
+                        openCallsInList = openCallsInList.OrderBy(c => c.CallOpenTime);
+                        break;
+                    case OpenCallInListFilter.CallMaxCloseTime:
+                        openCallsInList = openCallsInList.OrderBy(c => c.CallMaxCloseTime);
+                        break;
+                    case OpenCallInListFilter.CallDistance:
+                        openCallsInList = openCallsInList.OrderBy(c => c.CallDistance);
+                        break;
+                }
+            }
+            else
+                openCallsInList = openCallsInList.OrderBy(c => c.Id);
+            return openCallsInList;
         }
         catch (DO.DalDoesNotExistException ex)
         {
             throw new BlDoesNotExistException($"Failed to get open call list: {ex}");
         }
-        catch(DO.DalXMLFileLoadCreateException ex)
+        catch (DO.DalXMLFileLoadCreateException ex)
         {
             throw new BlCantLoadException($"Failed to get open call list: {ex}");
         }

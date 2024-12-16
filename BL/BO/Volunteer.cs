@@ -71,6 +71,7 @@ public class Volunteer
     /// if there is, it Show the corrent call that the Volunteer handle
     /// </summary>
     public BO.CallInProgress? CorrentCall { get; set; }
+
     public override string ToString() => this.TostringProperty(); 
     
 }

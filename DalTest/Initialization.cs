@@ -19,21 +19,18 @@ public static class Initialization
         string[] volunteerPhone = { "0524815812", "0501234567", "0527654321", "0549876543", "0584567890", "0533210987", "0555678901", "0501112222", "0523334444", "0545526673", "0587748876", "0529950030", "0558767765", "0528775432", "0528765432", "0542109876" };
         string[] volunteerEmail = { "moti.amar@gmail.com", "elya.motai@yahoo.com", "iosi.yoskovich@icloud.com", "david.gindi@hotmail.com", "yuval.michaeli@gmail.com", "dan.zilber@yahoo.com", "meir.nahum@hotmail.com", "izchak.grinvald@outlock.com", "shalom.salam@icloud.com", "meir.morgnshtain@gmail.com", "eden.cohen@hotmail.com", "shimon.cohen@yahoo.com", "david.hadad@gmail.com", "elly.hadar@icloud.com", "nuriel.hadad@yahoo.com", "israel.gadisha@gmail.com" };
         string[] volunteerAddress = {"Bustanei 15, jerusalem", "yehoshua ben gamla 13, jerusalem", "hala 13, jerusalem", "beit haarava 28, jerusalem", "harav herzog, jerusalem", "bosem 12,jerusalem", "hanamer 17, jerusalem", "hahalutz 17, jerusalem", "harav uziel 80,jerusalem ", "harav beztalel zulti 19, jerusalem", "shderot moshe daiian 109, jerusalem", "harav maymon 1, jerusalem", "a.m brachiu 7, jerusalem", "yzthar 25,jerusalem", "menachem mashkaloc 21, jerusalem", "aharon brend 12,jerusalem" };
+        int[] iDs = { 726172349, 236153821, 810772020, 422954990, 335035184, 740776588, 720487115, 933150617, 722247939, 381662543, 015741606, 076561398, 172780181, 180640021, 221092661, 569768724 };
         double[] volunteerLatitude = { 35.2126784, 35.2124199, 35.2087076, 35.2203343, 35.1994883, 35.1889476, 35.1805822, 35.1927184, 35.187882091894366,  35.21696116035834 , 35.24036075232489,  35.199124630657806 , 35.18891765398783,  35.18926428816602,  35.17470578874885, 35.17222213737034 };
         double[] volunteerLongitude = { 31.7648204, 31.7611362, 31.7638657, 31.7483032, 31.7589875, 31.7342954, 31.7518568, 31.7810136, 31.76552192492391, 31.810386702304726, 31.828473377413367, 31.788846938792492, 31.77681135390754, 31.738258839334225, 31.786734640142832, 31.784020945981794};
 
         int i = 0;
+        int number;
         foreach (var name in volunteerName)
-        { 
-            
-            // make sure that the id dosent exsist
-            int tmpid;
-            do
-                tmpid = s_rand.Next(200000000, 400000000);
-            while (s_dal.Volunteer.Read(tmpid) != null);
+        {
 
+            number = s_rand.Next(200000000, 400000000);
              // active choise
-            bool tmpaActive = (tmpid % 2) == 0 ? true : false;
+            bool tmpaActive = (number % 2) == 0 ? true : false;
            
             // random password
             string? password = name + "pass" + (i*4);
@@ -52,9 +49,9 @@ public static class Initialization
             DistanceTypes tmpDistanceType = default(DistanceTypes);
 
             // create a new Volunteer with all the tmp arguments
-            s_dal.Volunteer.Create(new Volunteer 
+            s_dal!.Volunteer.Create(new Volunteer 
             {
-                Id = tmpid,
+                Id = iDs[i],
                 FullName = name,
                 Phone = volunteerPhone[i],
                 Email = volunteerEmail[i],

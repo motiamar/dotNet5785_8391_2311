@@ -4,16 +4,15 @@ using System.Text.RegularExpressions;
 namespace Helpers;
 using System.Text.RegularExpressions;
 using System.Net.Http;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
 using BO;
 
 
 internal static class Tools
 {
-    // filed for the address cheking - API key
-    private const string GoogleMapsApiUrl = "https://maps.googleapis.com/maps/api/geocode/json?address={0}&key=AIzaSyDzEzuNVPxLv7EIKKvSU2b8GiAikFbV5jk"; 
     private static readonly HttpClient client = new HttpClient();
+    private const string NominatimApiUrl = "https://nominatim.openstreetmap.org/search?format=json&q={0}";
 
     /// <summary>
     /// func to ovveride and print tne logical entities
@@ -29,7 +28,17 @@ internal static class Tools
         foreach (var prop in properties)
         {
             var value = prop.GetValue(t, null);
-            result.AppendLine($"{prop.Name}:{value}");
+            if(value is IEnumerable<CallAssignInList> enumerable && !(value is string))
+            {
+                result.AppendLine($"{prop.Name}: [");
+                foreach (var item in enumerable)
+                {
+                    result.AppendLine($"{item}");
+                }
+                result.AppendLine("]");
+            }
+            else
+                result.AppendLine($"{prop.Name}:{value}");
         }
         return result.ToString();
     }
@@ -40,100 +49,34 @@ internal static class Tools
     /// <returns></returns>
     public static double Distance(DO.DistanceTypes distanceType, double VolLatitude, double VolLongitude, double CallLatitude, double CallLongitude)
     {
-        /// calculate the distance between the volunteer and the call by air
-        if (distanceType == DO.DistanceTypes.Air)
-        {
-            const double EarthRadiusKm = 6371.0;
-            double dLat = DegreesToRadians(CallLatitude - VolLatitude);
-            double dLon = DegreesToRadians(CallLongitude - VolLongitude);
-
-            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
-                       Math.Cos(DegreesToRadians(VolLatitude)) * Math.Cos(DegreesToRadians(CallLatitude)) *
-                       Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
-            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-            return EarthRadiusKm * c;
-        }
-        /// calculate the distance between the volunteer and the call by walking
-        else if (distanceType == DO.DistanceTypes.Walk)
-        {
-
-            string apiUrl = $"https://maps.googleapis.com/maps/api/directions/json?origin={VolLatitude},{VolLongitude}&destination={CallLatitude},{CallLongitude}&mode=walking&key=AIzaSyDzEzuNVPxLv7EIKKvSU2b8GiAikFbV5jk";
-            using (HttpClient client = new HttpClient())
-            {
-                HttpResponseMessage response = client.GetAsync(apiUrl).Result;
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new Exception($"Failed to retrieve data from Google Maps API: {response.StatusCode}");
-                }
-                string responseBody = response.Content.ReadAsStringAsync().Result;
-                JObject json = JObject.Parse(responseBody);
-                var distanceToken = json["routes"]?[0]?["legs"]?[0]?["distance"]?["value"];
-                if (distanceToken == null)
-                {
-                    throw new Exception("Failed to find walking distance in the response.");
-                }
-                double distanceInMeters = distanceToken.Value<double>();
-                return distanceInMeters / 1000.0; // המר למטרים
-            }
-        }
-        /// calculate the distance between the volunteer and the call by car
-        else
-        {
-            string apiUrl = $"https://maps.googleapis.com/maps/api/directions/json?origin={VolLatitude},{VolLongitude}&destination={CallLatitude},{CallLongitude}&mode=driving&key=AIzaSyDzEzuNVPxLv7EIKKvSU2b8GiAikFbV5jk";
-            using (HttpClient client = new HttpClient())
-            {
-                HttpResponseMessage response = client.GetAsync(apiUrl).Result;
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new Exception($"Failed to retrieve data from Google Maps API: {response.StatusCode}");
-                }
-                string responseBody = response.Content.ReadAsStringAsync().Result;
-                JObject json = JObject.Parse(responseBody);
-                var distanceToken = json["routes"]?[0]?["legs"]?[0]?["distance"]?["value"];
-                if (distanceToken == null)
-                {
-                    throw new Exception("Failed to find driving distance in the response.");
-                }
-                double distanceInMeters = distanceToken.Value<double>();
-                return distanceInMeters / 1000.0; // המר למטרים
-            }
-        }
+        return 0.0;
     }
 
-    /// <summary>
-    /// func to transfer degrees to radians
-    /// </summary>
-    private static double DegreesToRadians(double degrees)
-    {
-        return degrees * Math.PI / 180.0;
-    }
 
     /// <summary>
     /// func to check if the address is valid (exist on arth by google maps)
     /// </summary>
     public static bool IsValidAddress(string address)
     {
-        try
-        {
-            string requestUrl = string.Format(GoogleMapsApiUrl, Uri.EscapeDataString(address));
-            HttpResponseMessage response = client.GetAsync(requestUrl).Result; // block the result until it return
-            if (response.IsSuccessStatusCode)
-            {
-                string content = response.Content.ReadAsStringAsync().Result; // block the result until it return
-                JObject jsonResponse = JObject.Parse(content);
-                var results = jsonResponse["results"];
-                return results!.HasValues;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error: " + ex.Message);
-            return false;
-        }
+        //try
+        //{
+        //   string requestUri = string.Format(NominatimApiUrl, Uri.EscapeDataString(address));
+        //    client.DefaultRequestHeaders.Add("User-Agent", "CSharpApp/1.0");
+        //    HttpResponseMessage response = client.GetAsync(requestUri).Result;
+        //    if(response.IsSuccessStatusCode)
+        //    {
+        //        string content = response.Content.ReadAsStringAsync().Result;
+        //        JArray responseArray = JArray.Parse(content);
+        //        return responseArray.Count > 0;              
+        //    }
+        //    return false;
+        //}
+        //catch (Exception ex)
+        //{
+        //    Console.WriteLine("Error: " + ex.Message);
+        //    return false;
+        //}
+        return true;
     }
 
 
@@ -142,32 +85,15 @@ internal static class Tools
     /// </summary>
     public static double GetLatitudeFromAddress(string address)
     {
-        try
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                string requestUrl = string.Format(GoogleMapsApiUrl, Uri.EscapeDataString(address));
-                HttpResponseMessage response = client.GetAsync(requestUrl).GetAwaiter().GetResult();
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                    JObject json = JObject.Parse(content);
-                    var results = json["results"];
-                    if (results!.HasValues)
-                    {
-                        var geometry = results[0]!["geometry"];
-                        var location = geometry!["location"];
-                        double latitude = location!["lat"]!.ToObject<double>();
-                        return latitude;
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            // במקרה של שגיאה כלשהי (כמו בעיית חיבור)
-            Console.WriteLine("Error: " + ex.Message);
-        }
+        //try
+        //{
+            
+        //}
+        //catch (Exception ex)
+        //{
+        //    // במקרה של שגיאה כלשהי (כמו בעיית חיבור)
+        //    Console.WriteLine("Error: " + ex.Message);
+        //}
         return 0;
     }
 
@@ -176,32 +102,15 @@ internal static class Tools
     /// </summary>
     public static double GetLongitudeFromAddress(string address)
     {
-        try
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                string requestUrl = string.Format(GoogleMapsApiUrl, Uri.EscapeDataString(address));
-                HttpResponseMessage response = client.GetAsync(requestUrl).GetAwaiter().GetResult();
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                    JObject json = JObject.Parse(content);
-                    var results = json["results"];
-                    if (results!.HasValues)
-                    {
-                        var geometry = results[0]!["geometry"];
-                        var location = geometry!["location"];
-                        double longitude = location!["lng"]!.ToObject<double>();
-                        return longitude;
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            // במקרה של שגיאה כלשהי (כמו בעיית חיבור)
-            Console.WriteLine("Error: " + ex.Message);
-        }
+        //    try
+        //    {
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // במקרה של שגיאה כלשהי (כמו בעיית חיבור)
+        //        Console.WriteLine("Error: " + ex.Message);
+        //    }
         return 0;
     }
 

@@ -15,7 +15,8 @@ internal static class CallManager
     /// </summary>
     internal static BO.BCallStatus GetStatus(DO.Call call)
     {
-        var assignment = s_dal.Assignment.ReadAll().FirstOrDefault(a => a.CallId == call.Id);
+        var assignments = s_dal.Assignment.ReadAll();
+        var assignment = assignments.FirstOrDefault(a => a.CallId == call.Id);
         var currentRiskTime = ClockManager.Now + s_dal.Config.RiskRnge;
         if (assignment == null)
         {
@@ -87,15 +88,17 @@ internal static class CallManager
         var calls = s_dal.Call.ReadAll();
         var assignments = s_dal.Assignment.ReadAll();
         var callInLists = from call in calls
+                          let assignment = assignments.FirstOrDefault(a => a.CallId == call.Id)
+                          let volunteer = assignment?.VolunteerId != null ? s_dal.Volunteer.Read(assignment.VolunteerId) : null
                           select new BO.CallInList
                           {
-                              Id = assignments.FirstOrDefault(a => a.CallId == call.Id)!.Id,
+                              Id = assignment != null ? assignment.Id : null,
                               CallId = call.Id,
                               Type = (BO.BTypeCalls)call.TypeCall,
                               CallOpenTime = call.OpeningCallTime,
-                              CallLeftTime = (TimeSpan)(call.MaxEndingCallTime - ClockManager.Now)!,
-                              LastVolunteerName = s_dal.Volunteer.Read(assignments.FirstOrDefault(a => a.CallId == call.Id)!.VolunteerId)!.FullName,
-                              TotalTreatmentTime = (TimeSpan)(assignments.FirstOrDefault(a => a.CallId == call.Id)!.FinishTime - assignments.FirstOrDefault(a => a.CallId == call.Id)!.StartTime)!,
+                              CallLeftTime = call.MaxEndingCallTime != null ? (TimeSpan)(call.MaxEndingCallTime - ClockManager.Now) : TimeSpan.Zero,
+                              LastVolunteerName = volunteer != null ? volunteer.FullName : "N/A",
+                              TotalTreatmentTime = assignment != null ? (TimeSpan)(assignment.FinishTime - assignment.StartTime)! : TimeSpan.Zero,
                               CallStatus = GetStatus(call),
                               SumOfAssignments = assignments.Count(a => a.CallId == call.Id)
                           };
@@ -165,7 +168,8 @@ internal static class CallManager
     /// </summary>
     internal static void ChooseCallChek(DO.Call call)
     {
-        var assignment = s_dal.Assignment.ReadAll(v => v.CallId == call.Id);
+        var assignments = s_dal.Assignment.ReadAll();
+        var assignment = assignments.FirstOrDefault(a => a.CallId == call.Id);
         if (assignment is not null)
             throw new BlinCorrectException("The call is already in treatment");
         if (call.MaxEndingCallTime < ClockManager.Now)

@@ -46,15 +46,32 @@ internal class VolunteerImplementation : BlApi.IVolunteer
     /// <param name="filter"> return a list of only active volunteers or not</param>
     /// <param name="select">return a list sorted by volunteers Id or by the enum fild</param>
     /// <returns></returns>
-    public IEnumerable<VolunteerInList> ReadAll(bool? active = null, CallInListFilter? sort = null)
+    public IEnumerable<VolunteerInList> ReadAll(bool? active = null, VollInListFilter? sort = null)
     {
         try
         {
-            IEnumerable<VolunteerInList> volunteerInLists = Helpers.VolunteerManager.GetAllVolunteerInList();
-            string Filed = sort.ToString()!;
-            var property = typeof(BO.VolunteerInList).GetProperty(Filed);
-            volunteerInLists.Where(v => active == null || v.Active == active);
-            return sort == null ? volunteerInLists.OrderBy(v => v.Id) : volunteerInLists.OrderBy(v => property!.GetValue(v));
+            IEnumerable<VolunteerInList> volunteerInLists = Helpers.VolunteerManager.GetAllVolunteerInList();           
+            if (active != null)
+            {
+                volunteerInLists = volunteerInLists.Where(v => v.Active == active);
+            }
+            if (sort == null)
+                return volunteerInLists.OrderBy(v => v.Id);
+            switch (sort)
+            {
+                case VollInListFilter.FullName:
+                    return volunteerInLists.OrderBy(v => v.FullName);
+                case VollInListFilter.TreatedCalls:
+                    return volunteerInLists.OrderBy(v => v.TreatedCalls);
+                case VollInListFilter.CanceledCalls:
+                    return volunteerInLists.OrderBy(v => v.CanceledCalls);
+                case VollInListFilter.ExpiredCalls:
+                    return volunteerInLists.OrderBy(v => v.ExpiredCalls);
+                case VollInListFilter.CorrentCallId:
+                    return volunteerInLists.OrderBy(v => v.CorrentCallId);
+                default:
+                    return volunteerInLists.OrderBy(v => v.Id);
+            }
         }
         catch (DO.DalXMLFileLoadCreateException ex)
         {

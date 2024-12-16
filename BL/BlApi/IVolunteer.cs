@@ -15,7 +15,7 @@ public interface IVolunteer
     /// <param name="filter"> return a list of only active volunteers or not</param>
     /// <param name="select">return a list sorted by volunteers Id or by the enum fild</param>
     /// <returns></returns>
-    IEnumerable<BO.VolunteerInList> ReadAll(bool? active = null, BO.CallInListFilter? sort = null);
+    IEnumerable<BO.VolunteerInList> ReadAll(bool? active = null, BO.VollInListFilter? sort = null);
 
     /// <summary>
     /// create a BO.Volunteer entity if the id exist in the data base 
