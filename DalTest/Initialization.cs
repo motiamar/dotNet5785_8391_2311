@@ -517,7 +517,7 @@ public static class Initialization
         int tmpVolunteerId = 0;
         DateTime ? tmpFinishTime = null;
         DateTime tmpStartTime;
-        EndKinds tmpEndKind = default;
+        EndKinds tmpEndKind = EndKinds.Open;
 
         IEnumerable <Call> tmpCalls = s_dal!.Call.ReadAll();
         IEnumerable <Volunteer> tmpVolenteers = s_dal.Volunteer!.ReadAll();

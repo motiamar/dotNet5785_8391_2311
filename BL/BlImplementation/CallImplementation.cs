@@ -52,36 +52,45 @@ internal class CallImplementation : BlApi.ICall
         try
         {
             IEnumerable<CallInList> callsInList = Helpers.CallManager.GetAllCallInList();
-            if (filter != null)
+            if (filter != null && value != null)
             {
                 switch (filter)
                 {
                     case CallInListFilter.Id:
-                        callsInList = callsInList.Where(c => c.Id == (int)value!);
+                        if(value is int id)
+                            callsInList = callsInList.Where(c => c.Id == id);
                         break;
                     case CallInListFilter.CallId:
-                        callsInList = callsInList.Where(c => c.CallId == (int)value!);
+                        if(value is int callId)
+                            callsInList = callsInList.Where(c => c.CallId == callId);
                         break;
                     case CallInListFilter.Type:
-                        callsInList = callsInList.Where(c => c.Type == (BTypeCalls)value!);
+                        if(value is BTypeCalls type)
+                            callsInList = callsInList.Where(c => c.Type == type);
                         break;
                     case CallInListFilter.CallOpenTime:
-                        callsInList = callsInList.Where(c => c.CallOpenTime == (DateTime)value!);
+                        if (value is DateTime time)
+                                callsInList = callsInList.Where(c => c.CallOpenTime == time);
                         break;
                     case CallInListFilter.CallMaxCloseTime:
-                        callsInList = callsInList.Where(c => c.CallLeftTime == (TimeSpan)value!);
+                        if (value is TimeSpan timeSpan)
+                                callsInList = callsInList.Where(c => c.CallLeftTime == timeSpan);
                         break;
                     case CallInListFilter.LastVolunteerName:
-                        callsInList = callsInList.Where(c => c.LastVolunteerName == (string)value!);
+                        if (value is string name)
+                            callsInList = callsInList.Where(c => c.LastVolunteerName == name);
                         break;
                         case CallInListFilter.TotalTreatmentTime:
-                        callsInList = callsInList.Where(c => c.TotalTreatmentTime == (TimeSpan)value!);
+                        if (value is TimeSpan timeSpan2)
+                                callsInList = callsInList.Where(c => c.TotalTreatmentTime == timeSpan2);
                         break;
                     case CallInListFilter.CallStatus:
-                        callsInList = callsInList.Where(c => c.CallStatus == (BCallStatus)value!);
+                        if (value is BCallStatus status)
+                            callsInList = callsInList.Where(c => c.CallStatus == status);
                         break;
                     case CallInListFilter.SumOfAssignments:
-                        callsInList = callsInList.Where(c => c.SumOfAssignments == (int)value!);
+                        if (value is int sum)
+                                callsInList = callsInList.Where(c => c.SumOfAssignments == sum);
                         break;
                 }
             }
@@ -448,7 +457,11 @@ internal class CallImplementation : BlApi.ICall
             if (assignment is null)
                 throw new DO.DalDoesNotExistException($"assignment with id {assignmentId} does not exist");
             DO.Volunteer volunteer = _dal.Volunteer.Read(volunteerId)!;
-            string role = Helpers.VolunteerManager.GetVolunteerRole(volunteer.FullName, volunteer.Password!)!;          
+            if (volunteer is null)
+                throw new DO.DalDoesNotExistException($"volunteer with id {volunteerId} does not exist");
+            string? role = Helpers.VolunteerManager.GetVolunteerRole(volunteer.FullName, volunteer.Password!)!;   
+            if(role is null)
+                throw new BlDoesNotExistException($"Failed to cancel assignment with id {assignmentId}: volunteer with id {volunteerId} does not exist");
             if (assignment.VolunteerId != volunteerId && role != "Manager")
                 throw new BlNotAllowException($"the assignment is not belong to volunteer with id: {volunteerId} or he dosent a manager");
             if (assignment.FinishTime != null)
@@ -483,12 +496,17 @@ internal class CallImplementation : BlApi.ICall
             DO.Call call = _dal.Call.Read(CallId)!;
             if (call is null)
                 throw new DO.DalDoesNotExistException($"call with id: {CallId} does not exist");
+            DO.Volunteer volunteer = _dal.Volunteer.Read(volunteerId)!;
+            if(volunteer is null)
+                throw new DO.DalDoesNotExistException($"Volunteer with id: {volunteerId} does not exist");
             Helpers.CallManager.ChooseCallChek(call);
             DO.Assignment assignment = new DO.Assignment
             {
                 CallId = CallId,
                 VolunteerId = volunteerId,
-                StartTime = Helpers.ClockManager.Now
+                StartTime = Helpers.ClockManager.Now,
+                FinishTime = null,
+                EndKind = EndKinds.Treated
             };
             _dal.Assignment.Create(assignment);
         }

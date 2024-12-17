@@ -221,7 +221,7 @@ internal class Program
                         break;
 
                     case BSubCallMenu.End_call: // end the call
-                        Console.WriteLine("enter call ID please");
+                        Console.WriteLine("enter volunteer ID please");
                         int callId = int.Parse(Console.ReadLine()!);
                         Console.WriteLine("enter assignment ID please");
                         int assingmentId = int.Parse(Console.ReadLine()!);
@@ -229,11 +229,11 @@ internal class Program
                         break;
 
                     case BSubCallMenu.Cancel_call: // cancel the call
-                        Console.WriteLine("enter call ID please");
-                        int callId2 = int.Parse(Console.ReadLine()!);
+                        Console.WriteLine("enter volunteer ID please");
+                        int volunteerId1 = int.Parse(Console.ReadLine()!);
                         Console.WriteLine("enter assignment ID please");
                         int assingmentId2 = int.Parse(Console.ReadLine()!);
-                        s_bl.Call.CanceleAssignment(callId2, assingmentId2);
+                        s_bl.Call.CanceleAssignment(volunteerId1, assingmentId2);
                         break;
 
                     case BSubCallMenu.Choose_call: // choose the call by the volunteer
@@ -481,7 +481,8 @@ internal class Program
             ShowCallEnum();
             sort = (CallInListFilter)int.Parse(Console.ReadLine()!);
         }
-        foreach (var item in s_bl.Call.ReadAll(filter, value, sort))
+        var calls = s_bl.Call.ReadAll(filter, value, sort);
+        foreach (var item in calls)
         {
             Console.WriteLine(item);
         }
@@ -507,7 +508,7 @@ internal class Program
         var tmp = s_bl.Call.Read(Id)!;
         Console.WriteLine(tmp);
         // Show the entity first      
-        Console.WriteLine("enter Type please, 1 to Medical_situation, 2 to Car_accident, 3 to Fall_from_hight, 3 to Violent_event, 4 to Domestic_violent, 5 to None");
+        Console.WriteLine("enter Type please, 0 to Medical_situation, 1 to Car_accident, 2 to Fall_from_hight, 3 to Violent_event, 4 to Domestic_violent, 5 to None");
         BTypeCalls type = (BTypeCalls)int.Parse(Console.ReadLine()!);       
         Console.WriteLine("enter descrption please");
         string descrption = Console.ReadLine()!;
@@ -535,7 +536,7 @@ internal class Program
     private static void AddCall()
     {        
         int Id = 0;
-        Console.WriteLine("enter Type please, 1 to Medical_situation, 2 to Car_accident, 3 to Fall_from_hight, 3 to Violent_event, 4 to Domestic_violent, 5 to None");
+        Console.WriteLine("enter Type please, 0 to Medical_situation, 1 to Car_accident, 2 to Fall_from_hight, 3 to Violent_event, 4 to Domestic_violent, 5 to None");
         BTypeCalls type = (BTypeCalls)int.Parse(Console.ReadLine()!);
         Console.WriteLine("enter descrption please");
         string descrption = Console.ReadLine()!;
@@ -570,7 +571,7 @@ internal class Program
         int choose = int.Parse(Console.ReadLine()!);
         if (choose == 0)
         {
-            Console.WriteLine("enter Type please, 1 to Medical_situation, 2 to Car_accident, 3 to Fall_from_hight, 3 to Violent_event, 4 to Domestic_violent, 5 to None");
+            Console.WriteLine("enter Type please, 0 to Medical_situation, 1 to Car_accident, 2 to Fall_from_hight, 3 to Violent_event, 4 to Domestic_violent, 5 to None");
             filter = (BTypeCalls)int.Parse(Console.ReadLine()!);
         }
         Console.WriteLine("enter 0 to order the list by the enum fild or 1 to continue");
@@ -599,7 +600,7 @@ internal class Program
         int choose = int.Parse(Console.ReadLine()!);
         if (choose == 0)
         {
-            Console.WriteLine("enter Type please, 1 to Medical_situation, 2 to Car_accident, 3 to Fall_from_hight, 3 to Violent_event, 4 to Domestic_violent, 5 to None");
+            Console.WriteLine("enter Type please, 0 to Medical_situation, 1 to Car_accident, 2 to Fall_from_hight, 3 to Violent_event, 4 to Domestic_violent, 5 to None");
             filter = (BTypeCalls)int.Parse(Console.ReadLine()!);
         }
         Console.WriteLine("enter 0 to order the list by the enum fild or 1 to continue");

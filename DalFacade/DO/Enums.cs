@@ -33,6 +33,7 @@ public enum EndKinds
     Self_cancellation,
     Administrator_cancellation,
     Expired_cancellation,
+    Open
 }
 
 //  choises for the menu

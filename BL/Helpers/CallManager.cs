@@ -87,21 +87,27 @@ internal static class CallManager
     {
         var calls = s_dal.Call.ReadAll();
         var assignments = s_dal.Assignment.ReadAll();
+        var assignmentsLookup = assignments.ToLookup(a => a.CallId);
         var callInLists = from call in calls
-                          let assignment = assignments.FirstOrDefault(a => a.CallId == call.Id)
-                          let volunteer = assignment?.VolunteerId != null ? s_dal.Volunteer.Read(assignment.VolunteerId) : null
+                          let assignment = assignmentsLookup[call.Id].FirstOrDefault()
+                          let volunteer = assignment != null ? s_dal.Volunteer.Read(assignment.VolunteerId) : null
                           select new BO.CallInList
                           {
-                              Id = assignment != null ? assignment.Id : null,
+                              Id = assignment?.Id,
                               CallId = call.Id,
                               Type = (BO.BTypeCalls)call.TypeCall,
                               CallOpenTime = call.OpeningCallTime,
-                              CallLeftTime = call.MaxEndingCallTime != null ? (TimeSpan)(call.MaxEndingCallTime - ClockManager.Now) : TimeSpan.Zero,
-                              LastVolunteerName = volunteer != null ? volunteer.FullName : "N/A",
-                              TotalTreatmentTime = assignment != null ? (TimeSpan)(assignment.FinishTime - assignment.StartTime)! : TimeSpan.Zero,
+                              CallLeftTime = call.MaxEndingCallTime != null && call.MaxEndingCallTime > ClockManager.Now
+                                  ? (TimeSpan)(call.MaxEndingCallTime - ClockManager.Now)
+                                  : TimeSpan.Zero,
+                              LastVolunteerName = volunteer?.FullName ?? "N/A",
+                              TotalTreatmentTime = assignment?.FinishTime != null && assignment?.StartTime != null
+                                  ? (TimeSpan)(assignment.FinishTime - assignment.StartTime)
+                                  : TimeSpan.Zero,
                               CallStatus = GetStatus(call),
-                              SumOfAssignments = assignments.Count(a => a.CallId == call.Id)
+                              SumOfAssignments = assignmentsLookup[call.Id].Count()
                           };
+
         return callInLists;
     }
 
@@ -148,8 +154,8 @@ internal static class CallManager
         var calls = s_dal.Call.ReadAll();
         calls.Where(v => Helpers.CallManager.GetStatus(v) == BCallStatus.Open || Helpers.CallManager.GetStatus(v) == BCallStatus.Open_in_risk);
         var openCallInList = from call in calls
-                             let vLati = Helpers.Tools.GetLatitudeFromAddress(volunteer.Address!)
-                             let vLongi = Helpers.Tools.GetLongitudeFromAddress(volunteer.Address!)
+                             let vLati = volunteer.Latitude
+                             let vLongi = volunteer.Longitude
                              select new BO.OpenCallInList
                              {
                                  Id = call.Id,
@@ -158,7 +164,7 @@ internal static class CallManager
                                  CallAddress = call.FullAddressOfTheCall,
                                  CallOpenTime = call.OpeningCallTime,
                                  CallMaxCloseTime = call.MaxEndingCallTime,
-                                 CallDistance = Helpers.Tools.Distance(volunteer.DistanceType, vLati, vLongi, call.Latitude, call.Longitude)
+                                 CallDistance = Helpers.Tools.Distance(volunteer.DistanceType, vLati ?? 0, vLongi ?? 0, call.Latitude, call.Longitude)
                              };
         return openCallInList!;
     }
