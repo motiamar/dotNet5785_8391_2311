@@ -14,6 +14,7 @@ internal static class VolunteerManager
 {
     private static IDal s_dal = Factory.Get;
 
+    internal static ObserverManager Observers = new(); //stage 5 
     /// <summary>
     /// return the role of the volunteer
     /// </summary>

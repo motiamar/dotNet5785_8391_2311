@@ -8,6 +8,7 @@ using BlApi;
 using BO;
 using DalApi;
 using DO;
+using Helpers;
 using static BO.Exceptions;
 
 internal class VolunteerImplementation : BlApi.IVolunteer
@@ -122,12 +123,16 @@ internal class VolunteerImplementation : BlApi.IVolunteer
                 // if the volunteer is a manager is can change the role
                 var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = change.FullName, Phone = change.Phone, Email = change.Email, Password = change.Password, Address = change.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = change.Active, MaximumDistance = change.MaximumDistance, DistanceType = distanceType };
                 _dal.Volunteer.Update(newVolunteer);
+                VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
+                VolunteerManager.Observers.NotifyListUpdated(); 
             }
             else
             {
                 //if the volunteer is not a manager is can't change the role
                 var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = change.FullName, Phone = change.Phone, Email = change.Email, Password = change.Password, Address = change.Address, Role = volunteer.Role, Latitude = latitude, Longitude = longitude, Active = change.Active, MaximumDistance = change.MaximumDistance, DistanceType = distanceType };
                 _dal.Volunteer.Update(newVolunteer);
+                VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
+                VolunteerManager.Observers.NotifyListUpdated();
             }
         }
         catch (DO.DalDoesNotExistException ex)
@@ -152,9 +157,13 @@ internal class VolunteerImplementation : BlApi.IVolunteer
             var assignment = _dal.Assignment.ReadAll();
             int? correntCallId = assignment.FirstOrDefault(v => v.VolunteerId == volunteerId)?.CallId;
             if (correntCallId is null)
+            {
                 _dal.Volunteer.Delete(volunteerId);
+                VolunteerManager.Observers.NotifyListUpdated();
+            }
             else
                 throw new BLVolunteerIsAssign($"cant delete volunteer: {volunteerId}, the volunteer is assign");
+
         }
         catch (DO.DalDoesNotExistException ex)
         {
@@ -177,10 +186,20 @@ internal class VolunteerImplementation : BlApi.IVolunteer
             var distanceType = (DistanceTypes)Enum.Parse(typeof(BDistanceTypes), volunteer.DistanceType.ToString());
             var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = volunteer.FullName, Phone = volunteer.Phone, Email = volunteer.Email, Password = volunteer.Password, Address = volunteer.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = volunteer.Active, MaximumDistance = volunteer.MaximumDistance, DistanceType = distanceType };
             _dal.Volunteer.Create(newVolunteer);
+            VolunteerManager.Observers.NotifyListUpdated();
         }
         catch (DO.DalAlreadyExistException ex)
         {
             throw new BlVolAllreadyExist($"volunteer with id : {volunteer.Id} is already exist: {ex}");
         }
     }
+
+    public void AddObserver(Action listObserver)=> VolunteerManager.Observers.AddListObserver(listObserver);
+
+    public void AddObserver(int id, Action observer) => VolunteerManager.Observers.AddObserver(id, observer);
+
+
+    public void RemoveObserver(Action listObserver) => VolunteerManager.Observers.RemoveListObserver(listObserver);
+
+    public void RemoveObserver(int id, Action observer) => VolunteerManager.Observers.RemoveObserver(id, observer);
 }

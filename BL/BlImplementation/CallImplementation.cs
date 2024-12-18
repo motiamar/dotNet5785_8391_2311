@@ -6,6 +6,7 @@ using BlApi;
 using BO;
 using DalApi;
 using DO;
+using Helpers;
 using Newtonsoft.Json.Linq;
 using static BO.Exceptions;
 
@@ -204,6 +205,8 @@ internal class CallImplementation : BlApi.ICall
                 MaxEndingCallTime = change.CallMaxCloseTime
             };
             _dal.Call.Update(updateCall);
+            CallManager.Observers.NotifyItemUpdated(change.Id);
+            CallManager.Observers.NotifyListUpdated();
         }
         catch (DO.DalDoesNotExistException ex)
         {
@@ -222,7 +225,10 @@ internal class CallImplementation : BlApi.ICall
             if (call is null)   
                 throw new DO.DalDoesNotExistException($"call with id {callId} does not exist");
             if (Helpers.CallManager.GetStatus(call) == BCallStatus.Open)
+            {
                 _dal.Call.Delete(callId);
+                CallManager.Observers.NotifyListUpdated();
+            }
             else
                 throw new BlNotAllowException($"Failed to delete call with id {callId}: call is not open");
         }
@@ -253,6 +259,7 @@ internal class CallImplementation : BlApi.ICall
                 MaxEndingCallTime = call.CallMaxCloseTime
             };
             _dal.Call.Create(newCall);
+            CallManager.Observers.NotifyListUpdated();
         }
         catch(DO.DalXMLFileLoadCreateException)
         {
@@ -436,6 +443,8 @@ internal class CallImplementation : BlApi.ICall
                 EndKind = DO.EndKinds.Treated
             };
             _dal.Assignment.Update(updateAssignment);   
+            CallManager.Observers.NotifyItemUpdated(assignment.CallId);
+            CallManager.Observers.NotifyListUpdated();
         }
         catch(DO.DalDoesNotExistException ex)
         {
@@ -475,7 +484,9 @@ internal class CallImplementation : BlApi.ICall
                 FinishTime = Helpers.ClockManager.Now,
                 EndKind = role == "Manager" ? EndKinds.Administrator_cancellation : EndKinds.Self_cancellation,
             };
-            _dal.Assignment.Update(update);        
+            _dal.Assignment.Update(update);
+            CallManager.Observers.NotifyItemUpdated(assignment.CallId);
+            CallManager.Observers.NotifyListUpdated();
         }
         catch (DO.DalDoesNotExistException ex)
         {
@@ -509,10 +520,20 @@ internal class CallImplementation : BlApi.ICall
                 EndKind = EndKinds.Treated
             };
             _dal.Assignment.Create(assignment);
+            CallManager.Observers.NotifyItemUpdated(CallId);
+            CallManager.Observers.NotifyListUpdated();
         }
         catch (DO.DalAlreadyExistException)
         {
             throw new BlinCorrectException("Failed to choose call: assignment already exists");
         }
-    }   
+    }
+
+    public void AddObserver(Action listObserver)=> CallManager.Observers.AddListObserver( listObserver);
+
+    public void AddObserver(int id, Action observer) => CallManager.Observers.AddObserver(id, observer);
+
+    public void RemoveObserver(Action listObserver) => CallManager.Observers.RemoveListObserver(listObserver);
+
+    public void RemoveObserver(int id, Action observer) => CallManager.Observers.RemoveObserver(id, observer);
 }

@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlTypes;
 namespace BlApi;
 
-public interface IVolunteer
+public interface IVolunteer : IObservable
 {
     /// <summary>
     /// method to enter the system

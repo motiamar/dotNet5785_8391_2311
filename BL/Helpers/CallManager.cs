@@ -10,6 +10,8 @@ internal static class CallManager
 {
     private static IDal s_dal = DalApi.Factory.Get;
 
+    internal static ObserverManager Observers = new(); //stage 5 
+
     /// <summary>
     /// return the status of the call = open, In_treatment, Closed, Expired, In_treatment_in_risk 
     /// </summary>
@@ -197,6 +199,8 @@ internal static class CallManager
                 {
                     DO.Assignment assignment = new DO.Assignment { CallId = call.Id, VolunteerId = 0, FinishTime = Helpers.ClockManager.Now, EndKind = EndKinds.Expired_cancellation };
                     s_dal.Assignment.Create(assignment);
+                    CallManager.Observers.NotifyListUpdated();
+
                 }
                 else 
                 {
@@ -212,11 +216,15 @@ internal static class CallManager
                             EndKind = EndKinds.Expired_cancellation
                         };
                         s_dal.Assignment.Update(assign);
+                        CallManager.Observers.NotifyListUpdated();
+                        CallManager.Observers.NotifyItemUpdated(assignment.CallId);
                     }
                 }
             }
             
         }
     }
-}
+
     
+
+}

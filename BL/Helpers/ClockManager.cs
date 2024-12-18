@@ -7,6 +7,8 @@ namespace Helpers;
 /// </summary>
 internal static class ClockManager 
 {
+
+    //internal static ObserverManager Observers = new(); //stage 5 
     #region Stage 4
     private static readonly DalApi.IDal _dal = DalApi.Factory.Get;
 
@@ -31,10 +33,10 @@ internal static class ClockManager
         var oldClock = _dal.Config.Clock; 
         _dal.Config.Clock = newClock;
         Helpers.CallManager.UpdateCalls();
-        
+
 
         //Calling all the observers of clock Update
-        //ClockUpdatedObservers?.Invoke(); //prepared for stage 5
+        ClockUpdatedObservers?.Invoke(); //prepared for stage 5
     }
     #endregion Stage 4
 

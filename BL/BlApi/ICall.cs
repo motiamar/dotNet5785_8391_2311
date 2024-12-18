@@ -1,6 +1,6 @@
 ﻿namespace BlApi;
 
-public interface ICall
+public interface ICall: IObservable
 {
     /// <summary>
     /// func that return array filed with the amount of calls exist, orederd by compering the index to the enum size
