@@ -41,7 +41,7 @@ internal static class Tools
         return result.ToString();
     }
     private const double EarthRadiusKm = 6371.0;
-    private const string ApiKey = "pk.171d9d217781e7387c5cb9df70d511bf"; // החלף במפתח ה-API שלך
+    private const string ApiKey = "pk.171d9d217781e7387c5cb9df70d511bf"; //  מפתח-API 
     private const string BaseUrl = "https://us1.locationiq.com/v1/search.php";
     /// <summary>
     /// func to calculate the distance between the volunteer and the call by Latitude and Longitude depend on the distance type
@@ -58,7 +58,6 @@ internal static class Tools
             double deltaLat = radLat2 - radLat1;
             double deltaLon = radLon2 - radLon1;
 
-            // נוסחת ההאברסין
             double a = Math.Pow(Math.Sin(deltaLat / 2), 2) +
                        Math.Cos(radLat1) * Math.Cos(radLat2) * Math.Pow(Math.Sin(deltaLon / 2), 2);
 
