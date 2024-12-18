@@ -33,7 +33,7 @@ internal static class Tools
                 {
                     result.AppendLine($"{item}");
                 }
-                result.AppendLine("]");
+                result.AppendLine();
             }
             else
                 result.AppendLine($"{prop.Name}:{value}");
