@@ -82,6 +82,9 @@ internal class AdminImplementation : IAdmin
         AdminManager.MaxRange = AdminManager.MaxRange;
     }
 
+    /// <summary>
+    /// FUNC to add and remove observer to the config and ckock update event
+    /// </summary>
     public void AddConfigObserver(Action configObserver)=> AdminManager.ConfigUpdatedObservers += configObserver;
 
     public void RemoveConfigObserver(Action configObserver) => AdminManager.ConfigUpdatedObservers -= configObserver;
