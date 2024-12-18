@@ -26,14 +26,18 @@ internal static class Tools
         foreach (var prop in properties)
         {
             var value = prop.GetValue(t, null);
-            if(value is IEnumerable<CallAssignInList> enumerable && !(value is string))
+            if (value is IEnumerable<CallAssignInList> enumerable && !(value is string))
             {
-                result.AppendLine($"{prop.Name}: [");
+                result.AppendLine($"{prop.Name}: ");
                 foreach (var item in enumerable)
                 {
                     result.AppendLine($"{item}");
                 }
                 result.AppendLine();
+            }
+            else if (value != null && !value.GetType().IsPrimitive && value.GetType() != typeof(string))
+            {
+                result.AppendLine($"{prop.Name} : {value.TostringProperty()} ");
             }
             else
                 result.AppendLine($"{prop.Name}:{value}");

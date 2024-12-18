@@ -14,7 +14,7 @@ internal class AdminImplementation : IAdmin
     /// </summary>
     public DateTime GetClock()
     {
-        return Helpers.ClockManager.Now;
+        return Helpers.AdminManager.Now;
     }
 
     /// <summary>
@@ -26,24 +26,24 @@ internal class AdminImplementation : IAdmin
         switch (unit)
         {
             case TimeUnit.Minute:
-                newClock = ClockManager.Now.AddMinutes(1);
+                newClock = AdminManager.Now.AddMinutes(1);
                 break;
             case TimeUnit.Hour:
-                newClock = ClockManager.Now.AddHours(1);
+                newClock = AdminManager.Now.AddHours(1);
                 break;
             case TimeUnit.Day:
-                newClock = ClockManager.Now.AddDays(1);
+                newClock = AdminManager.Now.AddDays(1);
                 break;
             case TimeUnit.Month:
-                newClock = ClockManager.Now.AddMonths(1);
+                newClock = AdminManager.Now.AddMonths(1);
                 break;
             case TimeUnit.Year:
-                newClock = ClockManager.Now.AddYears(1);
+                newClock = AdminManager.Now.AddYears(1);
                 break;  
                 default:
                 throw new ArgumentOutOfRangeException(nameof(unit), unit, null);
         }
-        Helpers.ClockManager.UpdateClock(newClock);
+        Helpers.AdminManager.UpdateClock(newClock);
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ internal class AdminImplementation : IAdmin
     /// </summary>
     public TimeSpan GetMaxRange()
     {
-        return _dal.Config.RiskRnge;
+        return Helpers.AdminManager.MaxRange;
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ internal class AdminImplementation : IAdmin
     /// </summary>
     public void SetMaxRange(TimeSpan maxRange)
     {
-        _dal.Config.RiskRnge = maxRange;
+        Helpers.AdminManager.MaxRange = maxRange;
     }
 
     /// <summary>
@@ -68,7 +68,8 @@ internal class AdminImplementation : IAdmin
     public void ResetDB()
     {
         _dal.ResetDB();
-        ClockManager.UpdateClock(ClockManager.Now);
+        AdminManager.UpdateClock(AdminManager.Now);
+        AdminManager.MaxRange = AdminManager.MaxRange;
     }
 
     /// <summary>
@@ -77,6 +78,15 @@ internal class AdminImplementation : IAdmin
     public void InitializeDB()
     {
         DalTest.Initialization.Do();
-        ClockManager.UpdateClock(ClockManager.Now);
+        AdminManager.UpdateClock(AdminManager.Now);
+        AdminManager.MaxRange = AdminManager.MaxRange;
     }
+
+    public void AddConfigObserver(Action configObserver)=> AdminManager.ConfigUpdatedObservers += configObserver;
+
+    public void RemoveConfigObserver(Action configObserver) => AdminManager.ConfigUpdatedObservers -= configObserver;
+
+    public void AddClockObserver(Action clockObserver) => AdminManager.ClockUpdatedObservers += clockObserver;
+
+    public void RemoveClockObserver(Action clockObserver) => AdminManager.ClockUpdatedObservers -= clockObserver;
 }

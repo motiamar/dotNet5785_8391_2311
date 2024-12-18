@@ -108,7 +108,7 @@ internal class Program
                         Console.WriteLine("enetr 3 to order by TreatedCalls, 4 to order by the CanceledCalls");
                         Console.WriteLine("enetr 5 to order by ExpiredCalls, 6 to order by the CorrentCallId");
                         VollInListFilter? sort = (VollInListFilter)int.Parse(Console.ReadLine()!);
-                        foreach (var item in s_bl.Volunteer.ReadAll(active, sort))
+                        foreach (VolunteerInList item in s_bl.Volunteer.ReadAll(active, sort))
                         {
                             Console.WriteLine(item);
                         }
@@ -195,7 +195,7 @@ internal class Program
                     case BSubCallMenu.Show_call: // show the entity
                         Console.WriteLine("enter call ID please");
                         Id = int.Parse(Console.ReadLine()!);
-                        Console.WriteLine(s_bl.Call.Read(Id)!);
+                        Console.WriteLine(value: s_bl.Call.Read(Id)!);
                         break;
 
                     case BSubCallMenu.Update_call: // update the entity

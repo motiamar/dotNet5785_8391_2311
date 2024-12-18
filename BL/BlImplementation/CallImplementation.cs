@@ -439,7 +439,7 @@ internal class CallImplementation : BlApi.ICall
                 CallId = assignment.CallId,
                 VolunteerId = assignment.VolunteerId,
                 StartTime = assignment.StartTime,
-                FinishTime = Helpers.ClockManager.Now,
+                FinishTime = Helpers.AdminManager.Now,
                 EndKind = DO.EndKinds.Treated
             };
             _dal.Assignment.Update(updateAssignment);   
@@ -481,7 +481,7 @@ internal class CallImplementation : BlApi.ICall
                 CallId = assignment.CallId,
                 VolunteerId = assignment.VolunteerId,
                 StartTime = assignment.StartTime,
-                FinishTime = Helpers.ClockManager.Now,
+                FinishTime = Helpers.AdminManager.Now,
                 EndKind = role == "Manager" ? EndKinds.Administrator_cancellation : EndKinds.Self_cancellation,
             };
             _dal.Assignment.Update(update);
@@ -515,7 +515,7 @@ internal class CallImplementation : BlApi.ICall
             {
                 CallId = CallId,
                 VolunteerId = volunteerId,
-                StartTime = Helpers.ClockManager.Now,
+                StartTime = Helpers.AdminManager.Now,
                 FinishTime = null,
                 EndKind = EndKinds.Treated
             };

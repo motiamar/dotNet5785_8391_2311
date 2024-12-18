@@ -19,7 +19,7 @@ internal static class CallManager
     {
         var assignments = s_dal.Assignment.ReadAll();
         var assignment = assignments.FirstOrDefault(a => a.CallId == call.Id);
-        var currentRiskTime = ClockManager.Now + s_dal.Config.RiskRnge;
+        var currentRiskTime = Helpers.AdminManager.Now + Helpers.AdminManager.MaxRange;
         if (assignment == null)
         {
             return currentRiskTime < call.MaxEndingCallTime ? BCallStatus.Open : BCallStatus.Open_in_risk;
@@ -99,8 +99,8 @@ internal static class CallManager
                               CallId = call.Id,
                               Type = (BO.BTypeCalls)call.TypeCall,
                               CallOpenTime = call.OpeningCallTime,
-                              CallLeftTime = call.MaxEndingCallTime != null && call.MaxEndingCallTime > ClockManager.Now
-                                  ? (TimeSpan)(call.MaxEndingCallTime - ClockManager.Now)
+                              CallLeftTime = call.MaxEndingCallTime != null && call.MaxEndingCallTime > Helpers.AdminManager.Now
+                                  ? (TimeSpan)(call.MaxEndingCallTime - Helpers.AdminManager.Now)
                                   : TimeSpan.Zero,
                               LastVolunteerName = volunteer?.FullName ?? "N/A",
                               TotalTreatmentTime = assignment?.FinishTime != null && assignment?.StartTime != null
@@ -180,7 +180,7 @@ internal static class CallManager
         var assignment = assignments.FirstOrDefault(a => a.CallId == call.Id);
         if (assignment is not null)
             throw new BlinCorrectException("The call is already in treatment");
-        if (call.MaxEndingCallTime < ClockManager.Now)
+        if (call.MaxEndingCallTime < Helpers.AdminManager.Now)
             throw new BlinCorrectException("The call is expired");
     }
 
@@ -193,11 +193,11 @@ internal static class CallManager
         foreach (var call in calls)
         {
             var assignments = s_dal.Assignment.ReadAll(v => v.CallId == call.Id).Where(v=> v.FinishTime is null);
-            if (call.MaxEndingCallTime < ClockManager.Now)
+            if (call.MaxEndingCallTime < Helpers.AdminManager.Now)
             {               
                 if (assignments is null)
                 {
-                    DO.Assignment assignment = new DO.Assignment { CallId = call.Id, VolunteerId = 0, FinishTime = Helpers.ClockManager.Now, EndKind = EndKinds.Expired_cancellation };
+                    DO.Assignment assignment = new DO.Assignment { CallId = call.Id, VolunteerId = 0, FinishTime = Helpers.AdminManager.Now, EndKind = EndKinds.Expired_cancellation };
                     s_dal.Assignment.Create(assignment);
                     CallManager.Observers.NotifyListUpdated();
 
@@ -212,7 +212,7 @@ internal static class CallManager
                             CallId = assignment.CallId,
                             VolunteerId = assignment.VolunteerId,
                             StartTime = assignment.StartTime,
-                            FinishTime = Helpers.ClockManager.Now,
+                            FinishTime = Helpers.AdminManager.Now,
                             EndKind = EndKinds.Expired_cancellation
                         };
                         s_dal.Assignment.Update(assign);
