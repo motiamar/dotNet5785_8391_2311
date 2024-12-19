@@ -1,12 +1,11 @@
-﻿<Window x:Class="PL.Admin.VolunteerListWindow"
+﻿<Window x:Class="PL.Admin.CallListWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="VolunteerListWindow" Height="640" Width="800"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+        Title="CallListWindow" Height="640" Width="800">
     <!--External grid-->
     <Grid>
         <Grid.RowDefinitions>
@@ -23,15 +22,14 @@
             <ComboBox  Grid.Column="1" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
             <Label Content="Label" Grid.Column="0" HorizontalAlignment="Left" Margin="182,0,0,0" VerticalAlignment="Center"/>
         </Grid>
-        <ListView Grid.Row="1" Margin="5" ItemsSource="{Binding VolunteerList}">
+        <ListView Grid.Row="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <!--Add new volunteer button-->
-        <Button Content="Add Volunteer" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+        <Button Content="Add Call" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
 
     </Grid>
 </Window>

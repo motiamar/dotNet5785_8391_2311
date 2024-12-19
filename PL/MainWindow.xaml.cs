@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BO;
+using PL.Admin;
 namespace PL;
 
 /// <summary>
@@ -17,6 +18,8 @@ namespace PL;
 /// </summary>
 public partial class MainWindow : Window
 {
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
     public MainWindow()
     {
         InitializeComponent();
@@ -25,9 +28,6 @@ public partial class MainWindow : Window
 
 
     }
-
-    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-   
 
     /// <summary>
     /// dependecy property for the clock 
@@ -54,11 +54,14 @@ public partial class MainWindow : Window
     public static readonly DependencyProperty MaxRangeProperty =
         DependencyProperty.Register("MaxRange", typeof(TimeSpan), typeof(MainWindow));
 
-
-    private void BtnSetMaxRange(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// button to set a new value to the risk range
+    /// </summary>
+    private void BtnSetMaxRange_Click(object sender, RoutedEventArgs e)
     {
         s_bl.Admin.SetMaxRange(MaxRange);
     }
+
     /// <summary>
     /// add one minute to the clock
     /// </summary>
@@ -124,12 +127,82 @@ public partial class MainWindow : Window
         s_bl.Admin.AddConfigObserver(ConfigObserver);
     }
 
+    /// <summary>
+    /// close screen event and remove observers
+    /// </summary>
     private void MainWindow_Closing(object? sender, CancelEventArgs e)
     {
         s_bl.Admin.RemoveClockObserver(ClockObserver);
         s_bl.Admin.RemoveConfigObserver(ConfigObserver);
     }
-    
 
-    
+    /// <summary>
+    /// botton to open the volunteers screen
+    /// </summary>
+    private void BtnHandleVolunteers_Click(object sender, RoutedEventArgs e)
+    {
+        new VolunteerListWindow().Show();
+    }
+
+    /// <summary>
+    /// botton to open the calls screen
+    /// </summary>
+    private void BtnHandleCalls_Click(object sender, RoutedEventArgs e)
+    {
+        new CallListWindow().Show();
+    }
+
+    /// <summary>
+    /// botton to initionalize the system
+    /// </summary>
+    private void BtnIntialization_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBoxResult result = MessageBox.Show("Are you sure you want to initionliz the system?", "confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        if (result == MessageBoxResult.Yes)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window != this)
+                    {
+                        window.Close();
+                    }
+                }
+                s_bl.Admin.InitializeDB();
+            }
+            finally
+            {
+                Mouse.OverrideCursor = null;
+            }
+        }
+    }
+
+    /// <summary>
+    /// botton to reset the system
+    /// </summary>
+    private void BtnReset_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBoxResult result = MessageBox.Show("Are you sure you want to reset the system?", "confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        if (result == MessageBoxResult.Yes)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window != this)
+                    {
+                        window.Close();
+                    }
+                }
+                s_bl.Admin.InitializeDB();
+            }
+            finally
+            {
+                Mouse.OverrideCursor = null;
+            }
+        }
+    }
 }
