@@ -9,20 +9,20 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <!--External grid-->
     <Grid>
-            <!--Internal, Upper Grid-->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="35*"/>
-                <RowDefinition Height="215*"/>
-                <RowDefinition Height="373*"/>
-            </Grid.RowDefinitions>
+        <!--Internal, Upper Grid-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="215*"/>
+            <RowDefinition Height="373*"/>
+        </Grid.RowDefinitions>
 
-            <!--Internal, Upper Grid-->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <!--clock time and buttons-->
-        <Label Grid.Column="1" Content="{Binding CurrentTime}" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="27" Width="40"/>
+        <!--Internal, Upper Grid-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--clock time and buttons-->
+        <Label Grid.Column="1" Content="{Binding CurrentTime}" Margin="139,-1,37,0" RenderTransformOrigin="0.504,0.524"/>
         <Button Grid.Column="1" Content="Add One Minute" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="43" Width="400" Grid.Row="1" Click="BtnAddOneMinute_Click"/>
         <Button Grid.Column="1" Content="Add One Hour" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="43" Width="400" Margin="0,43,0,0" Grid.Row="1" Click="BtnAddOneHour_Click"/>
         <Button Grid.Column="1" Content="Add One Day" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="43" Width="400" Grid.Row="1" Click="BtnAddOneDay_Click"/>
@@ -30,18 +30,18 @@
         <Button Grid.Column="1" Content="Add One Year" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="43" Width="400" Margin="0,172,0,0" Grid.Row="1" Grid.RowSpan="2" Click="BtnAddOneYear_Click"/>
 
         <!--max range buttons-->
-            <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding MaxRange}" VerticalAlignment="Top" Width="225" Height="30"/>
-            <Button Grid.Column="1" Content="Set max range" HorizontalAlignment="Center" Margin="0,61,0,0" Grid.Row="2" VerticalAlignment="Top" Height="50" Width="100" Click="BtnSetMaxRange"/>
-            <Button Grid.Column="1" Content="Button" HorizontalAlignment="Center" Margin="0,136,0,0" Grid.Row="2" VerticalAlignment="Top" Height="50" Width="100"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding MaxRange}" VerticalAlignment="Top" Width="225" Height="30"/>
+        <Button Grid.Column="1" Content="Set max range" HorizontalAlignment="Center" Margin="0,61,0,0" Grid.Row="2" VerticalAlignment="Top" Height="50" Width="100" Click="BtnSetMaxRange"/>
+        <Button Grid.Column="1" Content="Button" HorizontalAlignment="Center" Margin="0,136,0,0" Grid.Row="2" VerticalAlignment="Top" Height="50" Width="100"/>
 
-            <!--max lists buttons-->
-            <Label Content="Label" HorizontalAlignment="Center" VerticalAlignment ="Top" RenderTransformOrigin="-0.102,0.059"/>
-            <Button Content="Button" HorizontalAlignment="Center" Margin="0,31,0,0" Grid.Row="1" VerticalAlignment="Top" Height="55" Width="126" RenderTransformOrigin="0.476,-0.18"/>
-            <Button Content="Button" HorizontalAlignment="Center" Margin="0,118,0,0" Grid.Row="1" VerticalAlignment="Top" Height="55" Width="126"/>
-            <!--Initi and reset-->
-            <Button Content="Button" HorizontalAlignment="Center" Margin="0,61,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" Height="50"/>
-            <Button Content="Button" HorizontalAlignment="Center" Margin="0,136,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" Height="50"/>
+        <!--max lists buttons-->
+        <Label Content="Label" HorizontalAlignment="Center" VerticalAlignment ="Top" RenderTransformOrigin="-0.102,0.059"/>
+        <Button Content="Button" HorizontalAlignment="Center" Margin="0,31,0,0" Grid.Row="1" VerticalAlignment="Top" Height="55" Width="126" RenderTransformOrigin="0.476,-0.18"/>
+        <Button Content="Button" HorizontalAlignment="Center" Margin="0,118,0,0" Grid.Row="1" VerticalAlignment="Top" Height="55" Width="126"/>
+        <!--Initi and reset-->
+        <Button Content="Button" HorizontalAlignment="Center" Margin="0,61,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" Height="50"/>
+        <Button Content="Button" HorizontalAlignment="Center" Margin="0,136,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" Height="50"/>
 
     </Grid>
-    
+
 </Window>

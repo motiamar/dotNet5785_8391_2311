@@ -124,7 +124,7 @@ public partial class MainWindow : Window
         s_bl.Admin.AddConfigObserver(ConfigObserver);
     }
 
-    private void MainWindow_Closing(object sender, CancelEventArgs e)
+    private void MainWindow_Closing(object? sender, CancelEventArgs e)
     {
         s_bl.Admin.RemoveClockObserver(ClockObserver);
         s_bl.Admin.RemoveConfigObserver(ConfigObserver);
