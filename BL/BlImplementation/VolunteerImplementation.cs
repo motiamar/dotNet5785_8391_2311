@@ -44,8 +44,8 @@ internal class VolunteerImplementation : BlApi.IVolunteer
     /// <summary>
     /// func that return a sorted list of the volunteers in list, sorted by filter Booleany and a enum fild 
     /// </summary>
-    /// <param name="filter"> return a list of only active volunteers or not</param>
-    /// <param name="select">return a list sorted by volunteers Id or by the enum fild</param>
+    /// <param name="active"> return a list of only active volunteers or not</param>
+    /// <param name="sort">return a list sorted by volunteers Id or by the enum fild</param>
     /// <returns></returns>
     public IEnumerable<VolunteerInList> ReadAll(bool? active = null, VollInListFilter? sort = null)
     {

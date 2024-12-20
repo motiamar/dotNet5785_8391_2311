@@ -20,13 +20,27 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox  Grid.Column="1" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
+            <!--ordering the list-->
+            <ComboBox  Grid.Column="1" SelectedValue="{Binding filter, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource VolunteersListColelctionKey}}" SelectionChanged="ComboBox_VolunteerListChange"/>
             <Label Content="Label" Grid.Column="0" HorizontalAlignment="Left" Margin="182,0,0,0" VerticalAlignment="Center"/>
         </Grid>
         <ListView Grid.Row="1" Margin="5" ItemsSource="{Binding VolunteerList}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="100" />
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding FullName}" Width="100" />
+                    <GridViewColumn Header="Active" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Active}" IsEnabled="False" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Treated Calls" DisplayMemberBinding="{Binding TreatedCalls}" Width="100" />
+                    <GridViewColumn Header="Canceled Calls" DisplayMemberBinding="{Binding CanceledCalls}" Width="100" />
+                    <GridViewColumn Header="Expired Calls" DisplayMemberBinding="{Binding ExpiredCalls}" Width="100" />
+                    <GridViewColumn Header="Corrent CallId" DisplayMemberBinding="{Binding CorrentCallId}" Width="100" />
+                    <GridViewColumn Header="Corrent Call Type" DisplayMemberBinding="{Binding CorrentCallType}" Width="100" />
                 </GridView>
             </ListView.View>
         </ListView>
