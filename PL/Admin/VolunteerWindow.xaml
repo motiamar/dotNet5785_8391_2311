@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="VolunteerWindow" Height="640" Width="800">
+        Title="VolunteerWindow" Height="640" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
     <!--External grid-->
     <Grid Height="624" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
@@ -29,118 +31,48 @@
             <RowDefinition Height="60*"/>
             <RowDefinition Height="60*"/>
         </Grid.RowDefinitions>
-        <!--label definitions-->
+        <!-- style for all the label -->
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="32"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="DarkBlue"/>
+            </Style>
+        </Grid.Resources>
         <Border Background="LightYellow" Grid.Column="1" Grid.Row="0" Grid.RowSpan="14"/>
-        <Label Content="Volunteer Id" 
-               Grid.Column="1"
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center"           
-               Foreground="DarkBlue" Height="52" Width="196"/>
-        <Label Content="Volunteer name" 
-               Grid.Column="1"
-               Grid.Row="1" 
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="52" Width="248"/>
-        <Label Content="Volunteer phone" 
-               Grid.Column="1"
-               Grid.Row="2" 
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="52" Width="260"/>
-        <Label Content="Volunteer email" 
-               Grid.Column="1"
-               Grid.Row="3" 
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="52" Width="248"/>
-        <Label Content="Volunteer password" 
-               Grid.Row="4" 
-               Grid.Column="1"
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="54" Width="308"/>
-        <Label Content="Volunteer Address" 
-               Grid.Column="1"
-               Grid.Row="5" 
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="53" Width="286"/>
-        <Label Content="Volunteer role" 
-               Grid.Column="1"
-               Grid.Row="6" 
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="52" Width="224"/>
-        <Label Content="Volunteer Activity" 
-               Grid.Column="1"
-               Grid.Row="7" 
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="52" Width="280"/>
-        <Label Content="Volunteer Maximum Distance" 
-               Grid.Column="1"
-               Grid.Row="8" 
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="52" Width="400"/>
-        <Label Content="Volunteer Distance Type" 
-               Grid.Row="9" 
-               Grid.Column="1"
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="53" Width="374"/>
-        <Label Content="number of Treated Calls" 
-               Grid.Column="1"
-               Grid.Row="10" 
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="42" Width="278"/>
-        <Label Content="number of Canceled Calls" 
-               Grid.Column="1"
-               Grid.Row="11" 
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="54" Width="390"/>
-        <Label Content="number of Expired Calls" 
-               Grid.Column="1"
-               Grid.Row="12" 
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="53" Width="374"/>
-        <Label Content="Corrent Call" 
-               Grid.Column="1"
-               Grid.Row="13" 
-               FontSize="32" 
-               FontWeight="Bold" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center" 
-               Foreground="DarkBlue" Height="53" Width="374"/>
+        <Label Content="Volunteer Id" Grid.Column="1" Grid.Row="0" Height="52" Width="196"/>
+        <Label Content="Volunteer name" Grid.Column="1" Grid.Row="1" Height="52" Width="248"/>
+        <Label Content="Volunteer phone" Grid.Column="1" Grid.Row="2" Height="52" Width="260"/>
+        <Label Content="Volunteer email" Grid.Column="1" Grid.Row="3" Height="52" Width="248"/>
+        <Label Content="Volunteer password" Grid.Column="1" Grid.Row="4" Height="54" Width="308"/>
+        <Label Content="Volunteer Address" Grid.Column="1" Grid.Row="5" Height="53" Width="286"/>
+        <Label Content="Volunteer role" Grid.Column="1" Grid.Row="6" Height="52" Width="224"/>
+        <Label Content="Volunteer Activity" Grid.Column="1" Grid.Row="7" Height="52" Width="280"/>
+        <Label Content="Volunteer Maximum Distance" Grid.Column="1" Grid.Row="8" Height="52" Width="400"/>
+        <Label Content="Volunteer Distance Type" Grid.Column="1" Grid.Row="9" Height="53" Width="374"/>
+        <Label Content="number of Treated Calls" Grid.Column="1" Grid.Row="10" Height="42" Width="278"/>
+        <Label Content="number of Canceled Calls" Grid.Column="1" Grid.Row="11" Height="54" Width="390"/>
+        <Label Content="number of Expired Calls" Grid.Column="1" Grid.Row="12" Height="53" Width="374"/>
+        <Label Content="Corrent Call" Grid.Column="1" Grid.Row="13" Height="53" Width="374"/>
+
+        <!-- info  -->
+        <TextBox Text="{Binding CorrentVolunteer.Id, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBox Text="{Binding CorrentVolunteer.FullName, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBox Text="{Binding CorrentVolunteer.Phone, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBox Text="{Binding CorrentVolunteer.Email, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBox Text="{Binding CorrentVolunteer.Password, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBox Text="{Binding CorrentVolunteer.Address, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <ComboBox ItemsSource="{Binding Source={StaticResource RoleColelctionKey}}" SelectedValue="{Binding CorrentVolunteer.role, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <CheckBox IsChecked="{Binding CorrentVolunteer.Active}" IsEnabled="False" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBox Text="{Binding CorrentVolunteer.MaximumDistance, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <ComboBox ItemsSource="{Binding Source={StaticResource DistanceTypeColelctionKey}}" SelectedValue="{Binding CorrentVolunteer.DistanceType, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBox Text="{Binding CorrentVolunteer.TreatedCalls, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBox Text="{Binding CorrentVolunteer.CanceledCalls, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="11" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBox Text="{Binding CorrentVolunteer.ExpiredCalls, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="12" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TextBox Text="{Binding CorrentVolunteer.CorrentCall, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Column="0" Grid.Row="13" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <!-- button to add/update -->
+        <Button Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding ButtonText}" HorizontalAlignment="Left" Margin="240,0,0,0" Grid.Row="14" VerticalAlignment="Center" Width="320" Height="42" Click="BtnAddUpdate_Click"/>
     </Grid>
 </Window>
