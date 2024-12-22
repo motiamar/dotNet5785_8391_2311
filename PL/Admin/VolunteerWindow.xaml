@@ -5,8 +5,142 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="VolunteerWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="VolunteerWindow" Height="640" Width="800">
+    <!--External grid-->
+    <Grid Height="624" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+        </Grid.RowDefinitions>
+        <!--label definitions-->
+        <Border Background="LightYellow" Grid.Column="1" Grid.Row="0" Grid.RowSpan="14"/>
+        <Label Content="Volunteer Id" 
+               Grid.Column="1"
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center"           
+               Foreground="DarkBlue" Height="52" Width="196"/>
+        <Label Content="Volunteer name" 
+               Grid.Column="1"
+               Grid.Row="1" 
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="52" Width="248"/>
+        <Label Content="Volunteer phone" 
+               Grid.Column="1"
+               Grid.Row="2" 
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="52" Width="260"/>
+        <Label Content="Volunteer email" 
+               Grid.Column="1"
+               Grid.Row="3" 
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="52" Width="248"/>
+        <Label Content="Volunteer password" 
+               Grid.Row="4" 
+               Grid.Column="1"
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="54" Width="308"/>
+        <Label Content="Volunteer Address" 
+               Grid.Column="1"
+               Grid.Row="5" 
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="53" Width="286"/>
+        <Label Content="Volunteer role" 
+               Grid.Column="1"
+               Grid.Row="6" 
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="52" Width="224"/>
+        <Label Content="Volunteer Activity" 
+               Grid.Column="1"
+               Grid.Row="7" 
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="52" Width="280"/>
+        <Label Content="Volunteer Maximum Distance" 
+               Grid.Column="1"
+               Grid.Row="8" 
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="52" Width="400"/>
+        <Label Content="Volunteer Distance Type" 
+               Grid.Row="9" 
+               Grid.Column="1"
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="53" Width="374"/>
+        <Label Content="number of Treated Calls" 
+               Grid.Column="1"
+               Grid.Row="10" 
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="42" Width="278"/>
+        <Label Content="number of Canceled Calls" 
+               Grid.Column="1"
+               Grid.Row="11" 
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="54" Width="390"/>
+        <Label Content="number of Expired Calls" 
+               Grid.Column="1"
+               Grid.Row="12" 
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="53" Width="374"/>
+        <Label Content="Corrent Call" 
+               Grid.Column="1"
+               Grid.Row="13" 
+               FontSize="32" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Foreground="DarkBlue" Height="53" Width="374"/>
     </Grid>
 </Window>

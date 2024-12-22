@@ -79,7 +79,7 @@ public partial class VolunteerListWindow : Window
     /// open the volunteer window and update the list
     /// </summary>
     private void VolunteerListWindow_Loaded(object sender, RoutedEventArgs e)
-    {       
+    {
         s_bl.Volunteer.AddObserver(VolunteerListObserver);
         VolunteerList = s_bl.Volunteer.ReadAll()!;
     }
