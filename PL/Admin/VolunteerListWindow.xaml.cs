@@ -113,7 +113,6 @@ public partial class VolunteerListWindow : Window
         if (SelectedVolunteerInList != null)
         {
             new VolunteerWindow(SelectedVolunteerInList.Id).Show();
-
         }
     }
 

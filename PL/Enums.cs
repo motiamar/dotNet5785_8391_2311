@@ -1,18 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Data;
-using System.Windows.Media;
+
 namespace PL;
 
 
 /// <summary>
 /// define the character of the Volunteer
 /// </summary>
-public partial class VolunteersListColelction : IEnumerable
+public class VolunteerListCollection : IEnumerable
 {
     static readonly IEnumerable<BO.VollInListFilter> s_enums =
         (Enum.GetValues(typeof(BO.VollInListFilter)) as IEnumerable<BO.VollInListFilter>)!;
@@ -22,7 +21,7 @@ public partial class VolunteersListColelction : IEnumerable
 /// <summary>
 /// define the character of the Volunteer
 /// </summary>
-public partial class RoleColelction : IEnumerable
+public class RoleCollection : IEnumerable
 {
     static readonly IEnumerable<BO.BRoles> s_enums =
         (Enum.GetValues(typeof(BO.BRoles)) as IEnumerable<BO.BRoles>)!;
@@ -32,12 +31,9 @@ public partial class RoleColelction : IEnumerable
 /// <summary>
 /// define in what means the distance get measured
 /// </summary>
-public partial class DistanceTypeColelction : IEnumerable
+public class DistanceTypeCollection : IEnumerable
 {
     static readonly IEnumerable<BO.BDistanceTypes> s_enums =
         (Enum.GetValues(typeof(BO.BDistanceTypes)) as IEnumerable<BO.BDistanceTypes>)!;
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
-
-
-

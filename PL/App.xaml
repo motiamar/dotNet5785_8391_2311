@@ -4,10 +4,10 @@
              xmlns:local="clr-namespace:PL"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <local:VolunteersListColelction x:Key="VolunteersListColelctionKey"/>
-        <local:DistanceTypeColelction x:Key="DistanceTypeColelctionKey"/>
+        <local:DistanceTypeCollection x:Key="DistanceTypeColelctionKey"/>
         <local:ConverterRoleToColor x:Key="ConverterRoleToColorKey"/>
-        <local:RoleColelction x:Key="RoleColelctionKey"/>
+        <local:VolunteerListCollection x:Key="VolunteersListColelctionKey"/>
+        <local:RoleCollection x:Key="RoleColelctionKey"/>
         <local:IdToReadOnlyConverter x:Key="IdToReadOnlyConverterKey"/>
     </Application.Resources>
 </Application>

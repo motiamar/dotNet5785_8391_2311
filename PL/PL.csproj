@@ -14,20 +14,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Enums.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="DALL·E 2024-12-23 17.05.43 - A professional and clean software background design for a rescue organization. The background should convey urgency and compassion, incorporating subt.webp" />
     <None Remove="Image.jpg" />
+    <None Remove="Images\Image2.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Enums.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Image.jpg">
+    <Resource Include="Images\Image.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Image2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 

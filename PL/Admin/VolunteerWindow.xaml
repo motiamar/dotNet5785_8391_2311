@@ -4,7 +4,10 @@
         Title="VolunteerWindow" Height="640" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
-    <Grid Background="White" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/Images/Image2.jpg"/>
+        </Grid.Background>
         <!-- מרכז טבלה עם 2 עמודות -->
         <Grid Width="600" VerticalAlignment="Top" Height="458">
             <Grid.ColumnDefinitions>
