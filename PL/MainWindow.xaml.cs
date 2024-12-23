@@ -205,4 +205,9 @@ public partial class MainWindow : Window
             }
         }
     }
+
+    private void BtnSetMaxRange_Click()
+    {
+
+    }
 }
