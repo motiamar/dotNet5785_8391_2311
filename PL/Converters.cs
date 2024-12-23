@@ -8,7 +8,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 namespace PL;
 
-class ConverterRoleToColor : IValueConverter
+public class ConverterRoleToColor : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
