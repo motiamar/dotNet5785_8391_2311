@@ -14,17 +14,22 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
         <!--Internal, Upper Grid-->
-        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid HorizontalAlignment="Stretch" Height="Auto" Grid.Row="0" VerticalAlignment="Stretch" Width="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!--ordering the list-->
-            <ComboBox  Grid.Column="1"  SelectedValue="{Binding filter, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource VolunteersListColelctionKey}}" SelectionChanged="ComboBox_VolunteerListChange"/>
-            <Label Content="Label" Grid.Column="0" HorizontalAlignment="Left" Margin="182,0,0,0" VerticalAlignment="Center"/>
+            <ComboBox Grid.Column="1" SelectedValue="{Binding filter, Mode=TwoWay}" 
+                      ItemsSource="{Binding Source={StaticResource VolunteersListColelctionKey}}" 
+                      SelectionChanged="ComboBox_VolunteerListChange"/>
+            <Label Content="sort" Grid.Column="0" HorizontalAlignment="Left" Margin="182,0,0,0" VerticalAlignment="Center"/>
         </Grid>
-        <ListView Grid.Row="1" Margin="5" ItemsSource="{Binding VolunteerList}">
+
+        <!--ListView with additional control in the last column-->
+        <ListView Grid.Row="1" Margin="5" ItemsSource="{Binding VolunteerList}" SelectedItem="{Binding SelectedVolunteerInList}" MouseDoubleClick="SelectedVolunteerInList_MouseDouble_Click">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" Width="100">
@@ -47,11 +52,21 @@
                     <GridViewColumn Header="Expired Calls" DisplayMemberBinding="{Binding ExpiredCalls}" Width="100" />
                     <GridViewColumn Header="Corrent CallId" DisplayMemberBinding="{Binding CorrentCallId}" Width="100" />
                     <GridViewColumn Header="Corrent Call Type" DisplayMemberBinding="{Binding CorrentCallType}" Width="100" />
+                    <!-- New column with additional control -->
+                    <GridViewColumn Header="Action" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="DELETE" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnDelete_Click" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
+
         <!--Add new volunteer button-->
-        <Button Content="Add Volunteer" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+        <Button Content="Add Volunteer" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAddVolunteer_Click"/>
 
     </Grid>
 </Window>
+

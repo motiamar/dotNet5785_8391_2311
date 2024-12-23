@@ -9,6 +9,9 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <!--External grid-->
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/Image.jpg" />
+        </Grid.Background>
         <!--Internal, Upper Grid-->
         <Grid.RowDefinitions>
             <RowDefinition Height="35*"/>
@@ -32,10 +35,9 @@
         <!--max range buttons-->
         <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding MaxRange}" VerticalAlignment="Top" Width="225" Height="30"/>
         <Button Grid.Column="1" Content="Set max range" HorizontalAlignment="Center" Margin="0,61,0,0" Grid.Row="2" VerticalAlignment="Top" Height="50" Width="100" Click="BtnSetMaxRange_Click"/>
-        <Button Grid.Column="1" Content="Button" HorizontalAlignment="Center" Margin="0,136,0,0" Grid.Row="2" VerticalAlignment="Top" Height="50" Width="100"/>
 
         <!--max lists buttons-->
-        <Label Content="lists" HorizontalAlignment="Center" VerticalAlignment ="Top" RenderTransformOrigin="-0.102,0.059"/>
+        <Label Content="lists" HorizontalAlignment="Center" VerticalAlignment ="Top" RenderTransformOrigin="-0.102,0.059" FontSize="20" FontWeight="Bold" Foreground="DarkBlue" Background="White" Padding="5" FontFamily="Segoe UI" />
         <Button Content="Handle volunteers" HorizontalAlignment="Center" Margin="0,31,0,0" Grid.Row="1" VerticalAlignment="Top" Height="55" Width="126" RenderTransformOrigin="0.476,-0.18" Click="BtnHandleVolunteers_Click"/>
         <Button Content="Handle calls" HorizontalAlignment="Center" Margin="0,118,0,0" Grid.Row="1" VerticalAlignment="Top" Height="55" Width="126" Click="BtnHandleCalls_Click"/>
         <!--Initi and reset-->

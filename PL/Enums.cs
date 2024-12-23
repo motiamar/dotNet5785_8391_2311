@@ -10,7 +10,7 @@ namespace PL;
 /// <summary>
 /// define the character of the Volunteer
 /// </summary>
-internal class VolunteersListColelction : IEnumerable
+partial class VolunteersListColelction : IEnumerable
 {
     static readonly IEnumerable<BO.VollInListFilter> s_enums =
         (Enum.GetValues(typeof(BO.VollInListFilter)) as IEnumerable<BO.VollInListFilter>)!;

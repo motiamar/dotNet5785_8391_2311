@@ -6,7 +6,9 @@
     <Application.Resources>
         <local:VolunteersListColelction x:Key="VolunteersListColelctionKey"/>
         <local:DistanceTypeColelction x:Key="DistanceTypeColelctionKey"/>
+        <local:ConverterRoleToColor x:Key="ConverterRoleToColorKey"/>
         <local:RoleColelction x:Key="RoleColelctionKey"/>
+        <local:IdToReadOnlyConverter x:Key="IdToReadOnlyConverterKey"/>
     </Application.Resources>
 </Application>
     

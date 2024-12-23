@@ -20,9 +20,8 @@ namespace PL.Admin;
 public partial class VolunteerWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-    public VolunteerWindow()
+    public VolunteerWindow(int id = 0)
     {
-        int id = 0;
         ButtonText = id == 0 ? "Add" : "Update";
         InitializeComponent();
         try
@@ -34,7 +33,7 @@ public partial class VolunteerWindow : Window
             else
             {
                 CorrentVolunteer = new BO.Volunteer();
-            }
+            }          
         }
         catch (Exception ex)
         {
@@ -88,8 +87,25 @@ public partial class VolunteerWindow : Window
     /// </summary>
     private void BtnAddUpdate_Click(object sender, RoutedEventArgs e)
     {
-
+        try
+        {
+            if (ButtonText == "Add")
+            {
+                s_bl.Volunteer.Create(CorrentVolunteer!);
+                MessageBox.Show("the Volunteer has created sucsesfuly");
+                this.Close();
+            }
+            else
+            {
+                s_bl.Volunteer.Update(CorrentVolunteer!.Id, CorrentVolunteer);
+                MessageBox.Show("the Volunteer has updeted sucsesfuly");
+                this.Close();
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
     }
-
 
 }
