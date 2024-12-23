@@ -197,7 +197,7 @@ public partial class MainWindow : Window
                         window.Close();
                     }
                 }
-                s_bl.Admin.InitializeDB();
+                s_bl.Admin.ResetDB();
             }
             finally
             {

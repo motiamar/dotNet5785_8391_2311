@@ -63,7 +63,7 @@ public partial class VolunteerListWindow : Window
             6 => s_bl.Volunteer.ReadAll(null, VollInListFilter.CorrentCallId)!,
             7 => s_bl.Volunteer.ReadAll(null, VollInListFilter.CorrentCallType)!,
             _ => throw new NotImplementedException(),
-        };       
+        };
     }
 
     /// <summary>
@@ -73,7 +73,7 @@ public partial class VolunteerListWindow : Window
     {
         VolunteerList = s_bl.Volunteer.ReadAll()!;
     }
-   
+
 
     /// <summary>
     /// open the volunteer window and update the list
@@ -90,6 +90,61 @@ public partial class VolunteerListWindow : Window
     private void VolunteerListWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
         s_bl.Volunteer.RemoveObserver(VolunteerListObserver);
+    }
+
+    /// <summary>
+    /// entity to hold the selected volunteer in the list
+    /// </summary>
+    public BO.VolunteerInList? SelectedVolunteerInList { get; set; }
+
+    /// <summary>
+    /// button to add a new volunteer
+    /// </summary>
+    private void BtnAddVolunteer_Click(object sender, RoutedEventArgs e)
+    {
+        new VolunteerWindow().Show();
+    }
+
+    /// <summary>
+    /// open the volunteer window when double click on the list in update mode
+    /// </summary>
+    private void SelectedVolunteerInList_MouseDouble_Click(object sender, MouseButtonEventArgs e)
+    {
+        if (SelectedVolunteerInList != null)
+        {
+            new VolunteerWindow(SelectedVolunteerInList.Id).Show();
+
+        }
+    }
+
+    /// <summary>
+    /// delete the selected volunteer from the list
+    /// </summary>
+    private void BtnDelete_Click(object sender, RoutedEventArgs e)
+    {
+        SelectedVolunteerInList = (sender as Button)!.DataContext as BO.VolunteerInList;
+        if (SelectedVolunteerInList == null)
+        {
+            MessageBox.Show("No Volunteer selected");
+            return;
+        }
+        try
+        {
+            var result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                s_bl.Volunteer.Delete(SelectedVolunteerInList!.Id);
+            }
+            else
+            {
+                MessageBox.Show("Delete canceled");
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+
+        }
     }
 }
 
