@@ -1,6 +1,7 @@
 ﻿namespace BlImplementation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Numerics;
 using System.Security.Cryptography;
@@ -193,6 +194,71 @@ internal class VolunteerImplementation : BlApi.IVolunteer
             throw new BlVolAllreadyExist($"volunteer with id : {volunteer.Id} is already exist: {ex}");
         }
     }
+
+
+    /// <summary>
+    /// func that return a sorted list of the volunteers in list, sorted by filter Booleany and a enum fild 
+    /// </summary>
+    /// <param name="value"> a parameter to srot for</param>
+    /// <param name="filter">return a list sorted by volunteers Id or by the enum fild</param>
+    /// <returns></returns>
+    public IEnumerable<VolunteerInList> ReadAllScreen(object? value = null, VollInListFilter? filter = null)
+    {
+        try
+        {
+            IEnumerable<VolunteerInList> volunteerInLists = Helpers.VolunteerManager.GetAllVolunteerInList();
+            if (filter != null && value != null)
+            {
+                switch (filter)
+                {
+                    case VollInListFilter.Id:
+                        if (value is int id)
+                            volunteerInLists = volunteerInLists.Where(c => c.Id == id);
+                        break;
+                    case VollInListFilter.FullName:
+                        if (value is string fullName)
+                            volunteerInLists = volunteerInLists.Where(c => c.FullName == fullName);
+                        break;
+                    case VollInListFilter.Active:
+                        if (value is bool active)
+                            volunteerInLists = volunteerInLists.Where(c => c.Active == active);
+                        break;
+                    case VollInListFilter.TreatedCalls:
+                        if (value is int treatedCall)
+                            volunteerInLists = volunteerInLists.Where(c => c.TreatedCalls == treatedCall);
+                        break;
+                    case VollInListFilter.CanceledCalls:
+                        if (value is int cenceldCall)
+                            volunteerInLists = volunteerInLists.Where(c => c.CanceledCalls == cenceldCall);
+                        break;
+                    case VollInListFilter.ExpiredCalls:
+                        if (value is int expiersCall)
+                            volunteerInLists = volunteerInLists.Where(c => c.ExpiredCalls == expiersCall);
+                        break;
+                    case VollInListFilter.CorrentCallId:
+                        if (value is int correntCallId)
+                            volunteerInLists = volunteerInLists.Where(c => c.CorrentCallId == correntCallId);
+                        break;
+                    case VollInListFilter.CorrentCallType:
+                        if (value is BTypeCalls type)
+                            volunteerInLists = volunteerInLists.Where(c => c.CorrentCallType == type);
+                        break;
+                    default:
+                        return volunteerInLists;                    
+                }
+                return volunteerInLists;
+            }
+            else
+            {
+                return volunteerInLists; 
+            }
+        }
+        catch (DO.DalXMLFileLoadCreateException ex)
+        {
+            throw new BlDoesNotExistException($"can't find any volunteers : {ex}");
+        }
+    }
+
 
     public void AddObserver(Action listObserver)=> VolunteerManager.Observers.AddListObserver(listObserver);
 

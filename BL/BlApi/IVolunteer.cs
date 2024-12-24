@@ -17,6 +17,15 @@ public interface IVolunteer : IObservable
     /// <returns></returns>
     IEnumerable<BO.VolunteerInList> ReadAll(bool? active = null, BO.VollInListFilter? sort = null);
 
+
+    /// <summary>
+    /// func that return a sorted list of the volunteers in list, sorted by filter Booleany and a enum fild 
+    /// </summary>
+    /// <param name="value"> a parameter to srot for</param>
+    /// <param name="filter">return a list sorted by volunteers Id or by the enum fild</param>
+    /// <returns></returns>
+    IEnumerable<BO.VolunteerInList> ReadAllScreen(object? value = null, BO.VollInListFilter? filter = null);
+
     /// <summary>
     /// create a BO.Volunteer entity if the id exist in the data base 
     /// </summary>

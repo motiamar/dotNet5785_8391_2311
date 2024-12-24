@@ -7,6 +7,7 @@
         <local:DistanceTypeCollection x:Key="DistanceTypeColelctionKey"/>
         <local:ConverterRoleToColor x:Key="ConverterRoleToColorKey"/>
         <local:VolunteerListCollection x:Key="VolunteersListColelctionKey"/>
+        <local:VolunteerListFilterCollection x:Key="VolunteersListColelctionFilterKey"/>
         <local:RoleCollection x:Key="RoleColelctionKey"/>
         <local:IdToReadOnlyConverter x:Key="IdToReadOnlyConverterKey"/>
     </Application.Resources>

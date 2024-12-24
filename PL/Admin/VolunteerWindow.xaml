@@ -9,15 +9,14 @@
             <ImageBrush ImageSource="pack://application:,,,/Images/Image2.jpg"/>
         </Grid.Background>
         <!-- מרכז טבלה עם 2 עמודות -->
-        <Grid Width="600" VerticalAlignment="Top" Height="458">
+        <Grid VerticalAlignment="Top" Margin="100,20,106,0" Height="548">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <!-- עמודה לימין -->
                 <ColumnDefinition Width="2*"/>
-                <!-- עמודה לשמאל -->
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <!-- כל שורה מוגדרת כ-RowDefinition -->
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -35,44 +34,126 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Volunteer details Title -->
-            <Label Content="Volunteer details" Grid.Column="0" Grid.ColumnSpan="2" FontSize="30" FontWeight="Bold" Foreground="DarkBlue" HorizontalAlignment="Left" Grid.Row="0" Margin="176,-66,0,76"/>
+            <!-- Title -->
+            <Label Content="Volunteer details" Grid.Column="0" Grid.ColumnSpan="2" 
+                   FontSize="30" FontWeight="Bold" Foreground="DarkBlue" 
+                   HorizontalAlignment="Center" Margin="0,10,0,20"/>
 
-            <!-- Labels -->
-            <Label Content="Volunteer Activity" Grid.Row="1" Grid.Column="0" />
-            <Label Content="Volunteer Id" Grid.Row="2" Grid.Column="0" />
-            <Label Content="Volunteer name" Grid.Row="3" Grid.Column="0" />
-            <Label Content="Volunteer phone" Grid.Row="4" Grid.Column="0" />
-            <Label Content="Volunteer email" Grid.Row="5" Grid.Column="0" />
-            <Label Content="Volunteer password" Grid.Row="6" Grid.Column="0" />
-            <Label Content="Volunteer Address" Grid.Row="7" Grid.Column="0" />
-            <Label Content="Volunteer role" Grid.Row="8" Grid.Column="0" />
-            <Label Content="Volunteer Maximum Distance" Grid.Row="9" Grid.Column="0" />
-            <Label Content="Volunteer Distance Type" Grid.Row="10" Grid.Column="0" />
-            <Label Content="number of Treated Calls" Grid.Row="11" Grid.Column="0" />
-            <Label Content="number of Canceled Calls" Grid.Row="12" Grid.Column="0" />
-            <Label Content="number of Expired Calls" Grid.Row="13" Grid.Column="0" />
-            <Label Content="Corrent Call" Grid.Row="14" Grid.Column="0" />
+            <!-- Labels and Inputs -->
+            <Label Content="Volunteer Activity" Grid.Row="1" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Volunteer Activity" Grid.Row="1" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <CheckBox IsChecked="{Binding CorrentVolunteer.Active}" Grid.Row="1" Grid.Column="1" Content="Active" VerticalAlignment="Center"/>
+            
+            <Label Content="Volunteer Id" Grid.Row="2" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Volunteer Id" Grid.Row="2" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <TextBox Text="{Binding CorrentVolunteer.Id}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
 
-            <!-- Controls -->
-            <CheckBox IsChecked="{Binding CorrentVolunteer.Active}" IsEnabled="true" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Active"/>
-            <TextBox Text="{Binding CorrentVolunteer.Id, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" IsReadOnly="{Binding CorrentVolunteer.Id, Converter={StaticResource IdToReadOnlyConverterKey}}" Grid.Row="2" Grid.Column="1" />
-            <TextBox Text="{Binding CorrentVolunteer.FullName, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Row="3" Grid.Column="1"/>
-            <TextBox Text="{Binding CorrentVolunteer.Phone, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Row="4" Grid.Column="1"/>
-            <TextBox Text="{Binding CorrentVolunteer.Email, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Row="5" Grid.Column="1"/>
-            <TextBox Text="{Binding CorrentVolunteer.Password, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Row="6" Grid.Column="1"/>
-            <TextBox Text="{Binding CorrentVolunteer.Address, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Row="7" Grid.Column="1"/>
-            <ComboBox ItemsSource="{Binding Source={StaticResource RoleColelctionKey}}" SelectedValue="{Binding CorrentVolunteer.role, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Row="8" Grid.Column="1" />
-            <TextBox Text="{Binding CorrentVolunteer.MaximumDistance, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Row="9" Grid.Column="1"/>
-            <ComboBox ItemsSource="{Binding Source={StaticResource DistanceTypeColelctionKey}}" SelectedValue="{Binding CorrentVolunteer.DistanceType, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Row="10" Grid.Column="1"/>
-            <TextBox Text="{Binding CorrentVolunteer.TreatedCalls, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Row="11" Grid.Column="1" IsReadOnly="True"/>
-            <TextBox Text="{Binding CorrentVolunteer.CanceledCalls, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Row="12" Grid.Column="1" IsReadOnly="True"/>
-            <TextBox Text="{Binding CorrentVolunteer.ExpiredCalls, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Row="13" Grid.Column="1" IsReadOnly="True"/>
-            <TextBox Text="{Binding CorrentVolunteer.CorrentCall, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Grid.Row="14" Grid.Column="1"/>
+            <Label Content="Volunteer Name" Grid.Row="3" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Volunteer Name" Grid.Row="3" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <TextBox Text="{Binding CorrentVolunteer.FullName}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <Label Content="Volunteer Phone" Grid.Row="4" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Volunteer Phone" Grid.Row="4" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <TextBox Text="{Binding CorrentVolunteer.Phone}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <Label Content="Volunteer Email" Grid.Row="5" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Volunteer Email" Grid.Row="5" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <TextBox Text="{Binding CorrentVolunteer.Email}" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <Label Content="Volunteer Password" Grid.Row="6" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Volunteer Password" Grid.Row="6" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <TextBox Text="{Binding CorrentVolunteer.Password}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <Label Content="Volunteer Address" Grid.Row="7" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Volunteer Address" Grid.Row="7" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <TextBox Text="{Binding CorrentVolunteer.Address}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <Label Content="Volunteer Role" Grid.Row="8" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Volunteer Role" Grid.Row="8" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <ComboBox ItemsSource="{Binding Source={StaticResource RoleColelctionKey}}" SelectedValue="{Binding CorrentVolunteer.role}" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <Label Content="Maximum Distance" Grid.Row="9" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Volunteer Distance" Grid.Row="9" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <TextBox Text="{Binding CorrentVolunteer.MaximumDistance}" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <Label Content="Distance Type" Grid.Row="10" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Distance Type" Grid.Row="10" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <ComboBox ItemsSource="{Binding Source={StaticResource DistanceTypeColelctionKey}}" SelectedValue="{Binding CorrentVolunteer.DistanceType}" Grid.Row="10" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <Label Content="Treated Calls" Grid.Row="11" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Treated Calls" Grid.Row="11" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <TextBox Text="{Binding CorrentVolunteer.TreatedCalls}" Grid.Row="11" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True"/>
+
+            <Label Content="Canceled Calls" Grid.Row="12" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Canceled Calls" Grid.Row="12" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <TextBox Text="{Binding CorrentVolunteer.CanceledCalls}" Grid.Row="12" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True"/>
+
+            <Label Content="Expired Calls" Grid.Row="13" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Expired Calls" Grid.Row="13" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <TextBox Text="{Binding CorrentVolunteer.ExpiredCalls}" Grid.Row="13" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True"/>
+
+            <Label Content="Current Call" Grid.Row="14" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Label Content="Current Call" Grid.Row="14" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,0,0,0">
+                <Label.Effect>
+                    <BlurEffect Radius="20"/>
+                </Label.Effect>
+            </Label>
+            <TextBox Text="{Binding CorrentVolunteer.CorrentCall}" Grid.Row="14" Grid.Column="1" VerticalAlignment="Center"/>
 
             <!-- Button -->
-            <Button Grid.Column="1" Content="{Binding ButtonText}" HorizontalAlignment="Center" Margin="0,65,0,-45" Grid.Row="14" Width="200" Height="40" Click="BtnAddUpdate_Click" RenderTransformOrigin="0.49,2.158"/>
+            <Button Grid.Row="17" Grid.Column="1" Content="{Binding ButtonText}" HorizontalAlignment="Left" Background="LightBlue" Width="162" Margin="36,10,0,-42"/>
         </Grid>
     </Grid>
 </Window>
-

@@ -18,6 +18,18 @@ public class VolunteerListCollection : IEnumerable
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
 
+
+/// <summary>
+/// define the character of the Volunteer
+/// </summary>
+public class VolunteerListFilterCollection : IEnumerable
+{
+    static readonly IEnumerable<BO.BTypeCalls> s_enums =
+        (Enum.GetValues(typeof(BO.BTypeCalls)) as IEnumerable<BO.BTypeCalls>)!;
+    public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
+}
+
+
 /// <summary>
 /// define the character of the Volunteer
 /// </summary>

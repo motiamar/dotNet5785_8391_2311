@@ -23,6 +23,8 @@ public partial class VolunteerListWindow : Window
 
     public VolunteerListWindow()
     {
+        Filter = VollInListFilter.Id;
+        sort = BTypeCalls.None;
         InitializeComponent();
         this.Loaded += VolunteerListWindow_Loaded;
         this.Closing += VolunteerListWindow_Closing!;
@@ -47,6 +49,8 @@ public partial class VolunteerListWindow : Window
     /// </summary>
     public BO.VollInListFilter Filter { get; set; } = BO.VollInListFilter.Id;
 
+    public BO.BTypeCalls sort { get; set; } = BO.BTypeCalls.None;
+
     /// <summary>
     /// update the volunteer list view by the filter sorting
     /// </summary>
@@ -54,7 +58,7 @@ public partial class VolunteerListWindow : Window
     {
         VolunteerList = (sender as ComboBox)!.SelectedIndex switch
         {
-            0 => s_bl.Volunteer.ReadAll()!,
+            0 => s_bl.Volunteer.ReadAll(null, VollInListFilter.Id)!,
             1 => s_bl.Volunteer.ReadAll(null, VollInListFilter.FullName)!,
             2 => s_bl.Volunteer.ReadAll(null, VollInListFilter.Active)!,
             3 => s_bl.Volunteer.ReadAll(null, VollInListFilter.TreatedCalls)!,
@@ -62,6 +66,24 @@ public partial class VolunteerListWindow : Window
             5 => s_bl.Volunteer.ReadAll(null, VollInListFilter.ExpiredCalls)!,
             6 => s_bl.Volunteer.ReadAll(null, VollInListFilter.CorrentCallId)!,
             7 => s_bl.Volunteer.ReadAll(null, VollInListFilter.CorrentCallType)!,
+            _ => throw new NotImplementedException(),
+        };
+    }
+
+    /// <summary>
+    /// sorted the list by the filter corrent type call
+    /// </summary>
+
+    private void ComboBox_VolunteerListFilter(object sender, SelectionChangedEventArgs e)
+    {
+        VolunteerList = (sender as ComboBox)!.SelectedIndex switch
+        {
+            0 => s_bl.Volunteer.ReadAllScreen(BTypeCalls.Medical_situation, VollInListFilter.CorrentCallType)!,
+            1 => s_bl.Volunteer.ReadAllScreen(BTypeCalls.Car_accident, VollInListFilter.CorrentCallType)!,
+            2 => s_bl.Volunteer.ReadAllScreen(BTypeCalls.Fall_from_hight, VollInListFilter.CorrentCallType)!,
+            3 => s_bl.Volunteer.ReadAllScreen(BTypeCalls.Violent_event, VollInListFilter.CorrentCallType)!,
+            4 => s_bl.Volunteer.ReadAllScreen(BTypeCalls.Domestic_violent, VollInListFilter.CorrentCallType)!,
+            5 => s_bl.Volunteer.ReadAllScreen(BTypeCalls.None, VollInListFilter.CorrentCallType)!,
             _ => throw new NotImplementedException(),
         };
     }
@@ -145,6 +167,8 @@ public partial class VolunteerListWindow : Window
 
         }
     }
+
+  
 }
 
 

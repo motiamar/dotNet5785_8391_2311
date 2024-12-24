@@ -25,7 +25,9 @@
             <ComboBox Grid.Column="1" SelectedValue="{Binding filter, Mode=TwoWay}" 
                       ItemsSource="{Binding Source={StaticResource VolunteersListColelctionKey}}" 
                       SelectionChanged="ComboBox_VolunteerListChange"/>
-            <Label Content="sort" Grid.Column="0" HorizontalAlignment="Left" Margin="182,0,0,0" VerticalAlignment="Center"/>
+            <ComboBox Grid.Column="0" SelectedValue="{Binding sort, Mode=TwoWay}" 
+           ItemsSource="{Binding Source={StaticResource VolunteersListColelctionFilterKey}}" 
+           SelectionChanged="ComboBox_VolunteerListFilter"/>
         </Grid>
 
         <!--ListView with additional control in the last column-->
@@ -40,23 +42,23 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding FullName}" Width="100" />
-                    <GridViewColumn Header="Active" Width="100">
+                    <GridViewColumn Header="Active" Width="60">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding Active}" IsEnabled="False" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Treated Calls" DisplayMemberBinding="{Binding TreatedCalls}" Width="100" />
-                    <GridViewColumn Header="Canceled Calls" DisplayMemberBinding="{Binding CanceledCalls}" Width="100" />
-                    <GridViewColumn Header="Expired Calls" DisplayMemberBinding="{Binding ExpiredCalls}" Width="100" />
-                    <GridViewColumn Header="Corrent CallId" DisplayMemberBinding="{Binding CorrentCallId}" Width="100" />
-                    <GridViewColumn Header="Corrent Call Type" DisplayMemberBinding="{Binding CorrentCallType}" Width="100" />
+                    <GridViewColumn Header="Treated Calls" DisplayMemberBinding="{Binding TreatedCalls}" Width="80" />
+                    <GridViewColumn Header="Canceled Calls" DisplayMemberBinding="{Binding CanceledCalls}" Width="80" />
+                    <GridViewColumn Header="Expired Calls" DisplayMemberBinding="{Binding ExpiredCalls}" Width="80" />
+                    <GridViewColumn Header="Corrent CallId" DisplayMemberBinding="{Binding CorrentCallId}" Width="80" />
+                    <GridViewColumn Header="Corrent Call Type" DisplayMemberBinding="{Binding CorrentCallType}" Width="90" />
                     <!-- New column with additional control -->
-                    <GridViewColumn Header="Action" Width="100">
+                    <GridViewColumn Header="Action" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="DELETE" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnDelete_Click" />
+                                <Button Content="DELETE" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnDelete_Click"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
