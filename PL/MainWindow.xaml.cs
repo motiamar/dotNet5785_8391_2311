@@ -24,67 +24,87 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        this.DataContext = this; // Ensure binding context is set correctly
     }
 
-    /// <summary>
-    /// dependecy property for the current ID of the user
-    /// </summary>
+    // Dependency property for CurrentID
     public int CurrentID
     {
         get { return (int)GetValue(CurrentIDProperty); }
         set { SetValue(CurrentIDProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty CurrentIDProperty =
         DependencyProperty.Register("CurrentID", typeof(int), typeof(MainWindow), new PropertyMetadata(null));
 
-
-    /// <summary>
-    ///  dependecy property for the current password of the user
-    /// </summary>
+    // Dependency property for CurrentPassword
     public string CurrentPassword
     {
         get { return (string)GetValue(CurrentPasswordProperty); }
         set { SetValue(CurrentPasswordProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for CurrentPassword.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty CurrentPasswordProperty =
         DependencyProperty.Register("CurrentPassword", typeof(string), typeof(MainWindow), new PropertyMetadata(null));
 
-
-
-
+    // Dependency property for CurrentUser
     public BO.Volunteer? CurrentUser
     {
         get { return (BO.Volunteer?)GetValue(CurrentUserProperty); }
         set { SetValue(CurrentUserProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for CorrentUser.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty CurrentUserProperty =
-        DependencyProperty.Register("CorrentUser", typeof(BO.Volunteer), typeof(MainWindow), new PropertyMetadata(null));
+        DependencyProperty.Register("CurrentUser", typeof(BO.Volunteer), typeof(MainWindow), new PropertyMetadata(null));
 
+    // Event handler for password change in PasswordBox
+    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        // Update CurrentPassword when password changes
+        CurrentPassword = ((PasswordBox)sender).Password;
+    }
+
+    // Event handler when CheckBox is checked (show password as plain text)
+    private void ShowPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
+    {
+        // Show TextBoxPassword and hide PasswordBox
+        PasswordBox.Visibility = Visibility.Collapsed;
+        TextBoxPassword.Visibility = Visibility.Visible;
+        TextBoxPassword.Text = PasswordBox.Password;
+    }
+
+    // Event handler when CheckBox is unchecked (hide password as plain text)
+    private void ShowPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
+    {
+        // Show PasswordBox and hide TextBoxPassword
+        PasswordBox.Visibility = Visibility.Visible;
+        TextBoxPassword.Visibility = Visibility.Collapsed;
+        PasswordBox.Password = TextBoxPassword.Text;
+    }
 
     private void BtnLogIn_Click(object sender, RoutedEventArgs e)
     {
         try
         {
+            // Attempt to get the user from the backend
             CurrentUser = s_bl.Volunteer.Read(CurrentID);
+
+            // Check if the entered password matches
             if (CurrentPassword != CurrentUser!.Password)
             {
                 throw new Exception("Password is incorrect");
             }
+
+            // Handle user roles
             switch (CurrentUser.role)
             {
                 case BRoles.Volunteer:
-                    VolunteerUserWindow VolunteerUserWindow = new();
-                    VolunteerUserWindow.Show();
+                    VolunteerUserWindow volunteerUserWindow = new();
+                    volunteerUserWindow.Show();
                     break;
 
                 case BRoles.Manager:
-                    MessageBoxResult result = MessageBox.Show("Do you want to enter the Manager screen?", "Manager Login", MessageBoxButton.YesNo,  MessageBoxImage.Question);
+                    MessageBoxResult result = MessageBox.Show("Do you want to enter the Manager screen?", "Manager Login", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes)
                     {
                         MainAdminWindow mainAdminWindow = new();
@@ -92,67 +112,18 @@ public partial class MainWindow : Window
                     }
                     else
                     {
-                        VolunteerUserWindow VolunteerUserWindow2 = new();
-                        VolunteerUserWindow2.Show();
+                        VolunteerUserWindow volunteerUserWindow2 = new();
+                        volunteerUserWindow2.Show();
                     }
                     break;
 
                 default:
                     throw new Exception("Role is not defined");
             }
-
         }
         catch (Exception ex)
         {
             MessageBox.Show(ex.Message);
         }
     }
-
-
-    //private void LoginButton_Click(object sender, RoutedEventArgs e)
-    //{
-    //    string userType = ((ComboBoxItem)UserTypeComboBox.SelectedItem)?.Content.ToString();
-    //    string userId = UserIdTextBox.Text;
-    //    string password = PasswordBox.Password;
-
-    //    if (string.IsNullOrEmpty(userType) || string.IsNullOrEmpty(userId))
-    //    {
-    //        MessageBox.Show("Please fill in all required fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //        return;
-    //    }
-    //    if (userType == "Volunteer")
-    //    {
-    //        // Navigate to VolunteerListWindow
-    //        VolunteerListWindow volunteerListWindow = new VolunteerListWindow();
-    //        volunteerListWindow.Show();
-    //    }
-    //    else if (userType == "Manager")
-    //    {
-    //        // Allow manager to choose between Admin or Volunteer list screen
-    //        MessageBoxResult result = MessageBox.Show("Do you want to enter the Manager screen?",
-    //                                                  "Manager Login",
-    //                                                  MessageBoxButton.YesNo,
-    //                                                  MessageBoxImage.Question);
-
-    //        if (result == MessageBoxResult.Yes)
-    //        {
-    //            // Navigate to MainAdminWindow (Manager screen)
-    //            MainAdminWindow mainAdminWindow = new MainAdminWindow();
-    //            mainAdminWindow.Show();
-    //        }
-    //        else
-    //        {
-    //            // Navigate to VolunteerListWindow
-    //            VolunteerListWindow volunteerListWindow = new VolunteerListWindow();
-    //            volunteerListWindow.Show();
-
-    //        }
-    //    }
-
-    //    // Clear inputs for next login
-    //    UserTypeComboBox.SelectedIndex = -1;
-    //    UserIdTextBox.Clear();
-    //    PasswordBox.Clear();
-    //}
-
 }

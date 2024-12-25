@@ -12,23 +12,33 @@
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/Images/Image.jpg" />
         </Grid.Background>
-        <!--Internal, Upper Grid-->
-        <!-- Header -->
-        <Label Content="Login to the System"   FontSize="24"  FontWeight="Bold"  HorizontalAlignment="Center"  VerticalAlignment="Top"   Margin="0,20,0,0"/>
 
-        <!-- User Input Section -->
+        <!--Header-->
+        <Label Content="Login to the System" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+
+        <!--User Input Section-->
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-            <!-- User ID Input -->
+            <!--User ID Input-->
             <Label Content="Enter User ID:" FontSize="16" Margin="0,0,0,10"/>
-            <TextBox Text="{Binding CurrentID}" Width="250" Margin="0,0,0,20" />
+            <TextBox Text="{Binding CurrentID}" Width="250" Margin="0,0,0,20"/>
 
-            <!-- Password Input -->
+            <!--Password Input-->
             <Label Content="Enter Password:" FontSize="16" Margin="0,0,0,10"/>
-            <TextBox Text="{Binding CurrentPassword}" Width="250" Margin="0,0,0,20"/>
 
-            <!-- Login Button -->
-            <Button Content="Login"  Width="150"  Height="40"  HorizontalAlignment="Center" Click="BtnLogIn_Click"/>
+            <!-- Grid to contain both the PasswordBox and TextBox -->
+            <Grid>
+                <!-- PasswordBox -->
+                <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged" Width="250" Margin="0,0,0,20" Visibility="Visible"/>
+
+                <!-- TextBox to show password as plain text -->
+                <TextBox x:Name="TextBoxPassword" Visibility="Collapsed" Width="250" Margin="0,0,0,20" IsReadOnly="True"/>
+            </Grid>
+
+            <!--CheckBox to Show/Hide Password-->
+            <CheckBox x:Name="ShowPasswordCheckBox" Content="Show Password" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,10,0,0" Checked="ShowPasswordCheckBox_Checked" Unchecked="ShowPasswordCheckBox_Unchecked"/>
+
+            <!--Login Button-->
+            <Button Content="Login" Width="150" Height="40" HorizontalAlignment="Center" Click="BtnLogIn_Click"/>
         </StackPanel>
     </Grid>
-
 </Window>
