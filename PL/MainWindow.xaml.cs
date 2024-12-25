@@ -23,186 +23,92 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        this.Loaded += MainWindowLoaded;
-        this.Closing += MainWindow_Closing;
-
-
     }
 
     /// <summary>
-    /// dependecy property for the clock 
+    /// dependecy property for the current ID of the user
     /// </summary>
-    public DateTime CurrentTime
+    public int? CurrentID
     {
-        get { return (DateTime)GetValue(CurrentTimeProperty); }
-        set { SetValue(CurrentTimeProperty, value); }
+        get { return (int)GetValue(CurrentIDProperty); }
+        set { SetValue(CurrentIDProperty, value); }
     }
 
-    public static readonly DependencyProperty CurrentTimeProperty =
-        DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(MainWindow));
-
-    /// <summary>
-    /// dependecy property for the risk range 
-    /// </summary>
-    public TimeSpan MaxRange
-    {
-        get { return (TimeSpan)GetValue(MaxRangeProperty); }
-        set { SetValue(MaxRangeProperty, value); }
-    }
-
-    // Using a DependencyProperty as the backing store for MaxRange.
-    public static readonly DependencyProperty MaxRangeProperty =
-        DependencyProperty.Register("MaxRange", typeof(TimeSpan), typeof(MainWindow));
-
-    /// <summary>
-    /// button to set a new value to the risk range
-    /// </summary>
-    private void BtnSetMaxRange_Click(object sender, RoutedEventArgs e)
-    {
-        s_bl.Admin.SetMaxRange(MaxRange);
-    }
-
-    /// <summary>
-    /// add one minute to the clock
-    /// </summary>
-    private void BtnAddOneMinute_Click(object sender, RoutedEventArgs e)
-    {
-        s_bl.Admin.ForwordClock(BO.TimeUnit.Minute);
-    }
-
-    /// <summary>
-    /// add one hour to the clock
-    /// </summary>
-    private void BtnAddOneHour_Click(object sender, RoutedEventArgs e)
-    {
-        s_bl.Admin.ForwordClock(BO.TimeUnit.Hour);
-    }
-
-    /// <summary>
-    /// add one day to the clock
-    /// </summary>
-    private void BtnAddOneDay_Click(object sender, RoutedEventArgs e)
-    {
-        s_bl.Admin.ForwordClock(BO.TimeUnit.Day);
-    }
-
-    /// <summary>
-    /// add one month to the clock
-    /// </summary>
-    private void BtnAddOneMonth_Click(object sender, RoutedEventArgs e)
-    {
-        s_bl.Admin.ForwordClock(BO.TimeUnit.Month);
-
-    }
-    /// <summary>
-    /// add one year to the clock
-    /// </summary>
-    private void BtnAddOneYear_Click(object sender, RoutedEventArgs e)
-    {
-        s_bl.Admin.ForwordClock(BO.TimeUnit.Year);
-    }
+    // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty CurrentIDProperty =
+        DependencyProperty.Register("CurrentID", typeof(int), typeof(MainWindow), new PropertyMetadata(null));
 
 
     /// <summary>
-    /// observer for the clock to update the screen
+    ///  dependecy property for the current password of the user
     /// </summary>
-    private void ClockObserver()
+    public string CurrentPassword
     {
-        CurrentTime = s_bl.Admin.GetClock();
+        get { return (string)GetValue(CurrentPasswordProperty); }
+        set { SetValue(CurrentPasswordProperty, value); }
     }
 
-    private void ConfigObserver()
+    // Using a DependencyProperty as the backing store for CurrentPassword.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty CurrentPasswordProperty =
+        DependencyProperty.Register("CurrentPassword", typeof(string), typeof(MainWindow), new PropertyMetadata(null));
+
+
+
+
+
+    //private void LoginButton_Click(object sender, RoutedEventArgs e)
+    //{
+    //    string userType = ((ComboBoxItem)UserTypeComboBox.SelectedItem)?.Content.ToString();
+    //    string userId = UserIdTextBox.Text;
+    //    string password = PasswordBox.Password;
+
+    //    if (string.IsNullOrEmpty(userType) || string.IsNullOrEmpty(userId))
+    //    {
+    //        MessageBox.Show("Please fill in all required fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+    //        return;
+    //    }
+    //    if (userType == "Volunteer")
+    //    {
+    //        // Navigate to VolunteerListWindow
+    //        VolunteerListWindow volunteerListWindow = new VolunteerListWindow();
+    //        volunteerListWindow.Show();
+    //    }
+    //    else if (userType == "Manager")
+    //    {
+    //        // Allow manager to choose between Admin or Volunteer list screen
+    //        MessageBoxResult result = MessageBox.Show("Do you want to enter the Manager screen?",
+    //                                                  "Manager Login",
+    //                                                  MessageBoxButton.YesNo,
+    //                                                  MessageBoxImage.Question);
+
+    //        if (result == MessageBoxResult.Yes)
+    //        {
+    //            // Navigate to MainAdminWindow (Manager screen)
+    //            MainAdminWindow mainAdminWindow = new MainAdminWindow();
+    //            mainAdminWindow.Show();
+    //        }
+    //        else
+    //        {
+    //            // Navigate to VolunteerListWindow
+    //            VolunteerListWindow volunteerListWindow = new VolunteerListWindow();
+    //            volunteerListWindow.Show();
+
+    //        }
+    //    }
+
+    //    // Clear inputs for next login
+    //    UserTypeComboBox.SelectedIndex = -1;
+    //    UserIdTextBox.Clear();
+    //    PasswordBox.Clear();
+    //}
+
+    private void MainWindowLoaded(object sender, RoutedEventArgs e)
     {
-        MaxRange = s_bl.Admin.GetMaxRange();
+        
     }
 
-    /// <summary>
-    /// open screen event and initialization
-    /// </summary>
-    private void MainWindowLoaded(object sendor, RoutedEventArgs e)
+    private void MainWindow_Closing(object sender, CancelEventArgs e)
     {
-        CurrentTime = s_bl.Admin.GetClock();
-        MaxRange = s_bl.Admin.GetMaxRange();
-        s_bl.Admin.AddClockObserver(ClockObserver);
-        s_bl.Admin.AddConfigObserver(ConfigObserver);
-    }
 
-    /// <summary>
-    /// close screen event and remove observers
-    /// </summary>
-    private void MainWindow_Closing(object? sender, CancelEventArgs e)
-    {
-        s_bl.Admin.RemoveClockObserver(ClockObserver);
-        s_bl.Admin.RemoveConfigObserver(ConfigObserver);
-    }
-
-    /// <summary>
-    /// botton to open the volunteers screen
-    /// </summary>
-    private void BtnHandleVolunteers_Click(object sender, RoutedEventArgs e)
-    {
-        new VolunteerListWindow().Show();
-    }
-
-    /// <summary>
-    /// botton to open the calls screen
-    /// </summary>
-    private void BtnHandleCalls_Click(object sender, RoutedEventArgs e)
-    {
-        new CallListWindow().Show();
-    }
-
-    /// <summary>
-    /// botton to initionalize the system
-    /// </summary>
-    private void BtnIntialization_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBoxResult result = MessageBox.Show("Are you sure you want to initionliz the system?", "confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-        if (result == MessageBoxResult.Yes)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            try
-            {
-                foreach (Window window in Application.Current.Windows)
-                {
-                    if (window != this)
-                    {
-                        window.Close();
-                    }
-                }
-                s_bl.Admin.InitializeDB();
-            }
-            finally
-            {
-                Mouse.OverrideCursor = null;
-            }
-        }
-    }
-
-    /// <summary>
-    /// botton to reset the system
-    /// </summary>
-    private void BtnReset_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBoxResult result = MessageBox.Show("Are you sure you want to reset the system?", "confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-        if (result == MessageBoxResult.Yes)
-        {
-            Mouse.OverrideCursor = Cursors.Wait;
-            try
-            {
-                foreach (Window window in Application.Current.Windows)
-                {
-                    if (window != this)
-                    {
-                        window.Close();
-                    }
-                }
-                s_bl.Admin.ResetDB();
-            }
-            finally
-            {
-                Mouse.OverrideCursor = null;
-            }
-        }
     }
 }
