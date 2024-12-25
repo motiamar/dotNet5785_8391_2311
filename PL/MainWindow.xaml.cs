@@ -11,6 +11,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BO;
 using PL.Admin;
+using PL.Volunteer;
 namespace PL;
 
 /// <summary>
@@ -28,7 +29,7 @@ public partial class MainWindow : Window
     /// <summary>
     /// dependecy property for the current ID of the user
     /// </summary>
-    public int? CurrentID
+    public int CurrentID
     {
         get { return (int)GetValue(CurrentIDProperty); }
         set { SetValue(CurrentIDProperty, value); }
@@ -54,6 +55,58 @@ public partial class MainWindow : Window
 
 
 
+
+    public BO.Volunteer? CurrentUser
+    {
+        get { return (BO.Volunteer?)GetValue(CurrentUserProperty); }
+        set { SetValue(CurrentUserProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for CorrentUser.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty CurrentUserProperty =
+        DependencyProperty.Register("CorrentUser", typeof(BO.Volunteer), typeof(MainWindow), new PropertyMetadata(null));
+
+
+    private void BtnLogIn_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            CurrentUser = s_bl.Volunteer.Read(CurrentID);
+            if (CurrentPassword != CurrentUser!.Password)
+            {
+                throw new Exception("Password is incorrect");
+            }
+            switch (CurrentUser.role)
+            {
+                case BRoles.Volunteer:
+                    VolunteerUserWindow VolunteerUserWindow = new();
+                    VolunteerUserWindow.Show();
+                    break;
+
+                case BRoles.Manager:
+                    MessageBoxResult result = MessageBox.Show("Do you want to enter the Manager screen?", "Manager Login", MessageBoxButton.YesNo,  MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        MainAdminWindow mainAdminWindow = new();
+                        mainAdminWindow.Show();
+                    }
+                    else
+                    {
+                        VolunteerUserWindow VolunteerUserWindow2 = new();
+                        VolunteerUserWindow2.Show();
+                    }
+                    break;
+
+                default:
+                    throw new Exception("Role is not defined");
+            }
+
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
 
 
     //private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -102,13 +155,4 @@ public partial class MainWindow : Window
     //    PasswordBox.Clear();
     //}
 
-    private void MainWindowLoaded(object sender, RoutedEventArgs e)
-    {
-        
-    }
-
-    private void MainWindow_Closing(object sender, CancelEventArgs e)
-    {
-
-    }
 }

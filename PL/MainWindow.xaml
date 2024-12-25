@@ -27,7 +27,7 @@
             <TextBox Text="{Binding CurrentPassword}" Width="250" Margin="0,0,0,20"/>
 
             <!-- Login Button -->
-            <Button Content="Login"  Width="150"  Height="40"  HorizontalAlignment="Center"/>
+            <Button Content="Login"  Width="150"  Height="40"  HorizontalAlignment="Center" Click="BtnLogIn_Click"/>
         </StackPanel>
     </Grid>
 
