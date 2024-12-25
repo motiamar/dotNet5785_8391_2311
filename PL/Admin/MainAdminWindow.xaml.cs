@@ -38,7 +38,7 @@ public partial class MainAdminWindow : Window
     }
 
     public static readonly DependencyProperty CurrentTimeProperty =
-        DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(MainWindow));
+        DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(MainAdminWindow));
 
     /// <summary>
     /// dependecy property for the risk range 
@@ -51,7 +51,7 @@ public partial class MainAdminWindow : Window
 
     // Using a DependencyProperty as the backing store for MaxRange.
     public static readonly DependencyProperty MaxRangeProperty =
-        DependencyProperty.Register("MaxRange", typeof(TimeSpan), typeof(MainWindow));
+        DependencyProperty.Register("MaxRange", typeof(TimeSpan), typeof(MainAdminWindow));
 
     /// <summary>
     /// button to set a new value to the risk range
@@ -123,7 +123,7 @@ public partial class MainAdminWindow : Window
         CurrentTime = s_bl.Admin.GetClock();
         MaxRange = s_bl.Admin.GetMaxRange();
         s_bl.Admin.AddClockObserver(ClockObserver);
-        s_bl.Admin.AddConfigObserver(ConfigObserver);
+        s_bl.Admin.AddConfigObserver(configObserver: ConfigObserver);
     }
 
     /// <summary>
