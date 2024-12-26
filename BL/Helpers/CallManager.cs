@@ -59,17 +59,15 @@ internal static class CallManager
     /// <summary>
     /// return a call in progress by the id of the assignment
     /// </summary>
-    internal static BO.CallInProgress GetCallInProgress(int id)
+    internal static BO.CallInProgress GetCallInProgress(DO.Assignment assignment, DO.Volunteer volunteer)
     {
-        DO.Assignment assignment = s_dal.Assignment.Read(id)!;
         DO.Call call = s_dal.Call.Read(assignment.CallId)!;
-        DO.Volunteer volunteer = s_dal.Volunteer.Read(assignment.VolunteerId)!;
         double vLati = Helpers.Tools.GetLatitudeFromAddress(volunteer.Address!);
         double vLongi = Helpers.Tools.GetLongitudeFromAddress(volunteer.Address!);
         var callInProgres = new BO.CallInProgress
         {
-            Id = id,
-            CallId = assignment.CallId,
+            Id = assignment.Id,
+            CallId = call.Id,
             Type = (BO.BTypeCalls)call.TypeCall,
             Description = call.VerbalDecription,
             CallAddress = call.FullAddressOfTheCall,

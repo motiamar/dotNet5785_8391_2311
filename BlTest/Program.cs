@@ -9,7 +9,7 @@ internal class Program
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     static void Main(string[] args)
-    {  
+    {
         bool logOut = true;
         do
         {
@@ -103,7 +103,7 @@ internal class Program
                         if (choose == 1)
                             active = true;
                         if (choose == 2)
-                            active = false;                      
+                            active = false;
                         Console.WriteLine("enter 1 to order by the Full Name");
                         Console.WriteLine("enetr 3 to order by TreatedCalls, 4 to order by the CanceledCalls");
                         Console.WriteLine("enetr 5 to order by ExpiredCalls, 6 to order by the CorrentCallId");
@@ -121,7 +121,7 @@ internal class Program
                         break;
 
                     case BSubVolMenu.Update_volunteer: // update the entity
-                        UpdateVolunteer();                       
+                        UpdateVolunteer();
                         break;
 
                     case BSubVolMenu.Delete_volunteer: // delete the entity
@@ -189,7 +189,7 @@ internal class Program
                         break;
 
                     case BSubCallMenu.Show_calls: // show the list
-                        ShowCalls();                      
+                        ShowCalls();
                         break;
 
                     case BSubCallMenu.Show_call: // show the entity
@@ -213,7 +213,7 @@ internal class Program
                         break;
 
                     case BSubCallMenu.Show_close_calls: // show the list of close calls
-                        ShowCloseCalls();                        
+                        ShowCloseCalls();
                         break;
 
                     case BSubCallMenu.Show_open_calls: // show the list of open calls
@@ -307,7 +307,7 @@ internal class Program
                         break;
 
                     case BSubAdmMenu.Initialize: // initialize the data base
-                        s_bl.Admin.InitializeDB(); 
+                        s_bl.Admin.InitializeDB();
                         break;
 
                     default:
@@ -381,7 +381,7 @@ internal class Program
     private static void AddVolunteer()
     {
         Console.WriteLine("enter ID please");
-        int Id = int.Parse(Console.ReadLine()!);       
+        int Id = int.Parse(Console.ReadLine()!);
         Console.WriteLine("enter Full Name please");
         string FullName = Console.ReadLine()!;
         Console.WriteLine("enter Phone please");
@@ -415,9 +415,9 @@ internal class Program
             role = role,
             Active = Active,
             MaximumDistance = MaximumDistance,
-            DistanceType = distanceTypes,        
+            DistanceType = distanceTypes,
         };
-        s_bl.Volunteer.Create( newVolunteer);
+        s_bl.Volunteer.Create(newVolunteer);
     }
 
     /// <summary>
@@ -434,7 +434,7 @@ internal class Program
         {
             ShowCallEnum();
             filter = (CallInListFilter)int.Parse(Console.ReadLine()!);
-            switch(filter)
+            switch (filter)
             {
                 case CallInListFilter.Id:
                     Console.WriteLine("enetr the Id to compre by");
@@ -495,7 +495,7 @@ internal class Program
     {
         Console.WriteLine("enetr 0 for Id, enter 1 for CallId, enetr 2 for Type, enter 3 for CallOpenTime");
         Console.WriteLine("enetr 4 for CallMaxCloseTime, enetr 5 for LastVolunteerName, enetr 6 for TotalTreatmentTime");
-        Console.WriteLine("enetr 7 for CallStatus, enter 5 for SumOfAssignments");              
+        Console.WriteLine("enetr 7 for CallStatus, enter 5 for SumOfAssignments");
     }
 
     /// <summary>
@@ -509,7 +509,7 @@ internal class Program
         Console.WriteLine(tmp);
         // Show the entity first      
         Console.WriteLine("enter Type please, 0 to Medical_situation, 1 to Car_accident, 2 to Fall_from_hight, 3 to Violent_event, 4 to Domestic_violent, 5 to None");
-        BTypeCalls type = (BTypeCalls)int.Parse(Console.ReadLine()!);       
+        BTypeCalls type = (BTypeCalls)int.Parse(Console.ReadLine()!);
         Console.WriteLine("enter descrption please");
         string descrption = Console.ReadLine()!;
         Console.WriteLine("enter Call Address please in formt: street, number, city");
@@ -525,7 +525,7 @@ internal class Program
             CallOpenTime = s_bl.Admin.GetClock(),
             CallMaxCloseTime = CallMaxCloseTime,
             CallStatus = tmp.CallStatus,
-            callAssignInLists = tmp.callAssignInLists,    
+            callAssignInLists = tmp.callAssignInLists,
         };
         s_bl.Call.Update(UpdateCall);
     }
@@ -534,7 +534,7 @@ internal class Program
     /// add the call entity
     /// </summary>
     private static void AddCall()
-    {        
+    {
         int Id = 0;
         Console.WriteLine("enter Type please, 0 to Medical_situation, 1 to Car_accident, 2 to Fall_from_hight, 3 to Violent_event, 4 to Domestic_violent, 5 to None");
         BTypeCalls type = (BTypeCalls)int.Parse(Console.ReadLine()!);
@@ -632,7 +632,7 @@ internal class Program
     {
         Console.WriteLine("enetr 0 for Id, enter 1 for type, enetr 2 for Descrption, enter 3 for call adrress");
         Console.WriteLine("enetr 4 for CallOpenTime, enetr 5 for CallMaxCloseTime, enetr 6 for CallDistance");
-    }   
+    }
 }
 
 

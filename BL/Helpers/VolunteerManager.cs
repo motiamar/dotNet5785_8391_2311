@@ -60,7 +60,8 @@ internal static class VolunteerManager
     {
         DO.Volunteer volunteer = s_dal.Volunteer.Read(Id)!;
         var assignments = s_dal.Assignment.ReadAll(a => a.VolunteerId == Id);
-        int? idAssignmentOfCall = assignments.FirstOrDefault(v => v.FinishTime == null)?.Id;
+        var CurrentAssignmentOfCall = assignments.FirstOrDefault(v => v.FinishTime == null);
+      
         BO.Volunteer Bvolunteer = new BO.Volunteer
         {
             Id = Id,
@@ -78,7 +79,7 @@ internal static class VolunteerManager
             TreatedCalls = assignments.Count(v => v.EndKind == DO.EndKinds.Treated),
             CanceledCalls = assignments.Count(v => v.EndKind == DO.EndKinds.Administrator_cancellation || v.EndKind == DO.EndKinds.Self_cancellation),
             ExpiredCalls = assignments.Count(v => v.EndKind == DO.EndKinds.Expired_cancellation),
-            CorrentCall = idAssignmentOfCall == null ? null : Helpers.CallManager.GetCallInProgress(idAssignmentOfCall.Value)
+            CorrentCall = CurrentAssignmentOfCall == null ? null : Helpers.CallManager.GetCallInProgress(CurrentAssignmentOfCall, volunteer)
         };
         return Bvolunteer;
     }
