@@ -46,6 +46,6 @@ public class CallInProgress
     /// if the call is in treatment or in a risk treatment
     /// </summary>
     public BCallStatus CallStatus { get; set; }
-    public override string ToString()=>this.TostringProperty();
+    public override string ToString() => this.TostringProperty();
 
 }

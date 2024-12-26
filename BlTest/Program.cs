@@ -117,7 +117,11 @@ internal class Program
                     case BSubVolMenu.Show_volunteer: // show the entity
                         Console.WriteLine("enter ID please");
                         Id = int.Parse(Console.ReadLine()!);
-                        Console.WriteLine(s_bl.Volunteer.Read(Id));
+                        var volunteer = s_bl.Volunteer.Read(Id);
+                        Console.WriteLine(volunteer);
+                        if (volunteer!.CorrentCall != null)
+                            Console.WriteLine(volunteer!.CorrentCall);
+
                         break;
 
                     case BSubVolMenu.Update_volunteer: // update the entity
