@@ -27,7 +27,10 @@ public partial class MainWindow : Window
         this.DataContext = this; // Ensure binding context is set correctly
     }
 
-    // Dependency property for CurrentID
+
+    /// <summary>
+    /// Dependency property for CurrentID
+    /// </summary>
     public int CurrentID
     {
         get { return (int)GetValue(CurrentIDProperty); }
@@ -37,7 +40,10 @@ public partial class MainWindow : Window
     public static readonly DependencyProperty CurrentIDProperty =
         DependencyProperty.Register("CurrentID", typeof(int), typeof(MainWindow), new PropertyMetadata(null));
 
-    // Dependency property for CurrentPassword
+
+    /// <summary>
+    /// Dependency property for CurrentPassword
+    /// </summary>
     public string CurrentPassword
     {
         get { return (string)GetValue(CurrentPasswordProperty); }
@@ -47,7 +53,10 @@ public partial class MainWindow : Window
     public static readonly DependencyProperty CurrentPasswordProperty =
         DependencyProperty.Register("CurrentPassword", typeof(string), typeof(MainWindow), new PropertyMetadata(null));
 
-    // Dependency property for CurrentUser
+
+    /// <summary>
+    /// Dependency property for CurrentUser
+    /// </summary>
     public BO.Volunteer? CurrentUser
     {
         get { return (BO.Volunteer?)GetValue(CurrentUserProperty); }
@@ -57,14 +66,20 @@ public partial class MainWindow : Window
     public static readonly DependencyProperty CurrentUserProperty =
         DependencyProperty.Register("CurrentUser", typeof(BO.Volunteer), typeof(MainWindow), new PropertyMetadata(null));
 
-    // Event handler for password change in PasswordBox
+
+    /// <summary>
+    /// Event handler for password change in PasswordBox
+    /// </summary>
     private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
     {
         // Update CurrentPassword when password changes
         CurrentPassword = ((PasswordBox)sender).Password;
     }
 
-    // Event handler when CheckBox is checked (show password as plain text)
+
+    /// <summary>
+    /// Event handler when CheckBox is checked (show password as plain text)
+    /// </summary>
     private void ShowPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
     {
         // Show TextBoxPassword and hide PasswordBox
@@ -73,7 +88,10 @@ public partial class MainWindow : Window
         TextBoxPassword.Text = PasswordBox.Password;
     }
 
-    // Event handler when CheckBox is unchecked (hide password as plain text)
+
+    /// <summary>
+    /// Event handler when CheckBox is unchecked (hide password as plain text)
+    /// </summary>
     private void ShowPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
     {
         // Show PasswordBox and hide TextBoxPassword
@@ -82,6 +100,9 @@ public partial class MainWindow : Window
         PasswordBox.Password = TextBoxPassword.Text;
     }
 
+    /// <summary>
+    /// Button click for logging in
+    /// </summary>
     private void BtnLogIn_Click(object sender, RoutedEventArgs e)
     {
         try

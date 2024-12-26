@@ -21,32 +21,58 @@ internal static class Tools
     {
         if (t == null)
             return "Null";
+
         var properties = typeof(T).GetProperties();
         var result = new System.Text.StringBuilder();
+
         foreach (var prop in properties)
         {
             var value = prop.GetValue(t, null);
+
             if (value is IEnumerable<CallAssignInList> enumerable && !(value is string))
             {
                 result.AppendLine($"{prop.Name}: ");
                 foreach (var item in enumerable)
                 {
-                    result.AppendLine($"{item}");
+                    result.AppendLine($"  {item}");
                 }
                 result.AppendLine();
             }
-            else if (value != null && !value.GetType().IsPrimitive && value.GetType() != typeof(string))
+            else if (value is DateTime dateTime)
             {
-                result.AppendLine($"{prop.Name} : {value.TostringProperty()} ");
+                result.AppendLine($"{prop.Name} : {dateTime:yyyy-MM-dd HH:mm:ss}"); // פורמט מותאם אישית
+            }
+            else if (value is TimeSpan timeSpan)
+            {
+                result.AppendLine($"{prop.Name} : {timeSpan:c}"); // פורמט קומפקטי ל-TimeSpan
+            }
+            else if (value is Enum enumValue)
+            {
+                result.AppendLine($"{prop.Name} : {enumValue}"); // ToString() כברירת מחדל
+            }
+            else if (value != null && value.GetType().IsClass && value.GetType() != typeof(string))
+            {
+                result.AppendLine($"{prop.Name}: ");
+                result.AppendLine(value.TostringProperty()); // קריאה רקורסיבית
             }
             else
-                result.AppendLine($"{prop.Name}:{value}");
+            {
+                result.AppendLine($"{prop.Name} : {value}");
+            }
         }
+
         return result.ToString();
     }
+
+
+    /// <summary>
+    /// tools for the addreas and the distance
+    /// </summary>
     private const double EarthRadiusKm = 6371.0;
     private const string ApiKey = "pk.171d9d217781e7387c5cb9df70d511bf"; //  מפתח-API 
     private const string BaseUrl = "https://us1.locationiq.com/v1/search.php";
+
+
     /// <summary>
     /// func to calculate the distance between the volunteer and the call by Latitude and Longitude depend on the distance type
     /// </summary>

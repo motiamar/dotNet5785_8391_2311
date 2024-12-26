@@ -492,7 +492,7 @@ public static class Initialization
             
             
             // define the random ending time
-            DateTime finish = start.AddMinutes(s_rand.Next(5, 10));  
+            DateTime finish = start.AddMinutes(s_rand.Next(50, 100));  
             s_dal.Call!.Create(new Call
             {
                 Id = tmpId,

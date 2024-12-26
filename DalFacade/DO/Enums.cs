@@ -23,7 +23,7 @@ public enum TypeCalls
     Car_accident,
     Fall_from_hight,
     Violent_event,
-    Domestic_violent,
+    Domestic_violent
 } 
 
 // tells how the assiment ended

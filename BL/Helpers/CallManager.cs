@@ -90,6 +90,7 @@ internal static class CallManager
         var calls = s_dal.Call.ReadAll();
         var assignments = s_dal.Assignment.ReadAll();
         var assignmentsLookup = assignments.ToLookup(a => a.CallId);
+
         var callInLists = from call in calls
                           let assignment = assignmentsLookup[call.Id].FirstOrDefault()
                           let volunteer = assignment != null ? s_dal.Volunteer.Read(assignment.VolunteerId) : null
@@ -97,15 +98,11 @@ internal static class CallManager
                           {
                               Id = assignment?.Id,
                               CallId = call.Id,
-                              Type = (BO.BTypeCalls)call.TypeCall,
+                              Type = (BO.BTypeCalls)Enum.Parse(typeof(BO.BTypeCalls), call.TypeCall.ToString()),
                               CallOpenTime = call.OpeningCallTime,
-                              CallLeftTime = call.MaxEndingCallTime != null && call.MaxEndingCallTime > Helpers.AdminManager.Now
-                                  ? (TimeSpan)(call.MaxEndingCallTime - Helpers.AdminManager.Now)
-                                  : TimeSpan.Zero,
+                              CallLeftTime = call.MaxEndingCallTime > Helpers.AdminManager.Now ? (call.MaxEndingCallTime - Helpers.AdminManager.Now) ?? TimeSpan.Zero : TimeSpan.Zero,
                               LastVolunteerName = volunteer?.FullName ?? "N/A",
-                              TotalTreatmentTime = assignment?.FinishTime != null && assignment?.StartTime != null
-                                  ? (TimeSpan)(assignment.FinishTime - assignment.StartTime)
-                                  : TimeSpan.Zero,
+                              TotalTreatmentTime = assignment?.FinishTime != null && assignment?.StartTime != null ? (TimeSpan)(assignment.FinishTime - assignment.StartTime)                                 : TimeSpan.Zero,
                               CallStatus = GetStatus(call),
                               SumOfAssignments = assignmentsLookup[call.Id].Count()
                           };

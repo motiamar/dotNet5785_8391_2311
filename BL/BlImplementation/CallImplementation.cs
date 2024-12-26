@@ -282,6 +282,8 @@ internal class CallImplementation : BlApi.ICall
     {
         try
         {
+            if(_dal.Volunteer.Read(volunteerId) is null)
+                throw new DO.DalDoesNotExistException($"volunteer with id {volunteerId} does not exist");
             IEnumerable<ClosedCallInList> closedCallsInList = Helpers.CallManager.GetClosedCallInLists(volunteerId);
            if(filter is not null)
             {
@@ -352,6 +354,8 @@ internal class CallImplementation : BlApi.ICall
     {
         try
         {
+            if (_dal.Volunteer.Read(volunteerId) is null)
+                throw new DO.DalDoesNotExistException($"volunteer with id {volunteerId} does not exist");
             DO.Volunteer volunteer = _dal.Volunteer.Read(volunteerId)!;
             IEnumerable<OpenCallInList> openCallsInList = Helpers.CallManager.GetOpenCallInLists(volunteer);
             if (filter is not null)
