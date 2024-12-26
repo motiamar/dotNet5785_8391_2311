@@ -53,7 +53,7 @@
                     <GridViewColumn Header="Canceled Calls" DisplayMemberBinding="{Binding CanceledCalls}" Width="80" />
                     <GridViewColumn Header="Expired Calls" DisplayMemberBinding="{Binding ExpiredCalls}" Width="80" />
                     <GridViewColumn Header="Corrent CallId" DisplayMemberBinding="{Binding CorrentCallId}" Width="80" />
-                    <GridViewColumn Header="Corrent Call Type" DisplayMemberBinding="{Binding CorrentCallType}" Width="90" />
+                    <GridViewColumn Header="Corrent Call Type" DisplayMemberBinding="{Binding CorrentCallType}" Width="100" />
                     <!-- New column with additional control -->
                     <GridViewColumn Header="Action" Width="80">
                         <GridViewColumn.CellTemplate>

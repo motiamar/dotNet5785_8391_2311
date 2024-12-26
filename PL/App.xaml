@@ -10,6 +10,7 @@
         <local:VolunteerListFilterCollection x:Key="VolunteersListColelctionFilterKey"/>
         <local:RoleCollection x:Key="RoleColelctionKey"/>
         <local:IdToReadOnlyConverter x:Key="IdToReadOnlyConverterKey"/>
+        <local:CallInProgressToStringConverter x:Key="CallInProgressConverterKey"/>
     </Application.Resources>
 </Application>
     

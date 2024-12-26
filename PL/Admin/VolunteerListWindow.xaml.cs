@@ -168,7 +168,6 @@ public partial class VolunteerListWindow : Window
         }
     }
 
-  
 }
 
 

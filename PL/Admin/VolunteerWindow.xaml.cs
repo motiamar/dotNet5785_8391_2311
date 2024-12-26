@@ -107,6 +107,4 @@ public partial class VolunteerWindow : Window
             MessageBox.Show(ex.Message);
         }
     }
-
-  
 }

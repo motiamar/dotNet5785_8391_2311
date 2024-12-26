@@ -17,6 +17,7 @@
     <None Remove="DALL·E 2024-12-23 17.05.43 - A professional and clean software background design for a rescue organization. The background should convey urgency and compassion, incorporating subt.webp" />
     <None Remove="Image.jpg" />
     <None Remove="Images\Image2.jpg" />
+    <None Remove="Images\image3.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Image2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\image3.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
