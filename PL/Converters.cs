@@ -8,6 +8,9 @@ using System.Windows.Data;
 using System.Windows.Media;
 namespace PL;
 
+/// <summary>
+/// if the Role is Manager return Red, else return Yellow
+/// </summary>
 public class ConverterRoleToColor : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -31,7 +34,7 @@ public class ConverterRoleToColor : IValueConverter
 }
 
 /// <summary>
-/// indicate if the id is 0 or not
+/// indicate if the id is 0 or not and return true or false
 /// </summary>
 public class IdToReadOnlyConverter : IValueConverter
 {
@@ -50,3 +53,23 @@ public class IdToReadOnlyConverter : IValueConverter
     }
 }
 
+
+/// <summary>
+/// if there is a call in progress return the call to string else return empty string
+/// </summary>
+public class CallInProgressToStringConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+        if (value is BO.CallInProgress call)
+        {
+            return $"Assign id: {call.Id} id: {call.CallId} Type: {call.Type}\n Description: {call.Description}\n Address: {call.CallAddress} Open time: {call.CallOpenTime}\n Max time to close: {call.CallMaxCloseTime} Enter time: {call.CallEnterTime}\n Distance: {call.CallDistance} Status: {call.CallStatus}";
+        }
+        return string.Empty;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+        return null!;
+    }
+}

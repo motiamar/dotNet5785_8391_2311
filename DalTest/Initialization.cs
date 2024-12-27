@@ -515,7 +515,7 @@ public static class Initialization
         int tmpIndex = 0;
         int tmpCallId = 0;
         int tmpVolunteerId = 0;
-        DateTime ? tmpFinishTime = null;
+        DateTime? tmpFinishTime = null;
         DateTime tmpStartTime;
         EndKinds tmpEndKind = EndKinds.Open;
 

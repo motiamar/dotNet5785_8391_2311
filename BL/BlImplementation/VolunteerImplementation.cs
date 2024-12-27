@@ -113,28 +113,19 @@ internal class VolunteerImplementation : BlApi.IVolunteer
                 throw new BlDoesNotExistException($"can't find volunteer with id : {volunteerId}");
             if (volunteerId != change.Id && volunteer!.Role != Roles.Manager)
                 throw new BlNotAllowException("you can't change the details of the volunteer");
+            var volunteers = _dal.Volunteer.ReadAll(v=> v.Role == Roles.Manager);
+            if (volunteer.Role == Roles.Manager && change.role == BRoles.Volunteer && volunteers == null)
+                throw new BlNotAllowException("you can't change the role of the manager becose there is no more managers");
             // func to chek all the incoming details    
             Helpers.VolunteerManager.VolunteerChek(change);
             double? latitude = Helpers.Tools.GetLatitudeFromAddress(change.Address!);
             double? longitude = Helpers.Tools.GetLongitudeFromAddress(change.Address!);
             var role = (Roles)Enum.Parse(typeof(BRoles), change.role.ToString());
             var distanceType = (DistanceTypes)Enum.Parse(typeof(BDistanceTypes), change.DistanceType.ToString());
-            if (volunteer.Role == Roles.Manager)
-            {
-                // if the volunteer is a manager is can change the role
-                var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = change.FullName, Phone = change.Phone, Email = change.Email, Password = change.Password, Address = change.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = change.Active, MaximumDistance = change.MaximumDistance, DistanceType = distanceType };
-                _dal.Volunteer.Update(newVolunteer);
-                VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
-                VolunteerManager.Observers.NotifyListUpdated(); 
-            }
-            else
-            {
-                //if the volunteer is not a manager is can't change the role
-                var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = change.FullName, Phone = change.Phone, Email = change.Email, Password = change.Password, Address = change.Address, Role = volunteer.Role, Latitude = latitude, Longitude = longitude, Active = change.Active, MaximumDistance = change.MaximumDistance, DistanceType = distanceType };
-                _dal.Volunteer.Update(newVolunteer);
-                VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
-                VolunteerManager.Observers.NotifyListUpdated();
-            }
+            var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = change.FullName, Phone = change.Phone, Email = change.Email, Password = change.Password, Address = change.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = change.Active, MaximumDistance = change.MaximumDistance, DistanceType = distanceType };
+            _dal.Volunteer.Update(newVolunteer);
+            VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
+            VolunteerManager.Observers.NotifyListUpdated();
         }
         catch (DO.DalDoesNotExistException ex)
         {

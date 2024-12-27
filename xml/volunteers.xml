@@ -226,14 +226,14 @@
   </Volunteer>
   <Volunteer>
     <Id>207688391</Id>
-    <FullName>moti moti </FullName>
+    <FullName>moti amar</FullName>
     <Phone>0525653900</Phone>
-    <Email>moramar@gmail.com</Email>
-    <Password>Aa23132132wd3##</Password>
+    <Email>moramar36@gmail.com</Email>
+    <Password>Ma021198#</Password>
     <Address>yossi ben yossi 17, netanya, israel</Address>
     <Latitude>32.3157799</Latitude>
-    <Longitude>34.859415</Longitude>
-    <Role>Volunteer</Role>
+    <Longitude>NaN</Longitude>
+    <Role>Manager</Role>
     <Active>true</Active>
     <MaximumDistance>4324343434</MaximumDistance>
     <DistanceType>Air</DistanceType>
