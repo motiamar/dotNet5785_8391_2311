@@ -21,7 +21,7 @@ namespace PL.Admin
     {
         public CallListWindow(int status = 0)
         {
-            int _Status = status;
+            int callStatus = status;
             InitializeComponent();
         }
     }

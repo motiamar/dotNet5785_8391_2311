@@ -211,25 +211,32 @@ public partial class MainAdminWindow : Window
     /// </summary>
     private void Btn_calls_Click(object sender, RoutedEventArgs e)
     {
-        int[] callsStatus = s_bl.Call.ArrayStatus(); 
-        string[] statusNames = { "Open", "In_treatment", "Closed", "Expired", "Open_in_risk", "In_treatment_in_risk" }; 
-
-        StatusButtonsPanel.Children.Clear(); // clear the panel
-
-        for (int i = 0; i < callsStatus.Length; i++)
+        try
         {
-            Button statusButton = new Button
+            int[] callsStatus = s_bl.Call.ArrayStatus();
+            string[] statusNames = { "Open", "In_treatment", "Closed", "Expired", "Open_in_risk", "In_treatment_in_risk" };
+
+            StatusButtonsPanel.Children.Clear(); // clear the panel
+
+            for (int i = 0; i < callsStatus.Length; i++)
             {
-                Content = $"{statusNames[i]} ({callsStatus[i]})", // טקסט הכפתור
-                Tag = i, 
-                Margin = new Thickness(2),
-                Padding = new Thickness(5),
-                Background = Brushes.LightBlue,
-                FontSize = 14
-            };
-            statusButton.Click += StatusButton_Click;      
-            StatusButtonsPanel.Children.Add(statusButton);
+                Button statusButton = new Button
+                {
+                    Content = $"{statusNames[i]} ({callsStatus[i]})", // content of the button
+                    Tag = i,
+                    Margin = new Thickness(2),
+                    Padding = new Thickness(5),
+                    Background = Brushes.LightBlue,
+                    FontSize = 14
+                };
+                statusButton.Click += StatusButton_Click;
+                StatusButtonsPanel.Children.Add(statusButton);
+            }
+        }catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
         }
+       
     }
 
 
@@ -240,7 +247,7 @@ public partial class MainAdminWindow : Window
     {
         if (sender is Button button)
         {
-            int status = (int)button.Tag; // מקבל את הסטטוס מתוך ה-Tag
+            int status = (int)button.Tag; // return the status selected
             new CallListWindow(status).Show(); 
         }
     }
