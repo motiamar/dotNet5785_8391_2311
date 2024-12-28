@@ -19,8 +19,9 @@ namespace PL.Admin
     /// </summary>
     public partial class CallListWindow : Window
     {
-        public CallListWindow()
+        public CallListWindow(int status = 0)
         {
+            int _Status = status;
             InitializeComponent();
         }
     }

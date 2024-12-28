@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,7 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace PL.Admin;
 
 /// <summary>
@@ -20,7 +20,7 @@ namespace PL.Admin;
 /// </summary>
 public partial class MainAdminWindow : Window
 {
-    static readonly BlApi.IBl s_bl = BlApi.Factory.Get(); 
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public MainAdminWindow()
     {
         InitializeComponent();
@@ -120,6 +120,7 @@ public partial class MainAdminWindow : Window
     /// </summary>
     private void MainAdminWindowLoaded(object sendor, RoutedEventArgs e)
     {
+        Btn_calls_Click(sendor, e);
         CurrentTime = s_bl.Admin.GetClock();
         MaxRange = s_bl.Admin.GetMaxRange();
         s_bl.Admin.AddClockObserver(ClockObserver);
@@ -202,6 +203,45 @@ public partial class MainAdminWindow : Window
             {
                 Mouse.OverrideCursor = null;
             }
+        }
+    }
+
+    /// <summary>
+    /// create buttons for each status of the calls
+    /// </summary>
+    private void Btn_calls_Click(object sender, RoutedEventArgs e)
+    {
+        int[] callsStatus = s_bl.Call.ArrayStatus(); 
+        string[] statusNames = { "Open", "In_treatment", "Closed", "Expired", "Open_in_risk", "In_treatment_in_risk" }; 
+
+        StatusButtonsPanel.Children.Clear(); // clear the panel
+
+        for (int i = 0; i < callsStatus.Length; i++)
+        {
+            Button statusButton = new Button
+            {
+                Content = $"{statusNames[i]} ({callsStatus[i]})", // טקסט הכפתור
+                Tag = i, 
+                Margin = new Thickness(2),
+                Padding = new Thickness(5),
+                Background = Brushes.LightBlue,
+                FontSize = 14
+            };
+            statusButton.Click += StatusButton_Click;      
+            StatusButtonsPanel.Children.Add(statusButton);
+        }
+    }
+
+
+    /// <summary>
+    /// event to open a new screen with the selected status
+    /// </summary>
+    private void StatusButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button button)
+        {
+            int status = (int)button.Tag; // מקבל את הסטטוס מתוך ה-Tag
+            new CallListWindow(status).Show(); 
         }
     }
 }

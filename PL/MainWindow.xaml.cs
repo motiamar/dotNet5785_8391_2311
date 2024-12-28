@@ -120,21 +120,19 @@ public partial class MainWindow : Window
             switch (CurrentUser.role)
             {
                 case BRoles.Volunteer:
-                    VolunteerUserWindow volunteerUserWindow = new();
-                    volunteerUserWindow.Show();
+                    new VolunteerUserWindow(CurrentID).Show();
                     break;
 
                 case BRoles.Manager:
                     MessageBoxResult result = MessageBox.Show("Do you want to enter the Manager screen?", "Manager Login", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes)
                     {
-                        MainAdminWindow mainAdminWindow = new();
-                        mainAdminWindow.Show();
+                        new MainAdminWindow().Show();
+
                     }
                     else
                     {
-                        VolunteerUserWindow volunteerUserWindow2 = new();
-                        volunteerUserWindow2.Show();
+                        new VolunteerUserWindow(CurrentID).Show();
                     }
                     break;
 

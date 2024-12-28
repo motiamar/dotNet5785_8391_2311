@@ -538,12 +538,12 @@ public static class Initialization
                     tmpEndKind = (EndKinds)s_rand.Next(0, 2);
                 }
                 else
-                {   
-                    // the finish time of the assinment is more then the call
-                    tmpFinishTime = tmpCalls.ElementAt(tmpIndex).MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 2));
-
-                    //5 expired calls
-                    tmpEndKind = EndKinds.Expired_cancellation;
+                {
+                // the finish time of the assinment is more then the call
+                tmpFinishTime = null;
+                    //tmpCalls.ElementAt(tmpIndex).MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 2));
+                //5 expired calls
+                tmpEndKind = EndKinds.Expired_cancellation;
                 }
 
                 s_dal.Assignment!.Create(new Assignment
