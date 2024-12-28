@@ -86,7 +86,22 @@ public partial class VolunteerUserWindow : Window
 
     private void BtnEndCall_Click(object sender, RoutedEventArgs e)
     {
+        try
+        {
+            BO.CallInProgress callInProgress = CurrentVolunteerUser.CorrentCall!;
+            if(callInProgress == null)
+            {
+                MessageBox.Show("There is no call in progress");
+                return;
+            }
+            s_bl.Call.EndAssignment(CurrentVolunteerUser.Id, callInProgress.Id);
+            MessageBox.Show("The call has ended sucssesfuly");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
 
+        }
     }
 
     private void BtnCancaleCall_Click(object sender, RoutedEventArgs e)
