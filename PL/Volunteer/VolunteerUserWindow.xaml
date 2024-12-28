@@ -48,7 +48,7 @@
                 <BlurEffect Radius="20"/>
             </Label.Effect>
         </Label>
-        <CheckBox IsChecked="{Binding CurrentVolunteerUser.Active}" IsEnabled="{Binding CurrentVolunteerUser.CorrentCall, Converter={StaticResource NullToEnabledConverter}}" Grid.Row="1" Grid.Column="1" Content="Active" VerticalAlignment="Center" Height="15"/>
+        <CheckBox IsChecked="{Binding CurrentVolunteerUser.Active}" IsEnabled="{Binding CurrentVolunteerUser.CorrentCall, Converter={StaticResource NullToEnabledConverterKey}}" Grid.Row="1" Grid.Column="1" Content="Active" VerticalAlignment="Center" Height="15"/>
 
         <Label Content="Volunteer Id" Grid.Row="2" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27"/>
         <Label Content="Volunteer Id" Grid.Row="1" Grid.Column="0" Foreground="Red" FontSize="14"  FontWeight="Bold" Margin="0,27,0,27" Grid.RowSpan="3">
