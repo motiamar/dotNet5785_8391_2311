@@ -76,12 +76,12 @@ public partial class VolunteerUserWindow : Window
 
     private void BtnCallHistory_Click(object sender, RoutedEventArgs e)
     {
-
+        new CallHistoryWindow(CurrentVolunteerUser.Id).Show();
     }
 
     private void BtnChooseCall_Click(object sender, RoutedEventArgs e)
     {
-
+        new ChooseCallWindow().Show();
     }
 
     private void BtnEndCall_Click(object sender, RoutedEventArgs e)
@@ -106,6 +106,21 @@ public partial class VolunteerUserWindow : Window
 
     private void BtnCancaleCall_Click(object sender, RoutedEventArgs e)
     {
+        try
+        {
+            BO.CallInProgress callInProgress = CurrentVolunteerUser.CorrentCall!;
+            if (callInProgress == null)
+            {
+                MessageBox.Show("There is no call in progress");
+                return;
+            }
+            s_bl.Call.CanceleAssignment(CurrentVolunteerUser.Id, callInProgress.Id);
+            MessageBox.Show("The call has canceled sucssesfuly");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
 
     }
 }

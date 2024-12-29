@@ -11,9 +11,9 @@
         <local:RoleCollection x:Key="RoleColelctionKey"/>
         <local:IdToReadOnlyConverter x:Key="IdToReadOnlyConverterKey"/>
         <local:CallInProgressToStringConverter x:Key="CallInProgressConverterKey"/>
-        <local:NullToEnabledConverter x:Key="NullToEnabledConverter" />
-        <local:BoolToEnabledConverter x:Key="BoolToEnabledConverter"/>
-        <local:TextNotEmptyToEnabledConverter x:Key="TextNotEmptyToEnabledConverter"/>
+        <local:NullToEnabledConverter x:Key="NullToEnabledConverterKey" />
+        <local:BoolToEnabledConverter x:Key="BoolToEnabledConverterKey"/>
+        <local:TextNotEmptyToEnabledConverter x:Key="TextNotEmptyToEnabledConverterKey"/>
     </Application.Resources>
 </Application>
     

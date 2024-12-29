@@ -157,8 +157,8 @@
         <!-- Buttons -->
         <Button Content="Update deailes" Grid.Row="14" Grid.Column="1"  HorizontalAlignment="Left" Background="LightBlue" Width="144" Margin="252,92,0,-44" Grid.RowSpan="3" Click="BtnUpdate_Click"/>
         <Button Content="Call history" Grid.Row="14" Margin="99,92,144,-44" Grid.RowSpan="3" Grid.Column="1" Background="LightBlue" Click="BtnCallHistory_Click"/>
-        <Button Content="Choose new call" Click="BtnChooseCall_Click" Background="LightBlue"  IsEnabled="{Binding CurrentVolunteerUser.Active, Converter={StaticResource BoolToEnabledConverter}}"/>
-        <Button Content="End call" Grid.Row="14" Margin="0,92,59,-44" Grid.RowSpan="3" Background="LightBlue" Click="BtnEndCall_Click" IsEnabled="{Binding Text, ElementName=MyTextBox, Converter={StaticResource TextNotEmptyToEnabledConverter}}"/>
-        <Button Content="Cancale call" Grid.Row="14" Margin="139,92,297,-44" Grid.RowSpan="3" Grid.ColumnSpan="2" Background="LightBlue" Click="BtnCancaleCall_Click" IsEnabled="{Binding Text, ElementName=MyTextBox, Converter={StaticResource TextNotEmptyToEnabledConverter}}"/>
+        <Button Content="Choose new call" Click="BtnChooseCall_Click" Background="LightBlue"  IsEnabled="{Binding CurrentVolunteerUser.Active, Converter={StaticResource BoolToEnabledConverterKey}}"/>
+        <Button Content="End call" Grid.Row="14" Margin="0,92,59,-44" Grid.RowSpan="3" Background="LightBlue" Click="BtnEndCall_Click" IsEnabled="{Binding Text, ElementName=MyTextBox, Converter={StaticResource TextNotEmptyToEnabledConverterKey}}"/>
+        <Button Content="Cancale call" Grid.Row="14" Margin="139,92,297,-44" Grid.RowSpan="3" Grid.ColumnSpan="2" Background="LightBlue" Click="BtnCancaleCall_Click" IsEnabled="{Binding Text, ElementName=MyTextBox, Converter={StaticResource TextNotEmptyToEnabledConverterKey}}"/>
     </Grid>
 </Window>

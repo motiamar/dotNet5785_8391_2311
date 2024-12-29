@@ -169,14 +169,6 @@
     <EndKind>Treated</EndKind>
   </Assignment>
   <Assignment>
-    <Id>1021</Id>
-    <CallId>1027</CallId>
-    <VolunteerId>726172349</VolunteerId>
-    <StartTime>2024-12-28T19:14:19</StartTime>
-    <FinishTime xsi:nil="true" />
-    <EndKind>Expired_cancellation</EndKind>
-  </Assignment>
-  <Assignment>
     <Id>1022</Id>
     <CallId>1009</CallId>
     <VolunteerId>335035184</VolunteerId>
@@ -199,14 +191,6 @@
     <StartTime>2024-12-28T19:15:19</StartTime>
     <FinishTime>2024-12-28T20:11:19</FinishTime>
     <EndKind>Treated</EndKind>
-  </Assignment>
-  <Assignment>
-    <Id>1025</Id>
-    <CallId>1015</CallId>
-    <VolunteerId>726172349</VolunteerId>
-    <StartTime>2024-12-28T19:15:19</StartTime>
-    <FinishTime xsi:nil="true" />
-    <EndKind>Expired_cancellation</EndKind>
   </Assignment>
   <Assignment>
     <Id>1026</Id>
@@ -398,6 +382,22 @@
     <VolunteerId>172780181</VolunteerId>
     <StartTime>2024-12-28T19:12:19</StartTime>
     <FinishTime>2024-12-28T20:46:19</FinishTime>
+    <EndKind>Treated</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1021</Id>
+    <CallId>1027</CallId>
+    <VolunteerId>726172349</VolunteerId>
+    <StartTime>2024-12-28T19:14:19</StartTime>
+    <FinishTime>2024-12-28T19:05:19</FinishTime>
+    <EndKind>Treated</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1025</Id>
+    <CallId>1015</CallId>
+    <VolunteerId>726172349</VolunteerId>
+    <StartTime>2024-12-28T19:15:19</StartTime>
+    <FinishTime>2024-12-28T19:05:19</FinishTime>
     <EndKind>Treated</EndKind>
   </Assignment>
 </ArrayOfAssignment>

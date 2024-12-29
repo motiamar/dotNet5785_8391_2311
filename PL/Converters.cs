@@ -125,3 +125,4 @@ public class TextNotEmptyToEnabledConverter : IValueConverter
         return false;
     }
 }
+
