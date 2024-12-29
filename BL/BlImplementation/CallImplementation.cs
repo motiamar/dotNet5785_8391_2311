@@ -21,8 +21,9 @@ internal class CallImplementation : BlApi.ICall
     {
         try
         {
-            var grouped = from call in _dal.Call.ReadAll()
-                          group call by call.TypeCall into callGroup
+            var calls = Helpers.CallManager.GetAllCallInList();
+            var grouped = from call in calls
+                          group call by call.CallStatus into callGroup
                           select new { Status = callGroup.Key, Count = callGroup.Count() };
 
             // Initialize an array with the size of the enum

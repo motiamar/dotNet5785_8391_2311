@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="CallListWindow" Height="640" Width="800">
+        Title="CallListWindow" Height="640" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <!--External grid-->
     <Grid>
         <Grid.RowDefinitions>
@@ -19,17 +20,52 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox  Grid.Column="1" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
-            <Label Content="Label" Grid.Column="0" HorizontalAlignment="Left" Margin="182,0,0,0" VerticalAlignment="Center"/>
+            <!--ordering the list-->
+            <ComboBox Grid.Column="1" SelectedValue="{Binding sort, Mode=TwoWay}" 
+                  ItemsSource="{Binding Source={StaticResource CallInListCollectionKey}}" 
+                  SelectionChanged="ComboBox_CallInListChange"/>
         </Grid>
-        <ListView Grid.Row="1">
+
+        <!--ListView with additional control in the last column-->
+        <ListView Grid.Row="1" Margin="5" ItemsSource="{Binding CallList}" SelectedItem="{Binding SelectedCallInList}" MouseDoubleClick="SelectedCallInList_MouseDouble_Click">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="ID" Width="60">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Id}" Background="Yellow" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Call ID" DisplayMemberBinding="{Binding CallId}" Width="60" />
+                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" Width="80" />
+                    <GridViewColumn Header="Call Open Time" DisplayMemberBinding="{Binding CallOpenTime}" Width="105" />
+                    <GridViewColumn Header="Call Left Time" DisplayMemberBinding="{Binding CallLeftTime}" Width="80" />
+                    <GridViewColumn Header="Last Volunteer" DisplayMemberBinding="{Binding LastVolunteerName}" Width="90" />
+                    <GridViewColumn Header="Total Treatment" DisplayMemberBinding="{Binding TotalTreatmentTime}" Width="90" />
+                    <GridViewColumn Header="Call Status" DisplayMemberBinding="{Binding CallStatus}" Width="80" />
+                    <GridViewColumn Header="Assignments" DisplayMemberBinding="{Binding SumOfAssignments}" Width="80" />
+                    <!-- buttons for delete and end assignment -->
+                    <GridViewColumn Header="Action" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="DELETE" HorizontalAlignment="right" VerticalAlignment="Center" Click="BtnDelete_Click" Margin="2" Visibility="{Binding CallStatus, Converter={StaticResource EnumToVisibilityConverter}}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Action" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="End assignment" HorizontalAlignment="right" VerticalAlignment="Center" Click="BtnEndAss_Click" Margin="2" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add Call" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+
+        <!--Add new volunteer button-->
+        <Button Content="Add call" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAddCall_Click"/>
 
     </Grid>
 </Window>

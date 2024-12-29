@@ -248,7 +248,8 @@ public partial class MainAdminWindow : Window
         if (sender is Button button)
         {
             int status = (int)button.Tag; // return the status selected
-            new CallListWindow(status).Show(); 
+            BO.BCallStatus filter = (BO.BCallStatus)status;
+            new CallListWindow(filter).Show(); 
         }
     }
 }
