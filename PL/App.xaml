@@ -12,7 +12,6 @@
         <local:IdToReadOnlyConverter x:Key="IdToReadOnlyConverterKey"/>
         <local:CallInProgressToStringConverter x:Key="CallInProgressConverterKey"/>
         <local:NullToEnabledConverter x:Key="NullToEnabledConverterKey" />
-       
     </Application.Resources>
 </Application>
     
