@@ -154,6 +154,7 @@ public partial class CallListWindow : Window
     }
 }
 
-
+ <local:CallInListCollection x:Key="CallInListCollectionKey"/>
+        <local:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter" />
 
    
