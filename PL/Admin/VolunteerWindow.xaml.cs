@@ -56,7 +56,9 @@ public partial class VolunteerWindow : Window
         DependencyProperty.Register("Role", typeof(BO.BRoles), typeof(VolunteerWindow), new PropertyMetadata(null));
 
 
-
+    /// <summary>
+    /// property for the add / update button  
+    /// </summary>
     public string ButtonText
     {
         get { return (string)GetValue(ButtonTextProperty); }
@@ -83,7 +85,7 @@ public partial class VolunteerWindow : Window
 
 
     /// <summary>
-    /// 
+    /// add or update the volunteer depent on the button text
     /// </summary>
     private void BtnAddUpdate_Click(object sender, RoutedEventArgs e)
     {

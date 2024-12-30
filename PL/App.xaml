@@ -16,6 +16,8 @@
         <local:TextNotEmptyToEnabledConverter x:Key="TextNotEmptyToEnabledConverterKey"/>
         <local:EnumToVisibilityConverter x:Key="EnumToVisibilityConverterKey"/>
         <local:CallInListCollection x:Key="CallInListCollectionKey"/>
+        <local:CallStatusListCollection x:Key="CallStatusListCollectionKey"/>
+        <local:CallTypeListCollection x:Key="CallTypeListCollectionKey"/>
     </Application.Resources>
 </Application>
     

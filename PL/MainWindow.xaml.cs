@@ -127,7 +127,7 @@ public partial class MainWindow : Window
                     MessageBoxResult result = MessageBox.Show("Do you want to enter the Manager screen?", "Manager Login", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes)
                     {
-                        new MainAdminWindow().Show();
+                        new MainAdminWindow(CurrentID).Show();
 
                     }
                     else

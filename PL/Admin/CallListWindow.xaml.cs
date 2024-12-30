@@ -20,13 +20,15 @@ namespace PL.Admin;
 public partial class CallListWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-    public CallListWindow(BO.BCallStatus filter = 0)
+    public CallListWindow(BO.BCallStatus filter = 0 ,int managerId = 0)
     {
+        ManagerId = managerId;
         StatusFilter = filter;
         InitializeComponent();
         this.Loaded += CallListWindow_Loaded;
     }
 
+    public int ManagerId { get; set; }
     /// <summary>
     /// dependecy property for the call list filter
     /// </summary>
@@ -127,7 +129,7 @@ public partial class CallListWindow : Window
         SelectedCallInList = (sender as Button)!.DataContext as BO.CallInList;
         if (SelectedCallInList == null)
         {
-            MessageBox.Show("No Volunteer selected");
+            MessageBox.Show("No call selected");
             return;
         }
         try
@@ -148,9 +150,34 @@ public partial class CallListWindow : Window
         }
     }
 
-    private void BtnEndAss_Click(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// button to cancale the assignment of the call
+    /// </summary>
+    private void BtnCancaleAss_Click(object sender, RoutedEventArgs e)
     {
-
+        SelectedCallInList = (sender as Button)!.DataContext as BO.CallInList;
+        if (SelectedCallInList == null)
+        {
+            MessageBox.Show("No call selected");
+            return;
+        }
+        try
+        {
+            var result = MessageBox.Show("Are you sure you want to cancale the assignmebt to this call?", "Confirm End", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                int id = SelectedCallInList.Id ?? 0;
+                s_bl.Call.CanceleAssignment(ManagerId, id);
+            }
+            else
+            {
+                MessageBox.Show("the cancle canceled");
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
     }
 }
 
