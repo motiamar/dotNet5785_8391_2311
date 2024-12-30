@@ -79,7 +79,7 @@
                                         VerticalAlignment="Center" 
                                         Click="BtnDelete_Click" 
                                         Margin="2" 
-                                        Visibility="{Binding CallStatus, Converter={StaticResource EnumToVisibilityConverter}}" />
+                                        Visibility="{Binding CallStatus, Converter={StaticResource EnumToVisibilityConverterKey}}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -97,11 +97,6 @@
         </ListView>
 
         <!-- Button to Add New Call -->
-        <Button Content="Add call" 
-                Grid.Row="2" 
-                HorizontalAlignment="Center" 
-                Height="50" 
-                Width="100" 
-                Click="BtnAddCall_Click" />
+        <Button Content="Add call" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAddCall_Click" />
     </Grid>
 </Window>
