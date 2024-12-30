@@ -12,6 +12,8 @@
         <local:IdToReadOnlyConverter x:Key="IdToReadOnlyConverterKey"/>
         <local:CallInProgressToStringConverter x:Key="CallInProgressConverterKey"/>
         <local:NullToEnabledConverter x:Key="NullToEnabledConverterKey" />
+        <local:BoolToEnabledConverter x:Key="BoolToEnabledConverterKey"/>
+        <local:TextNotEmptyToEnabledConverter x:Key="TextNotEmptyToEnabledConverterKey"/>
         <local:EnumToVisibilityConverter x:Key="EnumToVisibilityConverterKey"/>
         <local:CallInListCollection x:Key="CallInListCollectionKey"/>
     </Application.Resources>

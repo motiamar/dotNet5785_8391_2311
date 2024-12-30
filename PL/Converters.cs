@@ -92,6 +92,44 @@ public class NullToEnabledConverter : IValueConverter
 }
 
 /// <summary>
+/// if the value is true return true else return false
+/// </summary>
+public class BoolToEnabledConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        // אם הערך הוא true, החזר true (כדי שהכפתור יהיה פעיל)
+        return value is bool isActive && isActive;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        // במקרה הזה, לא נצטרך להמיר חזרה, אז נחזיר false.
+        return false;
+    }
+}
+
+/// <summary>
+/// if the value is true you can push the button else you can't
+/// </summary>
+public class TextNotEmptyToEnabledConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        // בודק אם הטקסט לא ריק (לא null ולא ריק)
+        return !string.IsNullOrEmpty(value as string);
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        // במקרה הזה לא צריך להמיר חזרה, אז נחזיר false.
+        return false;
+    }
+}
+
+}
+
+/// <summary>
 /// if the call status is open return true else return false
 /// </summary>
 public class EnumToVisibilityConverter : IValueConverter
