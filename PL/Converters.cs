@@ -107,21 +107,7 @@ public class BoolToEnabledConverter : IValueConverter
     }
 }
 
-/// <summary>
-/// if the value is true you can push the button else you can't
-/// </summary>
-public class TextNotEmptyToEnabledConverter : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return !string.IsNullOrEmpty(value as string);
-    }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return false;
-    }
-}
 
 /// <summary>
 /// if the call status is open return true else return false

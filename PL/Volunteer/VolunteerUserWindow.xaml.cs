@@ -41,6 +41,30 @@ public partial class VolunteerUserWindow : Window
 
 
     /// <summary>
+    /// screen loaded
+    /// </summary>
+    public void VolunteerUserWindow_Loaded(object sender, RoutedEventArgs e) 
+    {
+        s_bl.Volunteer.AddObserver(CurrentVolunteerUser.Id, VolunteerUserObserver);
+    }
+
+    /// <summary>
+    /// screen closing
+    /// </summary>
+    public void VolunteerUserWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        s_bl.Volunteer.RemoveObserver(CurrentVolunteerUser.Id, VolunteerUserObserver);
+    }
+
+    /// <summary>
+    /// observer for the current volunteer
+    /// </summary>
+    public void VolunteerUserObserver()
+    {
+        CurrentVolunteerUser = s_bl.Volunteer.Read(CurrentVolunteerUser.Id)!;
+    }
+
+    /// <summary>
     /// dependeci object for the current volunteer
     /// </summary>
     public BO.Volunteer CurrentVolunteerUser
@@ -94,7 +118,7 @@ public partial class VolunteerUserWindow : Window
     /// </summary>
     private void BtnChooseCall_Click(object sender, RoutedEventArgs e)
     {
-        new ChooseCallWindow().Show();
+        new ChooseCallWindow(CurrentVolunteerUser).Show();
     }
 
     /// <summary>
@@ -104,13 +128,13 @@ public partial class VolunteerUserWindow : Window
     {
         try
         {
-            BO.CallInProgress callInProgress = CurrentVolunteerUser.CorrentCall!;
-            if(callInProgress == null)
+            BO.Call call = s_bl.Call.Read(CurrentVolunteerUser.CorrentCall!.Id)!;
+            if(call == null)
             {
                 MessageBox.Show("There is no call in progress");
                 return;
             }
-            s_bl.Call.EndAssignment(CurrentVolunteerUser.Id, callInProgress.Id);
+            s_bl.Call.EndAssignment(CurrentVolunteerUser.Id, CurrentVolunteerUser.CorrentCall!.Id);
             MessageBox.Show("The call has ended sucssesfuly");
         }
         catch (Exception ex)
@@ -127,13 +151,13 @@ public partial class VolunteerUserWindow : Window
     {
         try
         {
-            BO.CallInProgress callInProgress = CurrentVolunteerUser.CorrentCall!;
-            if (callInProgress == null)
+            BO.Call call = s_bl.Call.Read(CurrentVolunteerUser.CorrentCall!.Id)!;
+            if (call == null)
             {
                 MessageBox.Show("There is no call in progress");
                 return;
             }
-            s_bl.Call.CanceleAssignment(CurrentVolunteerUser.Id, callInProgress.Id);
+            s_bl.Call.CanceleAssignment(CurrentVolunteerUser.Id, CurrentVolunteerUser.CorrentCall!.Id);
             MessageBox.Show("The call has canceled sucssesfuly");
         }
         catch (Exception ex)
