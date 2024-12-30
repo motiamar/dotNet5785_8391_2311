@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="CallListWindow" Height="640" Width="800"
+        Title="CallListWindow" Height="640" Width="920"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <!--External grid-->

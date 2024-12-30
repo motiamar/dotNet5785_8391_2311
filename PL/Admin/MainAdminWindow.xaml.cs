@@ -117,16 +117,21 @@ public partial class MainAdminWindow : Window
         MaxRange = s_bl.Admin.GetMaxRange();
     }
 
+    private void CallsObserver()
+    {
+        Btn_calls_Click();
+    }
     /// <summary>
     /// open screen event and initialization
     /// </summary>
     private void MainAdminWindowLoaded(object sendor, RoutedEventArgs e)
     {
-        Btn_calls_Click(sendor, e);
+        Btn_calls_Click();
         CurrentTime = s_bl.Admin.GetClock();
         MaxRange = s_bl.Admin.GetMaxRange();
         s_bl.Admin.AddClockObserver(ClockObserver);
         s_bl.Admin.AddConfigObserver(configObserver: ConfigObserver);
+        s_bl.Call.AddObserver(CallsObserver);
     }
 
     /// <summary>
@@ -136,6 +141,7 @@ public partial class MainAdminWindow : Window
     {
         s_bl.Admin.RemoveClockObserver(ClockObserver);
         s_bl.Admin.RemoveConfigObserver(ConfigObserver);
+        s_bl.Call.RemoveObserver(CallsObserver);
     }
 
     /// <summary>
@@ -174,9 +180,14 @@ public partial class MainAdminWindow : Window
                 }
                 s_bl.Admin.InitializeDB();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             finally
             {
                 Mouse.OverrideCursor = null;
+                MessageBox.Show("The initiliz has sucssesfull");
             }
         }
     }
@@ -201,17 +212,22 @@ public partial class MainAdminWindow : Window
                 }
                 s_bl.Admin.ResetDB();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             finally
             {
                 Mouse.OverrideCursor = null;
+                MessageBox.Show("The reset has sucssesfull");
             }
-        }
+        }      
     }
 
     /// <summary>
     /// create buttons for each status of the calls
     /// </summary>
-    private void Btn_calls_Click(object sender, RoutedEventArgs e)
+    private void Btn_calls_Click()
     {
         try
         {

@@ -16,9 +16,11 @@
         <local:BoolToEnabledConverter x:Key="BoolToEnabledConverterKey"/>
         <local:EnumToVisibilityConverter x:Key="EnumToVisibilityConverterKey"/>
         <local:CallInListCollection x:Key="CallInListCollectionKey"/>
-        <local:CallStatusListCollection x:Key="CallStatusListCollectionKey"/>
         <local:CallTypeListCollection x:Key="CallTypeListCollectionKey"/>
         <local:MultiConditionToEnabledConverter x:Key="MultiConditionToEnabledConverterKey"/>
+        <local:CallAssignInListsConverter x:Key="CallAssignInListsConverterKey"/>
+        <local:StatusToEnableConverter x:Key="StatusToEnableConverterKey"/>
+        <local:MaxTimeEnableConverter x:Key="MaxTimeEnableConverterKey"/>
     </Application.Resources>
 </Application>
     
