@@ -6,71 +6,99 @@
         xmlns:local="clr-namespace:PL.Volunteer"
         mc:Ignorable="d"
         Title="CallHistoryWindow" Height="640" Width="800">
+    <!-- Grid Root Container -->
     <Grid>
-        <Grid VerticalAlignment="Top" Margin="100,20,106,0" Height="548">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <!-- כותרת של המסך -->
-            <Label Content="Call History" Grid.Column="1" FontSize="30" FontWeight="Bold" Foreground="DarkBlue"
-               HorizontalAlignment="Left" Margin="58,10,0,20" Width="248"/>
-
-            <!-- Labels ו-TextBoxים -->
-
-            <Label Content="Call ID" Grid.Row="1" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27"/>
-            <TextBox Text="{Binding }" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Height="18" IsReadOnly="True" Margin="10"/>
-
-            <Label Content="Call Type" Grid.Row="2" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27"/>
-            <TextBox Text="{Binding }" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Height="18" IsReadOnly="True" Margin="10"/>
-
-            <Label Content="Call Open Time" Grid.Row="3" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27"/>
-            <TextBox Text="{Binding }" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Height="18" IsReadOnly="True" Margin="10"/>
-
-            <Label Content="Time Left to Close" Grid.Row="4" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27"/>
-            <TextBox Text="{Binding }" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Height="18" IsReadOnly="True" Margin="10"/>
-
-            <Label Content="Last Volunteer Name" Grid.Row="5" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27"/>
-            <TextBox Text="{Binding }" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Height="18" IsReadOnly="True" Margin="10"/>
-
-            <Label Content="Total Treatment Time" Grid.Row="6" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27"/>
-            <TextBox Text="{Binding }" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Height="18" IsReadOnly="True" Margin="10"/>
-
-            <Label Content="Call Status" Grid.Row="7" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27"/>
-            <TextBox Text="{Binding }" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Height="18" IsReadOnly="True" Margin="10"/>
-
-            <Label Content="Sum of Assignments" Grid.Row="8" Grid.Column="0" Foreground="Blue" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27"/>
-            <TextBox Text="{Binding }" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Height="18" IsReadOnly="True" Margin="10"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- כותרת -->
+            <RowDefinition Height="500*"/>
+            <!-- רשימת קריאות -->
+            <RowDefinition Height="Auto"/>
             <!-- ComboBox לסינון -->
-            <ComboBox Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Width="200" SelectionChanged="ComboBox_SelectionChanged">
-                <ComboBoxItem Content="All Calls"/>
-                <ComboBoxItem Content="Treated Calls"/>
-                <ComboBoxItem Content="Cancelled by Volunteer"/>
-                <ComboBoxItem Content="Cancelled by Manager"/>
-                <ComboBoxItem Content="Expired"/>
-            </ComboBox>
-            <Grid/>
+        </Grid.RowDefinitions>
+
+        <!-- כותרת "Call History" -->
+        <Label Content="Call History" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Margin="0,20"/>
+
+        <!-- ComboBox לסינון לפי סדר הקריאות -->
+        <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="1" Margin="10" VerticalAlignment="Center" SelectionChanged="ComboBox_SelectionChanged_1"/>
+            <Label Content="Sort by:" HorizontalAlignment="Left" Margin="198,0,0,0" VerticalAlignment="Center"/>
         </Grid>
+
+        <!-- רשימת קריאות -->
+        <ListView Grid.Row="1" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ListView.View>
+                <GridView>
+                    <!-- כותרת "Call ID" -->
+                    <GridViewColumn Header="Call ID" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CallId}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <!-- כותרת "Call Type" -->
+                    <GridViewColumn Header="Call Type" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Type}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <!-- כותרת "Call Open Time" -->
+                    <GridViewColumn Header="Call Open Time" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CallOpenTime}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <!-- כותרת "Time Left to Close" -->
+                    <GridViewColumn Header="Time Left to Close" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CallLeftTime}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <!-- כותרת "Last Volunteer Name" -->
+                    <GridViewColumn Header="Last Volunteer Name" Width="180">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding LastVolunteerName}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <!-- כותרת "Total Treatment Time" -->
+                    <GridViewColumn Header="Total Treatment Time" Width="180">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding TotalTreatmentTime}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <!-- כותרת "Call Status" -->
+                    <GridViewColumn Header="Call Status" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CallStatus}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
     </Grid>
 </Window>

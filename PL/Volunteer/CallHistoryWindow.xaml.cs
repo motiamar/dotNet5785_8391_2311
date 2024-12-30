@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BO;
 
 namespace PL.Volunteer;
 
@@ -28,7 +29,7 @@ public partial class CallHistoryWindow : Window
         InitializeComponent();
         try
         {
-            UserHistoryCalls = 
+            UserHistoryCalls = s_bl.Call.Read(id)!;
         }
         catch (Exception ex)
         {
@@ -38,21 +39,36 @@ public partial class CallHistoryWindow : Window
 
 
 
-    public BO.ClosedCallInList UserHistoryCalls
+    public BO.Call UserHistoryCalls
     {
-        get { return (BO.ClosedCallInList)GetValue(UserHistoryCallsProperty); }
+        get { return (BO.Call)GetValue(UserHistoryCallsProperty); }
         set { SetValue(UserHistoryCallsProperty, value); }
     }
 
     // Using a DependencyProperty as the backing store for UserHistoryCalls.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty UserHistoryCallsProperty =
-        DependencyProperty.Register("UserHistoryCalls", typeof(BO.ClosedCallInList), typeof(CallHistoryWindow), new PropertyMetadata(null));
+        DependencyProperty.Register("UserHistoryCalls", typeof(BO.Call), typeof(CallHistoryWindow), new PropertyMetadata(null));
 
 
 
-    private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+    public int MyProperty
     {
+        get { return (int)GetValue(MyPropertyProperty); }
+        set { SetValue(MyPropertyProperty, value); }
+    }
 
+    // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty MyPropertyProperty =
+        DependencyProperty.Register("MyProperty", typeof(int), typeof(CallHistoryWindow), new PropertyMetadata(0));
+
+
+    private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+    {
+        if (UserHistoryCalls != null)
+        {
+
+        }
     }
 }
 

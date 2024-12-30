@@ -283,10 +283,10 @@ internal class CallImplementation : BlApi.ICall
     {
         try
         {
-            if(_dal.Volunteer.Read(volunteerId) is null)
+            if (_dal.Volunteer.Read(volunteerId) is null)
                 throw new DO.DalDoesNotExistException($"volunteer with id {volunteerId} does not exist");
             IEnumerable<ClosedCallInList> closedCallsInList = Helpers.CallManager.GetClosedCallInLists(volunteerId);
-           if(filter is not null)
+            if (filter is not null)
             {
                 switch (filter)
                 {
@@ -307,13 +307,13 @@ internal class CallImplementation : BlApi.ICall
                         break;
                 }
             }
-           if(sort is not null)
+            if (sort is not null)
             {
-                switch(sort)
+                switch (sort)
                 {
                     case CloseCallInListFilter.Id:
                         closedCallsInList = closedCallsInList.OrderBy(c => c.Id);
-                        break;                   
+                        break;
                     case CloseCallInListFilter.Type:
                         closedCallsInList = closedCallsInList.OrderBy(c => c.Type);
                         break;
@@ -334,7 +334,7 @@ internal class CallImplementation : BlApi.ICall
                         break;
                 }
             }
-           else
+            else
                 closedCallsInList = closedCallsInList.OrderBy(c => c.Id);
             return closedCallsInList;
         }
