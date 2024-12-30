@@ -71,16 +71,19 @@ public partial class CallHistoryWindow : Window
     /// </summary>
     private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
     {
-        CloseCallList = (sender as ComboBox)!.SelectedIndex switch
-        {
-            0 => s_bl.Call.GetCloseCallList(UserHistoryCalls.Id, BO.BTypeCalls.Medical_situation, BO.CloseCallInListFilter.Id),
-            1 => s_bl.Call.GetCloseCallList(UserHistoryCalls.Id, BO.BTypeCalls.Car_accident, BO.CloseCallInListFilter.Id),
-            2 => s_bl.Call.GetCloseCallList(UserHistoryCalls.Id, BO.BTypeCalls.Fall_from_hight, BO.CloseCallInListFilter.Id),
-            3 => s_bl.Call.GetCloseCallList(UserHistoryCalls.Id, BO.BTypeCalls.Violent_event, BO.CloseCallInListFilter.Id),
-            4 => s_bl.Call.GetCloseCallList(UserHistoryCalls.Id, BO.BTypeCalls.Domestic_violent, BO.CloseCallInListFilter.Id),
-            5 => s_bl.Call.GetCloseCallList(UserHistoryCalls.Id, BO.BTypeCalls.None, BO.CloseCallInListFilter.Id),
-            _ => throw new NotImplementedException(),
-        };
+        //CloseCallList = (sender as ComboBox)!.SelectedIndex switch
+        //{
+        //    0 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.Id)!,
+        //    1 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.CallId)!,
+        //    2 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.Type)!,
+        //    3 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.CallOpenTime)!,
+        //    4 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.CallMaxCloseTime)!,
+        //    5 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.LastVolunteerName)!,
+        //    6 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.TotalTreatmentTime)!,
+        //    7 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.CallStatus)!,
+        //    8 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.SumOfAssignments)!,
+        //    _ => throw new NotImplementedException(),
+        //};
     }
 }
 
