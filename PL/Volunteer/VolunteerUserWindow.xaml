@@ -152,7 +152,7 @@
                 <BlurEffect Radius="20"/>
             </Label.Effect>
         </Label>
-        <TextBox x:Name="MyTextBox" Text="{Binding CurrentVolunteerUser.CorrentCall, Converter={StaticResource CallInProgressConverterKey}}" Grid.Row="14" Grid.Column="1" VerticalAlignment="Center" Height="92" IsReadOnly="True" />
+        <TextBox Text="{Binding CurrentVolunteerUser.CorrentCall, Converter={StaticResource CallInProgressConverterKey}}" Grid.Row="14" Grid.Column="1" VerticalAlignment="Center" Height="92" IsReadOnly="True" />
 
         <!-- Buttons -->
         <Button Content="Update deailes" Grid.Row="14" Grid.Column="1"  HorizontalAlignment="Left" Background="LightBlue" Width="144" Margin="252,92,0,-44" Grid.RowSpan="3" Click="BtnUpdate_Click"/>

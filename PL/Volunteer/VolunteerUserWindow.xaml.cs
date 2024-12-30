@@ -50,7 +50,9 @@ public partial class VolunteerUserWindow : Window
     // Using a DependencyProperty as the backing store for CurrentVolunteer.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty CurrentVolunteerUserProperty =
         DependencyProperty.Register("CurrentVolunteerUser", typeof(BO.Volunteer), typeof(VolunteerUserWindow), new PropertyMetadata(null));
-
+    /// <summary>
+    /// dependeci object for the current role
+    /// </summary>
     public BO.BRoles Role
     {
         get { return (BO.BRoles)GetValue(RoleProperty); }
@@ -61,13 +63,15 @@ public partial class VolunteerUserWindow : Window
     public static readonly DependencyProperty RoleProperty =
         DependencyProperty.Register("Role", typeof(BO.BRoles), typeof(VolunteerUserWindow), new PropertyMetadata(null));
 
+    /// <summary>
+    /// button for the update the volunteer
+    /// </summary>
     private void BtnUpdate_Click(object sender, RoutedEventArgs e)
     {
         try
         {
             s_bl.Volunteer.Update(CurrentVolunteerUser!.Id, CurrentVolunteerUser);
             MessageBox.Show("the Volunteer has updeted sucsesfuly");
-            this.Close();
         }
         catch (Exception ex)
         {
@@ -75,16 +79,25 @@ public partial class VolunteerUserWindow : Window
         }
     }
 
+    /// <summary>
+    /// button to show the call history
+    /// </summary>
     private void BtnCallHistory_Click(object sender, RoutedEventArgs e)
     {
         new CallHistoryWindow(CurrentVolunteerUser.Id).Show();
     }
 
+    /// <summary>
+    /// button to choose a call
+    /// </summary>
     private void BtnChooseCall_Click(object sender, RoutedEventArgs e)
     {
         new ChooseCallWindow().Show();
     }
 
+    /// <summary>
+    /// button to end the call
+    /// </summary>
     private void BtnEndCall_Click(object sender, RoutedEventArgs e)
     {
         try
@@ -105,6 +118,9 @@ public partial class VolunteerUserWindow : Window
         }
     }
 
+    /// <summary>
+    /// button to cancel the call
+    /// </summary>
     private void BtnCancaleCall_Click(object sender, RoutedEventArgs e)
     {
         try
