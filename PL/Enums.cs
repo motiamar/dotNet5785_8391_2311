@@ -49,3 +49,13 @@ public class DistanceTypeCollection : IEnumerable
         (Enum.GetValues(typeof(BO.BDistanceTypes)) as IEnumerable<BO.BDistanceTypes>)!;
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
+
+/// <summary>
+/// define the sort of call that enterd the system
+/// </summary>
+public class CallInListCollection : IEnumerable
+{
+    static readonly IEnumerable<BO.CallInListFilter> s_enums =
+        (Enum.GetValues(typeof(BO.CallInListFilter)) as IEnumerable<BO.CallInListFilter>)!;
+    public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
+}
