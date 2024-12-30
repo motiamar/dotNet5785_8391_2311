@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="CallListWindow" Height="640" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
     <!--External grid-->
     <Grid>
         <Grid.RowDefinitions>
@@ -14,22 +15,29 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
         <!--Internal, Upper Grid-->
-        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid HorizontalAlignment="Stretch" Height="Auto" Grid.Row="0" VerticalAlignment="Stretch" Width="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <!--ordering the list-->
-            <ComboBox Grid.Column="1" SelectedValue="{Binding sort, Mode=TwoWay}" 
-                  ItemsSource="{Binding Source={StaticResource CallInListCollectionKey}}" 
-                  SelectionChanged="ComboBox_CallInListChange"/>
+
+            <!-- ComboBox to order the list -->
+            <ComboBox Grid.Column="1"
+                      SelectedValue="{Binding sort, Mode=TwoWay}" 
+                      ItemsSource="{Binding Source={StaticResource CallInListCollectionKey}}" 
+                      SelectionChanged="ComboBox_CallInListChange" />
         </Grid>
 
         <!--ListView with additional control in the last column-->
-        <ListView Grid.Row="1" Margin="5" ItemsSource="{Binding CallList}" SelectedItem="{Binding SelectedCallInList}" MouseDoubleClick="SelectedCallInList_MouseDouble_Click">
+        <ListView Grid.Row="1" Margin="5"
+                  ItemsSource="{Binding CallList}" 
+                  SelectedItem="{Binding SelectedCallInList}" 
+                  MouseDoubleClick="SelectedCallInList_MouseDouble_Click">
             <ListView.View>
                 <GridView>
+                    <!-- Column for ID -->
                     <GridViewColumn Header="ID" Width="60">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -37,22 +45,46 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+
+                    <!-- Column for Call ID -->
                     <GridViewColumn Header="Call ID" DisplayMemberBinding="{Binding CallId}" Width="60" />
+
+                    <!-- Column for Type -->
                     <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" Width="80" />
+
+                    <!-- Column for Call Open Time -->
                     <GridViewColumn Header="Call Open Time" DisplayMemberBinding="{Binding CallOpenTime}" Width="105" />
+
+                    <!-- Column for Call Left Time -->
                     <GridViewColumn Header="Call Left Time" DisplayMemberBinding="{Binding CallLeftTime}" Width="80" />
+
+                    <!-- Column for Last Volunteer -->
                     <GridViewColumn Header="Last Volunteer" DisplayMemberBinding="{Binding LastVolunteerName}" Width="90" />
+
+                    <!-- Column for Total Treatment -->
                     <GridViewColumn Header="Total Treatment" DisplayMemberBinding="{Binding TotalTreatmentTime}" Width="90" />
+
+                    <!-- Column for Call Status -->
                     <GridViewColumn Header="Call Status" DisplayMemberBinding="{Binding CallStatus}" Width="80" />
+
+                    <!-- Column for Assignments -->
                     <GridViewColumn Header="Assignments" DisplayMemberBinding="{Binding SumOfAssignments}" Width="80" />
-                    <!-- buttons for delete and end assignment -->
+
+                    <!-- Action Column for DELETE Button -->
                     <GridViewColumn Header="Action" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="DELETE" HorizontalAlignment="right" VerticalAlignment="Center" Click="BtnDelete_Click" Margin="2" Visibility="{Binding CallStatus, Converter={StaticResource EnumToVisibilityConverter}}"/>
+                                <Button Content="DELETE" 
+                                        HorizontalAlignment="Right" 
+                                        VerticalAlignment="Center" 
+                                        Click="BtnDelete_Click" 
+                                        Margin="2" 
+                                        Visibility="{Binding CallStatus, Converter={StaticResource EnumToVisibilityConverter}}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+
+                    <!-- Action Column for End Assignment Button -->
                     <GridViewColumn Header="Action" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -64,8 +96,12 @@
             </ListView.View>
         </ListView>
 
-        <!--Add new volunteer button-->
-        <Button Content="Add call" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAddCall_Click"/>
-
+        <!-- Button to Add New Call -->
+        <Button Content="Add call" 
+                Grid.Row="2" 
+                HorizontalAlignment="Center" 
+                Height="50" 
+                Width="100" 
+                Click="BtnAddCall_Click" />
     </Grid>
 </Window>
