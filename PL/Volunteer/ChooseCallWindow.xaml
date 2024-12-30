@@ -5,8 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Volunteer"
         mc:Ignorable="d"
-        Title="ChooseCallWindow" Height="450" Width="800">
+        Title="ChooseCallWindow" Height="600" Width="800"
+    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Text="Open Calls List" FontSize="20" HorizontalAlignment="Center" Margin="10"/>
+
+        <!-- Open Calls List -->
+        <ListBox x:Name="OpenCallsListBox" Grid.Row="1" 
+                 ItemsSource="{Binding OpenCalls}" 
+                 SelectionMode="Single"
+                 Margin="10" 
+                 Height="300">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Description}" FontWeight="Bold" />
+                        <TextBlock Text="{Binding Type}" FontStyle="Italic" />
+                        <TextBlock Text="{Binding CallAddress}" />
+                        <TextBlock Text="{Binding CallDistance, StringFormat='Distance: {0} km'}" />
+                        <Button Content="Select to Handle" HorizontalAlignment="Right" Margin="5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Selected Call Details -->
+        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="10">
+            <TextBlock Text="Selected Call Details" FontSize="16" FontWeight="Bold" />
+            <TextBlock Text="{Binding SelectedCall.Description}" FontSize="14"/>
+            <TextBlock Text="{Binding SelectedCall.CallAddress}" FontSize="14"/>
+            <TextBlock Text="{Binding SelectedCall.Type}" FontSize="14"/>
+            <TextBlock Text="{Binding SelectedCall.CallDistance, StringFormat='Distance: {0} km'}" FontSize="14"/>
+            <Button Content="Update Address" HorizontalAlignment="Right" Margin="10"/>
+        </StackPanel>
     </Grid>
 </Window>

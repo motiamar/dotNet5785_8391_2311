@@ -27,7 +27,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column="1" Margin="10" VerticalAlignment="Center" SelectionChanged="ComboBox_SelectionChanged_1" SelectedValue="{Binding sort, Mode=TwoWay}"  ItemsSource="{Binding Source={StaticResource CallInListCollectionKey}}"/>
+            <ComboBox Grid.Column="1" Margin="10" VerticalAlignment="Center" SelectionChanged="ComboBox_SelectionChanged_1" />
             <Label Content="Sort by:" HorizontalAlignment="Left" Margin="198,0,0,0" VerticalAlignment="Center"/>
         </Grid>
 
@@ -39,13 +39,13 @@
                     <GridViewColumn Header="Call ID" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding CallId}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Id}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
                     <!-- כותרת "Call Type" -->
-                    <GridViewColumn Header="Call Type" Width="120">
+                    <GridViewColumn Header="Call type" Width="120">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Type}" HorizontalAlignment="Center"/>
@@ -54,7 +54,16 @@
                     </GridViewColumn>
 
                     <!-- כותרת "Call Open Time" -->
-                    <GridViewColumn Header="Call Open Time" Width="150">
+                    <GridViewColumn Header="Call address" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CallAddress}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <!-- כותרת "Time Left to Close" -->
+                    <GridViewColumn Header="Call open time" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding CallOpenTime}" HorizontalAlignment="Center"/>
@@ -62,38 +71,29 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- כותרת "Time Left to Close" -->
-                    <GridViewColumn Header="Time Left to Close" Width="150">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding CallLeftTime}" HorizontalAlignment="Center"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
                     <!-- כותרת "Last Volunteer Name" -->
-                    <GridViewColumn Header="Last Volunteer Name" Width="180">
+                    <GridViewColumn Header="Call enter time" Width="180">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding LastVolunteerName}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding CallEnterTime}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
                     <!-- כותרת "Total Treatment Time" -->
-                    <GridViewColumn Header="Total Treatment Time" Width="180">
+                    <GridViewColumn Header="Call close time" Width="180">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding TotalTreatmentTime}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding CallCloseTime}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
                     <!-- כותרת "Call Status" -->
-                    <GridViewColumn Header="Call Status" Width="150">
+                    <GridViewColumn Header="End kind" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding CallStatus}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding EndKind}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

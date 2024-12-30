@@ -19,6 +19,7 @@ namespace PL.Volunteer
     /// </summary>
     public partial class ChooseCallWindow : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public ChooseCallWindow()
         {
             InitializeComponent();
