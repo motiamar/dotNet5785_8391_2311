@@ -450,6 +450,8 @@ internal class CallImplementation : BlApi.ICall
             _dal.Assignment.Update(updateAssignment);   
             CallManager.Observers.NotifyItemUpdated(assignment.CallId);
             CallManager.Observers.NotifyListUpdated();
+            VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
+            VolunteerManager.Observers.NotifyListUpdated();
         }
         catch(DO.DalDoesNotExistException ex)
         {
@@ -492,6 +494,8 @@ internal class CallImplementation : BlApi.ICall
             _dal.Assignment.Update(update);
             CallManager.Observers.NotifyItemUpdated(assignment.CallId);
             CallManager.Observers.NotifyListUpdated();
+            VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
+            VolunteerManager.Observers.NotifyListUpdated();
         }
         catch (DO.DalDoesNotExistException ex)
         {

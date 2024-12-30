@@ -149,4 +149,22 @@ public class MultiConditionToEnabledConverter : IMultiValueConverter
     {
         throw new NotImplementedException();
     }
+    
+}
+
+
+/// <summary>
+/// if there is a current call is return true else return false
+/// </summary>
+public class NullToNotEnabledConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return value != null;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
 }
