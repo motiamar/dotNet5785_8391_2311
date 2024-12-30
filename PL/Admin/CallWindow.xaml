@@ -5,8 +5,94 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="CallWindow" Height="450" Width="800">
+        Title="CallWindow" Height="640" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+    <!-- משאבים עבור החלון -->
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+    </Window.Resources>
+
     <Grid>
-        
+        <!-- טבלה ראשית עם 2 עמודות -->
+        <Grid Margin="100,20,106,0" VerticalAlignment="Top" Height="384">
+            <!-- עמודות -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- שורות -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- כותרת -->
+            <Label Content="Call Details" 
+                   Grid.Column="1" 
+                   FontSize="30" FontWeight="Bold" Foreground="DarkBlue" 
+                   HorizontalAlignment="Left" Margin="16,10,0,20"/>
+
+            <!-- Id -->
+            <Label Content="Id" Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelStyle}" Margin="0,0,0,26" Grid.RowSpan="2" />
+            <TextBox Text="{Binding CorrentCall.Id}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+
+            <!-- Type -->
+            <Label Content="Type" Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelStyle}" Margin="0,0,0,26" Grid.RowSpan="2" />
+            <ComboBox ItemsSource="{Binding Source={StaticResource CallTypeListCollectionKey}}" 
+                      SelectedValue="{Binding CorrentCall.Type}" 
+                      Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <!-- Description -->
+            <Label Content="Description" Grid.Row="3" Grid.Column="0" Style="{StaticResource LabelStyle}" Margin="0,0,0,26" Grid.RowSpan="2" />
+            <TextBox Text="{Binding CorrentCall.Description}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <!-- Address -->
+            <Label Content="Address" Grid.Row="4" Grid.Column="0" Style="{StaticResource LabelStyle}" Margin="0,0,0,26" Grid.RowSpan="2" />
+            <TextBox Text="{Binding CorrentCall.CallAddress}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <!-- Call Open Time -->
+            <Label Content="Call Open Time" Grid.Row="5" Grid.Column="0" Style="{StaticResource LabelStyle}" Margin="0,0,0,26" Grid.RowSpan="2" />
+            <TextBox Text="{Binding CorrentCall.CallOpenTime}" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <!-- Call Max Close Time -->
+            <Label Content="Call Max Close Time" Grid.Row="6" Grid.Column="0" Style="{StaticResource LabelStyle}" Margin="0,0,0,26" Grid.RowSpan="2" />
+            <TextBox Text="{Binding CorrentCall.CallMaxCloseTime}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <!-- Call Status -->
+            <Label Content="Call Status" Grid.Row="7" Grid.Column="0" Style="{StaticResource LabelStyle}" />
+            <ComboBox ItemsSource="{Binding Source={StaticResource CallStatusListCollectionKey}}" 
+                      SelectedValue="{Binding CorrentCall.CallStatus}" 
+                      Grid.Row="7" Grid.Column="1" VerticalAlignment="Center"/>
+
+            <!-- Call Assign In Lists -->
+            <Label Content="Call Assign In Lists" Grid.Row="7" Grid.Column="0" Style="{StaticResource LabelStyle}" Margin="0,29,0,0" Grid.RowSpan="2" RenderTransformOrigin="0.456,-0.29" VerticalAlignment="Top" />
+            <TextBox Text="{Binding CorrentCall.callAssignInLists}" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Height="71"/>
+
+            <!-- כפתור שמירה -->
+            <Button Grid.Row="14" Grid.Column="1" Content="{Binding ButtonText}" 
+                    HorizontalAlignment="Center" Background="LightBlue" Width="162" 
+                    Margin="0,30,0,0" Click="BtnAddUpdate_Click"/>
+        </Grid>
     </Grid>
 </Window>

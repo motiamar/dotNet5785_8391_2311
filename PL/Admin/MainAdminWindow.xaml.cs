@@ -21,12 +21,14 @@ namespace PL.Admin;
 public partial class MainAdminWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-    public MainAdminWindow()
+    public MainAdminWindow(int managerId)
     {
+        ManagerID = managerId;
         InitializeComponent();
         this.Loaded += MainAdminWindowLoaded;
         this.Closing += MainAdminWindow_Closing;
     }
+    int ManagerID { get; set; }
 
     /// <summary>
     /// dependecy property for the clock 
@@ -249,7 +251,7 @@ public partial class MainAdminWindow : Window
         {
             int status = (int)button.Tag; // return the status selected
             BO.BCallStatus filter = (BO.BCallStatus)status;
-            new CallListWindow(filter).Show(); 
+            new CallListWindow(filter, ManagerID).Show(); 
         }
     }
 }

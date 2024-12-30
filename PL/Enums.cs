@@ -59,3 +59,23 @@ public class CallInListCollection : IEnumerable
         (Enum.GetValues(typeof(BO.CallInListFilter)) as IEnumerable<BO.CallInListFilter>)!;
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
+
+/// <summary>
+/// define the status of the call
+/// </summary>
+public class CallStatusListCollection : IEnumerable
+{
+    static readonly IEnumerable<BO.BCallStatus> s_enums =
+        (Enum.GetValues(typeof(BO.BCallStatus)) as IEnumerable<BO.BCallStatus>)!;
+    public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
+}
+
+/// <summary>
+/// define the type of the call
+/// </summary>
+public class CallTypeListCollection : IEnumerable
+{
+    static readonly IEnumerable<BO.BTypeCalls> s_enums =
+        (Enum.GetValues(typeof(BO.BTypeCalls)) as IEnumerable<BO.BTypeCalls>)!;
+    public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
+}

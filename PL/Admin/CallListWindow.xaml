@@ -56,7 +56,7 @@
                     <GridViewColumn Header="Action" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="End assignment" HorizontalAlignment="right" VerticalAlignment="Center" Click="BtnEndAss_Click" Margin="2" />
+                                <Button Content="Cancale assignment" HorizontalAlignment="right" VerticalAlignment="Center" Click="BtnCancaleAss_Click" Margin="2" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

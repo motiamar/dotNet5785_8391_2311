@@ -127,8 +127,6 @@ public class TextNotEmptyToEnabledConverter : IValueConverter
     }
 }
 
-}
-
 /// <summary>
 /// if the call status is open return true else return false
 /// </summary>
