@@ -35,6 +35,8 @@ public partial class VolunteerUserWindow : Window
         {
             MessageBox.Show(ex.Message);
         }
+        this.Loaded += VolunteerUserWindow_Loaded;
+        this.Closing += VolunteerUserWindow_Closing!;
     }
 
 
@@ -138,7 +140,6 @@ public partial class VolunteerUserWindow : Window
         {
             MessageBox.Show(ex.Message);
         }
-
     }
 }
 

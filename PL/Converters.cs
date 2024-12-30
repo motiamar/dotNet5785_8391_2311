@@ -141,3 +141,26 @@ public class EnumToVisibilityConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+/// <summary>
+/// if the value is true return false else return true
+/// </summary>
+public class MultiConditionToEnabledConverter : IMultiValueConverter
+{
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (values.Length == 2)
+        {
+            bool isActive = values[0] is bool active && active;
+            bool hasCurrentCall = values[1] == null;
+
+            return isActive && hasCurrentCall; 
+        }
+        return false; 
+    }
+
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
