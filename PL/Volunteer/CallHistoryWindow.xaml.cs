@@ -38,7 +38,9 @@ public partial class CallHistoryWindow : Window
     }
 
 
-
+    /// <summary>
+    /// dependecy property for the call list
+    /// </summary>
     public BO.Call UserHistoryCalls
     {
         get { return (BO.Call)GetValue(UserHistoryCallsProperty); }
@@ -51,24 +53,44 @@ public partial class CallHistoryWindow : Window
 
 
 
-
-    public int MyProperty
+    /// <summary>
+    /// dependecy property for the call list filter
+    /// </summary>
+    public IEnumerable<ClosedCallInList> CloseCallList
     {
-        get { return (int)GetValue(MyPropertyProperty); }
-        set { SetValue(MyPropertyProperty, value); }
+        get { return (IEnumerable<ClosedCallInList>)GetValue(CloseCallListProperty); }
+        set { SetValue(CloseCallListProperty, value); }
     }
 
     // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty MyPropertyProperty =
-        DependencyProperty.Register("MyProperty", typeof(int), typeof(CallHistoryWindow), new PropertyMetadata(0));
+    public static readonly DependencyProperty CloseCallListProperty =
+        DependencyProperty.Register("MyProperty", typeof(IEnumerable<ClosedCallInList>), typeof(CallHistoryWindow), new PropertyMetadata(null));
 
 
+    /// <summary>
+    /// status filter for the call list
+    /// </summary>
+    BO.BCallStatus StatusFilter { get; set; }
+
+
+    /// <summary>
+    /// add observer to the call list and load the call list
+    /// </summary>
     private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
     {
-        if (UserHistoryCalls != null)
+        CloseCallList = (sender as ComboBox)!.SelectedIndex switch
         {
-
-        }
+            0 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.Id)!,
+            1 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.CallId)!,
+            2 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.Type)!,
+            3 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.CallOpenTime)!,
+            4 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.CallMaxCloseTime)!,
+            5 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.LastVolunteerName)!,
+            6 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.TotalTreatmentTime)!,
+            7 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.CallStatus)!,
+            8 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.SumOfAssignments)!,
+            _ => throw new NotImplementedException(),
+        };
     }
 }
 

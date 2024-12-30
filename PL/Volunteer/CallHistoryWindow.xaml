@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Volunteer"
         mc:Ignorable="d"
-        Title="CallHistoryWindow" Height="640" Width="800">
+        Title="CallHistoryWindow" Height="640" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <!-- Grid Root Container -->
     <Grid>
         <Grid.RowDefinitions>
@@ -26,7 +27,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column="1" Margin="10" VerticalAlignment="Center" SelectionChanged="ComboBox_SelectionChanged_1"/>
+            <ComboBox Grid.Column="1" Margin="10" VerticalAlignment="Center" SelectionChanged="ComboBox_SelectionChanged_1" SelectedValue="{Binding sort, Mode=TwoWay}"  ItemsSource="{Binding Source={StaticResource CallInListCollectionKey}}"/>
             <Label Content="Sort by:" HorizontalAlignment="Left" Margin="198,0,0,0" VerticalAlignment="Center"/>
         </Grid>
 
