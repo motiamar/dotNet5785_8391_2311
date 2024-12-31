@@ -19,6 +19,7 @@
         <local:CallStatusListCollection x:Key="CallStatusListCollectionKey"/>
         <local:CallTypeListCollection x:Key="CallTypeListCollectionKey"/>
         <local:MultiConditionToEnabledConverter x:Key="MultiConditionToEnabledConverterKey"/>
+        <local:CloseCallInListCollection x:Key="CloseCallInListCollectionKey"/>
     </Application.Resources>
 </Application>
     

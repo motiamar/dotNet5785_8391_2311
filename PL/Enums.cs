@@ -60,6 +60,13 @@ public class CallInListCollection : IEnumerable
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
 
+
+public class CloseCallInListCollection : IEnumerable
+{
+    static readonly IEnumerable<BO.CloseCallInListFilter> s_enums =
+        (Enum.GetValues(typeof(BO.CloseCallInListFilter)) as IEnumerable<BO.CloseCallInListFilter>)!;
+    public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
+}
 /// <summary>
 /// define the status of the call
 /// </summary>
