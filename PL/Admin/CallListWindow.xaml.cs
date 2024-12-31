@@ -26,6 +26,7 @@ public partial class CallListWindow : Window
         StatusFilter = filter;
         InitializeComponent();
         this.Loaded += CallListWindow_Loaded;
+        this.Closing += CallListWindow_Closing!;
     }
 
     public int ManagerId { get; set; }
@@ -74,7 +75,7 @@ public partial class CallListWindow : Window
     /// </summary>
     private void CallInListObserver()
     {
-        CallList = s_bl.Call.ReadAll()!;
+        CallList = s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, null)!;
     }
 
     /// <summary>

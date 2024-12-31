@@ -168,3 +168,67 @@ public class NullToNotEnabledConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+/// <summary>
+/// Converts a list of calls to a formatted string. If the list is empty or null, returns an empty string.
+/// </summary>
+public class CallAssignInListsConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+        if (value is List<BO.CallAssignInList> calls && calls.Count > 0)
+        {
+            return string.Join("\n\n", calls.Select(call =>
+                $"Volunteer id: {call.VolunteerId} \n" +
+                $"Volunteer name: {call.VolunteerFullName} \n" +
+                $"Enter time: {call.CallEnterTime} \n" +
+                $"Close Time: {call.CallCloseTime} \n" +
+                $"End Kind: {call.EndKind}"
+            ));
+        }
+        return string.Empty; 
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+        throw new NotImplementedException(); 
+    }
+}
+
+/// <summary>
+/// if the call status is open or open_in_risk return true else return false
+/// </summary>
+public class StatusToEnableConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        string statusValue = value.ToString()!;
+        if (statusValue == "Open" || statusValue == "Open_in_risk")
+            return true;
+        return false;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+/// <summary>
+/// if the call status is open or open_in_risk return true else return false
+/// </summary>
+public class MaxTimeEnableConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        string statusValue = value.ToString()!;
+        if (statusValue == "Closed" || statusValue == "Expired")
+            return false;
+        return true;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

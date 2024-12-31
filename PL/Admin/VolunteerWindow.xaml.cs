@@ -73,7 +73,7 @@ public partial class VolunteerWindow : Window
     /// <summary>
     /// property to hold the volunteer from the data base
     /// </summary>
-    public BO.Volunteer?  CorrentVolunteer
+    public BO.Volunteer? CorrentVolunteer
     {
         get { return (BO.Volunteer? )GetValue(CorrentVolunteerProperty); }
         set { SetValue(CorrentVolunteerProperty, value); }

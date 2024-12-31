@@ -70,6 +70,8 @@ internal class AdminImplementation : IAdmin
         _dal.ResetDB();
         AdminManager.UpdateClock(AdminManager.Now);
         AdminManager.MaxRange = AdminManager.MaxRange;
+        VolunteerManager.Observers.NotifyListUpdated();
+        CallManager.Observers.NotifyListUpdated();
     }
 
     /// <summary>
@@ -80,6 +82,8 @@ internal class AdminImplementation : IAdmin
         DalTest.Initialization.Do();
         AdminManager.UpdateClock(AdminManager.Now);
         AdminManager.MaxRange = AdminManager.MaxRange;
+        VolunteerManager.Observers.NotifyListUpdated();
+        CallManager.Observers.NotifyListUpdated();
     }
 
     /// <summary>

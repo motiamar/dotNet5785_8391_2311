@@ -256,7 +256,7 @@ internal class CallImplementation : BlApi.ICall
                 FullAddressOfTheCall = call.CallAddress,
                 Latitude = latitude,
                 Longitude = longitude,
-                OpeningCallTime = call.CallOpenTime,
+                OpeningCallTime = AdminManager.Now,
                 MaxEndingCallTime = call.CallMaxCloseTime
             };
             _dal.Call.Create(newCall);
