@@ -5,99 +5,104 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Volunteer"
         mc:Ignorable="d"
-        Title="CallHistoryWindow" Height="640" Width="900"
+        Title="CallHistoryWindow" Height="640" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
     <!-- Grid Root Container -->
     <Grid>
+        <!-- Row Definitions: Define the structure of the grid with 3 rows -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- כותרת -->
+            <!-- Header Row (Title) -->
             <RowDefinition Height="500*"/>
-            <!-- רשימת קריאות -->
+            <!-- ListView for call history -->
             <RowDefinition Height="Auto"/>
-            <!-- ComboBox לסינון -->
+            <!-- ComboBox for filtering -->
         </Grid.RowDefinitions>
 
-        <!-- כותרת "Call History" -->
+        <!-- Header "Call History" -->
         <Label Content="Call History" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Margin="0,20"/>
 
-        <!-- ComboBox לסינון לפי סדר הקריאות -->
+        <!-- ComboBox for sorting/filtering calls -->
         <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <!-- ComboBox for sorting the call list -->
             <ComboBox Grid.Column="1" Margin="10" VerticalAlignment="Center" SelectionChanged="ComboBox_SelectionChanged_1" 
-                      SelectedValue="{Binding sort , Mode=TwoWay}" 
+                      SelectedValue="{Binding CallInListSort , Mode=TwoWay}" 
                       ItemsSource="{Binding Source={StaticResource CloseCallInListCollectionKey}}" />
-            <Label Content="Sort by:" HorizontalAlignment="Left" Margin="198,0,0,0" VerticalAlignment="Center"/>
+
+            <!-- ComboBox for filtering by call type -->
+            <ComboBox Grid.Column="0" Margin="10" VerticalAlignment="Center" SelectionChanged="ComboBox_SelectionChanged_1" 
+                      SelectedValue="{Binding CallTypeFilter , Mode=TwoWay}" 
+                      ItemsSource="{Binding Source={StaticResource CallTypeListCollectionKey}}" />
         </Grid>
 
-        <!-- רשימת קריאות -->
-        <ListView Grid.Row="1" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-          ItemsSource="{Binding UserHistoryCalls}" 
-          SelectedItem="{Binding SelectedClosedCallInList}">
+        <!-- ListView displaying call history -->
+        <ListView Grid.Row="1" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding UserHistoryCalls}">
             <ListView.View>
                 <GridView>
-                    <!-- כותרת "Call ID" -->
+                    <!-- Column "Call ID" -->
                     <GridViewColumn Header="Call ID" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Id}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding UserHistoryCalls.Id}"  HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- כותרת "Call Type" -->
-                    <GridViewColumn Header="Call type" Width="120">
+                    <!-- Column "Call Type" -->
+                    <GridViewColumn Header="Call type" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Type}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding UserHistoryCalls.Type}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- כותרת "Call Address" -->
-                    <GridViewColumn Header="Call address" Width="150">
+                    <!-- Column "Call Address" -->
+                    <GridViewColumn Header="Call address" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding CallAddress}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding UserHistoryCalls.CallAddress}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- כותרת "Call Open Time" -->
-                    <GridViewColumn Header="Call open time" Width="150">
+                    <!-- Column "Call Open Time" -->
+                    <GridViewColumn Header="Call open time" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding CallOpenTime}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding UserHistoryCalls.CallOpenTime}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- כותרת "Call Enter Time" -->
-                    <GridViewColumn Header="Call enter time" Width="180">
+                    <!-- Column "Call Enter Time" -->
+                    <GridViewColumn Header="Call enter time" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding CallEnterTime}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding UserHistoryCalls.CallEnterTime}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- כותרת "Call Close Time" -->
-                    <GridViewColumn Header="Call close time" Width="180">
+                    <!-- Column "Call Close Time" -->
+                    <GridViewColumn Header="Call close time" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding CallCloseTime}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding UserHistoryCalls.CallCloseTime}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- כותרת "End Kind" -->
+                    <!-- Column "End Kind" -->
                     <GridViewColumn Header="End kind" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding EndKind}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding UserHistoryCalls.EndKind}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

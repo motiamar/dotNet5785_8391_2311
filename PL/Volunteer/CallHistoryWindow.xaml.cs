@@ -25,25 +25,42 @@ public partial class CallHistoryWindow : Window
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
     public CallHistoryWindow(int id = 0)
-    {
+    { 
+        UserID = id;
         InitializeComponent();
-        try
-        {
-            UserHistoryCalls = s_bl.Call.GetCloseCallList(id);
-            UserID = id;
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.Message);
-        }
+        UserHistoryCalls = s_bl.Call.GetCloseCallList(UserID, CallTypeFilter, CallInListSort);
         this.Loaded += CallHistoryWindow_Loaded;
         this.Closed += CallHistoryWindow_Closed!;
     }
 
+
     /// <summary>
-    /// entity to hold the selected call in the list
+    /// sort the call list by the given parameter
     /// </summary>
-    public BO.ClosedCallInList? SelectedClosedCallInList { get; set; }
+    public BO.CloseCallInListFilter? CallInListSort
+    {
+        get { return (BO.CloseCallInListFilter?)GetValue(CallInListSortProperty); }
+        set { SetValue(CallInListSortProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for CallInListSort.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty CallInListSortProperty =
+        DependencyProperty.Register("CallInListSort", typeof(BO.CloseCallInListFilter?), typeof(CallHistoryWindow), new PropertyMetadata(null));
+
+
+
+    /// <summary>
+    /// filter the call list by the call type
+    /// </summary>
+    public BO.BTypeCalls? CallTypeFilter
+    {
+        get { return (BO.BTypeCalls?)GetValue(CallTypeFilterProperty); }
+        set { SetValue(CallTypeFilterProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for CallTypeFilter.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty CallTypeFilterProperty =
+        DependencyProperty.Register("CallTypeFilter", typeof(BO.BTypeCalls?), typeof(CallHistoryWindow), new PropertyMetadata(null));
 
     /// <summary>
     /// user id to filter the call list
@@ -72,6 +89,7 @@ public partial class CallHistoryWindow : Window
     /// </summary>
     public void CallHistoryWindow_Loaded(object sender, RoutedEventArgs e)
     {
+        UserHistoryCalls = s_bl.Call.GetCloseCallList(UserID);
         s_bl.Call.AddObserver(CallInListObserver);
     }
 
@@ -80,7 +98,7 @@ public partial class CallHistoryWindow : Window
     /// </summary>
     public void CallInListObserver()
     {
-        UserHistoryCalls = s_bl.Call.GetCloseCallList(UserID);
+        UserHistoryCalls = s_bl.Call.GetCloseCallList(UserID, CallTypeFilter, CallInListSort);
     }
 
 
@@ -102,17 +120,7 @@ public partial class CallHistoryWindow : Window
     /// </summary>
     private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
     {
-        UserHistoryCalls = (sender as ComboBox)!.SelectedIndex switch
-        {
-            0 => s_bl.Call.GetCloseCallList(UserID,null,BO.CloseCallInListFilter.Id)!,
-            1 => s_bl.Call.GetCloseCallList(UserID, null, BO.CloseCallInListFilter.Type)!,
-            2 => s_bl.Call.GetCloseCallList(UserID, null, BO.CloseCallInListFilter.CallAddress)!,
-            3 => s_bl.Call.GetCloseCallList(UserID, null, BO.CloseCallInListFilter.CallOpenTime)!,
-            4 => s_bl.Call.GetCloseCallList(UserID, null, BO.CloseCallInListFilter.CallEnterTime)!,
-            5 => s_bl.Call.GetCloseCallList(UserID, null, BO.CloseCallInListFilter.CallCloseTime)!,
-            6 => s_bl.Call.GetCloseCallList(UserID, null, BO.CloseCallInListFilter.EndKind)!,
-            _ => throw new NotImplementedException(),
-        };
+        UserHistoryCalls = s_bl.Call.GetCloseCallList(UserID, CallTypeFilter, CallInListSort);
     }
 
 }
