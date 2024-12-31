@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Images/Image3.jpg"/>
+            <ImageBrush ImageSource="pack://application:,,,/Images/Image3.jpg" />
         </Grid.Background>
    
     <!-- מרכז טבלה עם 2 עמודות -->
@@ -42,52 +42,52 @@
         <!-- Title -->
 
             <Label Content="Volunteer details" Grid.Column="1" 
-                  FontSize="30" FontWeight="Bold" Foreground="Black" 
-                  HorizontalAlignment="Left" Margin="58,10,0,20" Width="248" Background= "White"/>
+                  FontSize="30" FontWeight="Bold" Foreground="White" 
+                  HorizontalAlignment="Left" Margin="58,10,0,20" Width="248"/>
 
             <!-- Labels and Inputs -->
-            <Label Content="Volunteer Activity:" Grid.Row="1" Grid.Column="0" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Background="White" Foreground="Black"/>
+            <Label Content="Volunteer Activity:" Grid.Row="1" Grid.Column="0" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27"  Foreground="White"/>
 
             <CheckBox IsChecked="{Binding CurrentVolunteerUser.Active}" IsEnabled="{Binding CurrentVolunteerUser.CorrentCall, Converter={StaticResource NullToEnabledConverterKey}}" Grid.Row="1" Grid.Column="1" Content="Active" VerticalAlignment="Center" Height="15" />
 
-            <Label Content="Volunteer Id:" Grid.Row="2" Grid.Column="0" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Background="White" Foreground="Black"/>
+            <Label Content="Volunteer Id:" Grid.Row="2" Grid.Column="0" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Foreground="White"/>
 
             <TextBox Text="{Binding CurrentVolunteerUser.Id}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Height="18" IsReadOnly="True"/>
 
-            <Label Content="Volunteer Name:" Grid.Row="3" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Background="White"/>
+            <Label Content="Volunteer Name:" Grid.Row="3" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" />
             <TextBox Text="{Binding CurrentVolunteerUser.FullName}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Height="18"/>
 
-            <Label Content="Volunteer Phone:" Grid.Row="4" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28" Background="White"/>
+            <Label Content="Volunteer Phone:" Grid.Row="4" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28" />
             <TextBox Text="{Binding CurrentVolunteerUser.Phone}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Height="18"/>
 
-            <Label Content="Volunteer Email:" Grid.Row="5" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Background="White"/>
+            <Label Content="Volunteer Email:" Grid.Row="5" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" />
             <TextBox Text="{Binding CurrentVolunteerUser.Email}" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Height="18"/>
 
-            <Label Content="Volunteer Password:" Grid.Row="6" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Background="White"/>
+            <Label Content="Volunteer Password:" Grid.Row="6" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" />
             <TextBox Text="{Binding CurrentVolunteerUser.Password}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Height="18"/>
 
-            <Label Content="Volunteer Address:" Grid.Row="7" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28" Background="White"/>
+            <Label Content="Volunteer Address:" Grid.Row="7" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28" />
             <TextBox Text="{Binding CurrentVolunteerUser.Address}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Height="18"/>
 
-            <Label Content="Volunteer Role:" Grid.Row="8" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Background="White"/>
+            <Label Content="Volunteer Role:" Grid.Row="8" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" />
             <TextBox Text="{Binding CurrentVolunteerUser.role}" IsReadOnly="True" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Height="22"/>
 
-            <Label Content="Maximum Distance:" Grid.Row="9" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Background="White"/>
+            <Label Content="Maximum Distance:" Grid.Row="9" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" />
             <TextBox Text="{Binding CurrentVolunteerUser.MaximumDistance}" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Height="18"/>
 
-            <Label Content="Distance Type:" Grid.Row="10" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Background="White"/>
+            <Label Content="Distance Type:" Grid.Row="10" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" />
             <ComboBox ItemsSource="{Binding Source={StaticResource DistanceTypeColelctionKey}}" SelectedValue="{Binding CurrentVolunteerUser.DistanceType}" Grid.Row="10" Grid.Column="1" VerticalAlignment="Center" Height="22"/>
 
-            <Label Content="Treated Calls:" Grid.Row="11" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Background="White"/>
+            <Label Content="Treated Calls:" Grid.Row="11" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" />
             <TextBox Text="{Binding CurrentVolunteerUser.TreatedCalls}" Grid.Row="11" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True" Height="18"/>
 
-            <Label Content="Canceled Calls:" Grid.Row="12" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28" Background="White"/>
+            <Label Content="Canceled Calls:" Grid.Row="12" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28" />
             <TextBox Text="{Binding CurrentVolunteerUser.CanceledCalls}" Grid.Row="12" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True" Height="18"/>
 
-            <Label Content="Expired Calls:" Grid.Row="13" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Background="White"/>
+            <Label Content="Expired Calls:" Grid.Row="13" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" />
             <TextBox Text="{Binding CurrentVolunteerUser.ExpiredCalls}" Grid.Row="13" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True" Height="18"/>
 
-            <Label Content="Current Call:" Grid.Row="14" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Background="White"/>
+            <Label Content="Current Call:" Grid.Row="14" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27"/>
             <TextBox Text="{Binding CurrentVolunteerUser.CorrentCall, Converter={StaticResource CallInProgressConverterKey}}" Grid.Row="14" Grid.Column="1" VerticalAlignment="Center" Height="92" IsReadOnly="True" />
 
             <!-- Buttons -->
