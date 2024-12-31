@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Volunteer"
         mc:Ignorable="d"
-        Title="CallHistoryWindow" Height="640" Width="800"
+        Title="CallHistoryWindow" Height="640" Width="900"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <!-- Grid Root Container -->
     <Grid>
@@ -27,12 +27,16 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column="1" Margin="10" VerticalAlignment="Center" SelectionChanged="ComboBox_SelectionChanged_1" />
+            <ComboBox Grid.Column="1" Margin="10" VerticalAlignment="Center" SelectionChanged="ComboBox_SelectionChanged_1" 
+                      SelectedValue="{Binding sort , Mode=TwoWay}" 
+                      ItemsSource="{Binding Source={StaticResource CloseCallInListCollectionKey}}" />
             <Label Content="Sort by:" HorizontalAlignment="Left" Margin="198,0,0,0" VerticalAlignment="Center"/>
         </Grid>
 
         <!-- רשימת קריאות -->
-        <ListView Grid.Row="1" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ListView Grid.Row="1" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+          ItemsSource="{Binding UserHistoryCalls}" 
+          SelectedItem="{Binding SelectedClosedCallInList}">
             <ListView.View>
                 <GridView>
                     <!-- כותרת "Call ID" -->
@@ -53,7 +57,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- כותרת "Call Open Time" -->
+                    <!-- כותרת "Call Address" -->
                     <GridViewColumn Header="Call address" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -62,7 +66,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- כותרת "Time Left to Close" -->
+                    <!-- כותרת "Call Open Time" -->
                     <GridViewColumn Header="Call open time" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -71,7 +75,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- כותרת "Last Volunteer Name" -->
+                    <!-- כותרת "Call Enter Time" -->
                     <GridViewColumn Header="Call enter time" Width="180">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -80,7 +84,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- כותרת "Total Treatment Time" -->
+                    <!-- כותרת "Call Close Time" -->
                     <GridViewColumn Header="Call close time" Width="180">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -89,7 +93,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- כותרת "Call Status" -->
+                    <!-- כותרת "End Kind" -->
                     <GridViewColumn Header="End kind" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -100,6 +104,5 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
     </Grid>
 </Window>

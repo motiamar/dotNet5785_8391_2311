@@ -21,6 +21,7 @@
         <local:CallAssignInListsConverter x:Key="CallAssignInListsConverterKey"/>
         <local:StatusToEnableConverter x:Key="StatusToEnableConverterKey"/>
         <local:MaxTimeEnableConverter x:Key="MaxTimeEnableConverterKey"/>
+        <local:CloseCallInListCollection x:Key="CloseCallInListCollectionKey"/>
     </Application.Resources>
 </Application>
     
