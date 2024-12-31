@@ -1,4 +1,5 @@
-﻿using System.Data.SqlTypes;
+﻿using BO;
+using System.Data.SqlTypes;
 namespace BlApi;
 
 public interface IVolunteer : IObservable
@@ -24,7 +25,7 @@ public interface IVolunteer : IObservable
     /// <param name="value"> a parameter to srot for</param>
     /// <param name="filter">return a list sorted by volunteers Id or by the enum fild</param>
     /// <returns></returns>
-    IEnumerable<BO.VolunteerInList> ReadAllScreen(object? value = null, BO.VollInListFilter? filter = null);
+    IEnumerable<BO.VolunteerInList> ReadAllScreen(VollInListFilter? sort = null, VollInListFilter? filter = null, object? value = null);
 
     /// <summary>
     /// create a BO.Volunteer entity if the id exist in the data base 
@@ -49,8 +50,4 @@ public interface IVolunteer : IObservable
     /// Add a new Volunteer to the data leir if the details are correct
     /// </summary>
     void Create(BO.Volunteer volunteer);
-
-
-
-
 }

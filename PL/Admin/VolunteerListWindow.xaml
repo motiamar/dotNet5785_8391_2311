@@ -26,8 +26,8 @@
                       ItemsSource="{Binding Source={StaticResource VolunteersListColelctionKey}}" 
                       SelectionChanged="ComboBox_VolunteerListChange"/>
             <ComboBox Grid.Column="0" SelectedValue="{Binding sort, Mode=TwoWay}" 
-           ItemsSource="{Binding Source={StaticResource VolunteersListColelctionFilterKey}}" 
-           SelectionChanged="ComboBox_VolunteerListFilter"/>
+           ItemsSource="{Binding Source={StaticResource VolunteersListColelctionSortKey}}" 
+           SelectionChanged="ComboBox_VolunteerListChange"/>
         </Grid>
 
         <!--ListView with additional control in the last column-->

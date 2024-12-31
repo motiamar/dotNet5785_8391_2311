@@ -193,7 +193,7 @@ internal class VolunteerImplementation : BlApi.IVolunteer
     /// <param name="value"> a parameter to srot for</param>
     /// <param name="filter">return a list sorted by volunteers Id or by the enum fild</param>
     /// <returns></returns>
-    public IEnumerable<VolunteerInList> ReadAllScreen(object? value = null, VollInListFilter? filter = null)
+    public IEnumerable<VolunteerInList> ReadAllScreen(VollInListFilter? sort = null, VollInListFilter? filter = null, object? value = null)
     {
         try
         {
@@ -202,46 +202,35 @@ internal class VolunteerImplementation : BlApi.IVolunteer
             {
                 switch (filter)
                 {
-                    case VollInListFilter.Id:
-                        if (value is int id)
-                            volunteerInLists = volunteerInLists.Where(c => c.Id == id);
-                        break;
-                    case VollInListFilter.FullName:
-                        if (value is string fullName)
-                            volunteerInLists = volunteerInLists.Where(c => c.FullName == fullName);
-                        break;
                     case VollInListFilter.Active:
-                        if (value is bool active)
-                            volunteerInLists = volunteerInLists.Where(c => c.Active == active);
-                        break;
-                    case VollInListFilter.TreatedCalls:
-                        if (value is int treatedCall)
-                            volunteerInLists = volunteerInLists.Where(c => c.TreatedCalls == treatedCall);
-                        break;
-                    case VollInListFilter.CanceledCalls:
-                        if (value is int cenceldCall)
-                            volunteerInLists = volunteerInLists.Where(c => c.CanceledCalls == cenceldCall);
-                        break;
-                    case VollInListFilter.ExpiredCalls:
-                        if (value is int expiersCall)
-                            volunteerInLists = volunteerInLists.Where(c => c.ExpiredCalls == expiersCall);
+                        volunteerInLists = volunteerInLists.Where(v => v.Active == (bool)value);
                         break;
                     case VollInListFilter.CorrentCallId:
-                        if (value is int correntCallId)
-                            volunteerInLists = volunteerInLists.Where(c => c.CorrentCallId == correntCallId);
+                        volunteerInLists = volunteerInLists.Where(v => v.CorrentCallId == (int)value);
                         break;
                     case VollInListFilter.CorrentCallType:
-                        if (value is BTypeCalls type)
-                            volunteerInLists = volunteerInLists.Where(c => c.CorrentCallType == type);
+                        volunteerInLists = volunteerInLists.Where(v => v.CorrentCallType == (BTypeCalls)value);
                         break;
                     default:
-                        return volunteerInLists;                    
+                        break;
                 }
-                return volunteerInLists;
             }
-            else
+            if (sort == null)
+                return volunteerInLists.OrderBy(v => v.Id);
+            switch (sort)
             {
-                return volunteerInLists; 
+                case VollInListFilter.FullName:
+                    return volunteerInLists.OrderBy(v => v.FullName);
+                case VollInListFilter.TreatedCalls:
+                    return volunteerInLists.OrderBy(v => v.TreatedCalls);
+                case VollInListFilter.CanceledCalls:
+                    return volunteerInLists.OrderBy(v => v.CanceledCalls);
+                case VollInListFilter.ExpiredCalls:
+                    return volunteerInLists.OrderBy(v => v.ExpiredCalls);
+                case VollInListFilter.CorrentCallId:
+                    return volunteerInLists.OrderBy(v => v.CorrentCallId);
+                default:
+                    return volunteerInLists.OrderBy(v => v.Id);
             }
         }
         catch (DO.DalXMLFileLoadCreateException ex)
@@ -259,4 +248,5 @@ internal class VolunteerImplementation : BlApi.IVolunteer
     public void RemoveObserver(Action listObserver) => VolunteerManager.Observers.RemoveListObserver(listObserver);
 
     public void RemoveObserver(int id, Action observer) => VolunteerManager.Observers.RemoveObserver(id, observer);
+
 }

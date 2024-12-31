@@ -13,8 +13,8 @@ namespace PL;
 /// </summary>
 public class VolunteerListCollection : IEnumerable
 {
-    static readonly IEnumerable<BO.VollInListFilter> s_enums =
-        (Enum.GetValues(typeof(BO.VollInListFilter)) as IEnumerable<BO.VollInListFilter>)!;
+    static readonly IEnumerable<BO.BTypeCalls> s_enums =
+        (Enum.GetValues(typeof(BO.BTypeCalls)) as IEnumerable<BO.BTypeCalls>)!;
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
 
@@ -22,10 +22,10 @@ public class VolunteerListCollection : IEnumerable
 /// <summary>
 /// define the character of the Volunteer
 /// </summary>
-public class VolunteerListFilterCollection : IEnumerable
+public class VolunteerListSortCollection : IEnumerable
 {
-    static readonly IEnumerable<BO.BTypeCalls> s_enums =
-        (Enum.GetValues(typeof(BO.BTypeCalls)) as IEnumerable<BO.BTypeCalls>)!;
+    static readonly IEnumerable<BO.VollInListFilter> s_enums =
+        (Enum.GetValues(typeof(BO.VollInListFilter)) as IEnumerable<BO.VollInListFilter>)!;
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
 
