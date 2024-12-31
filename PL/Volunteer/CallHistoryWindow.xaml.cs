@@ -33,6 +33,8 @@ public partial class CallHistoryWindow : Window
         this.Closed += CallHistoryWindow_Closed!;
     }
 
+    public int UserID { get; set; }
+
 
     /// <summary>
     /// sort the call list by the given parameter
@@ -62,19 +64,7 @@ public partial class CallHistoryWindow : Window
     public static readonly DependencyProperty CallTypeFilterProperty =
         DependencyProperty.Register("CallTypeFilter", typeof(BO.BTypeCalls?), typeof(CallHistoryWindow), new PropertyMetadata(null));
 
-    /// <summary>
-    /// user id to filter the call list
-    /// </summary>
-    public int UserID
-    {
-        get { return (int)GetValue(UserIDProperty); }
-        set { SetValue(UserIDProperty, value); }
-    }
-
-    // Using a DependencyProperty as the backing store for UserID.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty UserIDProperty =
-        DependencyProperty.Register("UserID", typeof(int), typeof(CallHistoryWindow), new PropertyMetadata(null));
-
+    
 
     /// <summary>
     /// close the observer
@@ -113,14 +103,20 @@ public partial class CallHistoryWindow : Window
 
     // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty UserHistoryCallsProperty =
-        DependencyProperty.Register("MyProperty", typeof(IEnumerable<BO.ClosedCallInList>), typeof(CallHistoryWindow), new PropertyMetadata(null));
+        DependencyProperty.Register("UserHistoryCalls", typeof(IEnumerable<BO.ClosedCallInList>), typeof(CallHistoryWindow), new PropertyMetadata(null));
 
     /// <summary>
     /// add observer to the call list and load the call list
     /// </summary>
     private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
     {
-        UserHistoryCalls = s_bl.Call.GetCloseCallList(UserID, CallTypeFilter, CallInListSort);
+        try
+        {
+            UserHistoryCalls = s_bl.Call.GetCloseCallList(UserID, CallTypeFilter, CallInListSort);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
     }
-
 }

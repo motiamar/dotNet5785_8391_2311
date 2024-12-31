@@ -48,7 +48,7 @@
                     <GridViewColumn Header="Call ID" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding UserHistoryCalls.Id}"  HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Id}"  HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -57,7 +57,7 @@
                     <GridViewColumn Header="Call type" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding UserHistoryCalls.Type}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Type}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -66,7 +66,7 @@
                     <GridViewColumn Header="Call address" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding UserHistoryCalls.CallAddress}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding CallAddress}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -75,7 +75,7 @@
                     <GridViewColumn Header="Call open time" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding UserHistoryCalls.CallOpenTime}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding CallOpenTime}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -84,7 +84,7 @@
                     <GridViewColumn Header="Call enter time" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding UserHistoryCalls.CallEnterTime}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding CallEnterTime}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -93,7 +93,7 @@
                     <GridViewColumn Header="Call close time" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding UserHistoryCalls.CallCloseTime}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding CallCloseTime}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -102,7 +102,7 @@
                     <GridViewColumn Header="End kind" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding UserHistoryCalls.EndKind}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding EndKind}" HorizontalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

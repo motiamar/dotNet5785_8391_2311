@@ -47,9 +47,9 @@ public partial class VolunteerListWindow : Window
     /// <summary>
     /// the filter for the volunteer list, define by the combo box
     /// </summary>
-    public BO.VollInListFilter Filter { get; set; } = BO.VollInListFilter.Id;
+    public BO.VollInListFilter Filter { get; set; }
 
-    public BO.BTypeCalls sort { get; set; } = BO.BTypeCalls.None;
+    public BO.BTypeCalls sort { get; set; }
 
     /// <summary>
     /// update the volunteer list view by the filter sorting
