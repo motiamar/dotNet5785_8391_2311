@@ -7,17 +7,18 @@
         mc:Ignorable="d"
         Title="ChooseCallWindow" Height="600" Width="940"
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-   
+
     <!-- Grid Root Container -->
     <Grid>
-        <!-- Row Definitions: Define the structure of the grid with 3 rows -->
+        <!-- Row Definitions: Define the structure of the grid with 4 rows -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <!-- Header Row (Title) -->
             <RowDefinition Height="500*"/>
             <!-- ListView for call history -->
             <RowDefinition Height="Auto"/>
-            <!-- ComboBox for filtering -->
+            <!-- Row for Label and TextBox -->
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Header "Call History" -->
@@ -108,5 +109,20 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <!-- Label and TextBox below ListView -->
+        <Grid Grid.Row="3" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Label for description -->
+            <Label Grid.Column="0" Content="Description:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+
+            <!-- TextBox for input -->
+            <TextBox Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" TextChanged="TextBox_TextDescription" />
+        </Grid>
+
     </Grid>
 </Window>

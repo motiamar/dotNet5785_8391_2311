@@ -119,6 +119,9 @@ public partial class ChooseCallWindow : Window
         }
     }
 
+    /// <summary>
+    /// the call that the volunteer choose
+    /// </summary>
     public BO.OpenCallInList? SelectOpenCallInList { get; set; }=null;
     /// <summary>
     /// button to choose the call
@@ -143,6 +146,14 @@ public partial class ChooseCallWindow : Window
         {
             MessageBox.Show(ex.Message);
         }
+    }
+
+    /// <summary>
+    /// text box to show the call description
+    /// </summary>
+    private void TextBox_TextDescription(object sender, TextChangedEventArgs e)
+    {
+
     }
 }
 
