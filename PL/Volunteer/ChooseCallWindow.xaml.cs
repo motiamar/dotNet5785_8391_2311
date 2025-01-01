@@ -21,10 +21,10 @@ namespace PL.Volunteer;
 public partial class ChooseCallWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-    public ChooseCallWindow(BO.Volunteer volunteer)
+    public ChooseCallWindow(int volunteerId)
     {
-        InitializeComponent();
-        volunteer_1 = volunteer;
+        volunteer_id = volunteerId;
+        InitializeComponent();       
         this.Loaded += ChooseCallWindow_Loaded;
         this.Closed += ChooseCallWindow_Closed!;
     }
@@ -34,8 +34,8 @@ public partial class ChooseCallWindow : Window
     /// </summary>
     public void ChooseCallWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_1.Id);
-        s_bl.Call.AddObserver(volunteer_1.Id,CallInListObserver);
+        OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_id);
+        s_bl.Call.AddObserver(CallInListObserver);
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ public partial class ChooseCallWindow : Window
     /// </summary>
     public void ChooseCallWindow_Closed(object sender, EventArgs e)
     {
-       s_bl.Call.RemoveObserver(volunteer_1.Id, CallInListObserver);
+       s_bl.Call.RemoveObserver( CallInListObserver);
     }
 
     /// <summary>
@@ -51,22 +51,13 @@ public partial class ChooseCallWindow : Window
     /// </summary>
     public void CallInListObserver()
     {
-        OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_1.Id, CallTypeFilter, OpenCallInListSort);
+        OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_id, CallTypeFilter, OpenCallInListSort);
     }
 
     /// <summary>
     /// the volunteer that choose the call
     /// </summary>
-    public BO.Volunteer volunteer_1
-    {
-        get { return (BO.Volunteer)GetValue(volunteer_1Property); }
-        set { SetValue(volunteer_1Property, value); }
-    }
-
-    // Using a DependencyProperty as the backing store for volunteer_1.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty volunteer_1Property =
-        DependencyProperty.Register("volunteer_1", typeof(BO.Volunteer), typeof(ChooseCallWindow), new PropertyMetadata(null));
-
+    public int volunteer_id { get; set; } 
 
     /// <summary>
     /// sort the call list by the given parameter
@@ -111,7 +102,7 @@ public partial class ChooseCallWindow : Window
     {
         try
         {
-            OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_1.Id, CallTypeFilter, OpenCallInListSort);
+            OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_id, CallTypeFilter, OpenCallInListSort);
         }
         catch (Exception ex)
         {
@@ -122,7 +113,19 @@ public partial class ChooseCallWindow : Window
     /// <summary>
     /// the call that the volunteer choose
     /// </summary>
-    public BO.OpenCallInList? SelectOpenCallInList { get; set; }=null;
+
+    public BO.OpenCallInList? SelectOpenCallInList
+    {
+        get { return (BO.OpenCallInList?)GetValue(SelectOpenCallInListProperty); }
+        set { SetValue(SelectOpenCallInListProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for SelectOpenCallInList.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty SelectOpenCallInListProperty =
+        DependencyProperty.Register("SelectOpenCallInList", typeof(BO.OpenCallInList), typeof(ChooseCallWindow), new PropertyMetadata(null));
+
+
+
     /// <summary>
     /// button to choose the call
     /// </summary>
@@ -136,9 +139,13 @@ public partial class ChooseCallWindow : Window
         }
         try
         {
-            var result = MessageBox.Show("Are you sure you want to choose this call?", "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show("Are you sure you want to choose this call?", "Confirm Choose", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
-                s_bl.Call.ChooseCall(volunteer_1.Id, SelectOpenCallInList.Id);
+            {
+                s_bl.Call.ChooseCall(volunteer_id, SelectOpenCallInList.Id);
+                MessageBox.Show("Call chosen successfully");
+                this.Close();
+            }             
             else
                 MessageBox.Show("Choose canceled");
         }
@@ -146,14 +153,6 @@ public partial class ChooseCallWindow : Window
         {
             MessageBox.Show(ex.Message);
         }
-    }
-
-    /// <summary>
-    /// text box to show the call description
-    /// </summary>
-    private void TextBox_TextDescription(object sender, TextChangedEventArgs e)
-    {
-
     }
 }
 

@@ -149,8 +149,8 @@ internal static class CallManager
     internal static IEnumerable<OpenCallInList> GetOpenCallInLists(DO.Volunteer volunteer)
     {
         var calls = s_dal.Call.ReadAll();
-        calls.Where(v => Helpers.CallManager.GetStatus(v) == BCallStatus.Open || Helpers.CallManager.GetStatus(v) == BCallStatus.Open_in_risk);
-        var openCallInList = from call in calls
+        var Calls = calls.Where(v => Helpers.CallManager.GetStatus(v) == BCallStatus.Open || Helpers.CallManager.GetStatus(v) == BCallStatus.Open_in_risk);
+        var openCallInList = from call in Calls
                              let vLati = volunteer.Latitude
                              let vLongi = volunteer.Longitude
                              select new BO.OpenCallInList

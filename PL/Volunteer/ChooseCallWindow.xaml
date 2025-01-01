@@ -42,7 +42,7 @@
         </Grid>
 
         <!-- ListView displaying call history -->
-        <ListView Grid.Row="1" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding OpenCallInList}">
+        <ListView Grid.Row="1" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding OpenCallInList}" SelectedItem="{Binding SelectOpenCallInList, Mode=TwoWay}">
             <ListView.View>
                 <GridView>
                     <!-- Column "Call ID" -->
@@ -121,7 +121,7 @@
             <Label Grid.Column="0" Content="Description:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
 
             <!-- TextBox for input -->
-            <TextBox Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" TextChanged="TextBox_TextDescription" />
+            <TextBox   Text="{Binding SelectOpenCallInList.Description, Mode=OneWay}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True"/>
         </Grid>
 
     </Grid>

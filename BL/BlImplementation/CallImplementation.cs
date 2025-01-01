@@ -531,6 +531,8 @@ internal class CallImplementation : BlApi.ICall
             _dal.Assignment.Create(assignment);
             CallManager.Observers.NotifyItemUpdated(CallId);
             CallManager.Observers.NotifyListUpdated();
+            VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
+            VolunteerManager.Observers.NotifyListUpdated();
         }
         catch (DO.DalAlreadyExistException)
         {

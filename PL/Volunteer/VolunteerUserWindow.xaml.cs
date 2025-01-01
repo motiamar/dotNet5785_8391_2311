@@ -118,7 +118,7 @@ public partial class VolunteerUserWindow : Window
     /// </summary>
     private void BtnChooseCall_Click(object sender, RoutedEventArgs e)
     {
-        new ChooseCallWindow(CurrentVolunteerUser).Show();
+        new ChooseCallWindow(CurrentVolunteerUser.Id).Show();
     }
 
     /// <summary>
