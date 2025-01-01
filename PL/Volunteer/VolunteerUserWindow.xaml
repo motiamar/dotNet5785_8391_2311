@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Images/Image3.jpg" />
+            <ImageBrush ImageSource="pack://application:,,,/Images/Image4.jpg" />
         </Grid.Background>
    
     <!-- מרכז טבלה עם 2 עמודות -->

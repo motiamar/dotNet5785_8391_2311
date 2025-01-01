@@ -60,7 +60,19 @@ public class CallInListCollection : IEnumerable
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
 
+/// <summary>
+/// define the sort of call that enterd the system
+/// </summary>
+public class OpenCallInListCollection : IEnumerable
+{
+    static readonly IEnumerable<BO.OpenCallInListFilter> s_enums =
+        (Enum.GetValues(typeof(BO.OpenCallInListFilter)) as IEnumerable<BO.OpenCallInListFilter>)!;
+    public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
+}
 
+/// <summary>
+/// define the sort of call that enterd the system
+/// </summary>
 public class CloseCallInListCollection : IEnumerable
 {
     static readonly IEnumerable<BO.CloseCallInListFilter> s_enums =

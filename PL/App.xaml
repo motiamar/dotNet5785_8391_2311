@@ -22,7 +22,7 @@
         <local:StatusToEnableConverter x:Key="StatusToEnableConverterKey"/>
         <local:MaxTimeEnableConverter x:Key="MaxTimeEnableConverterKey"/>
         <local:CloseCallInListCollection x:Key="CloseCallInListCollectionKey"/>
+        <local:OpenCallInListCollection x:Key="OpenCallInListCollectionKey"/>
     </Application.Resources>
 </Application>
-    
-    
+

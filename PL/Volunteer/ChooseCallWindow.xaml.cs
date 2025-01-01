@@ -11,18 +11,124 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BO;
 
-namespace PL.Volunteer
+namespace PL.Volunteer;
+
+/// <summary>
+/// Interaction logic for ChooseCallWindow.xaml
+/// </summary>
+public partial class ChooseCallWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for ChooseCallWindow.xaml
-    /// </summary>
-    public partial class ChooseCallWindow : Window
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    public ChooseCallWindow(BO.Volunteer volunteer)
     {
-        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public ChooseCallWindow(BO.Volunteer volunteer)
+        InitializeComponent();
+        volunteer_1 = volunteer;
+        this.Loaded += ChooseCallWindow_Loaded;
+        this.Closed += ChooseCallWindow_Closed!;
+    }
+
+    /// <summary>
+    /// the observer that get called when the call list get updated
+    /// </summary>
+    public void ChooseCallWindow_Loaded(object sender, RoutedEventArgs e)
+    {
+        OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_1.Id);
+        s_bl.Call.AddObserver(volunteer_1.Id,CallInListObserver);
+    }
+
+    /// <summary>
+    /// the observer that get called when the call list get updated
+    /// </summary>
+    public void ChooseCallWindow_Closed(object sender, EventArgs e)
+    {
+       s_bl.Call.RemoveObserver(volunteer_1.Id, CallInListObserver);
+    }
+
+    /// <summary>
+    /// the observer that get called when the call list get updated
+    /// </summary>
+    public void CallInListObserver()
+    {
+        OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_1.Id, CallTypeFilter, OpenCallInListSort);
+    }
+
+    /// <summary>
+    /// the volunteer that choose the call
+    /// </summary>
+    public BO.Volunteer volunteer_1
+    {
+        get { return (BO.Volunteer)GetValue(volunteer_1Property); }
+        set { SetValue(volunteer_1Property, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for volunteer_1.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty volunteer_1Property =
+        DependencyProperty.Register("volunteer_1", typeof(BO.Volunteer), typeof(ChooseCallWindow), new PropertyMetadata(null));
+
+
+    /// <summary>
+    /// sort the call list by the given parameter
+    /// </summary>
+    public BO.OpenCallInListFilter? OpenCallInListSort
+    {
+        get { return (BO.OpenCallInListFilter?)GetValue(OpenCallInListSortProperty); }
+        set { SetValue(OpenCallInListSortProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for CallInListSort.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty OpenCallInListSortProperty =
+        DependencyProperty.Register("OpenCallInListSort", typeof(BO.OpenCallInListFilter?), typeof(CallHistoryWindow), new PropertyMetadata(null));
+
+    /// <summary>
+    /// filter the call list by the call type
+    /// </summary>
+    public BO.BTypeCalls? CallTypeFilter
+    {
+        get { return (BO.BTypeCalls?)GetValue(CallTypeFilterProperty); }
+        set { SetValue(CallTypeFilterProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for CallTypeFilter.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty CallTypeFilterProperty =
+        DependencyProperty.Register("CallTypeFilter", typeof(BO.BTypeCalls?), typeof(CallHistoryWindow), new PropertyMetadata(null));
+
+    /// <summary>
+    /// the list of the open calls in the system
+    /// </summary>
+    public IEnumerable<BO.OpenCallInList> OpenCallInList
+    {
+        get { return (IEnumerable<BO.OpenCallInList>)GetValue(OpenCallInListProperty); }
+        set { SetValue(OpenCallInListProperty, value); }
+    }
+    
+    // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty OpenCallInListProperty =
+        DependencyProperty.Register("OpenCallInList", typeof(IEnumerable<BO.OpenCallInList>), typeof(ChooseCallWindow), new PropertyMetadata(null));
+
+    private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+    {
+        try
         {
-            InitializeComponent();
+            OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_1.Id, CallTypeFilter, OpenCallInListSort);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
         }
     }
 }
+
+public class BaseWindow : Window
+{
+    public static readonly DependencyProperty CallTypeFilterProperty =
+        DependencyProperty.Register("CallTypeFilter", typeof(BO.BTypeCalls?), typeof(BaseWindow), new PropertyMetadata(null));
+
+    public BO.BTypeCalls? CallTypeFilter
+    {
+        get { return (BO.BTypeCalls?)GetValue(CallTypeFilterProperty); }
+        set { SetValue(CallTypeFilterProperty, value); }
+    }
+}
+

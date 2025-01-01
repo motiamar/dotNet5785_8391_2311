@@ -33,6 +33,9 @@ public partial class CallHistoryWindow : Window
         this.Closed += CallHistoryWindow_Closed!;
     }
 
+    /// <summary>
+    /// the id of the user that the call list belong to
+    /// </summary>
     public int UserID { get; set; }
 
 
