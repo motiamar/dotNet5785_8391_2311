@@ -126,6 +126,7 @@ internal class VolunteerImplementation : BlApi.IVolunteer
             _dal.Volunteer.Update(newVolunteer);
             VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
             VolunteerManager.Observers.NotifyListUpdated();
+            CallManager.Observers.NotifyListUpdated();
         }
         catch (DO.DalDoesNotExistException ex)
         {

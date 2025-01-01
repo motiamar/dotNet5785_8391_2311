@@ -437,7 +437,7 @@
     <CallId>1021</CallId>
     <VolunteerId>726172349</VolunteerId>
     <StartTime>2025-01-01T14:33:26</StartTime>
-    <FinishTime xsi:nil="true" />
+    <FinishTime>2025-01-01T14:33:26</FinishTime>
     <EndKind>Treated</EndKind>
   </Assignment>
 </ArrayOfAssignment>

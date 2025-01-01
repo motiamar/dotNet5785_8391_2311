@@ -49,7 +49,7 @@
                     <GridViewColumn Header="Call ID" Width="70">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Id}"  HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Id}"  HorizontalAlignment="Center" Background="Yellow"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -102,7 +102,7 @@
                     <GridViewColumn Header="Action" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Choose" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnChoose_Click"/>
+                                <Button Content="Choose" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnChoose_Click" Background="LightSteelBlue"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -123,6 +123,9 @@
             <!-- TextBox for input -->
             <TextBox   Text="{Binding SelectOpenCallInList.Description, Mode=OneWay}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True"/>
         </Grid>
+        <Label Content="Update address" HorizontalAlignment="Left" Margin="36,10,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding volunteer.Address, Mode=TwoWay}" HorizontalAlignment="Left" Margin="36,41,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="249"/>
+        <Button Content="Change" HorizontalAlignment="Left" Margin="290,41,0,0" VerticalAlignment="Top" Height="18" Width="47" Background="LightSteelBlue" Click="BtnUpdateAddress_Click"/>
 
     </Grid>
 </Window>
