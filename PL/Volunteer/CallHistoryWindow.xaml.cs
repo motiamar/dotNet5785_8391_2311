@@ -55,7 +55,7 @@ public partial class CallHistoryWindow : Window
 
 
     /// <summary>
-    /// filter the call list by the call type
+    /// Filter the call list by the call type
     /// </summary>
     public BO.BTypeCalls? CallTypeFilter
     {
@@ -65,7 +65,7 @@ public partial class CallHistoryWindow : Window
 
     // Using a DependencyProperty as the backing store for CallTypeFilter.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty CallTypeFilterProperty =
-        DependencyProperty.Register("CallTypeFilter", typeof(BO.BTypeCalls?), typeof(CallHistoryWindow), new PropertyMetadata(null));
+    DependencyProperty.Register("CallTypeFilter", typeof(BO.BTypeCalls?), typeof(CallHistoryWindow), new PropertyMetadata(null));
 
     
 

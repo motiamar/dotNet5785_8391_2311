@@ -79,7 +79,7 @@ public partial class ChooseCallWindow : Window
 
     // Using a DependencyProperty as the backing store for CallInListSort.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty OpenCallInListSortProperty =
-        DependencyProperty.Register("OpenCallInListSort", typeof(BO.OpenCallInListFilter?), typeof(CallHistoryWindow), new PropertyMetadata(null));
+        DependencyProperty.Register("OpenCallInListSort", typeof(BO.OpenCallInListFilter?), typeof(ChooseCallWindow), new PropertyMetadata(null));
 
     /// <summary>
     /// filter the call list by the call type
@@ -92,7 +92,7 @@ public partial class ChooseCallWindow : Window
 
     // Using a DependencyProperty as the backing store for CallTypeFilter.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty CallTypeFilterProperty =
-        DependencyProperty.Register("CallTypeFilter", typeof(BO.BTypeCalls?), typeof(CallHistoryWindow), new PropertyMetadata(null));
+        DependencyProperty.Register("CallTypeFilter", typeof(BO.BTypeCalls?), typeof(ChooseCallWindow), new PropertyMetadata(null));
 
     /// <summary>
     /// the list of the open calls in the system
@@ -112,6 +112,32 @@ public partial class ChooseCallWindow : Window
         try
         {
             OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_1.Id, CallTypeFilter, OpenCallInListSort);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+
+    public BO.OpenCallInList? SelectOpenCallInList { get; set; }=null;
+    /// <summary>
+    /// button to choose the call
+    /// </summary>
+    private void BtnChoose_Click(object sender, RoutedEventArgs e)
+    {
+        SelectOpenCallInList = (sender as Button)!.DataContext as BO.OpenCallInList;
+        if (SelectOpenCallInList == null)
+        {
+            MessageBox.Show("No call selected");
+            return;
+        }
+        try
+        {
+            var result = MessageBox.Show("Are you sure you want to choose this call?", "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+                s_bl.Call.ChooseCall(volunteer_1.Id, SelectOpenCallInList.Id);
+            else
+                MessageBox.Show("Choose canceled");
         }
         catch (Exception ex)
         {

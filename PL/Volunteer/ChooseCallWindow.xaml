@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Volunteer"
         mc:Ignorable="d"
-        Title="ChooseCallWindow" Height="600" Width="1050"
+        Title="ChooseCallWindow" Height="600" Width="940"
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
    
     <!-- Grid Root Container -->
@@ -62,14 +62,6 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Description" Width="200">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Description}" HorizontalAlignment="Center"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
                     <!-- Column "Call Address" -->
                     <GridViewColumn Header="Call address" Width="200">
                         <GridViewColumn.CellTemplate>
@@ -102,6 +94,14 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding CallDistance}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Action" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Choose" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnChoose_Click"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
