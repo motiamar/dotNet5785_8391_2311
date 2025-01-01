@@ -120,15 +120,4 @@ public partial class ChooseCallWindow : Window
     }
 }
 
-public class BaseWindow : Window
-{
-    public static readonly DependencyProperty CallTypeFilterProperty =
-        DependencyProperty.Register("CallTypeFilter", typeof(BO.BTypeCalls?), typeof(BaseWindow), new PropertyMetadata(null));
-
-    public BO.BTypeCalls? CallTypeFilter
-    {
-        get { return (BO.BTypeCalls?)GetValue(CallTypeFilterProperty); }
-        set { SetValue(CallTypeFilterProperty, value); }
-    }
-}
 
