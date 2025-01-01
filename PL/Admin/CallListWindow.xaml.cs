@@ -81,23 +81,21 @@ public partial class CallListWindow : Window
     /// <summary>
     /// the sort for the call list, define by the combo box
     /// </summary>
-    public BO.CallInListFilter sort { get; set; } = BO.CallInListFilter.Id;
+
+
+    public BO.CallInListFilter sort
+    {
+        get { return (BO.CallInListFilter)GetValue(sortProperty); }
+        set { SetValue(sortProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty sortProperty =
+        DependencyProperty.Register("sort", typeof(BO.CallInListFilter), typeof(CallListWindow), new PropertyMetadata(null));
 
     private void ComboBox_CallInListChange(object sender, SelectionChangedEventArgs e)
     {
-        CallList = (sender as ComboBox)!.SelectedIndex switch
-        {
-            0 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.Id)!,
-            1 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.CallId)!,
-            2 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.Type)!,
-            3 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.CallOpenTime)!,
-            4 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.CallMaxCloseTime)!,
-            5 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.LastVolunteerName)!,
-            6 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.TotalTreatmentTime)!,
-            7 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.CallStatus)!,
-            8 => s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, BO.CallInListFilter.SumOfAssignments)!,
-            _ => throw new NotImplementedException(),
-        };
+        CallList = s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, sort);       
     }
 
 

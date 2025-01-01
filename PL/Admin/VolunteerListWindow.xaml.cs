@@ -23,8 +23,6 @@ public partial class VolunteerListWindow : Window
 
     public VolunteerListWindow()
     {
-        Filter = VollInListFilter.Id;
-        sort = BTypeCalls.None;
         InitializeComponent();
         this.Loaded += VolunteerListWindow_Loaded;
         this.Closing += VolunteerListWindow_Closing!;
@@ -47,53 +45,42 @@ public partial class VolunteerListWindow : Window
     /// <summary>
     /// the filter for the volunteer list, define by the combo box
     /// </summary>
-    public BO.VollInListFilter Filter { get; set; }
+    public BO.BTypeCalls? filter
+    {
+        get { return (BO.BTypeCalls)GetValue(FilterProperty); }
+        set { SetValue(FilterProperty, value); }
+    }
+    public static readonly DependencyProperty FilterProperty =
+        DependencyProperty.Register("filter", typeof(BO.BTypeCalls), typeof(VolunteerListWindow), new PropertyMetadata(null));
 
-    public BO.BTypeCalls sort { get; set; }
+    public BO.VollInListFilter? sort
+    {
+        get { return (BO.VollInListFilter)GetValue(sortProperty); }
+        set { SetValue(sortProperty, value); }
+    }
+    public static readonly DependencyProperty sortProperty =
+        DependencyProperty.Register("sort", typeof(BO.VollInListFilter), typeof(VolunteerListWindow), new PropertyMetadata(null));
+
+
+    /// <summary>
+    /// the filter for the volunteer list, to filter by the call type always
+    /// </summary>
+    public BO.VollInListFilter? filter2 = VollInListFilter.CorrentCallType;
 
     /// <summary>
     /// update the volunteer list view by the filter sorting
     /// </summary>
     private void ComboBox_VolunteerListChange(object sender, SelectionChangedEventArgs e)
     {
-        VolunteerList = (sender as ComboBox)!.SelectedIndex switch
-        {
-            0 => s_bl.Volunteer.ReadAll(null, VollInListFilter.Id)!,
-            1 => s_bl.Volunteer.ReadAll(null, VollInListFilter.FullName)!,
-            2 => s_bl.Volunteer.ReadAll(null, VollInListFilter.Active)!,
-            3 => s_bl.Volunteer.ReadAll(null, VollInListFilter.TreatedCalls)!,
-            4 => s_bl.Volunteer.ReadAll(null, VollInListFilter.CanceledCalls)!,
-            5 => s_bl.Volunteer.ReadAll(null, VollInListFilter.ExpiredCalls)!,
-            6 => s_bl.Volunteer.ReadAll(null, VollInListFilter.CorrentCallId)!,
-            7 => s_bl.Volunteer.ReadAll(null, VollInListFilter.CorrentCallType)!,
-            _ => throw new NotImplementedException(),
-        };
+        VolunteerList = s_bl.Volunteer.ReadAllScreen(sort, filter2, filter)!;
     }
-
-    /// <summary>
-    /// sorted the list by the filter corrent type call
-    /// </summary>
-
-    private void ComboBox_VolunteerListFilter(object sender, SelectionChangedEventArgs e)
-    {
-        VolunteerList = (sender as ComboBox)!.SelectedIndex switch
-        {
-            0 => s_bl.Volunteer.ReadAllScreen(BTypeCalls.Medical_situation, VollInListFilter.CorrentCallType)!,
-            1 => s_bl.Volunteer.ReadAllScreen(BTypeCalls.Car_accident, VollInListFilter.CorrentCallType)!,
-            2 => s_bl.Volunteer.ReadAllScreen(BTypeCalls.Fall_from_hight, VollInListFilter.CorrentCallType)!,
-            3 => s_bl.Volunteer.ReadAllScreen(BTypeCalls.Violent_event, VollInListFilter.CorrentCallType)!,
-            4 => s_bl.Volunteer.ReadAllScreen(BTypeCalls.Domestic_violent, VollInListFilter.CorrentCallType)!,
-            5 => s_bl.Volunteer.ReadAllScreen(BTypeCalls.None, VollInListFilter.CorrentCallType)!,
-            _ => throw new NotImplementedException(),
-        };
-    }
-
+  
     /// <summary>
     /// observer for the list
     /// </summary>
     private void VolunteerListObserver()
     {
-        VolunteerList = s_bl.Volunteer.ReadAll()!;
+        VolunteerList = s_bl.Volunteer.ReadAllScreen(sort, filter2, filter)!;
     }
 
 
