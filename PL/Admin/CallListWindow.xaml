@@ -97,6 +97,6 @@
         </ListView>
 
         <!-- Button to Add New Call -->
-        <Button Content="Add call" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAddCall_Click" />
+        <Button Content="Add call" Grid.Row="2" Background="LightBlue" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAddCall_Click" />
     </Grid>
 </Window>
