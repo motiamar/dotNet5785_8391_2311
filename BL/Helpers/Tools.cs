@@ -98,14 +98,14 @@ internal static class Tools
 
             return distance; // המרחק בקילומטרים
         }
-        if(distanceType == DistanceTypes.Car)
+        if (distanceType == DistanceTypes.Car)
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    // בניית URL לבקשה עם מצב "car" עבור נסיעה ברכב
-                    string requestUrl = $"{BaseUrl}?key={ApiKey}&mode=car&start={VolLatitude},{VolLongitude}&end={CallLatitude},{CallLongitude}&format=xml";
+                    string mode = "driving"; // מצב נסיעה ברכב
+                    string requestUrl = $"https://us1.locationiq.com/v1/directions/{mode}/{VolLatitude},{VolLongitude};{CallLatitude},{CallLongitude}?key={ApiKey}&overview=false";
 
                     // שליחת הבקשה וקבלת התגובה
                     HttpResponseMessage response = client.GetAsync(requestUrl).Result;
@@ -132,7 +132,6 @@ internal static class Tools
                     }
                     else
                     {
-                 
                         return double.NaN;
                     }
                 }
@@ -143,22 +142,22 @@ internal static class Tools
                 return double.NaN;
             }
         }
-        if(distanceType == DistanceTypes.Walk)
+        if (distanceType == DistanceTypes.Walk)
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
                     // בניית URL לבקשה עם מצב "walk" עבור הליכה רגלית
-                    string requestUrl = $"{BaseUrl}?key={ApiKey}&mode=walk&start={VolLatitude},{VolLongitude}&end={CallLatitude},{CallLongitude}&format=xml";
-                    Console.WriteLine($"Request URL: {requestUrl}");
+                    string mode = "foot"; // מצב נסיעה ברכב
+                    string requestUrl = $"https://us1.locationiq.com/v1/directions/{mode}/{VolLatitude},{VolLongitude};{CallLatitude},{CallLongitude}?key={ApiKey}&overview=false";
 
                     // שליחת הבקשה וקבלת התגובה
                     HttpResponseMessage response = client.GetAsync(requestUrl).Result;
 
                     if (!response.IsSuccessStatusCode)
                     {
-                       
+
                         return double.NaN;
                     }
 
@@ -178,7 +177,7 @@ internal static class Tools
                     }
                     else
                     {
-                       
+
                         return double.NaN;
                     }
                 }
@@ -191,11 +190,13 @@ internal static class Tools
         }
         return 0;
 
-    }        
+    }
     private static double DegreesToRadians(double degrees)
     {
         return degrees * (Math.PI / 180.0);
     }
+
+
     /// <summary>
     /// func to check if the address is valid (exist on arth by google maps)
     /// </summary>
@@ -230,7 +231,7 @@ internal static class Tools
         }
         catch (Exception)
         {
-            return false; // חריגה כלשהי - נניח שהכתובת לא תקינה
+            return false; 
         }
     }
 
@@ -308,6 +309,6 @@ internal static class Tools
         return double.NaN;
     }
 };
-    
+
 
 

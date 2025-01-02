@@ -19,19 +19,17 @@
     <None Remove="Images\Image2.jpg" />
     <None Remove="Images\image3.jpg" />
     <None Remove="Images\image4.jpg" />
+    <None Remove="Images\Image5.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Images\Image.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Image2.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\image3.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Images\Image4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Image5.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

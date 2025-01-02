@@ -6,7 +6,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Images/Image3.jpg"/>
+            <ImageBrush ImageSource="pack://application:,,,/Images/Image5.jpg"/>
         </Grid.Background>
         <!-- מרכז טבלה עם 2 עמודות -->
         <Grid VerticalAlignment="Top" Margin="100,20,106,0" Height="548">
