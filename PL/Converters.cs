@@ -129,6 +129,25 @@ public class EnumToVisibilityConverter : IValueConverter
 }
 
 /// <summary>
+/// if the call status is open return true else return false
+/// </summary>
+public class EnumToVisibilityConverter2 : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        string enumValue = value.ToString()!;
+        if (enumValue == "In_treatment" || enumValue == "In_treatment_in_risk")
+            return Visibility.Visible;
+        return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+/// <summary>
 /// if the value is true return false else return true
 /// </summary>
 public class MultiConditionToEnabledConverter : IMultiValueConverter

@@ -161,14 +161,6 @@
     <EndKind>Expired_cancellation</EndKind>
   </Assignment>
   <Assignment>
-    <Id>1021</Id>
-    <CallId>1021</CallId>
-    <VolunteerId>810772020</VolunteerId>
-    <StartTime>2025-01-02T12:50:03</StartTime>
-    <FinishTime xsi:nil="true" />
-    <EndKind>Expired_cancellation</EndKind>
-  </Assignment>
-  <Assignment>
     <Id>1022</Id>
     <CallId>1004</CallId>
     <VolunteerId>221092661</VolunteerId>
@@ -407,5 +399,13 @@
     <StartTime>2025-01-02T12:43:03</StartTime>
     <FinishTime>2025-01-02T12:43:03</FinishTime>
     <EndKind>Treated</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1021</Id>
+    <CallId>1021</CallId>
+    <VolunteerId>810772020</VolunteerId>
+    <StartTime>2025-01-02T12:50:03</StartTime>
+    <FinishTime>2025-01-02T12:43:03</FinishTime>
+    <EndKind>Administrator_cancellation</EndKind>
   </Assignment>
 </ArrayOfAssignment>

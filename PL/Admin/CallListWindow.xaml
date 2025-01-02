@@ -88,7 +88,7 @@
                     <GridViewColumn Header="Action" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Cancale assignment" HorizontalAlignment="right" VerticalAlignment="Center" Click="BtnCancaleAss_Click" Margin="2" />
+                                <Button Content="Cancale assignment" HorizontalAlignment="right" VerticalAlignment="Center" Click="BtnCancaleAss_Click" Margin="2" Visibility="{Binding CallStatus, Converter={StaticResource EnumToVisibilityConverter2Key}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

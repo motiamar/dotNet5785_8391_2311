@@ -15,6 +15,7 @@
         <local:NullToNotEnabledConverter x:Key="NullToNotEnabledConverterKey" />
         <local:BoolToEnabledConverter x:Key="BoolToEnabledConverterKey"/>
         <local:EnumToVisibilityConverter x:Key="EnumToVisibilityConverterKey"/>
+        <local:EnumToVisibilityConverter2 x:Key="EnumToVisibilityConverter2Key"/>
         <local:CallInListCollection x:Key="CallInListCollectionKey"/>
         <local:CallTypeListCollection x:Key="CallTypeListCollectionKey"/>
         <local:MultiConditionToEnabledConverter x:Key="MultiConditionToEnabledConverterKey"/>

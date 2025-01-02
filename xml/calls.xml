@@ -311,16 +311,6 @@
     <MaxEndingCallTime>02/01/2025 13:42:03</MaxEndingCallTime>
   </Call>
   <Call>
-    <Id>1032</Id>
-    <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Young woman complaining of severe pain</VerbalDecription>
-    <FullAddressOfTheCall>7 Greenberg Street, Jerusalem</FullAddressOfTheCall>
-    <Latitude>35.192176</Latitude>
-    <Longitude>31.81637</Longitude>
-    <OpeningCallTime>02/01/2025 12:48:03</OpeningCallTime>
-    <MaxEndingCallTime>02/01/2025 14:03:03</MaxEndingCallTime>
-  </Call>
-  <Call>
     <Id>1033</Id>
     <TypeCall>Fall_from_hight</TypeCall>
     <VerbalDecription>Elderly person slipped and fell down stairs</VerbalDecription>
