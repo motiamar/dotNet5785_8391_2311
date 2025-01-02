@@ -60,6 +60,8 @@ internal class AdminImplementation : IAdmin
     public void SetMaxRange(TimeSpan maxRange)
     {
         Helpers.AdminManager.MaxRange = maxRange;
+        VolunteerManager.Observers.NotifyListUpdated();
+        CallManager.Observers.NotifyListUpdated();
     }
 
     /// <summary>

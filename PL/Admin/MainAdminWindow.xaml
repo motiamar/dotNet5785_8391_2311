@@ -25,7 +25,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!--clock time and buttons-->
-        <Label Grid.Column="1" Content="{Binding CurrentTime}" HorizontalAlignment="Left" VerticalAlignment ="Center" RenderTransformOrigin="0.504,0.524" Height="35" Width="200" Margin="100,0,0,0" Background="LightBlue"/>
+        <Label Grid.Column="1" Content="{Binding CurrentTime}" HorizontalAlignment="Left" VerticalAlignment ="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.504,0.524" Height="35" Width="200" Margin="100,0,0,0" Background="LightBlue"/>
         <Button Grid.Column="1" Content="Add One Minute" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="43" Width="400" Grid.Row="1" Click="BtnAddOneMinute_Click" Background="LightBlue"/>
         <Button Grid.Column="1" Content="Add One Hour" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="43" Width="400" Margin="0,43,0,0" Grid.Row="1" Click="BtnAddOneHour_Click" RenderTransformOrigin="0.504,0.705" Background="LightBlue"/>
         <Button Grid.Column="1" Content="Add One Day" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="43" Width="400" Grid.Row="1" Click="BtnAddOneDay_Click" Margin="0,81,0,0" Background="LightBlue"/>
@@ -33,7 +33,7 @@
         <Button Grid.Column="1" Content="Add One Year" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="43" Width="400" Margin="0,167,0,0" Grid.Row="1" Click="BtnAddOneYear_Click" Background="LightBlue"/>
 
         <!--max range buttons-->
-        <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding MaxRange}" VerticalAlignment="Top" Width="225" Height="30" Background="LightBlue"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding MaxRange}" VerticalAlignment="Top" Width="225" Height="30" Background="LightBlue"/>
         <Button Grid.Column="1" Content="Set max range" HorizontalAlignment="Center" Margin="0,61,0,0" Grid.Row="2" VerticalAlignment="Top" Height="50" Width="100" Click="BtnSetMaxRange_Click" Background="LightBlue"/>
 
         <!--max lists buttons-->

@@ -61,6 +61,7 @@ public partial class MainAdminWindow : Window
     private void BtnSetMaxRange_Click(object sender, RoutedEventArgs e)
     {
         s_bl.Admin.SetMaxRange(MaxRange);
+        MessageBox.Show("The range has been updated");
     }
 
     /// <summary>
