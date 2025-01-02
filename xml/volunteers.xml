@@ -218,7 +218,7 @@
     <Password>Israelgadishapass60#</Password>
     <Address>hertzel 10, netanya, israel</Address>
     <Latitude>32.3296091</Latitude>
-    <Longitude>34.853865</Longitude>
+    <Longitude>NaN</Longitude>
     <Role>Manager</Role>
     <Active>true</Active>
     <MaximumDistance>62171</MaximumDistance>

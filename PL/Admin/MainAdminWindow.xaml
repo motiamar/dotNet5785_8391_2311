@@ -37,7 +37,7 @@
         <Button Grid.Column="1" Content="Set max range" HorizontalAlignment="Center" Margin="0,61,0,0" Grid.Row="2" VerticalAlignment="Top" Height="50" Width="100" Click="BtnSetMaxRange_Click" Background="LightBlue"/>
 
         <!--max lists buttons-->
-        <Label Content="Volunteers lists" HorizontalAlignment="Center" VerticalAlignment ="Top" Grid.Row="1" RenderTransformOrigin="-0.102,0.059" FontSize="20" FontWeight="Bold" Foreground="DarkBlue" Background="White" Padding="5" FontFamily="Segoe UI" Margin="0,10,0,0" />
+        <Label Content="Volunteers lists" HorizontalAlignment="Center" VerticalAlignment ="Top" Grid.Row="1" RenderTransformOrigin="-0.102,0.059" FontSize="20" FontWeight="Bold" Foreground="Black" Background="LightBlue" Padding="5" FontFamily="Segoe UI" Margin="0,10,0,0" />
         <Button Content="Handle volunteers" HorizontalAlignment="Center" Margin="0,65,0,0" Grid.Row="1" VerticalAlignment="Top" Height="55" Width="126" RenderTransformOrigin="0.476,-0.18" Click="BtnHandleVolunteers_Click" Background="LightBlue"/>
 
         <!--calls lists buttons-->
@@ -46,7 +46,7 @@
         <!--Initi and reset-->
         <Button Content="Initialization" HorizontalAlignment="Center" Margin="0,116,0,0" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Width="100" Height="45" Click="BtnIntialization_Click" RenderTransformOrigin="0.497,1.279" Background="LightBlue"/>
         <Button Content="Reset" HorizontalAlignment="Center" Background="Red" Grid.Row="2" VerticalAlignment="Top" Grid.Column="1" Width="100" Height="44" Click="BtnReset_Click" Margin="0,174,0,0"/>
-        <Label Content="  Calls Lists" Margin="0,25,15,0" Grid.Row="2" Height="37" Width="126" Background="White" Padding="5" FontFamily="Segoe UI" HorizontalAlignment="Center" VerticalAlignment ="Top" FontSize="20" FontWeight="Bold" Foreground="DarkBlue"/>
+        <Label Content="  Calls Lists" Margin="0,25,15,0" Grid.Row="2" Height="37" Width="126" Background="LightBlue" Padding="5" FontFamily="Segoe UI" HorizontalAlignment="Center" VerticalAlignment ="Top" FontSize="20" FontWeight="Bold" Foreground="Black"/>
 
     </Grid>
 
