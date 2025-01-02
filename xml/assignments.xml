@@ -393,11 +393,11 @@
     <EndKind>Administrator_cancellation</EndKind>
   </Assignment>
   <Assignment>
-    <Id>1022</Id>
-    <CallId>1033</CallId>
-    <VolunteerId>933150617</VolunteerId>
-    <StartTime>2025-01-01T20:31:46</StartTime>
-    <FinishTime>2025-01-01T21:24:46</FinishTime>
-    <EndKind>Administrator_cancellation</EndKind>
+    <Id>1054</Id>
+    <CallId>1021</CallId>
+    <VolunteerId>726172349</VolunteerId>
+    <StartTime>2025-01-01T14:33:26</StartTime>
+    <FinishTime>2025-01-01T14:33:26</FinishTime>
+    <EndKind>Treated</EndKind>
   </Assignment>
 </ArrayOfAssignment>

@@ -11,7 +11,7 @@
     <Longitude>31.7648204</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>52742</MaximumDistance>
+    <MaximumDistance>81187</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -222,6 +222,20 @@
     <Role>Manager</Role>
     <Active>false</Active>
     <MaximumDistance>89281</MaximumDistance>
+    <DistanceType>Air</DistanceType>
+  </Volunteer>
+  <Volunteer>
+    <Id>726172349</Id>
+    <FullName>moti amar</FullName>
+    <Phone>0524815812</Phone>
+    <Email>moti.amar@gmail.com</Email>
+    <Password>Motiamarpass0#</Password>
+    <Address>yossi ben yossi 10, netanya, israel</Address>
+    <Latitude>32.3157799</Latitude>
+    <Longitude>34.859415</Longitude>
+    <Role>Volunteer</Role>
+    <Active>true</Active>
+    <MaximumDistance>81187</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
 </ArrayOfVolunteer>

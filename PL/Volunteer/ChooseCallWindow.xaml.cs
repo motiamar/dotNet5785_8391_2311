@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
+using DO;
 
 namespace PL.Volunteer;
 
@@ -23,10 +24,18 @@ public partial class ChooseCallWindow : Window
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public ChooseCallWindow(int volunteerId)
     {
-        volunteer_id = volunteerId;
-        InitializeComponent();       
-        this.Loaded += ChooseCallWindow_Loaded;
-        this.Closed += ChooseCallWindow_Closed!;
+        try
+        {
+            volunteer_id = volunteerId;
+            volunteer = s_bl.Volunteer.Read(volunteer_id)!;
+            InitializeComponent();
+            this.Loaded += ChooseCallWindow_Loaded;
+            this.Closed += ChooseCallWindow_Closed!;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
     }
 
     /// <summary>
@@ -57,7 +66,23 @@ public partial class ChooseCallWindow : Window
     /// <summary>
     /// the volunteer that choose the call
     /// </summary>
-    public int volunteer_id { get; set; } 
+    public int volunteer_id { get; set; }
+
+
+    /// <summary>
+    /// the volunteer that choose the call
+    /// </summary>
+    public BO.Volunteer volunteer
+    {
+        get { return (BO.Volunteer)GetValue(volunteerProperty); }
+        set { SetValue(volunteerProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for volunteer.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty volunteerProperty =
+        DependencyProperty.Register("volunteer", typeof(BO.Volunteer), typeof(ChooseCallWindow), new PropertyMetadata(null));
+
+
 
     /// <summary>
     /// sort the call list by the given parameter
@@ -148,6 +173,22 @@ public partial class ChooseCallWindow : Window
             }             
             else
                 MessageBox.Show("Choose canceled");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// button to update the volunteer address
+    /// </summary>
+    private void BtnUpdateAddress_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            s_bl.Volunteer.Update(volunteer_id, volunteer);
+            MessageBox.Show("Address updated successfully");
         }
         catch (Exception ex)
         {
