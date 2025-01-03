@@ -8,7 +8,7 @@
         Title="CallWindow" Height="640" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
-    <!-- משאבים עבור החלון -->
+    <!-- Resources for the window -->
     <Window.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="Foreground" Value="White"/>
@@ -22,15 +22,13 @@
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/Images/Image4.jpg"/>
         </Grid.Background>
-        <!-- טבלה ראשית עם 2 עמודות -->
         <Grid Margin="100,20,106,0" VerticalAlignment="Top" Height="384">
-            <!-- עמודות -->
+         
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- שורות -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -49,7 +47,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- כותרת -->
+            <!-- title -->
             <Label Content="Call Details" 
                    Grid.Column="1" 
                    FontSize="30" FontWeight="Bold" Foreground="White" 
@@ -89,7 +87,7 @@
             <Label Content="Call Assign In Lists:" Grid.Row="7" Grid.Column="0" Style="{StaticResource LabelStyle}" Margin="0,29,0,0" Grid.RowSpan="2" RenderTransformOrigin="0.456,-0.29" VerticalAlignment="Top" />
             <TextBox Text="{Binding CorrentCall.callAssignInLists, Converter={StaticResource CallAssignInListsConverterKey}}" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Height="71" IsReadOnly="True"/>
 
-            <!-- כפתור שמירה -->
+            <!-- save -->
             <Button Grid.Row="14" Grid.Column="1" Content="{Binding ButtonText}" 
                     HorizontalAlignment="Center" Background="LightBlue" Width="162" 
                     Margin="0,30,0,-66" Click="BtnAddUpdate_Click"/>

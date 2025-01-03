@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Volunteer"
         mc:Ignorable="d"
-        Title="CallHistoryWindow" Height="640" Width="1000"
+        Title="CallHistoryWindow" Height="640" Width="1050"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <!-- Grid Root Container -->
@@ -13,11 +13,8 @@
         <!-- Row Definitions: Define the structure of the grid with 3 rows -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Header Row (Title) -->
             <RowDefinition Height="500*"/>
-            <!-- ListView for call history -->
             <RowDefinition Height="Auto"/>
-            <!-- ComboBox for filtering -->
         </Grid.RowDefinitions>
 
         <!-- Header "Call History" -->
@@ -48,7 +45,7 @@
                     <GridViewColumn Header="Call ID" Width="70">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Id}"  HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Id}"  HorizontalAlignment="Center" Background="Yellow"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -99,7 +96,7 @@
                     </GridViewColumn>
 
                     <!-- Column "End Kind" -->
-                    <GridViewColumn Header="End kind" Width="150">
+                    <GridViewColumn Header="End kind" Width="180">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding EndKind}" HorizontalAlignment="Center"/>
