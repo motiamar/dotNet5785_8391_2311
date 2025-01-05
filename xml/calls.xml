@@ -141,16 +141,6 @@
     <MaxEndingCallTime>02/01/2025 14:03:03</MaxEndingCallTime>
   </Call>
   <Call>
-    <Id>1015</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Person lost balance and fell off roof</VerbalDecription>
-    <FullAddressOfTheCall>15 Yehuda HaNasi Street, Jerusalem</FullAddressOfTheCall>
-    <Latitude>35.202146</Latitude>
-    <Longitude>31.75577</Longitude>
-    <OpeningCallTime>02/01/2025 12:48:03</OpeningCallTime>
-    <MaxEndingCallTime>02/01/2025 14:24:03</MaxEndingCallTime>
-  </Call>
-  <Call>
     <Id>1016</Id>
     <TypeCall>Domestic_violent</TypeCall>
     <VerbalDecription>Child with visible bruises on their face</VerbalDecription>
@@ -239,16 +229,6 @@
     <Longitude>31.816719</Longitude>
     <OpeningCallTime>02/01/2025 12:51:03</OpeningCallTime>
     <MaxEndingCallTime>02/01/2025 14:24:03</MaxEndingCallTime>
-  </Call>
-  <Call>
-    <Id>1025</Id>
-    <TypeCall>Violent_event</TypeCall>
-    <VerbalDecription>Man stabbed in the upper body</VerbalDecription>
-    <FullAddressOfTheCall>10 King David Street, Jerusalem</FullAddressOfTheCall>
-    <Latitude>35.222337</Latitude>
-    <Longitude>31.787706</Longitude>
-    <OpeningCallTime>02/01/2025 12:50:03</OpeningCallTime>
-    <MaxEndingCallTime>02/01/2025 14:27:03</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1026</Id>
@@ -679,5 +659,25 @@
     <Longitude>34.7718297</Longitude>
     <OpeningCallTime>02/01/2025 12:51:03</OpeningCallTime>
     <MaxEndingCallTime>02/01/2025 13:50:03</MaxEndingCallTime>
+  </Call>
+  <Call>
+    <Id>1015</Id>
+    <TypeCall>Fall_from_hight</TypeCall>
+    <VerbalDecription>Person lost balance and fell off roof</VerbalDecription>
+    <FullAddressOfTheCall>Yossi ben yossi 17, netanya, israel</FullAddressOfTheCall>
+    <Latitude>32.3157799</Latitude>
+    <Longitude>34.859415</Longitude>
+    <OpeningCallTime>02/01/2025 12:48:03</OpeningCallTime>
+    <MaxEndingCallTime>02/01/2025 14:24:03</MaxEndingCallTime>
+  </Call>
+  <Call>
+    <Id>1025</Id>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Man stabbed in the upper body</VerbalDecription>
+    <FullAddressOfTheCall>Yossi ben yossi 17, netanya, israel</FullAddressOfTheCall>
+    <Latitude>32.3157799</Latitude>
+    <Longitude>34.859415</Longitude>
+    <OpeningCallTime>02/01/2025 12:50:03</OpeningCallTime>
+    <MaxEndingCallTime>03/01/2025 00:00:00</MaxEndingCallTime>
   </Call>
 </ArrayOfCalls>

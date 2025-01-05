@@ -77,7 +77,7 @@
 
             <!-- Call Max Close Time -->
             <Label Content="Call Max Close Time:" Grid.Row="6" Grid.Column="0" Style="{StaticResource LabelStyle}" Margin="0,0,0,26" Grid.RowSpan="2" />
-            <TextBox Text="{Binding CorrentCall.CallMaxCloseTime}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" IsEnabled="{Binding CorrentCall.CallStatus, Converter={StaticResource MaxTimeEnableConverterKey}}"/>
+            <DatePicker SelectedDate="{Binding callMaxCloseTime, Mode=TwoWay}"  Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" IsEnabled="{Binding CorrentCall.CallStatus, Converter={StaticResource MaxTimeEnableConverterKey}}"/>
 
             <!-- Call Status -->
             <Label Content="Call Status:" Grid.Row="7" Grid.Column="0" Style="{StaticResource LabelStyle}" />

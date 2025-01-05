@@ -28,10 +28,12 @@ public partial class CallWindow : Window
             if (callId != 0)
             {
                 CorrentCall = s_bl.Call.Read(callId);
+                callMaxCloseTime = CorrentCall!.CallMaxCloseTime;
             }
             else
             {
                 CorrentCall = new BO.Call();
+                callMaxCloseTime = s_bl.Admin.GetClock();
             }
         }
         catch (Exception ex)
@@ -67,6 +69,19 @@ public partial class CallWindow : Window
     public static readonly DependencyProperty CorrentCallProperty =
         DependencyProperty.Register("CorrentCall", typeof(BO.Call), typeof(CallWindow), new PropertyMetadata(null));
 
+
+
+    public DateTime? callMaxCloseTime
+    {
+        get { return (DateTime)GetValue(callMaxCloseTimeProperty); }
+        set { SetValue(callMaxCloseTimeProperty, value); }
+    }
+    public static readonly DependencyProperty callMaxCloseTimeProperty =
+        DependencyProperty.Register("callMaxCloseTime", typeof(DateTime), typeof(CallWindow), new PropertyMetadata(null));
+
+
+    /// לשים פה משתנה לזמן שישתנה בהתאם לסוג המסך
+
     /// <summary>
     /// add or update the call depent on the button text
     /// </summary>
@@ -76,12 +91,14 @@ public partial class CallWindow : Window
         {
             if (ButtonText == "Add")
             {
+                CorrentCall!.CallMaxCloseTime = callMaxCloseTime;
                 s_bl.Call.Create(CorrentCall!);
                 MessageBox.Show("the call has created sucsesfuly");
                 this.Close();
             }
             else
             {
+                CorrentCall!.CallMaxCloseTime = callMaxCloseTime;
                 s_bl.Call.Update(CorrentCall!);
                 MessageBox.Show("the call has updeted sucsesfuly");
                 this.Close();
