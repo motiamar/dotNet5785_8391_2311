@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="CallListWindow" Height="640" Width="920"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-
     <!--External grid-->
     <Grid>
         <Grid.RowDefinitions>
