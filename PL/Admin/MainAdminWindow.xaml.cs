@@ -146,20 +146,25 @@ public partial class MainAdminWindow : Window
     }
 
     /// <summary>
-    /// botton to open the volunteers screen
+    /// botton to open the volunteers screen only once at in a time
     /// </summary>
+    private int _volunteerListWindowCounter = 0;
+
     private void BtnHandleVolunteers_Click(object sender, RoutedEventArgs e)
     {
-        new VolunteerListWindow().Show();
+        if (_volunteerListWindowCounter == 0)
+        {
+            var volunteerListWindow = new VolunteerListWindow();
+            _volunteerListWindowCounter++;
+            volunteerListWindow.Closed += (s, args) => _volunteerListWindowCounter--;
+            volunteerListWindow.Show();
+        }
+        else
+        {
+            MessageBox.Show("The Volunteers List window is already open.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 
-    /// <summary>
-    /// botton to open the calls screen
-    /// </summary>
-    private void BtnHandleCalls_Click(object sender, RoutedEventArgs e)
-    {
-        new CallListWindow().Show();
-    }
 
     /// <summary>
     /// botton to initionalize the system
@@ -260,15 +265,33 @@ public partial class MainAdminWindow : Window
 
 
     /// <summary>
-    /// event to open a new screen with the selected status
+    /// event to open a new screen with the selected status only once at in a time
     /// </summary>
+    private readonly Dictionary<BO.BCallStatus, CallListWindow> _openWindows = new();
+
     private void StatusButton_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button button)
         {
-            int status = (int)button.Tag; // return the status selected
+            int status = (int)button.Tag; // Extract the status
             BO.BCallStatus filter = (BO.BCallStatus)status;
-            new CallListWindow(filter, ManagerID).Show(); 
+            if (_openWindows.TryGetValue(filter, out var existingWindow))
+            {
+                if (existingWindow.IsVisible)
+                {
+                    existingWindow.Focus(); // give focus to the existing window
+                    return;
+                }
+                else
+                {
+                    _openWindows.Remove(filter); 
+                }
+            }
+            // create a new window
+            var newWindow = new CallListWindow(filter, ManagerID);
+            newWindow.Closed += (s, args) => _openWindows.Remove(filter); 
+            _openWindows[filter] = newWindow;
+            newWindow.Show();
         }
     }
 }

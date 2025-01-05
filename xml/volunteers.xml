@@ -224,4 +224,18 @@
     <MaximumDistance>62171</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
+  <Volunteer>
+    <Id>208717538</Id>
+    <FullName>david itach</FullName>
+    <Phone>0539660071</Phone>
+    <Email>Dwdwth26@gmail.com</Email>
+    <Password>Di1425361234#</Password>
+    <Address>petach tikva 68, netanya, israel</Address>
+    <Latitude>32.3189691</Latitude>
+    <Longitude>34.8580467</Longitude>
+    <Role>Volunteer</Role>
+    <Active>true</Active>
+    <MaximumDistance>144444</MaximumDistance>
+    <DistanceType>Air</DistanceType>
+  </Volunteer>
 </ArrayOfVolunteer>

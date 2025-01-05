@@ -408,4 +408,12 @@
     <FinishTime>2025-01-02T12:43:03</FinishTime>
     <EndKind>Administrator_cancellation</EndKind>
   </Assignment>
+  <Assignment>
+    <Id>1051</Id>
+    <CallId>1029</CallId>
+    <VolunteerId>208717538</VolunteerId>
+    <StartTime>2025-01-02T12:43:03</StartTime>
+    <FinishTime>2025-01-02T12:43:03</FinishTime>
+    <EndKind>Treated</EndKind>
+  </Assignment>
 </ArrayOfAssignment>
