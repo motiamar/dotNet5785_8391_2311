@@ -154,11 +154,11 @@ public partial class VolunteerUserWindow : Window
             BO.Call call = s_bl.Call.Read(CurrentVolunteerUser.CorrentCall!.Id)!;
             if (call == null)
             {
-                MessageBox.Show("There is no call in progress");
+                MessageBox.Show("There is no call in progress", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             s_bl.Call.CanceleAssignment(CurrentVolunteerUser.Id, CurrentVolunteerUser.CorrentCall!.Id);
-            MessageBox.Show("The call has canceled sucssesfuly");
+                MessageBox.Show("The call has canceled sucssesfuly", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         catch (Exception ex)
         {
