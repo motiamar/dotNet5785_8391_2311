@@ -117,7 +117,7 @@ public partial class CallListWindow : Window
     private void BtnAddCall_Click(object sender, RoutedEventArgs e)
     {
         new CallWindow().Show();
-    } 
+    }
 
 
     /// <summary>
@@ -128,7 +128,7 @@ public partial class CallListWindow : Window
         SelectedCallInList = (sender as Button)!.DataContext as BO.CallInList;
         if (SelectedCallInList == null)
         {
-            MessageBox.Show("No call selected");
+            MessageBox.Show("No call selected", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
         try
@@ -140,12 +140,13 @@ public partial class CallListWindow : Window
             }
             else
             {
-                MessageBox.Show("Delete canceled");
+                MessageBox.Show("Delete canceled", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
     }
 
@@ -157,7 +158,7 @@ public partial class CallListWindow : Window
         SelectedCallInList = (sender as Button)!.DataContext as BO.CallInList;
         if (SelectedCallInList == null)
         {
-            MessageBox.Show("No call selected");
+            MessageBox.Show("No call selected", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
         try
@@ -170,12 +171,12 @@ public partial class CallListWindow : Window
             }
             else
             {
-                MessageBox.Show("the cancle canceled");
+                MessageBox.Show("the cancle canceled", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

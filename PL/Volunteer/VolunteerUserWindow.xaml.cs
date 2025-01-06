@@ -33,7 +33,7 @@ public partial class VolunteerUserWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         this.Loaded += VolunteerUserWindow_Loaded;
         this.Closing += VolunteerUserWindow_Closing!;
@@ -97,11 +97,12 @@ public partial class VolunteerUserWindow : Window
         try
         {
             s_bl.Volunteer.Update(CurrentVolunteerUser!.Id, CurrentVolunteerUser);
-            MessageBox.Show("the Volunteer has updeted sucsesfuly");
+            MessageBox.Show("The Volunteer has updeted sucsesfuly", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -129,18 +130,17 @@ public partial class VolunteerUserWindow : Window
         try
         {
             BO.Call call = s_bl.Call.Read(CurrentVolunteerUser.CorrentCall!.Id)!;
-            if(call == null)
+            if (call == null)
             {
-                MessageBox.Show("There is no call in progress");
+                MessageBox.Show("There is no call in progress", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             s_bl.Call.EndAssignment(CurrentVolunteerUser.Id, CurrentVolunteerUser.CorrentCall!.Id);
-            MessageBox.Show("The call has ended sucssesfuly");
+            MessageBox.Show("The call has ended sucssesfuly", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
-
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -162,7 +162,7 @@ public partial class VolunteerUserWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

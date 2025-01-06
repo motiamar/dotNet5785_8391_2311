@@ -74,7 +74,7 @@ public partial class VolunteerListWindow : Window
     {
         VolunteerList = s_bl.Volunteer.ReadAllScreen(sort, filter2, filter)!;
     }
-  
+
     /// <summary>
     /// observer for the list
     /// </summary>
@@ -145,12 +145,12 @@ public partial class VolunteerListWindow : Window
             }
             else
             {
-                MessageBox.Show("Delete canceled");
+                MessageBox.Show("Delete canceled", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
         }
     }

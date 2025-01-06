@@ -34,7 +34,7 @@ public partial class ChooseCallWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -131,7 +131,7 @@ public partial class ChooseCallWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -159,7 +159,7 @@ public partial class ChooseCallWindow : Window
         SelectOpenCallInList = (sender as Button)!.DataContext as BO.OpenCallInList;
         if (SelectOpenCallInList == null)
         {
-            MessageBox.Show("No call selected");
+            MessageBox.Show("No call selected", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
         try
@@ -168,15 +168,15 @@ public partial class ChooseCallWindow : Window
             if (result == MessageBoxResult.Yes)
             {
                 s_bl.Call.ChooseCall(volunteer_id, SelectOpenCallInList.Id);
-                MessageBox.Show("Call chosen successfully");
+                MessageBox.Show("Call chosen successfully", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }             
             else
-                MessageBox.Show("Choose canceled");
+                MessageBox.Show("Choose canceled", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -188,11 +188,11 @@ public partial class ChooseCallWindow : Window
         try
         {
             s_bl.Volunteer.Update(volunteer_id, volunteer);
-            MessageBox.Show("Address updated successfully");
+            MessageBox.Show("Address updated successfully", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

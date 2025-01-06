@@ -188,12 +188,13 @@ public partial class MainAdminWindow : Window
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
                 Mouse.OverrideCursor = null;
-                MessageBox.Show("The initiliz has sucssesfull");
+                MessageBox.Show("The initiliz has sucssesfull", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
         }
     }
@@ -220,12 +221,13 @@ public partial class MainAdminWindow : Window
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
             finally
             {
-                Mouse.OverrideCursor = null;
-                MessageBox.Show("The reset has sucssesfull");
+                Mouse.OverrideCursor = null; 
+                MessageBox.Show("The reset has sucssesfull", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }      
     }
@@ -258,9 +260,9 @@ public partial class MainAdminWindow : Window
             }
         }catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-       
+
     }
 
 

@@ -33,14 +33,15 @@ public partial class VolunteerWindow : Window
             else
             {
                 CorrentVolunteer = new BO.Volunteer();
-            }          
+            }
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-
     }
+
+
 
     /// <summary>
     /// property for the ComboBox to set the role of the volunteer
@@ -75,7 +76,7 @@ public partial class VolunteerWindow : Window
     /// </summary>
     public BO.Volunteer? CorrentVolunteer
     {
-        get { return (BO.Volunteer? )GetValue(CorrentVolunteerProperty); }
+        get { return (BO.Volunteer?)GetValue(CorrentVolunteerProperty); }
         set { SetValue(CorrentVolunteerProperty, value); }
     }
 
@@ -106,7 +107,7 @@ public partial class VolunteerWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

@@ -38,7 +38,8 @@ public partial class CallWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
     }
 
@@ -93,20 +94,21 @@ public partial class CallWindow : Window
             {
                 CorrentCall!.CallMaxCloseTime = callMaxCloseTime;
                 s_bl.Call.Create(CorrentCall!);
-                MessageBox.Show("the call has created sucsesfuly");
+                MessageBox.Show("The call has created sucssesfuly", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             else
             {
                 CorrentCall!.CallMaxCloseTime = callMaxCloseTime;
                 s_bl.Call.Update(CorrentCall!);
-                MessageBox.Show("the call has updeted sucsesfuly");
+                MessageBox.Show("The call has updeted sucssesfuly", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
     }
 
