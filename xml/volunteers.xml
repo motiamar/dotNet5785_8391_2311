@@ -197,20 +197,6 @@
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
-    <Id>569768724</Id>
-    <FullName>israel gadisha</FullName>
-    <Phone>0542109876</Phone>
-    <Email>israel.gadisha@gmail.com</Email>
-    <Password>Israelgadishapass60#</Password>
-    <Address>hertzel 10, netanya, israel</Address>
-    <Latitude>32.3296091</Latitude>
-    <Longitude>NaN</Longitude>
-    <Role>Manager</Role>
-    <Active>true</Active>
-    <MaximumDistance>62171</MaximumDistance>
-    <DistanceType>Air</DistanceType>
-  </Volunteer>
-  <Volunteer>
     <Id>208717538</Id>
     <FullName>david itach</FullName>
     <Phone>0539660071</Phone>
@@ -236,6 +222,20 @@
     <Role>Volunteer</Role>
     <Active>true</Active>
     <MaximumDistance>60431</MaximumDistance>
+    <DistanceType>Air</DistanceType>
+  </Volunteer>
+  <Volunteer>
+    <Id>569768724</Id>
+    <FullName>israel gadisha</FullName>
+    <Phone>0542109876</Phone>
+    <Email>israel.gadisha@gmail.com</Email>
+    <Password>Israelgadishapass60#</Password>
+    <Address>hertzel 10, netanya, israel</Address>
+    <Latitude>32.3296091</Latitude>
+    <Longitude>34.853865</Longitude>
+    <Role>Manager</Role>
+    <Active>true</Active>
+    <MaximumDistance>62171</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
 </ArrayOfVolunteer>
