@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfVolunteer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Volunteer>
-    <Id>726172349</Id>
-    <FullName>moti amar</FullName>
-    <Phone>0524815812</Phone>
-    <Email>moti.amar@gmail.com</Email>
-    <Password>moti amarpass0</Password>
-    <Address>Bustanei 15, jerusalem</Address>
-    <Latitude>35.2126784</Latitude>
-    <Longitude>31.7648204</Longitude>
-    <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>60431</MaximumDistance>
-    <DistanceType>Air</DistanceType>
-  </Volunteer>
-  <Volunteer>
     <Id>236153821</Id>
     <FullName>elya motai</FullName>
     <Phone>0501234567</Phone>
@@ -236,6 +222,20 @@
     <Role>Volunteer</Role>
     <Active>true</Active>
     <MaximumDistance>144444</MaximumDistance>
+    <DistanceType>Air</DistanceType>
+  </Volunteer>
+  <Volunteer>
+    <Id>726172349</Id>
+    <FullName>moti amar</FullName>
+    <Phone>0524815812</Phone>
+    <Email>moti.amar@gmail.com</Email>
+    <Password>Motiamarpass0#</Password>
+    <Address>yossi ben yossi , netanya, israel</Address>
+    <Latitude>32.3157799</Latitude>
+    <Longitude>NaN</Longitude>
+    <Role>Volunteer</Role>
+    <Active>true</Active>
+    <MaximumDistance>60431</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
 </ArrayOfVolunteer>
