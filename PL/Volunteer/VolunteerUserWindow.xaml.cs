@@ -43,7 +43,7 @@ public partial class VolunteerUserWindow : Window
     /// <summary>
     /// screen loaded
     /// </summary>
-    public void VolunteerUserWindow_Loaded(object sender, RoutedEventArgs e) 
+    private void VolunteerUserWindow_Loaded(object sender, RoutedEventArgs e) 
     {
         s_bl.Volunteer.AddObserver(CurrentVolunteerUser.Id, VolunteerUserObserver);
     }
@@ -51,7 +51,7 @@ public partial class VolunteerUserWindow : Window
     /// <summary>
     /// screen closing
     /// </summary>
-    public void VolunteerUserWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    private void VolunteerUserWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
         s_bl.Volunteer.RemoveObserver(CurrentVolunteerUser.Id, VolunteerUserObserver);
     }
@@ -59,7 +59,7 @@ public partial class VolunteerUserWindow : Window
     /// <summary>
     /// observer for the current volunteer
     /// </summary>
-    public void VolunteerUserObserver()
+    private void VolunteerUserObserver()
     {
         CurrentVolunteerUser = s_bl.Volunteer.Read(CurrentVolunteerUser.Id)!;
     }
@@ -92,7 +92,7 @@ public partial class VolunteerUserWindow : Window
     /// <summary>
     /// button for the update the volunteer
     /// </summary>
-    private void BtnUpdate_Click(object sender, RoutedEventArgs e)
+    public void BtnUpdate_Click(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -109,7 +109,7 @@ public partial class VolunteerUserWindow : Window
     /// <summary>
     /// button to show the call history
     /// </summary>
-    private void BtnCallHistory_Click(object sender, RoutedEventArgs e)
+    public void BtnCallHistory_Click(object sender, RoutedEventArgs e)
     {
         new CallHistoryWindow(CurrentVolunteerUser.Id).Show();
     }
@@ -117,7 +117,7 @@ public partial class VolunteerUserWindow : Window
     /// <summary>
     /// button to choose a call
     /// </summary>
-    private void BtnChooseCall_Click(object sender, RoutedEventArgs e)
+    public void BtnChooseCall_Click(object sender, RoutedEventArgs e)
     {
         new ChooseCallWindow(CurrentVolunteerUser.Id).Show();
     }
@@ -125,7 +125,7 @@ public partial class VolunteerUserWindow : Window
     /// <summary>
     /// button to end the call
     /// </summary>
-    private void BtnEndCall_Click(object sender, RoutedEventArgs e)
+    public void BtnEndCall_Click(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -147,7 +147,7 @@ public partial class VolunteerUserWindow : Window
     /// <summary>
     /// button to cancel the call
     /// </summary>
-    private void BtnCancaleCall_Click(object sender, RoutedEventArgs e)
+    public void BtnCancaleCall_Click(object sender, RoutedEventArgs e)
     {
         try
         {

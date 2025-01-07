@@ -70,7 +70,7 @@ public partial class VolunteerListWindow : Window
     /// <summary>
     /// update the volunteer list view by the filter sorting
     /// </summary>
-    private void ComboBox_VolunteerListChange(object sender, SelectionChangedEventArgs e)
+    public void ComboBox_VolunteerListChange(object sender, SelectionChangedEventArgs e)
     {
         VolunteerList = s_bl.Volunteer.ReadAllScreen(sort, filter2, filter)!;
     }
@@ -109,7 +109,7 @@ public partial class VolunteerListWindow : Window
     /// <summary>
     /// button to add a new volunteer
     /// </summary>
-    private void BtnAddVolunteer_Click(object sender, RoutedEventArgs e)
+    public void BtnAddVolunteer_Click(object sender, RoutedEventArgs e)
     {
         new VolunteerWindow().Show();
     }
@@ -117,7 +117,7 @@ public partial class VolunteerListWindow : Window
     /// <summary>
     /// open the volunteer window when double click on the list in update mode
     /// </summary>
-    private void SelectedVolunteerInList_MouseDouble_Click(object sender, MouseButtonEventArgs e)
+    public void SelectedVolunteerInList_MouseDouble_Click(object sender, MouseButtonEventArgs e)
     {
         if (SelectedVolunteerInList != null)
         {
@@ -128,7 +128,7 @@ public partial class VolunteerListWindow : Window
     /// <summary>
     /// delete the selected volunteer from the list
     /// </summary>
-    private void BtnDelete_Click(object sender, RoutedEventArgs e)
+    public void BtnDelete_Click(object sender, RoutedEventArgs e)
     {
         SelectedVolunteerInList = (sender as Button)!.DataContext as BO.VolunteerInList;
         if (SelectedVolunteerInList == null)

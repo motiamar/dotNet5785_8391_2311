@@ -211,17 +211,45 @@
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
+    <Id>208717538</Id>
+    <FullName>david itach</FullName>
+    <Phone>0539660071</Phone>
+    <Email>Dwdwth26@gmail.com</Email>
+    <Password>Di1425361234#</Password>
+    <Address>petach tikva 68, netanya, israel</Address>
+    <Latitude>32.3189691</Latitude>
+    <Longitude>34.8580467</Longitude>
+    <Role>Volunteer</Role>
+    <Active>true</Active>
+    <MaximumDistance>144444</MaximumDistance>
+    <DistanceType>Air</DistanceType>
+  </Volunteer>
+  <Volunteer>
+    <Id>726172349</Id>
+    <FullName>moti amar</FullName>
+    <Phone>0524815812</Phone>
+    <Email>moti.amar@gmail.com</Email>
+    <Password>Motiamarpass0#</Password>
+    <Address>yossi ben yossi , netanya, israel</Address>
+    <Latitude>32.3157799</Latitude>
+    <Longitude>NaN</Longitude>
+    <Role>Volunteer</Role>
+    <Active>true</Active>
+    <MaximumDistance>60431</MaximumDistance>
+    <DistanceType>Air</DistanceType>
+  </Volunteer>
+  <Volunteer>
     <Id>569768724</Id>
     <FullName>israel gadisha</FullName>
     <Phone>0542109876</Phone>
     <Email>israel.gadisha@gmail.com</Email>
-    <Password>israel gadishapass60</Password>
-    <Address>aharon brend 12,jerusalem</Address>
-    <Latitude>35.17222213737034</Latitude>
-    <Longitude>31.784020945981794</Longitude>
+    <Password>Israelgadishapass60#</Password>
+    <Address>hertzel 10, netanya, israel</Address>
+    <Latitude>32.3296091</Latitude>
+    <Longitude>34.853865</Longitude>
     <Role>Manager</Role>
     <Active>true</Active>
-    <MaximumDistance>85933</MaximumDistance>
+    <MaximumDistance>62171</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
 </ArrayOfVolunteer>

@@ -86,7 +86,7 @@ public partial class CallWindow : Window
     /// <summary>
     /// add or update the call depent on the button text
     /// </summary>
-    private void BtnAddUpdate_Click(object sender, RoutedEventArgs e)
+    public void BtnAddUpdate_Click(object sender, RoutedEventArgs e)
     {
         try
         {

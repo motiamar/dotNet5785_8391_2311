@@ -88,7 +88,7 @@ public partial class VolunteerWindow : Window
     /// <summary>
     /// add or update the volunteer depent on the button text
     /// </summary>
-    private void BtnAddUpdate_Click(object sender, RoutedEventArgs e)
+    public void BtnAddUpdate_Click(object sender, RoutedEventArgs e)
     {
         try
         {
