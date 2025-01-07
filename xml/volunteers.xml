@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfVolunteer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Volunteer>
+    <Id>726172349</Id>
+    <FullName>moti amar</FullName>
+    <Phone>0524815812</Phone>
+    <Email>moti.amar@gmail.com</Email>
+    <Password>moti amarpass0</Password>
+    <Address>Bustanei 15, jerusalem</Address>
+    <Latitude>35.2126784</Latitude>
+    <Longitude>31.7648204</Longitude>
+    <Role>Volunteer</Role>
+    <Active>false</Active>
+    <MaximumDistance>56088</MaximumDistance>
+    <DistanceType>Air</DistanceType>
+  </Volunteer>
+  <Volunteer>
     <Id>236153821</Id>
     <FullName>elya motai</FullName>
     <Phone>0501234567</Phone>
@@ -10,8 +24,8 @@
     <Latitude>35.2124199</Latitude>
     <Longitude>31.7611362</Longitude>
     <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>52412</MaximumDistance>
+    <Active>false</Active>
+    <MaximumDistance>82226</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -25,7 +39,7 @@
     <Longitude>31.7638657</Longitude>
     <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>95125</MaximumDistance>
+    <MaximumDistance>96430</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -38,8 +52,8 @@
     <Latitude>35.2203343</Latitude>
     <Longitude>31.7483032</Longitude>
     <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>73137</MaximumDistance>
+    <Active>false</Active>
+    <MaximumDistance>76780</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -53,7 +67,7 @@
     <Longitude>31.7589875</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>77140</MaximumDistance>
+    <MaximumDistance>86364</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -67,7 +81,7 @@
     <Longitude>31.7342954</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>80603</MaximumDistance>
+    <MaximumDistance>94081</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -80,8 +94,8 @@
     <Latitude>35.1805822</Latitude>
     <Longitude>31.7518568</Longitude>
     <Role>Volunteer</Role>
-    <Active>false</Active>
-    <MaximumDistance>55121</MaximumDistance>
+    <Active>true</Active>
+    <MaximumDistance>52813</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -95,7 +109,7 @@
     <Longitude>31.7810136</Longitude>
     <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>93273</MaximumDistance>
+    <MaximumDistance>60617</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -108,8 +122,8 @@
     <Latitude>35.187882091894366</Latitude>
     <Longitude>31.76552192492391</Longitude>
     <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>99895</MaximumDistance>
+    <Active>false</Active>
+    <MaximumDistance>90702</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -123,7 +137,7 @@
     <Longitude>31.810386702304726</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>68919</MaximumDistance>
+    <MaximumDistance>73488</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -137,7 +151,7 @@
     <Longitude>31.828473377413367</Longitude>
     <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>68424</MaximumDistance>
+    <MaximumDistance>96696</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -150,8 +164,8 @@
     <Latitude>35.199124630657806</Latitude>
     <Longitude>31.788846938792492</Longitude>
     <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>63323</MaximumDistance>
+    <Active>false</Active>
+    <MaximumDistance>60863</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -165,7 +179,7 @@
     <Longitude>31.77681135390754</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>52720</MaximumDistance>
+    <MaximumDistance>65122</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -178,8 +192,8 @@
     <Latitude>35.18926428816602</Latitude>
     <Longitude>31.738258839334225</Longitude>
     <Role>Volunteer</Role>
-    <Active>false</Active>
-    <MaximumDistance>98366</MaximumDistance>
+    <Active>true</Active>
+    <MaximumDistance>51252</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -192,8 +206,8 @@
     <Latitude>35.17470578874885</Latitude>
     <Longitude>31.786734640142832</Longitude>
     <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>96789</MaximumDistance>
+    <Active>false</Active>
+    <MaximumDistance>93714</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -201,41 +215,13 @@
     <FullName>israel gadisha</FullName>
     <Phone>0542109876</Phone>
     <Email>israel.gadisha@gmail.com</Email>
-    <Password>Israelgadishapass60#</Password>
-    <Address>hertzel 10, netanya, israel</Address>
-    <Latitude>32.3296091</Latitude>
-    <Longitude>NaN</Longitude>
+    <Password>israel gadishapass60</Password>
+    <Address>aharon brend 12,jerusalem</Address>
+    <Latitude>35.17222213737034</Latitude>
+    <Longitude>31.784020945981794</Longitude>
     <Role>Manager</Role>
     <Active>true</Active>
-    <MaximumDistance>62171</MaximumDistance>
-    <DistanceType>Air</DistanceType>
-  </Volunteer>
-  <Volunteer>
-    <Id>208717538</Id>
-    <FullName>david itach</FullName>
-    <Phone>0539660071</Phone>
-    <Email>Dwdwth26@gmail.com</Email>
-    <Password>Di1425361234#</Password>
-    <Address>petach tikva 68, netanya, israel</Address>
-    <Latitude>32.3189691</Latitude>
-    <Longitude>34.8580467</Longitude>
-    <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>144444</MaximumDistance>
-    <DistanceType>Air</DistanceType>
-  </Volunteer>
-  <Volunteer>
-    <Id>726172349</Id>
-    <FullName>moti amar</FullName>
-    <Phone>0524815812</Phone>
-    <Email>moti.amar@gmail.com</Email>
-    <Password>Motiamarpass0#</Password>
-    <Address>yossi ben yossi , netanya, israel</Address>
-    <Latitude>32.3157799</Latitude>
-    <Longitude>NaN</Longitude>
-    <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>60431</MaximumDistance>
+    <MaximumDistance>85933</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
 </ArrayOfVolunteer>
