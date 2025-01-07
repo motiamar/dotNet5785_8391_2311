@@ -58,7 +58,7 @@ public partial class MainAdminWindow : Window
     /// <summary>
     /// button to set a new value to the risk range
     /// </summary>
-    private void BtnSetMaxRange_Click(object sender, RoutedEventArgs e)
+    public void BtnSetMaxRange_Click(object sender, RoutedEventArgs e)
     {
         s_bl.Admin.SetMaxRange(MaxRange);
         MessageBox.Show("The range has been updated", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -67,7 +67,7 @@ public partial class MainAdminWindow : Window
     /// <summary>
     /// add one minute to the clock
     /// </summary>
-    private void BtnAddOneMinute_Click(object sender, RoutedEventArgs e)
+    public void BtnAddOneMinute_Click(object sender, RoutedEventArgs e)
     {
         s_bl.Admin.ForwordClock(BO.TimeUnit.Minute);
     }
@@ -75,7 +75,7 @@ public partial class MainAdminWindow : Window
     /// <summary>
     /// add one hour to the clock
     /// </summary>
-    private void BtnAddOneHour_Click(object sender, RoutedEventArgs e)
+    public void BtnAddOneHour_Click(object sender, RoutedEventArgs e)
     {
         s_bl.Admin.ForwordClock(BO.TimeUnit.Hour);
     }
@@ -83,7 +83,7 @@ public partial class MainAdminWindow : Window
     /// <summary>
     /// add one day to the clock
     /// </summary>
-    private void BtnAddOneDay_Click(object sender, RoutedEventArgs e)
+    public void BtnAddOneDay_Click(object sender, RoutedEventArgs e)
     {
         s_bl.Admin.ForwordClock(BO.TimeUnit.Day);
     }
@@ -91,7 +91,7 @@ public partial class MainAdminWindow : Window
     /// <summary>
     /// add one month to the clock
     /// </summary>
-    private void BtnAddOneMonth_Click(object sender, RoutedEventArgs e)
+    public void BtnAddOneMonth_Click(object sender, RoutedEventArgs e)
     {
         s_bl.Admin.ForwordClock(BO.TimeUnit.Month);
 
@@ -99,7 +99,7 @@ public partial class MainAdminWindow : Window
     /// <summary>
     /// add one year to the clock
     /// </summary>
-    private void BtnAddOneYear_Click(object sender, RoutedEventArgs e)
+    public void BtnAddOneYear_Click(object sender, RoutedEventArgs e)
     {
         s_bl.Admin.ForwordClock(BO.TimeUnit.Year);
     }
@@ -148,9 +148,9 @@ public partial class MainAdminWindow : Window
     /// <summary>
     /// botton to open the volunteers screen only once at in a time
     /// </summary>
-    private int _volunteerListWindowCounter = 0;
+    public int _volunteerListWindowCounter = 0;
 
-    private void BtnHandleVolunteers_Click(object sender, RoutedEventArgs e)
+    public void BtnHandleVolunteers_Click(object sender, RoutedEventArgs e)
     {
         if (_volunteerListWindowCounter == 0)
         {
@@ -169,7 +169,7 @@ public partial class MainAdminWindow : Window
     /// <summary>
     /// botton to initionalize the system
     /// </summary>
-    private void BtnIntialization_Click(object sender, RoutedEventArgs e)
+    public void BtnIntialization_Click(object sender, RoutedEventArgs e)
     {
         MessageBoxResult result = MessageBox.Show("Are you sure you want to initionliz the system?", "confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
         if (result == MessageBoxResult.Yes)
@@ -202,7 +202,7 @@ public partial class MainAdminWindow : Window
     /// <summary>
     /// botton to reset the system
     /// </summary>
-    private void BtnReset_Click(object sender, RoutedEventArgs e)
+    public void BtnReset_Click(object sender, RoutedEventArgs e)
     {
         MessageBoxResult result = MessageBox.Show("Are you sure you want to reset the system?", "confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
         if (result == MessageBoxResult.Yes)
@@ -235,7 +235,7 @@ public partial class MainAdminWindow : Window
     /// <summary>
     /// create buttons for each status of the calls
     /// </summary>
-    private void Btn_calls_Click()
+    public void Btn_calls_Click()
     {
         try
         {
@@ -269,9 +269,9 @@ public partial class MainAdminWindow : Window
     /// <summary>
     /// event to open a new screen with the selected status only once at in a time
     /// </summary>
-    private readonly Dictionary<BO.BCallStatus, CallListWindow> _openWindows = new();
+    public readonly Dictionary<BO.BCallStatus, CallListWindow> _openWindows = new();
 
-    private void StatusButton_Click(object sender, RoutedEventArgs e)
+    public void StatusButton_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button button)
         {

@@ -41,7 +41,7 @@ public partial class ChooseCallWindow : Window
     /// <summary>
     /// the observer that get called when the call list get updated
     /// </summary>
-    public void ChooseCallWindow_Loaded(object sender, RoutedEventArgs e)
+    private void ChooseCallWindow_Loaded(object sender, RoutedEventArgs e)
     {
         OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_id);
         s_bl.Call.AddObserver(CallInListObserver);
@@ -50,7 +50,7 @@ public partial class ChooseCallWindow : Window
     /// <summary>
     /// the observer that get called when the call list get updated
     /// </summary>
-    public void ChooseCallWindow_Closed(object sender, EventArgs e)
+    private void ChooseCallWindow_Closed(object sender, EventArgs e)
     {
        s_bl.Call.RemoveObserver( CallInListObserver);
     }
@@ -58,7 +58,7 @@ public partial class ChooseCallWindow : Window
     /// <summary>
     /// the observer that get called when the call list get updated
     /// </summary>
-    public void CallInListObserver()
+    private void CallInListObserver()
     {
         OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_id, CallTypeFilter, OpenCallInListSort);
     }
@@ -118,12 +118,12 @@ public partial class ChooseCallWindow : Window
         get { return (IEnumerable<BO.OpenCallInList>)GetValue(OpenCallInListProperty); }
         set { SetValue(OpenCallInListProperty, value); }
     }
-    
+
     // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty OpenCallInListProperty =
         DependencyProperty.Register("OpenCallInList", typeof(IEnumerable<BO.OpenCallInList>), typeof(ChooseCallWindow), new PropertyMetadata(null));
 
-    private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+    public void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
     {
         try
         {
@@ -154,7 +154,7 @@ public partial class ChooseCallWindow : Window
     /// <summary>
     /// button to choose the call
     /// </summary>
-    private void BtnChoose_Click(object sender, RoutedEventArgs e)
+    public void BtnChoose_Click(object sender, RoutedEventArgs e)
     {
         SelectOpenCallInList = (sender as Button)!.DataContext as BO.OpenCallInList;
         if (SelectOpenCallInList == null)
@@ -183,7 +183,7 @@ public partial class ChooseCallWindow : Window
     /// <summary>
     /// button to update the volunteer address
     /// </summary>
-    private void BtnUpdateAddress_Click(object sender, RoutedEventArgs e)
+    public void BtnUpdateAddress_Click(object sender, RoutedEventArgs e)
     {
         try
         {

@@ -29,7 +29,7 @@ public partial class CallListWindow : Window
         this.Closing += CallListWindow_Closing!;
     }
 
-    public int ManagerId { get; set; }
+    private int ManagerId { get; set; }
     /// <summary>
     /// dependecy property for the call list filter
     /// </summary>
@@ -93,7 +93,7 @@ public partial class CallListWindow : Window
     public static readonly DependencyProperty sortProperty =
         DependencyProperty.Register("sort", typeof(BO.CallInListFilter), typeof(CallListWindow), new PropertyMetadata(null));
 
-    private void ComboBox_CallInListChange(object sender, SelectionChangedEventArgs e)
+    public void ComboBox_CallInListChange(object sender, SelectionChangedEventArgs e)
     {
         CallList = s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, sort);       
     }
@@ -102,7 +102,7 @@ public partial class CallListWindow : Window
     /// <summary>
     /// open the volunteer window when double click on the list in update mode
     /// </summary>
-    private void SelectedCallInList_MouseDouble_Click(object sender, MouseButtonEventArgs e)
+    public void SelectedCallInList_MouseDouble_Click(object sender, MouseButtonEventArgs e)
     {
         if (SelectedCallInList != null)
         {
@@ -114,7 +114,7 @@ public partial class CallListWindow : Window
     /// <summary>
     /// button to add a new volunteer
     /// </summary>
-    private void BtnAddCall_Click(object sender, RoutedEventArgs e)
+    public void BtnAddCall_Click(object sender, RoutedEventArgs e)
     {
         new CallWindow().Show();
     }
@@ -123,7 +123,7 @@ public partial class CallListWindow : Window
     /// <summary>
     /// delete the selected volunteer from the list
     /// </summary>
-    private void BtnDelete_Click(object sender, RoutedEventArgs e)
+    public void BtnDelete_Click(object sender, RoutedEventArgs e)
     {
         SelectedCallInList = (sender as Button)!.DataContext as BO.CallInList;
         if (SelectedCallInList == null)
@@ -153,7 +153,7 @@ public partial class CallListWindow : Window
     /// <summary>
     /// button to cancale the assignment of the call
     /// </summary>
-    private void BtnCancaleAss_Click(object sender, RoutedEventArgs e)
+    public void BtnCancaleAss_Click(object sender, RoutedEventArgs e)
     {
         SelectedCallInList = (sender as Button)!.DataContext as BO.CallInList;
         if (SelectedCallInList == null)

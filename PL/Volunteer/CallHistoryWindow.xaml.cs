@@ -66,12 +66,12 @@ public partial class CallHistoryWindow : Window
     public static readonly DependencyProperty CallTypeFilterProperty =
     DependencyProperty.Register("CallTypeFilter", typeof(BO.BTypeCalls?), typeof(CallHistoryWindow), new PropertyMetadata(null));
 
-    
+
 
     /// <summary>
     /// close the observer
     /// </summary>
-    public void CallHistoryWindow_Closed(object sender, EventArgs e)
+    private void CallHistoryWindow_Closed(object sender, EventArgs e)
     {
         s_bl.Call.RemoveObserver(CallInListObserver);
     }
@@ -79,7 +79,7 @@ public partial class CallHistoryWindow : Window
     /// <summary>
     /// loaded the call list
     /// </summary>
-    public void CallHistoryWindow_Loaded(object sender, RoutedEventArgs e)
+    private void CallHistoryWindow_Loaded(object sender, RoutedEventArgs e)
     {
         UserHistoryCalls = s_bl.Call.GetCloseCallList(UserID);
         s_bl.Call.AddObserver(CallInListObserver);
@@ -88,7 +88,7 @@ public partial class CallHistoryWindow : Window
     /// <summary>
     /// observer for the closed call list of the volunteer
     /// </summary>
-    public void CallInListObserver()
+    private void CallInListObserver()
     {
         UserHistoryCalls = s_bl.Call.GetCloseCallList(UserID, CallTypeFilter, CallInListSort);
     }
@@ -110,7 +110,7 @@ public partial class CallHistoryWindow : Window
     /// <summary>
     /// add observer to the call list and load the call list
     /// </summary>
-    private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+    public void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
     {
         try
         {

@@ -31,39 +31,39 @@ public partial class MainWindow : Window
     /// <summary>
     /// Dependency property for CurrentID
     /// </summary>
-    public int CurrentID
+    private int CurrentID
     {
         get { return (int)GetValue(CurrentIDProperty); }
         set { SetValue(CurrentIDProperty, value); }
     }
 
-    public static readonly DependencyProperty CurrentIDProperty =
+    private static readonly DependencyProperty CurrentIDProperty =
         DependencyProperty.Register("CurrentID", typeof(int), typeof(MainWindow), new PropertyMetadata(null));
 
 
     /// <summary>
     /// Dependency property for CurrentPassword
     /// </summary>
-    public string CurrentPassword
+    private string CurrentPassword
     {
         get { return (string)GetValue(CurrentPasswordProperty); }
         set { SetValue(CurrentPasswordProperty, value); }
     }
 
-    public static readonly DependencyProperty CurrentPasswordProperty =
+    private static readonly DependencyProperty CurrentPasswordProperty =
         DependencyProperty.Register("CurrentPassword", typeof(string), typeof(MainWindow), new PropertyMetadata(null));
 
 
     /// <summary>
     /// Dependency property for CurrentUser
     /// </summary>
-    public BO.Volunteer? CurrentUser
+    private BO.Volunteer? CurrentUser
     {
         get { return (BO.Volunteer?)GetValue(CurrentUserProperty); }
         set { SetValue(CurrentUserProperty, value); }
     }
 
-    public static readonly DependencyProperty CurrentUserProperty =
+    private static readonly DependencyProperty CurrentUserProperty =
         DependencyProperty.Register("CurrentUser", typeof(BO.Volunteer), typeof(MainWindow), new PropertyMetadata(null));
 
 
