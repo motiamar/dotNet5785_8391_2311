@@ -405,6 +405,30 @@
     <CallId>1005</CallId>
     <VolunteerId>726172349</VolunteerId>
     <StartTime>2025-01-07T21:03:08</StartTime>
+    <FinishTime>2025-01-07T21:03:08</FinishTime>
+    <EndKind>Treated</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1051</Id>
+    <CallId>1010</CallId>
+    <VolunteerId>726172349</VolunteerId>
+    <StartTime>2025-01-07T21:03:08</StartTime>
+    <FinishTime>2025-01-07T21:03:08</FinishTime>
+    <EndKind>Treated</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1052</Id>
+    <CallId>1003</CallId>
+    <VolunteerId>726172349</VolunteerId>
+    <StartTime>2025-01-07T21:03:08</StartTime>
+    <FinishTime>2025-01-07T21:03:08</FinishTime>
+    <EndKind>Treated</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1053</Id>
+    <CallId>1027</CallId>
+    <VolunteerId>726172349</VolunteerId>
+    <StartTime>2025-01-07T21:03:08</StartTime>
     <FinishTime xsi:nil="true" />
     <EndKind>Treated</EndKind>
   </Assignment>

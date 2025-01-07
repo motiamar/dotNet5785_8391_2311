@@ -30,6 +30,10 @@ public partial class VolunteerUserWindow : Window
         try
         {
             CurrentVolunteerUser = s_bl.Volunteer.Read(id)!;
+            if (CurrentVolunteerUser.CorrentCall!=null)
+            {
+                userCall = s_bl.Call.Read(CurrentVolunteerUser.CorrentCall.CallId)!;
+            }
         }
         catch (Exception ex)
         {
@@ -62,6 +66,14 @@ public partial class VolunteerUserWindow : Window
     private void VolunteerUserObserver()
     {
         CurrentVolunteerUser = s_bl.Volunteer.Read(CurrentVolunteerUser.Id)!;
+        if (CurrentVolunteerUser.CorrentCall != null)
+        {
+            userCall = s_bl.Call.Read(CurrentVolunteerUser.CorrentCall.CallId)!;
+        }
+        else
+        {
+            userCall = null;
+        }
     }
 
     /// <summary>
@@ -76,6 +88,7 @@ public partial class VolunteerUserWindow : Window
     // Using a DependencyProperty as the backing store for CurrentVolunteer.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty CurrentVolunteerUserProperty =
         DependencyProperty.Register("CurrentVolunteerUser", typeof(BO.Volunteer), typeof(VolunteerUserWindow), new PropertyMetadata(null));
+   
     /// <summary>
     /// dependeci object for the current role
     /// </summary>
@@ -88,6 +101,21 @@ public partial class VolunteerUserWindow : Window
     // Using a DependencyProperty as the backing store for Role.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty RoleProperty =
         DependencyProperty.Register("Role", typeof(BO.BRoles), typeof(VolunteerUserWindow), new PropertyMetadata(null));
+
+
+    /// <summary>
+    /// call object for the current user
+    /// </summary>
+    public BO.Call? userCall
+    {
+        get { return (BO.Call?)GetValue(userCallProperty); }
+        set { SetValue(userCallProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for userCall.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty userCallProperty =
+        DependencyProperty.Register("userCall", typeof(BO.Call), typeof(VolunteerUserWindow), new PropertyMetadata(null));
+
 
     /// <summary>
     /// button for the update the volunteer
