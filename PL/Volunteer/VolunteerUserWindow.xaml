@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Volunteer"
         mc:Ignorable="d"
-        Title="VolunteerUserWindow" Height="850" Width="800"
+        Title="VolunteerUserWindow" Height="500" Width="1400"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <Grid>
@@ -15,7 +15,7 @@
         </Grid.Background>
 
         <!-- Central grid with two columns for layout -->
-        <Grid VerticalAlignment="Top" Margin="120,20,110,0" Height="436">
+        <Grid VerticalAlignment="Top" Margin="120,20,685,0" Height="436">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="99*" />
                 <ColumnDefinition Width="197*" />
@@ -190,7 +190,7 @@
             </Button>
         </Grid>
 
-        <Grid VerticalAlignment="Top" Margin="120,439,110,0" Height="362">
+        <Grid VerticalAlignment="Top" Margin="720,55,105,0" Height="362">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
