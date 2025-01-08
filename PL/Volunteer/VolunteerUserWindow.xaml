@@ -201,8 +201,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="82" />
-                <RowDefinition Height="Auto" MinHeight="19.96" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="67*" />
@@ -242,7 +242,7 @@
                 </Label.Effect>
             </Label>
             <Label Content="Description:" Grid.Row="3" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28"/>
-            <TextBox Grid.Row="3"  TextWrapping="Wrap" Text="{Binding userCall.Description}" IsReadOnly="True" Height="18" Margin="91,5,0,5" Grid.ColumnSpan="2" />
+            <TextBox Grid.Row="3"  TextWrapping="Wrap" Text="{Binding userCall.Description}" IsReadOnly="True" Height="40" Margin="91,5,0,5" Grid.ColumnSpan="2" />
 
             <!-- Call Address -->
             <Label Content="Call address:" Grid.Row="4" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28">
@@ -251,7 +251,7 @@
                 </Label.Effect>
             </Label>
             <Label Content="Call address:" Grid.Row="4" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28"/>
-            <TextBox Grid.Row="4" TextWrapping="Wrap" Text="{Binding userCall.CallAddress}" VerticalAlignment="Center" IsReadOnly="True" Height="18" Grid.ColumnSpan="2" Margin="91,0,0,0" />
+            <TextBox Grid.Row="4" TextWrapping="Wrap" Text="{Binding userCall.CallAddress}" VerticalAlignment="Bottom" IsReadOnly="True" Height="18" Grid.ColumnSpan="2" Margin="91,0,0,5" />
 
             <!-- Call Open Time -->
             <Label Content="Call open time:" Grid.Row="5" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28">
