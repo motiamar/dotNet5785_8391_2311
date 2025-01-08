@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Volunteer"
         mc:Ignorable="d"
-        Title="VolunteerUserWindow" Height="500" Width="1400"
+        Title="VolunteerUserWindow" Height="500" Width="950"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <Grid>
@@ -15,11 +15,11 @@
         </Grid.Background>
 
         <!-- Central grid with two columns for layout -->
-        <Grid VerticalAlignment="Top" Margin="120,20,685,0" Height="436">
+        <Grid VerticalAlignment="Top" Margin="37,31,509,0" Height="436">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="99*" />
-                <ColumnDefinition Width="197*" />
-                <ColumnDefinition/>
+                <ColumnDefinition Width="153*" />
+                <ColumnDefinition Width="250*" />
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <!-- Define rows for form input fields -->
@@ -42,12 +42,12 @@
             </Grid.RowDefinitions>
 
             <!-- Title label with blurred effect behind -->
-            <Label Content="Volunteer details" Grid.Column="1" FontSize="30" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left" Margin="0,-5,0,22" Width="248" Grid.RowSpan="3">
+            <Label Content="Volunteer details" Grid.Column="1" FontSize="30" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" Margin="0,-5,0,22" Width="248" Grid.RowSpan="3">
                 <Label.Effect>
                     <BlurEffect Radius="10" />
                 </Label.Effect>
             </Label>
-            <Label Content="Volunteer details" Grid.Column="1" FontSize="30" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" Margin="0,-6,0,23" Width="248" Grid.RowSpan="3" />
+            <Label Content="Volunteer details" Grid.Column="1" FontSize="30" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,-6,0,23" Width="248" Grid.RowSpan="3" />
 
             <!-- Volunteer Activity label and checkbox -->
             <Label Content="Volunteer Activity:" Grid.Row="2" Grid.Column="0" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27" Foreground="Black">
@@ -178,8 +178,8 @@
             <TextBox Text="{Binding CurrentVolunteerUser.ExpiredCalls}" Grid.Row="14" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True" Height="18" Margin="0,0,15,0" />
 
             <!-- Buttons for actions -->
-            <Button Content="Update details" Grid.Row="15" Grid.Column="1" HorizontalAlignment="Left" Background="LightBlue" Width="172" Margin="9,0,0,39" Click="BtnUpdate_Click" />
-            <Button Content="Call history" Grid.Row="15" Margin="190,0,32,39" Background="LightBlue" Click="BtnCallHistory_Click" Grid.Column="1" Height="20" VerticalAlignment="Bottom" />
+            <Button Content="Update details" Grid.Row="15" HorizontalAlignment="Left" Background="LightBlue" Width="112" Margin="5,0,0,39" Click="BtnUpdate_Click" Grid.Column="1" />
+            <Button Content="Call history" Grid.Row="15" Margin="125,0,15,39" Background="LightBlue" Click="BtnCallHistory_Click" Grid.Column="1" Height="20" VerticalAlignment="Bottom" />
             <Button Content="Choose new call" Background="LightBlue" Click="BtnChooseCall_Click" Height="26" VerticalAlignment="Center" Grid.Row="1">
                 <Button.IsEnabled>
                     <MultiBinding Converter="{StaticResource MultiConditionToEnabledConverterKey}">
@@ -189,8 +189,9 @@
                 </Button.IsEnabled>
             </Button>
         </Grid>
-
-        <Grid VerticalAlignment="Top" Margin="720,55,105,0" Height="362">
+        
+         <!--grid for the call details-->
+        <Grid VerticalAlignment="Center" Margin="461,0,21,0" Height="362">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -204,11 +205,11 @@
                 <RowDefinition Height="Auto" MinHeight="19.96" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="67*" />
+                <ColumnDefinition Width="167*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Call Details -->
+            <!-- Call details -->
             <Label Content="Call details" FontSize="30" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Height="49" Width="162" Grid.Column="1" Margin="10,0,0,0" >
                 <Label.Effect>
                     <BlurEffect Radius="10" />
@@ -223,7 +224,7 @@
                 </Label.Effect>
             </Label>
             <Label Content="Call id:" Grid.Row="1" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28"/>
-            <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.Id}" VerticalAlignment="Center" Width="370" IsReadOnly="True" Height="18" />
+            <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.Id}" VerticalAlignment="Center" Width="310" IsReadOnly="True" Height="18" />
 
             <!-- Call Type -->
             <Label Content="Call Type:" Grid.Row="2" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28">
@@ -232,7 +233,7 @@
                 </Label.Effect>
             </Label>
             <Label Content="Call Type:" Grid.Row="2" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28"/>
-            <TextBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.Type}" VerticalAlignment="Center" Width="370" IsReadOnly="True" Height="18" />
+            <TextBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.Type}" VerticalAlignment="Center" Width="306" IsReadOnly="True" Height="18" />
 
             <!-- Description -->
             <Label Content="Description:" Grid.Row="3" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28">
@@ -241,7 +242,7 @@
                 </Label.Effect>
             </Label>
             <Label Content="Description:" Grid.Row="3" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28"/>
-            <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.Description}" VerticalAlignment="Center" Width="370" IsReadOnly="True" Height="18" />
+            <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.Description}" VerticalAlignment="Center" Width="308" IsReadOnly="True" Height="18" />
 
             <!-- Call Address -->
             <Label Content="Call address:" Grid.Row="4" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28">
@@ -250,7 +251,7 @@
                 </Label.Effect>
             </Label>
             <Label Content="Call address:" Grid.Row="4" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28"/>
-            <TextBox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.CallAddress}" VerticalAlignment="Center" Width="370" IsReadOnly="True" Height="18" />
+            <TextBox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.CallAddress}" VerticalAlignment="Center" Width="306" IsReadOnly="True" Height="18" />
 
             <!-- Call Open Time -->
             <Label Content="Call open time:" Grid.Row="5" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28">
@@ -259,7 +260,7 @@
                 </Label.Effect>
             </Label>
             <Label Content="Call open time:" Grid.Row="5" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28"/>
-            <TextBox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.CallOpenTime}" VerticalAlignment="Center" Width="370" IsReadOnly="True" Height="18" />
+            <TextBox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.CallOpenTime}" VerticalAlignment="Center" Width="306" IsReadOnly="True" Height="18" />
 
             <!-- Call Max Close Time -->
             <Label Content="Call max close time:" Grid.Row="6" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28">
@@ -268,7 +269,7 @@
                 </Label.Effect>
             </Label>
             <Label Content="Call max close time:" Grid.Row="6" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28"/>
-            <TextBox Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.CallMaxCloseTime}" VerticalAlignment="Center" Width="370" IsReadOnly="True" Height="18" />
+            <TextBox Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.CallMaxCloseTime}" VerticalAlignment="Center" Width="308" IsReadOnly="True" Height="18" />
 
             <!-- Call Status -->
             <Label Content="Call status:" Grid.Row="7" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28">
@@ -277,7 +278,7 @@
                 </Label.Effect>
             </Label>
             <Label Content="Call status:" Grid.Row="7" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28"/>
-            <TextBox Grid.Column="1" Grid.Row="7" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.CallStatus}" VerticalAlignment="Center" Width="370" IsReadOnly="True" Height="18" />
+            <TextBox Grid.Column="1" Grid.Row="7" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.CallStatus}" VerticalAlignment="Center" Width="306" IsReadOnly="True" Height="18" />
 
             <!-- Call Assign Lists -->
             <Label Content="Call assign lists:" Grid.Row="8" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28">
@@ -286,11 +287,11 @@
                 </Label.Effect>
             </Label>
             <Label Content="Call assign lists:" Grid.Row="8" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28"/>
-            <TextBox Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.callAssignInLists, Converter={StaticResource CallAssignInListsConverterKey}}" VerticalAlignment="Center" Width="370" IsReadOnly="True" Height="82" />
+            <TextBox Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding userCall.callAssignInLists, Converter={StaticResource CallAssignInListsConverterKey}}" VerticalAlignment="Center" Width="304" IsReadOnly="True" Height="82" />
 
             <!-- Buttons -->
-            <Button Content="End call" Grid.Row="9" Margin="10,10,198,-10" Background="LightBlue" Click="BtnEndCall_Click" IsEnabled="{Binding CurrentVolunteerUser.CorrentCall, Converter={StaticResource NullToNotEnabledConverterKey}}" Grid.Column="1" />
-            <Button Content="Cancel call" Grid.Row="9" Margin="203,10,14,-10" Background="LightBlue" Click="BtnCancaleCall_Click" IsEnabled="{Binding CurrentVolunteerUser.CorrentCall, Converter={StaticResource NullToNotEnabledConverterKey}}" Grid.Column="1" />
+            <Button Content="End call" Grid.Row="9" Margin="35,10,164,-10" Background="LightBlue" Click="BtnEndCall_Click" IsEnabled="{Binding CurrentVolunteerUser.CorrentCall, Converter={StaticResource NullToNotEnabledConverterKey}}" Grid.Column="1" />
+            <Button Content="Cancel call" Grid.Row="9" Margin="180,10,26,-10" Background="LightBlue" Click="BtnCancaleCall_Click" IsEnabled="{Binding CurrentVolunteerUser.CorrentCall, Converter={StaticResource NullToNotEnabledConverterKey}}" Grid.Column="1" />
         </Grid>
 
     </Grid>
