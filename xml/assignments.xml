@@ -265,26 +265,10 @@
     <EndKind>Expired_cancellation</EndKind>
   </Assignment>
   <Assignment>
-    <Id>1034</Id>
-    <CallId>1013</CallId>
-    <VolunteerId>569768724</VolunteerId>
-    <StartTime>2025-01-07T21:09:08</StartTime>
-    <FinishTime xsi:nil="true" />
-    <EndKind>Expired_cancellation</EndKind>
-  </Assignment>
-  <Assignment>
     <Id>1035</Id>
     <CallId>1035</CallId>
     <VolunteerId>172780181</VolunteerId>
     <StartTime>2025-01-07T21:13:08</StartTime>
-    <FinishTime xsi:nil="true" />
-    <EndKind>Expired_cancellation</EndKind>
-  </Assignment>
-  <Assignment>
-    <Id>1036</Id>
-    <CallId>1019</CallId>
-    <VolunteerId>569768724</VolunteerId>
-    <StartTime>2025-01-07T21:09:08</StartTime>
     <FinishTime xsi:nil="true" />
     <EndKind>Expired_cancellation</EndKind>
   </Assignment>
@@ -308,14 +292,6 @@
     <Id>1039</Id>
     <CallId>1035</CallId>
     <VolunteerId>221092661</VolunteerId>
-    <StartTime>2025-01-07T21:13:08</StartTime>
-    <FinishTime xsi:nil="true" />
-    <EndKind>Expired_cancellation</EndKind>
-  </Assignment>
-  <Assignment>
-    <Id>1040</Id>
-    <CallId>1023</CallId>
-    <VolunteerId>569768724</VolunteerId>
     <StartTime>2025-01-07T21:13:08</StartTime>
     <FinishTime xsi:nil="true" />
     <EndKind>Expired_cancellation</EndKind>
@@ -430,6 +406,38 @@
     <VolunteerId>726172349</VolunteerId>
     <StartTime>2025-01-07T21:03:08</StartTime>
     <FinishTime xsi:nil="true" />
+    <EndKind>Treated</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1034</Id>
+    <CallId>1013</CallId>
+    <VolunteerId>569768724</VolunteerId>
+    <StartTime>2025-01-07T21:09:08</StartTime>
+    <FinishTime>2025-01-07T21:03:08</FinishTime>
+    <EndKind>Treated</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1036</Id>
+    <CallId>1019</CallId>
+    <VolunteerId>569768724</VolunteerId>
+    <StartTime>2025-01-07T21:09:08</StartTime>
+    <FinishTime>2025-01-07T21:03:08</FinishTime>
+    <EndKind>Treated</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1040</Id>
+    <CallId>1023</CallId>
+    <VolunteerId>569768724</VolunteerId>
+    <StartTime>2025-01-07T21:13:08</StartTime>
+    <FinishTime>2025-01-07T21:03:08</FinishTime>
+    <EndKind>Treated</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1054</Id>
+    <CallId>1008</CallId>
+    <VolunteerId>569768724</VolunteerId>
+    <StartTime>2025-01-07T21:03:08</StartTime>
+    <FinishTime>2025-01-07T21:03:08</FinishTime>
     <EndKind>Treated</EndKind>
   </Assignment>
 </ArrayOfAssignment>

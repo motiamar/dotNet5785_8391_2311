@@ -239,7 +239,7 @@
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
-    <Id>569768724</Id>
+    <Id>207688391</Id>
     <FullName>israel gadisha</FullName>
     <Phone>0542109876</Phone>
     <Email>israel.gadisha@gmail.com</Email>
@@ -249,7 +249,7 @@
     <Longitude>34.853865</Longitude>
     <Role>Manager</Role>
     <Active>true</Active>
-    <MaximumDistance>62171</MaximumDistance>
+    <MaximumDistance>56976872462171</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
 </ArrayOfVolunteer>
