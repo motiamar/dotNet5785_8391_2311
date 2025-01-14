@@ -46,8 +46,8 @@ public static class Initialization
             // random distance
             double tmpMaximumDistance = s_rand.Next(50000, 100000);
 
-            DistanceTypes tmpDistanceType = default(DistanceTypes);
-            //DistanceTypes tmpDistanceType = (DistanceTypes)s_rand.Next(0, Enum.GetValues(typeof(DistanceTypes)).Length);
+            //DistanceTypes tmpDistanceType = default(DistanceTypes);
+            DistanceTypes tmpDistanceType = (DistanceTypes)s_rand.Next(0, Enum.GetValues(typeof(DistanceTypes)).Length);
 
             // create a new Volunteer with all the tmp arguments
             s_dal!.Volunteer.Create(new Volunteer 

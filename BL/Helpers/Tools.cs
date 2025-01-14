@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 namespace Helpers;
 using System.Text.RegularExpressions;
 using System.Net.Http;
-using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using BO;
 using RestSharp;
@@ -96,7 +95,6 @@ internal static class Tools
             return EarthRadiusKm * c; // המרחק בקילומטרים
         }
 
-
         if (distanceType == DistanceTypes.Car || distanceType == DistanceTypes.Walk)
         {
             try
@@ -106,8 +104,8 @@ internal static class Tools
                     // מצב נסיעה (driving או walking)
                     string mode = distanceType == DistanceTypes.Car ? "driving" : "walking";
 
-                    // בניית URL לבקשה ל-Google Distance Matrix API
-                    string requestUrl = $"https://maps.googleapis.com/maps/api/distancematrix/json?origins={VolLatitude},{VolLongitude}" +
+                    // בניית URL לבקשה ל-Google Distance Matrix API בפורמט XML
+                    string requestUrl = $"https://maps.googleapis.com/maps/api/distancematrix/xml?origins={VolLatitude},{VolLongitude}" +
                                         $"&destinations={CallLatitude},{CallLongitude}&mode={mode}&key={ApiKey}";
 
                     // שליחת הבקשה וקבלת תגובה
@@ -119,23 +117,24 @@ internal static class Tools
                         return double.NaN;
                     }
 
-                    // קריאת התוכן בפורמט JSON
-                    string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                    // קריאת התוכן בפורמט XML
+                    string xmlResponse = response.Content.ReadAsStringAsync().Result;
 
-                    // ניתוח התגובה
-                    var json = Newtonsoft.Json.Linq.JObject.Parse(jsonResponse);
+                    // ניתוח התגובה ב-XML
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.LoadXml(xmlResponse);
 
                     // בדיקת סטטוס
-                    string status = json["status"]?.ToString()!;
-                    if (status != "OK")
+                    XmlNode statusNode = xmlDoc.SelectSingleNode("//status")!;
+                    if (statusNode == null || statusNode.InnerText != "OK")
                     {
-                        Console.WriteLine($"Error: API response status is {status}");
+                        Console.WriteLine($"Error: API response status is {statusNode?.InnerText}");
                         return double.NaN;
                     }
 
                     // שליפת מרחק מהתגובה
-                    var distanceValue = json["rows"]?[0]?["elements"]?[0]?["distance"]?["value"];
-                    if (distanceValue != null && double.TryParse(distanceValue.ToString(), out double distanceInMeters))
+                    XmlNode distanceNode = xmlDoc.SelectSingleNode("//distance/value")!;
+                    if (distanceNode != null && double.TryParse(distanceNode.InnerText, out double distanceInMeters))
                     {
                         return distanceInMeters / 1000; // המרחק בקילומטרים
                     }
@@ -152,6 +151,7 @@ internal static class Tools
 
         return 0;
     }
+
 
     /// <summary>
     /// Convert degrees to radians.

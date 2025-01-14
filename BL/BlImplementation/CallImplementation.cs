@@ -7,7 +7,6 @@ using BO;
 using DalApi;
 using DO;
 using Helpers;
-using Newtonsoft.Json.Linq;
 using static BO.Exceptions;
 
 internal class CallImplementation : BlApi.ICall
