@@ -73,7 +73,7 @@ internal static class Tools
     private const string BaseUrl = "https://us1.locationiq.com/v1/search.php";
 
 
-    /// <summary>
+    // <summary>
     /// func to calculate the distance between the volunteer and the call by Latitude and Longitude depend on the distance type
     /// </summary>
     /// <returns></returns>
@@ -98,14 +98,14 @@ internal static class Tools
 
             return distance; // המרחק בקילומטרים
         }
-        if (distanceType == DistanceTypes.Car)
+        if (distanceType == DistanceTypes.Car || distanceType == DistanceTypes.Walk)
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    string mode = "driving"; // מצב נסיעה ברכב
-                    string requestUrl = $"https://us1.locationiq.com/v1/directions/{mode}/{VolLatitude},{VolLongitude};{CallLatitude},{CallLongitude}?key={ApiKey}&overview=false";
+                    string mode = distanceType == DistanceTypes.Car ? "driving" : "foot";
+                    string requestUrl = $"https://us1.locationiq.com/v1/directions/{mode}/{VolLatitude},{VolLongitude};{CallLatitude},{CallLongitude}?key={ApiKey}&overview=false&format=xml";
 
                     // שליחת הבקשה וקבלת התגובה
                     HttpResponseMessage response = client.GetAsync(requestUrl).Result;
@@ -138,64 +138,18 @@ internal static class Tools
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception: {ex.Message}");
-                return double.NaN;
-            }
-        }
-        if (distanceType == DistanceTypes.Walk)
-        {
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    // בניית URL לבקשה עם מצב "walk" עבור הליכה רגלית
-                    string mode = "foot"; // מצב נסיעה ברכב
-                    string requestUrl = $"https://us1.locationiq.com/v1/directions/{mode}/{VolLatitude},{VolLongitude};{CallLatitude},{CallLongitude}?key={ApiKey}&overview=false";
-
-                    // שליחת הבקשה וקבלת התגובה
-                    HttpResponseMessage response = client.GetAsync(requestUrl).Result;
-
-                    if (!response.IsSuccessStatusCode)
-                    {
-
-                        return double.NaN;
-                    }
-
-                    // קריאת התגובה כ-XML
-                    string xmlResponse = response.Content.ReadAsStringAsync().Result;
-                    Console.WriteLine("API Response:");
-                    Console.WriteLine(xmlResponse);
-
-                    XmlDocument xmlDoc = new XmlDocument();
-                    xmlDoc.LoadXml(xmlResponse);
-
-                    // שליפת תגית ה-distance מה-XML
-                    XmlNode distanceNode = xmlDoc.SelectSingleNode("//distance")!;
-                    if (distanceNode != null && double.TryParse(distanceNode.InnerText, out double distance))
-                    {
-                        return distance / 1000; // המרחק בקילומטרים
-                    }
-                    else
-                    {
-
-                        return double.NaN;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception: {ex.Message}");
+                Console.WriteLine($"Exception: {ex.GetType().Name}: {ex.Message}");
                 return double.NaN;
             }
         }
         return 0;
-
     }
+
+
     private static double DegreesToRadians(double degrees)
     {
         return degrees * (Math.PI / 180.0);
     }
-
 
     /// <summary>
     /// func to check if the address is valid (exist on arth by google maps)
@@ -235,13 +189,10 @@ internal static class Tools
         }
     }
 
-
-
-
     /// <summary>
-    /// func to get the latitude of the address
+    /// func to get the coordinates of the address
     /// </summary>
-    public static double GetLatitudeFromAddress(string address)
+    public static (double,double) GetCoordinatesFromAddress(string address)
     {
         {
             try
@@ -252,7 +203,7 @@ internal static class Tools
                     HttpResponseMessage response = client.GetAsync(requestUrl).Result;
 
                     if (!response.IsSuccessStatusCode)
-                        return double.NaN;
+                        return (double.NaN, double.NaN);
 
                     string xmlResponse = response.Content.ReadAsStringAsync().Result;
 
@@ -260,53 +211,17 @@ internal static class Tools
                     xmlDoc.LoadXml(xmlResponse);
 
                     XmlNode node = xmlDoc.SelectSingleNode("//place")!;
-                    if (node != null && node.Attributes!["lat"] != null)
-                    {
-                        return double.Parse(node.Attributes["lat"]!.Value);
-                    }
+                    var lat = node is not null ? double.Parse(node.Attributes?["lat"]?.Value!) : double.NaN;
+                    var lon = node is not null ? double.Parse(node.Attributes?["lon"]?.Value!) : double.NaN;
+                    return (lat, lon);
                 }
             }
             catch (Exception)
             {
                 // במקרה של שגיאה - מחזיר NaN
             }
-
-            return double.NaN;
+            return (double.NaN, double.NaN);
         }
-    }
-
-    /// <summary>
-    /// func to get the longitude of the address
-    /// </summary>
-    public static double GetLongitudeFromAddress(string address)
-    {
-        try
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                string requestUrl = $"{BaseUrl}?key={ApiKey}&q={Uri.EscapeDataString(address)}&format=xml";
-                HttpResponseMessage response = client.GetAsync(requestUrl).Result;
-
-                if (!response.IsSuccessStatusCode)
-                    return double.NaN;
-
-                string xmlResponse = response.Content.ReadAsStringAsync().Result;
-
-                XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.LoadXml(xmlResponse);
-
-                XmlNode node = xmlDoc.SelectSingleNode("//place")!;
-                if (node != null && node.Attributes!["lon"] != null)
-                {
-                    return double.Parse(node.Attributes["lon"]!.Value);
-                }
-            }
-        }
-        catch (Exception)
-        {
-            // במקרה של שגיאה - מחזיר NaN
-        }
-        return double.NaN;
     }
 };
 

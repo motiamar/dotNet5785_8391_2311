@@ -192,8 +192,7 @@ internal class CallImplementation : BlApi.ICall
             var call = _dal.Call.Read(change.Id);
             if (call is null)
                 throw new DO.DalDoesNotExistException($"call with the id : {change.Id} doesn't exist");
-            double latitude = Helpers.Tools.GetLatitudeFromAddress(change.CallAddress);
-            double longitude = Helpers.Tools.GetLongitudeFromAddress(change.CallAddress);
+            (double latitude, double longitude) = Helpers.Tools.GetCoordinatesFromAddress(change.CallAddress);
             DO.Call updateCall = new DO.Call
             {
                 Id = change.Id,
@@ -247,8 +246,7 @@ internal class CallImplementation : BlApi.ICall
         try
         {
             Helpers.CallManager.CallChek(call);
-            double latitude = Helpers.Tools.GetLatitudeFromAddress(call.CallAddress);
-            double longitude = Helpers.Tools.GetLongitudeFromAddress(call.CallAddress);
+            (double latitude, double longitude) = Helpers.Tools.GetCoordinatesFromAddress(call.CallAddress);
             DO.Call newCall = new DO.Call
             {
                 TypeCall = (DO.TypeCalls)call.Type,

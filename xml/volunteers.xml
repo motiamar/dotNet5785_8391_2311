@@ -10,8 +10,8 @@
     <Latitude>35.2126784</Latitude>
     <Longitude>31.7648204</Longitude>
     <Role>Volunteer</Role>
-    <Active>false</Active>
-    <MaximumDistance>56088</MaximumDistance>
+    <Active>true</Active>
+    <MaximumDistance>61528</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -25,7 +25,7 @@
     <Longitude>31.7611362</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>82226</MaximumDistance>
+    <MaximumDistance>75635</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -39,7 +39,7 @@
     <Longitude>31.7638657</Longitude>
     <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>96430</MaximumDistance>
+    <MaximumDistance>93088</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -53,7 +53,7 @@
     <Longitude>31.7483032</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>76780</MaximumDistance>
+    <MaximumDistance>65719</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -66,8 +66,8 @@
     <Latitude>35.1994883</Latitude>
     <Longitude>31.7589875</Longitude>
     <Role>Volunteer</Role>
-    <Active>false</Active>
-    <MaximumDistance>86364</MaximumDistance>
+    <Active>true</Active>
+    <MaximumDistance>81143</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -81,7 +81,7 @@
     <Longitude>31.7342954</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>94081</MaximumDistance>
+    <MaximumDistance>54821</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -95,7 +95,7 @@
     <Longitude>31.7518568</Longitude>
     <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>52813</MaximumDistance>
+    <MaximumDistance>80610</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -108,8 +108,8 @@
     <Latitude>35.1927184</Latitude>
     <Longitude>31.7810136</Longitude>
     <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>60617</MaximumDistance>
+    <Active>false</Active>
+    <MaximumDistance>93436</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -122,8 +122,8 @@
     <Latitude>35.187882091894366</Latitude>
     <Longitude>31.76552192492391</Longitude>
     <Role>Volunteer</Role>
-    <Active>false</Active>
-    <MaximumDistance>90702</MaximumDistance>
+    <Active>true</Active>
+    <MaximumDistance>56254</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -136,8 +136,8 @@
     <Latitude>35.21696116035834</Latitude>
     <Longitude>31.810386702304726</Longitude>
     <Role>Volunteer</Role>
-    <Active>false</Active>
-    <MaximumDistance>73488</MaximumDistance>
+    <Active>true</Active>
+    <MaximumDistance>80457</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -151,7 +151,7 @@
     <Longitude>31.828473377413367</Longitude>
     <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>96696</MaximumDistance>
+    <MaximumDistance>58446</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -165,7 +165,7 @@
     <Longitude>31.788846938792492</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>60863</MaximumDistance>
+    <MaximumDistance>55376</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -179,7 +179,7 @@
     <Longitude>31.77681135390754</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>65122</MaximumDistance>
+    <MaximumDistance>90425</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -193,7 +193,7 @@
     <Longitude>31.738258839334225</Longitude>
     <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>51252</MaximumDistance>
+    <MaximumDistance>95551</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -206,50 +206,22 @@
     <Latitude>35.17470578874885</Latitude>
     <Longitude>31.786734640142832</Longitude>
     <Role>Volunteer</Role>
-    <Active>false</Active>
-    <MaximumDistance>93714</MaximumDistance>
-    <DistanceType>Air</DistanceType>
-  </Volunteer>
-  <Volunteer>
-    <Id>208717538</Id>
-    <FullName>david itach</FullName>
-    <Phone>0539660071</Phone>
-    <Email>Dwdwth26@gmail.com</Email>
-    <Password>Di1425361234#</Password>
-    <Address>petach tikva 68, netanya, israel</Address>
-    <Latitude>32.3189691</Latitude>
-    <Longitude>34.8580467</Longitude>
-    <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>144444</MaximumDistance>
+    <MaximumDistance>66909</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
-    <Id>726172349</Id>
-    <FullName>moti amar</FullName>
-    <Phone>0524815812</Phone>
-    <Email>moti.amar@gmail.com</Email>
-    <Password>Motiamarpass0#</Password>
-    <Address>yossi ben yossi , netanya, israel</Address>
-    <Latitude>32.3157799</Latitude>
-    <Longitude>NaN</Longitude>
-    <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>60431</MaximumDistance>
-    <DistanceType>Air</DistanceType>
-  </Volunteer>
-  <Volunteer>
-    <Id>207688391</Id>
+    <Id>569768724</Id>
     <FullName>israel gadisha</FullName>
     <Phone>0542109876</Phone>
     <Email>israel.gadisha@gmail.com</Email>
-    <Password>Israelgadishapass60#</Password>
-    <Address>hertzel 10, netanya, israel</Address>
-    <Latitude>32.3296091</Latitude>
-    <Longitude>34.853865</Longitude>
+    <Password>israel gadishapass60</Password>
+    <Address>aharon brend 12,jerusalem</Address>
+    <Latitude>35.17222213737034</Latitude>
+    <Longitude>31.784020945981794</Longitude>
     <Role>Manager</Role>
     <Active>true</Active>
-    <MaximumDistance>56976872462171</MaximumDistance>
+    <MaximumDistance>73995</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
 </ArrayOfVolunteer>
