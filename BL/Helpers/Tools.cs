@@ -69,8 +69,7 @@ internal static class Tools
     /// tools for the addreas and the distance
     /// </summary>
     private const double EarthRadiusKm = 6371.0;
-    private const string ApiKey = "pk.171d9d217781e7387c5cb9df70d511bf"; //  מפתח-API 
-    private const string BaseUrl = "https://us1.locationiq.com/v1/search.php";
+    private const string ApiKey = "AIzaSyDzEzuNVPxLv7EIKKvSU2b8GiAikFbV5jk"; //  מפתח-API 
 
 
     // <summary>
@@ -81,6 +80,7 @@ internal static class Tools
     {
         if (distanceType == DistanceTypes.Air)
         {
+            // חישוב מרחק אווירי באמצעות נוסחת Haversine
             double radLat1 = DegreesToRadians(VolLatitude);
             double radLon1 = DegreesToRadians(VolLongitude);
             double radLat2 = DegreesToRadians(CallLatitude);
@@ -93,21 +93,24 @@ internal static class Tools
 
             double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
 
-            // חישוב המרחק
-            double distance = EarthRadiusKm * c;
-
-            return distance; // המרחק בקילומטרים
+            return EarthRadiusKm * c; // המרחק בקילומטרים
         }
+
+
         if (distanceType == DistanceTypes.Car || distanceType == DistanceTypes.Walk)
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    string mode = distanceType == DistanceTypes.Car ? "driving" : "foot";
-                    string requestUrl = $"https://us1.locationiq.com/v1/directions/{mode}/{VolLatitude},{VolLongitude};{CallLatitude},{CallLongitude}?key={ApiKey}&overview=false&format=xml";
+                    // מצב נסיעה (driving או walking)
+                    string mode = distanceType == DistanceTypes.Car ? "driving" : "walking";
 
-                    // שליחת הבקשה וקבלת התגובה
+                    // בניית URL לבקשה ל-Google Distance Matrix API
+                    string requestUrl = $"https://maps.googleapis.com/maps/api/distancematrix/json?origins={VolLatitude},{VolLongitude}" +
+                                        $"&destinations={CallLatitude},{CallLongitude}&mode={mode}&key={ApiKey}";
+
+                    // שליחת הבקשה וקבלת תגובה
                     HttpResponseMessage response = client.GetAsync(requestUrl).Result;
 
                     if (!response.IsSuccessStatusCode)
@@ -116,45 +119,53 @@ internal static class Tools
                         return double.NaN;
                     }
 
-                    // קריאת התגובה כ-XML
-                    string xmlResponse = response.Content.ReadAsStringAsync().Result;
-                    Console.WriteLine("API Response:");
-                    Console.WriteLine(xmlResponse);
+                    // קריאת התוכן בפורמט JSON
+                    string jsonResponse = response.Content.ReadAsStringAsync().Result;
 
-                    XmlDocument xmlDoc = new XmlDocument();
-                    xmlDoc.LoadXml(xmlResponse);
+                    // ניתוח התגובה
+                    var json = Newtonsoft.Json.Linq.JObject.Parse(jsonResponse);
 
-                    // שליפת תגית ה-distance מה-XML
-                    XmlNode distanceNode = xmlDoc.SelectSingleNode("//distance")!;
-                    if (distanceNode != null && double.TryParse(distanceNode.InnerText, out double distance))
+                    // בדיקת סטטוס
+                    string status = json["status"]?.ToString()!;
+                    if (status != "OK")
                     {
-                        return distance / 1000; // המרחק בקילומטרים
-                    }
-                    else
-                    {
+                        Console.WriteLine($"Error: API response status is {status}");
                         return double.NaN;
                     }
+
+                    // שליפת מרחק מהתגובה
+                    var distanceValue = json["rows"]?[0]?["elements"]?[0]?["distance"]?["value"];
+                    if (distanceValue != null && double.TryParse(distanceValue.ToString(), out double distanceInMeters))
+                    {
+                        return distanceInMeters / 1000; // המרחק בקילומטרים
+                    }
+
+                    return double.NaN;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception: {ex.GetType().Name}: {ex.Message}");
+                Console.WriteLine($"Exception: {ex.Message}");
                 return double.NaN;
             }
         }
+
         return 0;
     }
 
-
+    /// <summary>
+    /// Convert degrees to radians.
+    /// </summary>
     private static double DegreesToRadians(double degrees)
     {
         return degrees * (Math.PI / 180.0);
     }
 
+
+
     /// <summary>
     /// func to check if the address is valid (exist on arth by google maps)
     /// </summary>
-
     public static bool IsValidAddress(string address)
     {
         try
@@ -162,7 +173,7 @@ internal static class Tools
             using (HttpClient client = new HttpClient())
             {
                 // בניית ה-URL לבקשה
-                string requestUrl = $"{BaseUrl}?key={ApiKey}&q={Uri.EscapeDataString(address)}&format=xml";
+                string requestUrl = $"https://maps.googleapis.com/maps/api/geocode/xml?address={Uri.EscapeDataString(address)}&key=AIzaSyDzEzuNVPxLv7EIKKvSU2b8GiAikFbV5jk";
 
                 // שליחת הבקשה וקבלת תגובה
                 HttpResponseMessage response = client.GetAsync(requestUrl).Result;
@@ -177,49 +188,66 @@ internal static class Tools
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.LoadXml(xmlResponse);
 
-                // בדיקה אם ה-XML מכיל תוצאות
-                XmlNodeList nodes = xmlDoc.GetElementsByTagName("place");
+                // בדיקת סטטוס
+                XmlNode statusNode = xmlDoc.SelectSingleNode("//status")!;
+                if (statusNode is null || statusNode.InnerText != "OK")
+                    return false;
+
+                // בדיקת אם יש תוצאות
+                XmlNodeList nodes = xmlDoc.GetElementsByTagName("result");
                 return nodes.Count > 0;
             }
-
         }
         catch (Exception)
         {
-            return false; 
+            return false;
         }
     }
 
-    /// <summary>
-    /// func to get the coordinates of the address
-    /// </summary>
-    public static (double,double) GetCoordinatesFromAddress(string address)
+
+    ///// <summary>
+    ///// func to get the coordinates of the address
+    ///// </summary>
+    public static (double, double) GetCoordinatesFromAddress(string address)
     {
+        try
         {
-            try
+            using (HttpClient client = new HttpClient())
             {
-                using (HttpClient client = new HttpClient())
+                // בניית ה-URL לבקשה
+                string requestUrl = $"https://maps.googleapis.com/maps/api/geocode/xml?address={Uri.EscapeDataString(address)}&key=AIzaSyDzEzuNVPxLv7EIKKvSU2b8GiAikFbV5jk";
+
+                // שליחת הבקשה וקבלת תגובה
+                HttpResponseMessage response = client.GetAsync(requestUrl).Result;
+
+                if (!response.IsSuccessStatusCode)
+                    return (double.NaN, double.NaN);
+
+                // קריאת התוכן בפורמט XML
+                string xmlResponse = response.Content.ReadAsStringAsync().Result;
+
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(xmlResponse);
+
+                // בדיקת סטטוס
+                XmlNode statusNode = xmlDoc.SelectSingleNode("//status")!;
+                if (statusNode is null || statusNode.InnerText != "OK")
+                    return (double.NaN, double.NaN);
+
+                // שליפת הקואורדינטות
+                XmlNode locationNode = xmlDoc.SelectSingleNode("//location")!;
+                if (locationNode != null)
                 {
-                    string requestUrl = $"{BaseUrl}?key={ApiKey}&q={Uri.EscapeDataString(address)}&format=xml";
-                    HttpResponseMessage response = client.GetAsync(requestUrl).Result;
-
-                    if (!response.IsSuccessStatusCode)
-                        return (double.NaN, double.NaN);
-
-                    string xmlResponse = response.Content.ReadAsStringAsync().Result;
-
-                    XmlDocument xmlDoc = new XmlDocument();
-                    xmlDoc.LoadXml(xmlResponse);
-
-                    XmlNode node = xmlDoc.SelectSingleNode("//place")!;
-                    var lat = node is not null ? double.Parse(node.Attributes?["lat"]?.Value!) : double.NaN;
-                    var lon = node is not null ? double.Parse(node.Attributes?["lon"]?.Value!) : double.NaN;
+                    double lat = double.Parse(locationNode.SelectSingleNode("lat")?.InnerText ?? "NaN");
+                    double lon = double.Parse(locationNode.SelectSingleNode("lng")?.InnerText ?? "NaN");
                     return (lat, lon);
                 }
+
+                return (double.NaN, double.NaN);
             }
-            catch (Exception)
-            {
-                // במקרה של שגיאה - מחזיר NaN
-            }
+        }
+        catch (Exception)
+        {
             return (double.NaN, double.NaN);
         }
     }

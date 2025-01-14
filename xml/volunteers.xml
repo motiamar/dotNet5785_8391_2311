@@ -224,4 +224,18 @@
     <MaximumDistance>73995</MaximumDistance>
     <DistanceType>Air</DistanceType>
   </Volunteer>
+  <Volunteer>
+    <Id>207688391</Id>
+    <FullName>moti</FullName>
+    <Phone>0525653900</Phone>
+    <Email>moramar@gmail.com</Email>
+    <Password>Aa15273728#</Password>
+    <Address> 10 Jaffa Street, Jerusalem</Address>
+    <Latitude>31.7810619</Latitude>
+    <Longitude>35.221174</Longitude>
+    <Role>Volunteer</Role>
+    <Active>true</Active>
+    <MaximumDistance>100000</MaximumDistance>
+    <DistanceType>Car</DistanceType>
+  </Volunteer>
 </ArrayOfVolunteer>
