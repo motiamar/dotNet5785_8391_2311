@@ -179,7 +179,7 @@ public partial class MainAdminWindow : Window
             {
                 foreach (Window window in Application.Current.Windows)
                 {
-                    if (window != this)
+                    if (window != this && window.GetType() != typeof(MainWindow))
                     {
                         window.Close();
                     }
@@ -212,7 +212,7 @@ public partial class MainAdminWindow : Window
             {
                 foreach (Window window in Application.Current.Windows)
                 {
-                    if (window != this)
+                    if (window != this && window.GetType() != typeof(MainWindow))
                     {
                         window.Close();
                     }
