@@ -118,8 +118,7 @@ internal class VolunteerImplementation : BlApi.IVolunteer
                 throw new BlNotAllowException("you can't change the role of the manager becose there is no more managers");
             // func to chek all the incoming details    
             Helpers.VolunteerManager.VolunteerChek(change);
-            double? latitude = Helpers.Tools.GetLatitudeFromAddress(change.Address!);
-            double? longitude = Helpers.Tools.GetLongitudeFromAddress(change.Address!);
+            (double latitude, double longitude) = Tools.GetCoordinatesFromAddress(change.Address!);
             var role = (Roles)Enum.Parse(typeof(BRoles), change.role.ToString());
             var distanceType = (DistanceTypes)Enum.Parse(typeof(BDistanceTypes), change.DistanceType.ToString());
             var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = change.FullName, Phone = change.Phone, Email = change.Email, Password = change.Password, Address = change.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = change.Active, MaximumDistance = change.MaximumDistance, DistanceType = distanceType };
@@ -172,9 +171,8 @@ internal class VolunteerImplementation : BlApi.IVolunteer
         try
         {
             // check the incoming details
-            Helpers.VolunteerManager.VolunteerChek(volunteer);
-            double? latitude = Helpers.Tools.GetLatitudeFromAddress(volunteer.Address!);
-            double? longitude = Helpers.Tools.GetLongitudeFromAddress(volunteer.Address!);
+            Helpers.VolunteerManager.VolunteerChek(volunteer); 
+            (double latitude, double longitude) = Tools.GetCoordinatesFromAddress(volunteer.Address!);
             var role = (Roles)Enum.Parse(typeof(BRoles), volunteer.role.ToString());
             var distanceType = (DistanceTypes)Enum.Parse(typeof(BDistanceTypes), volunteer.DistanceType.ToString());
             var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = volunteer.FullName, Phone = volunteer.Phone, Email = volunteer.Email, Password = volunteer.Password, Address = volunteer.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = volunteer.Active, MaximumDistance = volunteer.MaximumDistance, DistanceType = distanceType };

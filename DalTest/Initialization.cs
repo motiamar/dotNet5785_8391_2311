@@ -12,7 +12,7 @@ public static class Initialization
 
 
 
-// creating 16 volunteers
+    // creating 16 volunteers
     private static void CreateVolunteers() 
     {
         string[] volunteerName = { "moti amar", "elya motai", "iosi yoskovich", "david gindi", "yuval michaeli", "dan zilber", "meir nahum", "izchak grinvald", "shalom salam", "meir morgnshtain", "eden cohen", "shimon cohen", "david hadad", "elly hadar", "nuriel hadad", "israel gadisha" };
@@ -34,7 +34,7 @@ public static class Initialization
            
             // random password
             string? password = name + "pass" + (i*4);
-           
+
             // 15 volunteers and one Manager
             Roles tmpRole = default(Roles);
             if(i == volunteerName.Length-1)
@@ -44,9 +44,10 @@ public static class Initialization
             }  
 
             // random distance
-            double tmpMaximumDistance = s_rand.Next(50000, 100000); 
+            double tmpMaximumDistance = s_rand.Next(50000, 100000);
 
-            DistanceTypes tmpDistanceType = default(DistanceTypes);
+            //DistanceTypes tmpDistanceType = default(DistanceTypes);
+            DistanceTypes tmpDistanceType = (DistanceTypes)s_rand.Next(0, Enum.GetValues(typeof(DistanceTypes)).Length);
 
             // create a new Volunteer with all the tmp arguments
             s_dal!.Volunteer.Create(new Volunteer 
