@@ -192,11 +192,14 @@ public partial class ChooseCallWindow : Window
     {
         try
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             s_bl.Volunteer.Update(volunteer_id, volunteer);
             MessageBox.Show("Address updated successfully", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            Mouse.OverrideCursor = null;
         }
         catch (Exception ex)
         {
+            Mouse.OverrideCursor = null;
             MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }

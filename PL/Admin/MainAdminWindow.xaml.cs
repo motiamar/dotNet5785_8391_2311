@@ -61,6 +61,7 @@ public partial class MainAdminWindow : Window
     public void BtnSetMaxRange_Click(object sender, RoutedEventArgs e)
     {
         s_bl.Admin.SetMaxRange(MaxRange);
+        Btn_calls_Click();
         MessageBox.Show("The range has been updated", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
@@ -131,7 +132,7 @@ public partial class MainAdminWindow : Window
         CurrentTime = s_bl.Admin.GetClock();
         MaxRange = s_bl.Admin.GetMaxRange();
         s_bl.Admin.AddClockObserver(ClockObserver);
-        s_bl.Admin.AddConfigObserver(configObserver: ConfigObserver);
+        s_bl.Admin.AddConfigObserver(ConfigObserver);
         s_bl.Call.AddObserver(CallsObserver);
     }
 
