@@ -152,7 +152,6 @@ internal static class Tools
         return 0;
     }
 
-
     /// <summary>
     /// Convert degrees to radians.
     /// </summary>
