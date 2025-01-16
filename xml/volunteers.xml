@@ -215,13 +215,13 @@
     <FullName>israel gadisha</FullName>
     <Phone>0542109876</Phone>
     <Email>israel.gadisha@gmail.com</Email>
-    <Password>israel gadishapass60</Password>
-    <Address>aharon brend 12,jerusalem</Address>
-    <Latitude>35.17222213737034</Latitude>
-    <Longitude>31.784020945981794</Longitude>
+    <Password>Israelgadishapass60#</Password>
+    <Address>aharon brend 12 ,jerusalem, israel</Address>
+    <Latitude>31.7839528</Latitude>
+    <Longitude>35.1722057</Longitude>
     <Role>Manager</Role>
     <Active>true</Active>
     <MaximumDistance>73726</MaximumDistance>
-    <DistanceType>Walk</DistanceType>
+    <DistanceType>Car</DistanceType>
   </Volunteer>
 </ArrayOfVolunteer>

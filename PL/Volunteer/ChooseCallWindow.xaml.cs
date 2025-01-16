@@ -43,8 +43,10 @@ public partial class ChooseCallWindow : Window
     /// </summary>
     private void ChooseCallWindow_Loaded(object sender, RoutedEventArgs e)
     {
+        Mouse.OverrideCursor = Cursors.Wait;
         OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_id);
         s_bl.Call.AddObserver(CallInListObserver);
+        Mouse.OverrideCursor = null;
     }
 
     /// <summary>
@@ -164,6 +166,7 @@ public partial class ChooseCallWindow : Window
         }
         try
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             var result = MessageBox.Show("Are you sure you want to choose this call?", "Confirm Choose", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
@@ -173,9 +176,11 @@ public partial class ChooseCallWindow : Window
             }             
             else
                 MessageBox.Show("Choose canceled", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            Mouse.OverrideCursor = null;
         }
         catch (Exception ex)
         {
+            Mouse.OverrideCursor = null;
             MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
