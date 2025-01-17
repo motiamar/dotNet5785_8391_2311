@@ -181,7 +181,7 @@ internal class VolunteerImplementation : BlApi.IVolunteer
         }
         catch (DO.DalAlreadyExistException ex)
         {
-            throw new BlVolAllreadyExist($"volunteer with id : {volunteer.Id} is already exist: {ex}");
+            throw new BlVolAllreadyExist($"volunteer with id : {volunteer.Id} is already exist");
         }
     }
 

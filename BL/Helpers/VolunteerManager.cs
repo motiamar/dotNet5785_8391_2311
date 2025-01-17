@@ -91,8 +91,10 @@ internal static class VolunteerManager
     internal static void VolunteerChek(BO.Volunteer volunteer)
     {
         if(!VaildId(volunteer.Id))
-            throw new BlinCorrectException("the id is not valid");
-        if(!VailPhone(volunteer.Phone))
+            throw new BlinCorrectException("the ID is not valid");
+        if (string.IsNullOrEmpty(volunteer.FullName))
+            throw new BlinCorrectException("the Name is empty");
+        if (!VailPhone(volunteer.Phone))
             throw new BlinCorrectException("the Phone is not valid");
         if(!VaildEmail(volunteer.Email))
             throw new BlinCorrectException("the Email is not valid");
@@ -139,6 +141,8 @@ internal static class VolunteerManager
     /// </summary>
     internal static bool VailPhone(string phone)
     {
+        if (string.IsNullOrEmpty(phone))
+            return false;
         phone = phone.Replace(" ", "");
         string pattern = @"^05[0-9]{8}$";
         return Regex.IsMatch(phone, pattern);
@@ -149,6 +153,8 @@ internal static class VolunteerManager
     /// </summary>
     internal static bool VaildEmail(string email)
     {
+        if (string.IsNullOrEmpty(email))
+            return false;
         string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
         return Regex.IsMatch(email, pattern);
     }

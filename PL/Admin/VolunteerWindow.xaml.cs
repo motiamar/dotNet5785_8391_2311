@@ -95,13 +95,13 @@ public partial class VolunteerWindow : Window
             if (ButtonText == "Add")
             {
                 s_bl.Volunteer.Create(CorrentVolunteer!);
-                MessageBox.Show("the Volunteer has created sucsesfuly");
+                MessageBox.Show("the Volunteer has created sucsesfuly", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             else
             {
                 s_bl.Volunteer.Update(CorrentVolunteer!.Id, CorrentVolunteer);
-                MessageBox.Show("the Volunteer has updeted sucsesfuly");
+                MessageBox.Show("the Volunteer has updeted sucsesfuly", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
         }
