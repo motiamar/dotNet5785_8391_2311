@@ -37,7 +37,7 @@
             <ListView.View>
                 <GridView>
                     <!-- Column for ID -->
-                    <GridViewColumn Header="ID" Width="70">
+                    <GridViewColumn Header="ID" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Id}" Background="Yellow" />
@@ -46,31 +46,31 @@
                     </GridViewColumn>
 
                     <!-- Column for Call ID -->
-                    <GridViewColumn Header="Call ID" DisplayMemberBinding="{Binding CallId}" Width="70" />
+                    <GridViewColumn Header="Call ID" DisplayMemberBinding="{Binding CallId}"  Width="50" />
 
                     <!-- Column for Type -->
-                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" Width="90" />
+                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" Width="120" />
 
                     <!-- Column for Call Open Time -->
-                    <GridViewColumn Header="Call Open Time" DisplayMemberBinding="{Binding CallOpenTime}" Width="105" />
+                    <GridViewColumn Header="Call Open Time" DisplayMemberBinding="{Binding CallOpenTime}" Width="150" />
 
                     <!-- Column for Call Left Time -->
-                    <GridViewColumn Header="Call Left Time" DisplayMemberBinding="{Binding CallLeftTime}" Width="80" />
+                    <GridViewColumn Header="Call Left Time" DisplayMemberBinding="{Binding CallLeftTime}" Width="90" />
 
                     <!-- Column for Last Volunteer -->
-                    <GridViewColumn Header="Last Volunteer" DisplayMemberBinding="{Binding LastVolunteerName}" Width="90" />
+                    <GridViewColumn Header="Last Volunteer" DisplayMemberBinding="{Binding LastVolunteerName}" Width="110" />
 
                     <!-- Column for Total Treatment -->
-                    <GridViewColumn Header="Total Treatment" DisplayMemberBinding="{Binding TotalTreatmentTime}" Width="90" />
+                    <GridViewColumn Header="Total Treatment" DisplayMemberBinding="{Binding TotalTreatmentTime}" Width="100" />
 
                     <!-- Column for Call Status -->
                     <GridViewColumn Header="Call Status" DisplayMemberBinding="{Binding CallStatus}" Width="80" />
 
                     <!-- Column for Assignments -->
-                    <GridViewColumn Header="Assignments" DisplayMemberBinding="{Binding SumOfAssignments}" Width="80" />
+                    <GridViewColumn Header="Assignments" DisplayMemberBinding="{Binding SumOfAssignments}" Width="85" />
 
                     <!-- Action Column for DELETE Button -->
-                    <GridViewColumn Header="Action" Width="80">
+                    <GridViewColumn Header="Action" Width="65">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="DELETE" 

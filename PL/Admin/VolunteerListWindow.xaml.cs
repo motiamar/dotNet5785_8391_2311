@@ -133,7 +133,7 @@ public partial class VolunteerListWindow : Window
         SelectedVolunteerInList = (sender as Button)!.DataContext as BO.VolunteerInList;
         if (SelectedVolunteerInList == null)
         {
-            MessageBox.Show("No Volunteer selected");
+            MessageBox.Show("No Volunteer selected", "Information",MessageBoxButton.OK,MessageBoxImage.Information);
             return;
         }
         try
