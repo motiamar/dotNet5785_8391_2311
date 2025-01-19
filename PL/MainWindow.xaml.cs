@@ -76,31 +76,7 @@ public partial class MainWindow : Window
         CurrentPassword = ((PasswordBox)sender).Password;
     }
 
-
-    /// <summary>
-    /// Event handler when CheckBox is checked (show password as plain text)
-    /// </summary>
-    private void ShowPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
-    {
-        // Show TextBoxPassword and hide PasswordBox
-        PasswordBox.Visibility = Visibility.Collapsed;
-        TextBoxPassword.Visibility = Visibility.Visible;
-        TextBoxPassword.Text = PasswordBox.Password;
-    }
-
-
-    /// <summary>
-    /// Event handler when CheckBox is unchecked (hide password as plain text)
-    /// </summary>
-    private void ShowPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
-    {
-        // Show PasswordBox and hide TextBoxPassword
-        PasswordBox.Visibility = Visibility.Visible;
-        TextBoxPassword.Visibility = Visibility.Collapsed;
-        PasswordBox.Password = TextBoxPassword.Text;
-    }
-
-    /// <summary>
+   /// <summary>
     /// Button click for logging in
     /// </summary>
     private void BtnLogIn_Click(object sender, RoutedEventArgs e)
@@ -145,4 +121,37 @@ public partial class MainWindow : Window
             MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
-}
+
+
+
+    /// <summary>
+    /// Dependency property for chek
+    /// </summary>
+    public string chek
+    {
+        get { return (string)GetValue(chekProperty); }
+        set { SetValue(chekProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for chek.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty chekProperty =
+        DependencyProperty.Register("chek", typeof(string), typeof(MainWindow), new PropertyMetadata(null));
+
+    /// <summary>
+    /// Event handler for checkbox checked to hide the passwordBox end show the textBox
+    /// </summary>
+    private void CheckBox_Checked(object sender, RoutedEventArgs e)
+    {
+        chek = "Hidden";
+    }
+
+    /// <summary>
+    /// Event handler for checkbox unchecked to show the passwordBox end hide the textBox
+    /// </summary>
+    private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+    {
+        chek = "Visible";
+    }
+
+};
+

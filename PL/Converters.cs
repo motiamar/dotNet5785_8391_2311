@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using Xceed.Wpf.AvalonDock.Converters;
 namespace PL;
 
 /// <summary>
@@ -298,4 +299,6 @@ public class DateTimeToTimeConverter : IValueConverter
         // ברירת מחדל במקרה של שגיאה: השעה הנוכחית
         return DateTime.Now;
     }
+
+
 }

@@ -52,31 +52,22 @@
                 <Label Content="Enter Password:" FontSize="16" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Grid>
 
-            <!-- Password input (PasswordBox) and alternative text box for password -->
-            <Grid>
                 <!-- PasswordBox for entering password securely -->
-                <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged" Width="250" Margin="0,0,0,20" Visibility="Visible" />
-                <!-- Invisible TextBox that can be used to show password in plain text -->
-                <TextBox x:Name="TextBoxPassword" Visibility="Collapsed" Width="250" Margin="0,0,0,20" IsReadOnly="True" />
+            <Grid>
+                <TextBox Text="{Binding CurrentPassword}"  Width="250" Margin="0,0,0,20" IsReadOnly="True"/>
+                <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" Width="250" Margin="25,0,25,20" Visibility="{Binding chek}" />
             </Grid>
 
-            <!-- Show/Hide password checkbox -->
-            <CheckBox x:Name="ShowPasswordCheckBox" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,10,0,0" Checked="ShowPasswordCheckBox_Checked" Unchecked="ShowPasswordCheckBox_Unchecked">
-                <Grid>
-                    <!-- TextBlock for "Show Password" with blur effect on black text -->
-                    <TextBlock Text="Show Password" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock.Effect>
-                            <BlurEffect Radius="10" />
-                            <!-- Apply blur effect -->
-                        </TextBlock.Effect>
-                    </TextBlock>
-                    <!-- TextBlock for "Show Password" with white text (on top of the black one) -->
-                    <TextBlock Text="Show Password" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                </Grid>
+            <!-- CheckBox for showing/hiding the password -->
+            <CheckBox Content="Show password" FontSize="15" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontWeight="Bold"  Foreground="White">
+                <CheckBox.Effect>
+                    <DropShadowEffect Color="Black" Direction="300" ShadowDepth="1" BlurRadius="8" />
+                </CheckBox.Effect>
             </CheckBox>
 
             <!-- Login button to trigger the login action -->
             <Button Content="Login" Width="150" Background="LightBlue" Height="40" HorizontalAlignment="Center" Click="BtnLogIn_Click" />
+            
         </StackPanel>
 
         <!-- Label for showing "בס''ד" in the top-right corner -->
