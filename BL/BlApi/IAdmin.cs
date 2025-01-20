@@ -32,6 +32,17 @@ public interface IAdmin
     /// </summary>
     void InitializeDB();
 
+    /// <summary>
+    /// Start the simulator
+    /// </summary>
+    void StartSimulator(int interval); //stage 7
+
+    /// <summary>
+    /// Stop the simulator
+    /// </summary>
+    void StopSimulator(); //stage 7
+
+
     #region Stage 5
     void AddConfigObserver(Action configObserver);
     void RemoveConfigObserver(Action configObserver);

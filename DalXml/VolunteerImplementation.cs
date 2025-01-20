@@ -3,12 +3,14 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
 internal class VolunteerImplementation : IVolunteer
 {
 
     // if entitiy with this ID exist, it send an ERROR masage, if not it Add it to the XML file
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Create(Volunteer item)
     {
       
@@ -24,6 +26,7 @@ internal class VolunteerImplementation : IVolunteer
 
 
     // if entitiy with this ID exist remove it from the XML file
+    [MethodImpl(MethodImplOptions.Synchronized)] 
     public void Delete(int id)
     {
         List<Volunteer> TmpVolunteers = XMLTools.LoadListFromXMLSerializer<Volunteer>(Config.s_volunteers_xml);
@@ -35,6 +38,7 @@ internal class VolunteerImplementation : IVolunteer
 
 
     // clear the XML file form all the entity data
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void DeleteAll()
     {
         XMLTools.SaveListToXMLSerializer(new List<Volunteer>(), Config.s_volunteers_xml);
@@ -42,6 +46,7 @@ internal class VolunteerImplementation : IVolunteer
 
 
     // if entity with this ID exist it return, if not it return null
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Volunteer? Read(int id)
     {
         List<Volunteer> TmpVolunteers = XMLTools.LoadListFromXMLSerializer<Volunteer>(Config.s_volunteers_xml);
@@ -50,6 +55,7 @@ internal class VolunteerImplementation : IVolunteer
 
 
     // return the first entity that stand the filter func
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Volunteer? Read(Func<Volunteer, bool> filter)
     {
         List<Volunteer> TmpVolunteers = XMLTools.LoadListFromXMLSerializer<Volunteer>(Config.s_volunteers_xml);
@@ -58,6 +64,7 @@ internal class VolunteerImplementation : IVolunteer
 
 
     // return a list of all the entity that stand the filter func if exist and if not, return all
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<Volunteer> ReadAll(Func<Volunteer, bool>? filter = null)
     {
         List<Volunteer> TmpVolunteers = XMLTools.LoadListFromXMLSerializer<Volunteer>(Config.s_volunteers_xml);
@@ -68,6 +75,7 @@ internal class VolunteerImplementation : IVolunteer
 
 
     // Update a entity in the XML file 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(Volunteer item)
     {
         List<Volunteer> TmpVolunteers = XMLTools.LoadListFromXMLSerializer<Volunteer>(Config.s_volunteers_xml);

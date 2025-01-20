@@ -1,6 +1,7 @@
 ﻿using DalApi;
 namespace Dal;
 using System;
+using System.Runtime.CompilerServices;
 
 // realizing the original methhods to the serfce
 internal class ConfigImplementation : IConfig

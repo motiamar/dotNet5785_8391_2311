@@ -18,6 +18,7 @@ internal class CallImplementation : BlApi.ICall
     /// </summary>
     public int[] ArrayStatus()
     {
+        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
         try
         {
             var calls = Helpers.CallManager.GetAllCallInList();
@@ -149,7 +150,9 @@ internal class CallImplementation : BlApi.ICall
     {
         try
         {
-            var call = _dal.Call.Read(id);
+            DO.Call? call; 
+            lock (AdminManager.BlMutex)
+                call = _dal.Call.Read(id);
 
             if (call is null)
                 return null;
@@ -185,10 +188,15 @@ internal class CallImplementation : BlApi.ICall
     /// <param name="change">the new entity we want to switch to</param>
     public void Update(BO.Call change)
     {
+        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
         try
         {
             Helpers.CallManager.CallChek(change);
-            var call = _dal.Call.Read(change.Id);
+
+            DO.Call? call; 
+            lock (AdminManager.BlMutex)
+                call = _dal.Call.Read(change.Id);
+
             if (call is null)
                 throw new DO.DalDoesNotExistException($"call with the id : {change.Id} doesn't exist");
             (double latitude, double longitude) = Helpers.Tools.GetCoordinatesFromAddress(change.CallAddress);
@@ -202,8 +210,11 @@ internal class CallImplementation : BlApi.ICall
                 Longitude = longitude,
                 OpeningCallTime = change.CallOpenTime,
                 MaxEndingCallTime = change.CallMaxCloseTime
-            };
-            _dal.Call.Update(updateCall);
+            }; 
+
+            lock (AdminManager.BlMutex)
+                _dal.Call.Update(updateCall);
+
             CallManager.Observers.NotifyItemUpdated(change.Id);
             CallManager.Observers.NotifyListUpdated();
         }
@@ -218,14 +229,20 @@ internal class CallImplementation : BlApi.ICall
     /// </summary>
     public void Delete(int callId)
     {
+        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
         try
         {
-            DO.Call call = _dal.Call.Read(callId)!; 
+            DO.Call call;
+            lock (AdminManager.BlMutex)
+                 call = _dal.Call.Read(callId)!; 
+
             if (call is null)   
                 throw new DO.DalDoesNotExistException($"call with id {callId} does not exist");
             if (Helpers.CallManager.GetStatus(call) == BCallStatus.Open)
             {
-                _dal.Call.Delete(callId);
+                lock (AdminManager.BlMutex)
+                    _dal.Call.Delete(callId);
+
                 CallManager.Observers.NotifyListUpdated();
             }
             else
@@ -242,6 +259,7 @@ internal class CallImplementation : BlApi.ICall
     /// </summary>
     public void Create(BO.Call call)
     {
+        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
         try
         {
             Helpers.CallManager.CallChek(call);
@@ -256,7 +274,10 @@ internal class CallImplementation : BlApi.ICall
                 OpeningCallTime = AdminManager.Now,
                 MaxEndingCallTime = call.CallMaxCloseTime
             };
-            _dal.Call.Create(newCall);
+
+            lock (AdminManager.BlMutex)
+                _dal.Call.Create(newCall);
+
             CallManager.Observers.NotifyListUpdated();
         }
         catch(DO.DalXMLFileLoadCreateException)
@@ -280,8 +301,10 @@ internal class CallImplementation : BlApi.ICall
     {
         try
         {
-            if (_dal.Volunteer.Read(volunteerId) is null)
-                throw new DO.DalDoesNotExistException($"volunteer with id {volunteerId} does not exist");
+            lock (AdminManager.BlMutex)
+                if (_dal.Volunteer.Read(volunteerId) is null)
+                   throw new DO.DalDoesNotExistException($"volunteer with id {volunteerId} does not exist");
+
             IEnumerable<ClosedCallInList> closedCallsInList = Helpers.CallManager.GetClosedCallInLists(volunteerId);
             if (filter is not null)
             {
@@ -352,9 +375,15 @@ internal class CallImplementation : BlApi.ICall
     {
         try
         {
-            if (_dal.Volunteer.Read(volunteerId) is null)
-                throw new DO.DalDoesNotExistException($"volunteer with id {volunteerId} does not exist");
-            DO.Volunteer volunteer = _dal.Volunteer.Read(volunteerId)!;
+            lock (AdminManager.BlMutex)
+                if (_dal.Volunteer.Read(volunteerId) is null)
+                    throw new DO.DalDoesNotExistException($"volunteer with id {volunteerId} does not exist");
+            
+            DO.Volunteer volunteer;
+
+            lock (AdminManager.BlMutex)
+                volunteer = _dal.Volunteer.Read(volunteerId)!;
+
             IEnumerable<OpenCallInList> openCallsInList = Helpers.CallManager.GetOpenCallInLists(volunteer);
             if (filter is not null)
             {
@@ -426,9 +455,14 @@ internal class CallImplementation : BlApi.ICall
     /// <param name="assignmentId"> the assignment that need to close</param>
     public void EndAssignment(int volunteerId, int assignmentId)
     {
+        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
         try
         {
-            DO.Assignment assignment = _dal.Assignment.Read(assignmentId)!;
+            DO.Assignment assignment;
+
+            lock (AdminManager.BlMutex)
+                 assignment = _dal.Assignment.Read(assignmentId)!;
+
             if (assignment is null)
                 throw new DO.DalDoesNotExistException($"assignment with id {assignmentId} does not exist");
             if(assignment.VolunteerId !=  volunteerId)
@@ -444,7 +478,10 @@ internal class CallImplementation : BlApi.ICall
                 FinishTime = Helpers.AdminManager.Now,
                 EndKind = DO.EndKinds.Treated
             };
-            _dal.Assignment.Update(updateAssignment);   
+
+            lock (AdminManager.BlMutex)
+                _dal.Assignment.Update(updateAssignment);   
+
             CallManager.Observers.NotifyItemUpdated(assignment.CallId);
             CallManager.Observers.NotifyListUpdated();
             VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
@@ -464,12 +501,20 @@ internal class CallImplementation : BlApi.ICall
     /// <param name="assignmentId">the assignment that need to cancaled</param>
     public void CanceleAssignment(int volunteerId, int assignmentId)
     {
+        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
         try
         {
-            DO.Assignment assignment = _dal.Assignment.Read(assignmentId)!;
+            DO.Assignment assignment;
+            lock (AdminManager.BlMutex)
+                 assignment = _dal.Assignment.Read(assignmentId)!;
+
             if (assignment is null)
                 throw new DO.DalDoesNotExistException($"assignment with id {assignmentId} does not exist");
-            DO.Volunteer volunteer = _dal.Volunteer.Read(volunteerId)!;
+
+            DO.Volunteer volunteer;
+            lock (AdminManager.BlMutex)
+                 volunteer = _dal.Volunteer.Read(volunteerId)!;
+
             if (volunteer is null)
                 throw new DO.DalDoesNotExistException($"volunteer with id {volunteerId} does not exist");
             string? role = Helpers.VolunteerManager.GetVolunteerRole(volunteer.FullName, volunteer.Password!)!;   
@@ -488,7 +533,10 @@ internal class CallImplementation : BlApi.ICall
                 FinishTime = Helpers.AdminManager.Now,
                 EndKind = role == "Manager" ? EndKinds.Administrator_cancellation : EndKinds.Self_cancellation,
             };
-            _dal.Assignment.Update(update);
+
+            lock (AdminManager.BlMutex)
+                _dal.Assignment.Update(update);
+
             CallManager.Observers.NotifyItemUpdated(assignment.CallId);
             CallManager.Observers.NotifyListUpdated();
             VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
@@ -508,12 +556,20 @@ internal class CallImplementation : BlApi.ICall
     /// <param name="CallId">the call he want to choose</param>
     public void ChooseCall(int volunteerId, int CallId)
     {
+        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
         try
         {
-            DO.Call call = _dal.Call.Read(CallId)!;
+            DO.Call call;
+            lock (AdminManager.BlMutex)
+                 call = _dal.Call.Read(CallId)!;
+
             if (call is null)
                 throw new DO.DalDoesNotExistException($"call with id: {CallId} does not exist");
-            DO.Volunteer volunteer = _dal.Volunteer.Read(volunteerId)!;
+
+            DO.Volunteer volunteer;
+            lock (AdminManager.BlMutex)
+                 volunteer = _dal.Volunteer.Read(volunteerId)!;
+
             if(volunteer is null)
                 throw new DO.DalDoesNotExistException($"Volunteer with id: {volunteerId} does not exist");
             Helpers.CallManager.ChooseCallChek(call);
@@ -525,7 +581,10 @@ internal class CallImplementation : BlApi.ICall
                 FinishTime = null,
                 EndKind = EndKinds.Treated
             };
-            _dal.Assignment.Create(assignment);
+
+            lock (AdminManager.BlMutex)
+                _dal.Assignment.Create(assignment);
+
             CallManager.Observers.NotifyItemUpdated(CallId);
             CallManager.Observers.NotifyListUpdated();
             VolunteerManager.Observers.NotifyItemUpdated(volunteerId);

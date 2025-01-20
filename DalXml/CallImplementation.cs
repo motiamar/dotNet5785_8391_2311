@@ -4,12 +4,14 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
 internal class CallImplementation : ICall
 {
 
     // the func crate a new spot in the XML file and Add the new entity to the spot with a new Id and return the new Id.
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Create(Call item)
     {
         XElement callsRootElem = XMLTools.LoadListFromXMLElement(Config.s_calls_xml);
@@ -34,6 +36,7 @@ internal class CallImplementation : ICall
 
 
     // the func search for the entity in the XML file by the id and remove it
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         XElement callsRootElem = XMLTools.LoadListFromXMLElement(Config.s_calls_xml);
@@ -44,6 +47,7 @@ internal class CallImplementation : ICall
 
 
     // clear the XML file form all the entity data
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void DeleteAll()
     {
         XElement callsRootElem = XMLTools.LoadListFromXMLElement(Config.s_calls_xml);
@@ -53,6 +57,7 @@ internal class CallImplementation : ICall
 
 
     // return if the item with the corrent id exist
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Call? Read(int id)
     {
         XElement? callElem =
@@ -62,6 +67,7 @@ internal class CallImplementation : ICall
 
 
     // the func search a entity in the list end return a pointer, depend on the filter func, if it not exsist it return null
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Call? Read(Func<Call, bool> filter)
     {
         return XMLTools.LoadListFromXMLElement(Config.s_calls_xml).Elements().Select(s => getCall(s)).FirstOrDefault(filter);
@@ -69,6 +75,7 @@ internal class CallImplementation : ICall
 
 
     // the func search a entity in the list end return a pointer, depend on the filter func, if it not exsist it return null
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<Call> ReadAll(Func<Call, bool>? filter = null)
     {
         return XMLTools.LoadListFromXMLElement(Config.s_calls_xml).Elements().Where(c => filter == null || filter(getCall(c))).Select(c => getCall(c));
@@ -76,6 +83,7 @@ internal class CallImplementation : ICall
     }
 
     // Update a entity in the XML file with the corrent id
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(Call item)
     {
         XElement callsRootElem = XMLTools.LoadListFromXMLElement(Config.s_calls_xml);

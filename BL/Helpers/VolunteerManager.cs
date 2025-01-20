@@ -20,7 +20,10 @@ internal static class VolunteerManager
     /// </summary>
     internal static string? GetVolunteerRole(string username, string password)
     {
-        var volunteers = s_dal.Volunteer.ReadAll();
+        IEnumerable<DO.Volunteer>? volunteers;
+        lock (AdminManager.BlMutex)
+             volunteers = s_dal.Volunteer.ReadAll();
+
         var volunteer = volunteers.FirstOrDefault(v => v.FullName == username && v.Password == password);
         if (volunteer != null)
         {
@@ -34,22 +37,25 @@ internal static class VolunteerManager
     /// </summary>
     internal static IEnumerable<VolunteerInList> GetAllVolunteerInList()
     {
-        var calls = s_dal.Call.ReadAll();
-        var VolunteerInLists = from volunteer in s_dal.Volunteer.ReadAll()
-                               let assignments = s_dal.Assignment.ReadAll(a => a.VolunteerId == volunteer.Id)
-                               let correntCallId = assignments.FirstOrDefault(v => v.FinishTime == null)?.CallId
-                               select new BO.VolunteerInList
-                               {
-                                   Id = volunteer.Id,
-                                   FullName = volunteer.FullName,
-                                   Active = volunteer.Active,
-                                   TreatedCalls = assignments.Count(v => v.EndKind == DO.EndKinds.Treated),
-                                   CanceledCalls = assignments.Count(v => v.EndKind == DO.EndKinds.Administrator_cancellation || v.EndKind == DO.EndKinds.Self_cancellation),
-                                   ExpiredCalls = assignments.Count(v =>  v.EndKind == DO.EndKinds.Expired_cancellation),
-                                   CorrentCallId = correntCallId,
-                                   CorrentCallType = correntCallId == null ? BTypeCalls.None : (BO.BTypeCalls)calls.FirstOrDefault(v => v.Id == correntCallId)!.TypeCall
-                               };
-        return VolunteerInLists;
+        lock (AdminManager.BlMutex)
+        {
+            var calls = s_dal.Call.ReadAll();
+            var VolunteerInLists = from volunteer in s_dal.Volunteer.ReadAll()
+                                   let assignments = s_dal.Assignment.ReadAll(a => a.VolunteerId == volunteer.Id)
+                                   let correntCallId = assignments.FirstOrDefault(v => v.FinishTime == null)?.CallId
+                                   select new BO.VolunteerInList
+                                   {
+                                       Id = volunteer.Id,
+                                       FullName = volunteer.FullName,
+                                       Active = volunteer.Active,
+                                       TreatedCalls = assignments.Count(v => v.EndKind == DO.EndKinds.Treated),
+                                       CanceledCalls = assignments.Count(v => v.EndKind == DO.EndKinds.Administrator_cancellation || v.EndKind == DO.EndKinds.Self_cancellation),
+                                       ExpiredCalls = assignments.Count(v => v.EndKind == DO.EndKinds.Expired_cancellation),
+                                       CorrentCallId = correntCallId,
+                                       CorrentCallType = correntCallId == null ? BTypeCalls.None : (BO.BTypeCalls)calls.FirstOrDefault(v => v.Id == correntCallId)!.TypeCall
+                                   };
+            return VolunteerInLists;
+        }
     }
 
 
@@ -58,10 +64,15 @@ internal static class VolunteerManager
     /// </summary>
     internal static BO.Volunteer GetBOVolunteer(int Id)
     {
-        DO.Volunteer volunteer = s_dal.Volunteer.Read(Id)!;
-        var assignments = s_dal.Assignment.ReadAll(a => a.VolunteerId == Id);
+        DO.Volunteer volunteer; 
+        IEnumerable<Assignment>? assignments;
+        lock (AdminManager.BlMutex)
+        {
+            volunteer = s_dal.Volunteer.Read(Id)!;
+            assignments = s_dal.Assignment.ReadAll(a => a.VolunteerId == Id);
+        }
+
         var CurrentAssignmentOfCall = assignments.FirstOrDefault(v => v.FinishTime == null);
-      
         BO.Volunteer Bvolunteer = new BO.Volunteer
         {
             Id = Id,

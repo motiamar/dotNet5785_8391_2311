@@ -50,4 +50,11 @@ internal class Exceptions
         public BlVolAllreadyExist(string message) : base(message) { }
     }
 
+    /// <summary>
+    /// exeption for unpossible deletitions
+    /// </summary>
+    public class BLTemporaryNotAvailableException : Exception
+    {
+        public BLTemporaryNotAvailableException(string message) : base(message) { }
+    }
 }

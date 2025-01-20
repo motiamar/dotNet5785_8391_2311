@@ -17,7 +17,10 @@ internal static class CallManager
     /// </summary>
     internal static BO.BCallStatus GetStatus(DO.Call call)
     {
-        var assignments = s_dal.Assignment.ReadAll();
+        IEnumerable<Assignment>? assignments;
+        lock (AdminManager.BlMutex)
+              assignments = s_dal.Assignment.ReadAll();
+
         var assignment = assignments.FirstOrDefault(a => a.CallId == call.Id);
         var currentRiskTime = Helpers.AdminManager.Now + Helpers.AdminManager.MaxRange;
         if (assignment == null)
@@ -36,13 +39,19 @@ internal static class CallManager
     /// </summary>
     internal static List<BO.CallAssignInList>? GetCallAssignInList(int id)
     {
-        var assignments = s_dal.Assignment.ReadAll().Where(a => a.CallId == id);
+        IEnumerable<Assignment>? assignments;
+        lock (AdminManager.BlMutex)
+             assignments = s_dal.Assignment.ReadAll().Where(a => a.CallId == id);
+
         if (assignments.Count() == 0)
             return null;
         List<BO.CallAssignInList> callAssignInLists = new List<CallAssignInList>();
         foreach (var assignment in assignments)
         {
-            var volunteer = s_dal.Volunteer.Read(assignment.VolunteerId);
+            DO.Volunteer? volunteer;
+            lock (AdminManager.BlMutex)
+                 volunteer = s_dal.Volunteer.Read(assignment.VolunteerId);
+
             callAssignInLists.Add(new BO.CallAssignInList
             {
                 VolunteerId = assignment.VolunteerId,
@@ -61,7 +70,10 @@ internal static class CallManager
     /// </summary>
     internal static BO.CallInProgress GetCallInProgress(DO.Assignment assignment, DO.Volunteer volunteer)
     {
-        DO.Call call = s_dal.Call.Read(assignment.CallId)!;
+        DO.Call call;
+        lock (AdminManager.BlMutex)
+             call = s_dal.Call.Read(assignment.CallId)!;
+
         (double vLati ,double vLongi) = Helpers.Tools.GetCoordinatesFromAddress(volunteer.Address!);
         var callInProgres = new BO.CallInProgress
         {
@@ -84,27 +96,28 @@ internal static class CallManager
     /// </summary>
     internal static IEnumerable<CallInList> GetAllCallInList()
     {
-        var calls = s_dal.Call.ReadAll();
-        var assignments = s_dal.Assignment.ReadAll();
-        var assignmentsLookup = assignments.ToLookup(a => a.CallId);
-
-        var callInLists = from call in calls
-                          let assignment = assignmentsLookup[call.Id].FirstOrDefault()
-                          let volunteer = assignment != null ? s_dal.Volunteer.Read(assignment.VolunteerId) : null
-                          select new BO.CallInList
-                          {
-                              Id = assignment?.Id,
-                              CallId = call.Id,
-                              Type = (BO.BTypeCalls)Enum.Parse(typeof(BO.BTypeCalls), call.TypeCall.ToString()),
-                              CallOpenTime = call.OpeningCallTime,
-                              CallLeftTime = call.MaxEndingCallTime > Helpers.AdminManager.Now ? (call.MaxEndingCallTime - Helpers.AdminManager.Now) ?? TimeSpan.Zero : TimeSpan.Zero,
-                              LastVolunteerName = volunteer?.FullName ?? "N/A",
-                              TotalTreatmentTime = assignment?.FinishTime != null && assignment?.StartTime != null ? (TimeSpan)(assignment.FinishTime - assignment.StartTime)                                 : TimeSpan.Zero,
-                              CallStatus = GetStatus(call),
-                              SumOfAssignments = assignmentsLookup[call.Id].Count()
-                          };
-
-        return callInLists;
+        lock (AdminManager.BlMutex)
+        {
+            var calls = s_dal.Call.ReadAll();
+            var assignments = s_dal.Assignment.ReadAll();
+            var assignmentsLookup = assignments.ToLookup(a => a.CallId);
+            var callInLists = from call in calls
+                              let assignment = assignmentsLookup[call.Id].FirstOrDefault()
+                              let volunteer = assignment != null ? s_dal.Volunteer.Read(assignment.VolunteerId) : null
+                              select new BO.CallInList
+                              {
+                                  Id = assignment?.Id,
+                                  CallId = call.Id,
+                                  Type = (BO.BTypeCalls)Enum.Parse(typeof(BO.BTypeCalls), call.TypeCall.ToString()),
+                                  CallOpenTime = call.OpeningCallTime,
+                                  CallLeftTime = call.MaxEndingCallTime > Helpers.AdminManager.Now ? (call.MaxEndingCallTime - Helpers.AdminManager.Now) ?? TimeSpan.Zero : TimeSpan.Zero,
+                                  LastVolunteerName = volunteer?.FullName ?? "N/A",
+                                  TotalTreatmentTime = assignment?.FinishTime != null && assignment?.StartTime != null ? (TimeSpan)(assignment.FinishTime - assignment.StartTime) : TimeSpan.Zero,
+                                  CallStatus = GetStatus(call),
+                                  SumOfAssignments = assignmentsLookup[call.Id].Count()
+                              };
+            return callInLists;
+        }
     }
 
     /// <summary>
@@ -124,22 +137,25 @@ internal static class CallManager
 
     internal static IEnumerable<ClosedCallInList> GetClosedCallInLists(int id)
     {
-        var calls = s_dal.Call.ReadAll();
-        var assignments = s_dal.Assignment.ReadAll(v => v.VolunteerId == id);
-        var closedCallInList = from assignment in assignments
-                               let call = calls.FirstOrDefault(v => v.Id == assignment.CallId)
-                               select new BO.ClosedCallInList
-                               {
-                                   Id = call.Id,
-                                   Type = (BTypeCalls)call.TypeCall,
-                                   CallAddress = call.FullAddressOfTheCall,
-                                   CallOpenTime = call.OpeningCallTime,
-                                   CallEnterTime = assignments.FirstOrDefault(v => v.CallId == call.Id)!.StartTime,
-                                   CallCloseTime = assignments.FirstOrDefault(v => v.CallId == call.Id)!.FinishTime,
-                                   EndKind = (BEndKinds)assignments.FirstOrDefault(v => v.CallId == call.Id)!.EndKind,
-                               };
-        closedCallInList.Where(v => v.CallCloseTime != null);
-        return closedCallInList;
+        lock (AdminManager.BlMutex)
+        {
+            var calls = s_dal.Call.ReadAll();
+            var assignments = s_dal.Assignment.ReadAll(v => v.VolunteerId == id);
+            var closedCallInList = from assignment in assignments
+                                   let call = calls.FirstOrDefault(v => v.Id == assignment.CallId)
+                                   select new BO.ClosedCallInList
+                                   {
+                                       Id = call.Id,
+                                       Type = (BTypeCalls)call.TypeCall,
+                                       CallAddress = call.FullAddressOfTheCall,
+                                       CallOpenTime = call.OpeningCallTime,
+                                       CallEnterTime = assignments.FirstOrDefault(v => v.CallId == call.Id)!.StartTime,
+                                       CallCloseTime = assignments.FirstOrDefault(v => v.CallId == call.Id)!.FinishTime,
+                                       EndKind = (BEndKinds)assignments.FirstOrDefault(v => v.CallId == call.Id)!.EndKind,
+                                   };
+            closedCallInList.Where(v => v.CallCloseTime != null);
+            return closedCallInList;
+        }
     }
 
     /// <summary>
@@ -147,22 +163,25 @@ internal static class CallManager
     /// </summary>
     internal static IEnumerable<OpenCallInList> GetOpenCallInLists(DO.Volunteer volunteer)
     {
-        var calls = s_dal.Call.ReadAll();
-        var Calls = calls.Where(v => Helpers.CallManager.GetStatus(v) == BCallStatus.Open || Helpers.CallManager.GetStatus(v) == BCallStatus.Open_in_risk);
-        var openCallInList = from call in Calls
-                             let vLati = volunteer.Latitude
-                             let vLongi = volunteer.Longitude
-                             select new BO.OpenCallInList
-                             {
-                                 Id = call.Id,
-                                 Type = (BTypeCalls)call.TypeCall,
-                                 Description = call.VerbalDecription,
-                                 CallAddress = call.FullAddressOfTheCall,
-                                 CallOpenTime = call.OpeningCallTime,
-                                 CallMaxCloseTime = call.MaxEndingCallTime,
-                                 CallDistance = Helpers.Tools.Distance(volunteer.DistanceType, vLati ?? 0, vLongi ?? 0, call.Latitude, call.Longitude)
-                             };
-        return openCallInList!;
+        lock (AdminManager.BlMutex)
+        {
+            var calls = s_dal.Call.ReadAll();
+            var Calls = calls.Where(v => Helpers.CallManager.GetStatus(v) == BCallStatus.Open || Helpers.CallManager.GetStatus(v) == BCallStatus.Open_in_risk);
+            var openCallInList = from call in Calls
+                                 let vLati = volunteer.Latitude
+                                 let vLongi = volunteer.Longitude
+                                 select new BO.OpenCallInList
+                                 {
+                                     Id = call.Id,
+                                     Type = (BTypeCalls)call.TypeCall,
+                                     Description = call.VerbalDecription,
+                                     CallAddress = call.FullAddressOfTheCall,
+                                     CallOpenTime = call.OpeningCallTime,
+                                     CallMaxCloseTime = call.MaxEndingCallTime,
+                                     CallDistance = Helpers.Tools.Distance(volunteer.DistanceType, vLati ?? 0, vLongi ?? 0, call.Latitude, call.Longitude)
+                                 };
+            return openCallInList!;
+        }
     }
 
     /// <summary>
@@ -170,7 +189,10 @@ internal static class CallManager
     /// </summary>
     internal static void ChooseCallChek(DO.Call call)
     {
-        var assignments = s_dal.Assignment.ReadAll();
+        IEnumerable<Assignment>? assignments;
+        lock (AdminManager.BlMutex)
+             assignments = s_dal.Assignment.ReadAll();
+
         var assignment = assignments.FirstOrDefault(a => a.CallId == call.Id);
         if (assignment is not null)
             throw new BlinCorrectException("The call is already in treatment");
@@ -183,16 +205,25 @@ internal static class CallManager
     /// </summary>
     internal static void UpdateCalls()
     {
-        var calls = s_dal.Call.ReadAll();
+        IEnumerable<DO.Call>? calls;
+        lock (AdminManager.BlMutex) 
+             calls = s_dal.Call.ReadAll();
+
         foreach (var call in calls)
         {
-            var assignments = s_dal.Assignment.ReadAll(v => v.CallId == call.Id).Where(v=> v.FinishTime is null);
+            IEnumerable<Assignment>? assignments;
+            lock (AdminManager.BlMutex)
+                 assignments = s_dal.Assignment.ReadAll(v => v.CallId == call.Id).Where(v=> v.FinishTime is null);
+
             if (call.MaxEndingCallTime < Helpers.AdminManager.Now)
             {               
                 if (assignments is null)
                 {
                     DO.Assignment assignment = new DO.Assignment { CallId = call.Id, VolunteerId = 0, FinishTime = Helpers.AdminManager.Now, EndKind = EndKinds.Expired_cancellation };
-                    s_dal.Assignment.Create(assignment);
+
+                    lock (AdminManager.BlMutex)
+                        s_dal.Assignment.Create(assignment);
+
                     CallManager.Observers.NotifyListUpdated();
 
                 }
@@ -209,7 +240,10 @@ internal static class CallManager
                             FinishTime = Helpers.AdminManager.Now,
                             EndKind = EndKinds.Expired_cancellation
                         };
-                        s_dal.Assignment.Update(assign);
+
+                        lock (AdminManager.BlMutex)
+                            s_dal.Assignment.Update(assign);
+
                         CallManager.Observers.NotifyListUpdated();
                         CallManager.Observers.NotifyItemUpdated(assignment.CallId);
                     }

@@ -4,11 +4,13 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 internal class AssignmentImplementation : IAssignment
 {
 
     // the func crate a new spot in the XML file and Add the new entity to the spot with a new Id and return the new Id.
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Create(Assignment item)
     { 
         int NewId = Config.NextAssignmentId;
@@ -21,6 +23,7 @@ internal class AssignmentImplementation : IAssignment
 
 
     // the func search for the entity in the XML file by the id and remove it
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         List<Assignment> TmpAssignments = XMLTools.LoadListFromXMLSerializer<Assignment>(Config.s_assignments_xml);
@@ -31,6 +34,7 @@ internal class AssignmentImplementation : IAssignment
 
 
     // clear the XML file form all the entity data
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void DeleteAll()
     {
         XMLTools.SaveListToXMLSerializer(new List<Assignment>(), Config.s_assignments_xml);
@@ -38,6 +42,7 @@ internal class AssignmentImplementation : IAssignment
 
 
     // return if the item with the corrent id exist
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Assignment? Read(int id)
     {
         List<Assignment> TmpAssignments = XMLTools.LoadListFromXMLSerializer<Assignment>(Config.s_assignments_xml);
@@ -46,6 +51,7 @@ internal class AssignmentImplementation : IAssignment
 
 
     // the func search a entity in the list end return a pointer, depend on the filter func, if it not exsist it return null
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Assignment? Read(Func<Assignment, bool> filter)
     {
         List<Assignment> TmpAssignments = XMLTools.LoadListFromXMLSerializer<Assignment>(Config.s_assignments_xml);
@@ -54,6 +60,7 @@ internal class AssignmentImplementation : IAssignment
 
 
     // return a list of all the entity that stand the filter func if exist and if not, return all
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<Assignment> ReadAll(Func<Assignment, bool>? filter = null)
     {
         List<Assignment> TmpAssignments = XMLTools.LoadListFromXMLSerializer<Assignment>(Config.s_assignments_xml);
@@ -64,6 +71,7 @@ internal class AssignmentImplementation : IAssignment
 
 
     // Update a entity in the XML file 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(Assignment item)
     {
         Delete(item.Id);

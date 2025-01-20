@@ -88,11 +88,12 @@ internal class VolunteerImplementation : BlApi.IVolunteer
     {
         try
         {
-            if (_dal.Volunteer.Read(id) != null)
-            {
-                BO.Volunteer volunteer = Helpers.VolunteerManager.GetBOVolunteer(id);
-                return volunteer;
-            }
+            lock (AdminManager.BlMutex)
+                if (_dal.Volunteer.Read(id) != null)
+                {
+                    BO.Volunteer volunteer = Helpers.VolunteerManager.GetBOVolunteer(id);
+                    return volunteer;
+                }
             throw new BlDoesNotExistException($"can't find volunteer with id : {id}");
         }
         catch (DO.DalDoesNotExistException ex)
@@ -106,14 +107,22 @@ internal class VolunteerImplementation : BlApi.IVolunteer
     /// </summary>
     public void Update(int volunteerId, BO.Volunteer change)
     {
+        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
         try
         {
-            var volunteer = _dal.Volunteer.Read(volunteerId);
+            DO.Volunteer? volunteer;
+            lock (AdminManager.BlMutex)
+                volunteer = _dal.Volunteer.Read(volunteerId);
+
             if (volunteer == null)
                 throw new BlDoesNotExistException($"can't find volunteer with id : {volunteerId}");
             if (volunteerId != change.Id && volunteer!.Role != Roles.Manager)
                 throw new BlNotAllowException("you can't change the details of the volunteer");
-            var volunteers = _dal.Volunteer.ReadAll(v=> v.Role == Roles.Manager);
+
+            IEnumerable<DO.Volunteer>? volunteers;
+            lock (AdminManager.BlMutex)
+                volunteers = _dal.Volunteer.ReadAll(v => v.Role == Roles.Manager);
+
             if (volunteer.Role == Roles.Manager && change.role == BRoles.Volunteer && volunteers == null)
                 throw new BlNotAllowException("you can't change the role of the manager becose there is no more managers");
             // func to chek all the incoming details    
@@ -122,7 +131,10 @@ internal class VolunteerImplementation : BlApi.IVolunteer
             var role = (Roles)Enum.Parse(typeof(BRoles), change.role.ToString());
             var distanceType = (DistanceTypes)Enum.Parse(typeof(BDistanceTypes), change.DistanceType.ToString());
             var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = change.FullName, Phone = change.Phone, Email = change.Email, Password = change.Password, Address = change.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = change.Active, MaximumDistance = change.MaximumDistance, DistanceType = distanceType };
-            _dal.Volunteer.Update(newVolunteer);
+
+            lock (AdminManager.BlMutex)
+                _dal.Volunteer.Update(newVolunteer);
+
             VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
             VolunteerManager.Observers.NotifyListUpdated();
             CallManager.Observers.NotifyListUpdated();
@@ -143,18 +155,28 @@ internal class VolunteerImplementation : BlApi.IVolunteer
     /// </summary>
     public void Delete(int volunteerId)
     {
+        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
         try
         {
-            var volunteer = _dal.Volunteer.Read(volunteerId);
-            var assignment = _dal.Assignment.ReadAll();
+            IEnumerable<Assignment>? assignment;
+            DO.Volunteer? volunteer;
+            lock (AdminManager.BlMutex)
+            {
+                volunteer = _dal.Volunteer.Read(volunteerId);
+                assignment = _dal.Assignment.ReadAll();
+            }
+
             int? correntCallId = assignment.FirstOrDefault(v => v.VolunteerId == volunteerId)?.CallId;
             if (correntCallId is null)
             {
-                _dal.Volunteer.Delete(volunteerId);
+                lock (AdminManager.BlMutex)
+                    _dal.Volunteer.Delete(volunteerId);
+
                 VolunteerManager.Observers.NotifyListUpdated();
             }
             else
                 throw new BLVolunteerIsAssign($"cant delete volunteer: {volunteerId}, the volunteer is assign");
+
 
         }
         catch (DO.DalDoesNotExistException ex)
@@ -168,6 +190,7 @@ internal class VolunteerImplementation : BlApi.IVolunteer
     /// </summary>
     public void Create(BO.Volunteer volunteer)
     {
+        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
         try
         {
             // check the incoming details
@@ -176,7 +199,10 @@ internal class VolunteerImplementation : BlApi.IVolunteer
             var role = (Roles)Enum.Parse(typeof(BRoles), volunteer.role.ToString());
             var distanceType = (DistanceTypes)Enum.Parse(typeof(BDistanceTypes), volunteer.DistanceType.ToString());
             var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = volunteer.FullName, Phone = volunteer.Phone, Email = volunteer.Email, Password = volunteer.Password, Address = volunteer.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = volunteer.Active, MaximumDistance = volunteer.MaximumDistance, DistanceType = distanceType };
-            _dal.Volunteer.Create(newVolunteer);
+            
+            lock (AdminManager.BlMutex)
+                _dal.Volunteer.Create(newVolunteer);
+
             VolunteerManager.Observers.NotifyListUpdated();
         }
         catch (DO.DalAlreadyExistException ex)
