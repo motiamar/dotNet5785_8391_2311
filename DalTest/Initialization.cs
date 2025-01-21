@@ -523,7 +523,7 @@ public static class Initialization
         IEnumerable <Call> tmpCalls = s_dal!.Call.ReadAll();
         IEnumerable <Volunteer> tmpVolenteers = s_dal.Volunteer!.ReadAll();
 
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 45; i++)
         {
                 tmpIndex = s_rand.Next(0, 50);
                 tmpCallId = tmpCalls.ElementAt(tmpIndex).Id;
@@ -541,8 +541,7 @@ public static class Initialization
                 else
                 {
                 // the finish time of the assinment is more then the call
-                tmpFinishTime = null;
-                    //tmpCalls.ElementAt(tmpIndex).MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 2));
+                tmpFinishTime = tmpCalls.ElementAt(tmpIndex).MaxEndingCallTime!.Value.AddMinutes(s_rand.Next(1, 10));
                 //5 expired calls
                 tmpEndKind = EndKinds.Expired_cancellation;
                 }
@@ -555,8 +554,25 @@ public static class Initialization
                     StartTime = tmpStartTime,
                     FinishTime = tmpFinishTime,
                     EndKind = tmpEndKind,
-                });
-            
+                });           
+        }
+        foreach (var item in tmpVolenteers)
+        {
+            tmpIndex = s_rand.Next(0, 50);
+            tmpCallId = tmpCalls.ElementAt(tmpIndex).Id;
+            tmpStartTime = tmpCalls.ElementAt(tmpIndex).OpeningCallTime.AddMinutes(1);
+            tmpVolunteerId = item.Id;
+            tmpFinishTime = null;
+            tmpEndKind = EndKinds.Open;
+            s_dal.Assignment!.Create(new Assignment
+            {
+                Id = tmpId,
+                CallId = tmpCallId,
+                VolunteerId = tmpVolunteerId,
+                StartTime = tmpStartTime,
+                FinishTime = tmpFinishTime,
+                EndKind = tmpEndKind,
+            });
         }
     }
 
