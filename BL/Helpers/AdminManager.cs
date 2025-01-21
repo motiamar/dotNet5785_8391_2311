@@ -7,15 +7,15 @@ namespace Helpers;
 /// <summary>
 /// Internal BL manager for all Application's Clock logic policies
 /// </summary>
-internal static class AdminManager //stage 4
+internal static class AdminManager 
 {
     #region Stage 4
-    private static readonly DalApi.IDal s_dal = DalApi.Factory.Get; //stage 4
+    private static readonly DalApi.IDal s_dal = DalApi.Factory.Get; 
     #endregion Stage 4
 
     #region Stage 5
-    internal static event Action? ConfigUpdatedObservers; //prepared for stage 5 - for config update observers
-    internal static event Action? ClockUpdatedObservers; //prepared for stage 5 - for clock update observers
+    internal static event Action? ConfigUpdatedObservers; 
+    internal static event Action? ClockUpdatedObservers; 
     #endregion Stage 5
 
     #region Stage 4
@@ -28,38 +28,38 @@ internal static class AdminManager //stage 4
         set
         {
             s_dal.Config.RiskRnge = value;
-            ConfigUpdatedObservers?.Invoke(); // stage 5
+            ConfigUpdatedObservers?.Invoke(); 
         }
     }
 
     /// <summary>
     /// Property for providing current application's clock value for any BL class that may need it
     /// </summary>
-    internal static DateTime Now { get => s_dal.Config.Clock; } //stage 4
+    internal static DateTime Now { get => s_dal.Config.Clock; } 
 
     /// <summary>
     /// Method to reset the DB
     /// </summary>
-    internal static void ResetDB() //stage 4
+    internal static void ResetDB() 
     {
-        lock (BlMutex) //stage 7
+        lock (BlMutex) 
         {
             s_dal.ResetDB();
-            AdminManager.UpdateClock(AdminManager.Now); //stage 5 - needed since we want the label on Pl to be updated
-            AdminManager.MaxRange = AdminManager.MaxRange; // stage 5 - needed to update PL 
+            AdminManager.UpdateClock(AdminManager.Now); //needed since we want the label on Pl to be updated
+            AdminManager.MaxRange = AdminManager.MaxRange; // needed to update PL 
         }
     }
 
     /// <summary>
     /// Method to initialize the DB
     /// </summary>
-    internal static void InitializeDB() //stage 4
+    internal static void InitializeDB()
     {
-        lock (BlMutex) //stage 7
+        lock (BlMutex) 
         {
             DalTest.Initialization.Do();
-            AdminManager.UpdateClock(AdminManager.Now);  //stage 5 - needed since we want the label on Pl to be updated
-            AdminManager.MaxRange = AdminManager.MaxRange; // stage 5 - needed for update the PL 
+            AdminManager.UpdateClock(AdminManager.Now);  // needed since we want the label on Pl to be updated
+            AdminManager.MaxRange = AdminManager.MaxRange; // needed for update the PL 
         }
     }
 
@@ -71,28 +71,23 @@ internal static class AdminManager //stage 4
     internal static void UpdateClock(DateTime newClock) //stage 4-7
     {
         // new Thread(() => { // stage 7 - not sure - still under investigation - see stage 7 instructions after it will be released        
-        updateClock(newClock);//stage 4-6
+        updateClock(newClock);
         // }).Start(); // stage 7 as above
     }
 
     /// <summary>
-    /// 
+    /// task for periodic update of the calls
     /// </summary>
     private static Task? _periodicTask = null;
 
     /// <summary>
     /// Method to update the clock
     /// </summary>
-    private static void updateClock(DateTime newClock) // prepared for stage 7 as DRY to eliminate needless repetition
+    private static void updateClock(DateTime newClock) 
     {
-        var oldClock = s_dal.Config.Clock; //stage 4
-        s_dal.Config.Clock = newClock; //stage 4
-        Helpers.CallManager.UpdateCalls();
-
-        if (_periodicTask is null || _periodicTask.IsCompleted) //stage 7
-            _periodicTask = Task.Run(() => Helpers.CallManager.UpdateCalls());// to check by moty!!!!!!!!
-
-        ClockUpdatedObservers?.Invoke(); //prepared for stage 5
+        if (_periodicTask is null || _periodicTask.IsCompleted) // make sure that the task - Update calls - is running asincronously
+            _periodicTask = Task.Run(() => Helpers.CallManager.UpdateCalls()); 
+        ClockUpdatedObservers?.Invoke();
     }
     #endregion Stage 4
 
@@ -101,15 +96,18 @@ internal static class AdminManager //stage 4
     /// Mutex to use from BL methods to get mutual exclusion while the simulator is running
     /// </summary>
     internal static readonly object BlMutex = new(); // BlMutex = s_dal; // This field is actually the same as s_dal - it is defined for readability of locks
+
     /// <summary>
     /// The thread of the simulator
     /// </summary>
     private static volatile Thread? s_thread;
+
     /// <summary>
     /// The Interval for clock updating
     /// in minutes by second (default value is 1, will be set on Start())    
     /// </summary>
     private static int s_interval = 1;
+
     /// <summary>
     /// The flag that signs whether simulator is running
     /// 
@@ -174,15 +172,8 @@ internal static class AdminManager //stage 4
         while (!s_stop)
         {
             UpdateClock(Now.AddMinutes(s_interval));
-
-            //TO_DO:
-            //Add calls here to any logic simulation that was required in stage 7
-            //for example: course registration simulation
             if (_simulateTask is null || _simulateTask.IsCompleted)//stage 7
                 _simulateTask = Task.Run(() => StudentManager.SimulateCourseRegistrationAndGrade());
-
-            //etc...
-
             try
             {
                 Thread.Sleep(1000); // 1 second

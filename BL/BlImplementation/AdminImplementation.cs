@@ -22,7 +22,7 @@ internal class AdminImplementation : IAdmin
     /// </summary>
     public void ForwordClock(TimeUnit unit)
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
         DateTime newClock;
         switch (unit)
         {
@@ -60,7 +60,7 @@ internal class AdminImplementation : IAdmin
     /// </summary>
     public void SetMaxRange(TimeSpan maxRange)
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
         Helpers.AdminManager.MaxRange = maxRange;
         VolunteerManager.Observers.NotifyListUpdated();
         CallManager.Observers.NotifyListUpdated();
@@ -71,7 +71,7 @@ internal class AdminImplementation : IAdmin
     /// </summary>
     public void ResetDB()
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
         AdminManager.ResetDB(); //stage 7
         VolunteerManager.Observers.NotifyListUpdated();
         CallManager.Observers.NotifyListUpdated();
@@ -82,8 +82,8 @@ internal class AdminImplementation : IAdmin
     /// </summary>
     public void InitializeDB()
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
-        AdminManager.InitializeDB(); //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
+        AdminManager.InitializeDB(); 
         VolunteerManager.Observers.NotifyListUpdated();
         CallManager.Observers.NotifyListUpdated();
     }
@@ -104,13 +104,13 @@ internal class AdminImplementation : IAdmin
     /// </summary>
     public void StartSimulator(int interval)
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
-        AdminManager.Start(interval); //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
+        AdminManager.Start(interval); 
     }
 
     /// <summary>
     /// stop the simulator
     /// </summary>
     public void StopSimulator() =>
-        AdminManager.Stop(); //stage 7
+        AdminManager.Stop(); 
 }
