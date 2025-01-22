@@ -200,8 +200,29 @@ internal static class VolunteerManager
         return true;
     }
 
-    internal static void SimulateVolunteerMovment() //stage 7
+
+    /// <summary>
+    /// the simulation of the volunteers activity
+    /// </summary>
+    private static readonly Random s_rand = new();
+    private static int s_simulatorCounter = 0;
+    internal static void SimulateVolunteerActivity() //stage 7
     {
-        return;
+        Thread.CurrentThread.Name = $"Simulator{++s_simulatorCounter}";
+        LinkedList<int> volunteersToUpdate = new(); 
+        List<DO.Volunteer> doVolList;
+
+        lock (AdminManager.BlMutex) 
+            doVolList = s_dal.Volunteer.ReadAll(v => v.Active == true).ToList();
+
+        foreach (var volunteer in doVolList)
+        {
+            var assignments = s_dal.Assignment.ReadAll(a => a.VolunteerId == volunteer.Id).Where(v=> v.FinishTime == null).ToList();
+            if(assignments == null)
+            {
+
+            }
+        }
+
     }
 }

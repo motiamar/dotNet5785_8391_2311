@@ -216,27 +216,22 @@ internal static class Tools
         {
             using (HttpClient client = new HttpClient())
             {
-                // בניית ה-URL לבקשה
                 string requestUrl = $"https://maps.googleapis.com/maps/api/geocode/xml?address={Uri.EscapeDataString(address)}&key=AIzaSyDzEzuNVPxLv7EIKKvSU2b8GiAikFbV5jk";
 
-                // שליחת הבקשה וקבלת תגובה
                 HttpResponseMessage response = await client.GetAsync(requestUrl);
 
                 if (!response.IsSuccessStatusCode)
                     return (double.NaN, double.NaN);
 
-                // קריאת התוכן בפורמט XML
                 string xmlResponse = await response.Content.ReadAsStringAsync();
 
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.LoadXml(xmlResponse);
 
-                // בדיקת סטטוס
                 XmlNode statusNode = xmlDoc.SelectSingleNode("//status")!;
                 if (statusNode is null || statusNode.InnerText != "OK")
                     return (double.NaN, double.NaN);
 
-                // שליפת הקואורדינטות
                 XmlNode locationNode = xmlDoc.SelectSingleNode("//location")!;
                 if (locationNode != null)
                 {
@@ -244,7 +239,6 @@ internal static class Tools
                     double lon = double.Parse(locationNode.SelectSingleNode("lng")?.InnerText ?? "NaN");
                     return (lat, lon);
                 }
-
                 return (double.NaN, double.NaN);
             }
         }
