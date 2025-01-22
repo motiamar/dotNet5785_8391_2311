@@ -73,7 +73,8 @@ internal static class CallManager
         DO.Call call;
         lock (AdminManager.BlMutex)
              call = s_dal.Call.Read(assignment.CallId)!;
-        (double vLati, double vLongi) = Helpers.Tools.GetCoordinatesFromAddressAsync(volunteer.Address!).Result;
+        double vLati = (Double)volunteer.Latitude!;
+        double vLongi = (Double)volunteer.Longitude!;
         var callInProgres = new BO.CallInProgress
         {
             Id = assignment.Id,

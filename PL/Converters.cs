@@ -315,7 +315,7 @@ public class StatusToColorConverter : IValueConverter
                 return Brushes.Red;
         }
 
-        return Brushes.Gray;
+        return Brushes.Black;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

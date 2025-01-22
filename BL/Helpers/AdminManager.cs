@@ -70,7 +70,7 @@ internal static class AdminManager
     /// <param name="newClock">updated clock value</param>
     internal static void UpdateClock(DateTime newClock) //stage 4-7
     {
-        // new Thread(() => { // stage 7 - not sure - still under investigation - see stage 7 instructions after it will be released        
+        // new Thread(() => { // stage 7 - not sure - still under investigation - see stage 7 instructions after it will be released
         updateClock(newClock);
         // }).Start(); // stage 7 as above
     }
@@ -85,6 +85,7 @@ internal static class AdminManager
     /// </summary>
     private static void updateClock(DateTime newClock) 
     {
+        s_dal.Config.Clock = newClock;
         if (_periodicTask is null || _periodicTask.IsCompleted) // make sure that the task - Update calls - is running asincronously
             _periodicTask = Task.Run(() => Helpers.CallManager.UpdateCalls()); 
         ClockUpdatedObservers?.Invoke();
