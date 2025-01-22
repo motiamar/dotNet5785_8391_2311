@@ -111,6 +111,5 @@ internal class AdminImplementation : IAdmin
     /// <summary>
     /// stop the simulator
     /// </summary>
-    public void StopSimulator() =>
-        AdminManager.Stop(); 
+    public void StopSimulator() => AdminManager.Stop(); 
 }

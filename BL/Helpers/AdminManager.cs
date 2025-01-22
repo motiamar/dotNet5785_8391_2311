@@ -95,7 +95,7 @@ internal static class AdminManager
     /// <summary>    
     /// Mutex to use from BL methods to get mutual exclusion while the simulator is running
     /// </summary>
-    internal static readonly object BlMutex = new(); // BlMutex = s_dal; // This field is actually the same as s_dal - it is defined for readability of locks
+    internal static readonly object BlMutex = new object(); // BlMutex = s_dal; // This field is actually the same as s_dal - it is defined for readability of locks
 
     /// <summary>
     /// The thread of the simulator
@@ -173,7 +173,7 @@ internal static class AdminManager
         {
             UpdateClock(Now.AddMinutes(s_interval));
             if (_simulateTask is null || _simulateTask.IsCompleted)//stage 7
-                _simulateTask = Task.Run(() => StudentManager.SimulateCourseRegistrationAndGrade());
+                _simulateTask = Task.Run(() => Helpers.VolunteerManager.SimulateVolunteerMovment());
             try
             {
                 Thread.Sleep(1000); // 1 second

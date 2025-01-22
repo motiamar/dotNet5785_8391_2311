@@ -253,13 +253,16 @@ public class MaxTimeEnableConverter : IValueConverter
     }
 }
 
+/// <summary>
+/// converts a DateTime to a string in the format "dd/MM/yyyy HH:mm"
+/// </summary>
 public class DateTimeToDateConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is DateTime dateTime)
         {
-            return dateTime.Date; // מחזיר רק את התאריך
+            return dateTime.Date; 
         }
         return null!;
     }
@@ -268,22 +271,22 @@ public class DateTimeToDateConverter : IValueConverter
     {
         if (value is DateTime date)
         {
-            return date; // מחזיר את התאריך כפי שהוא
+            return date; 
         }
-
-        // אם ה-Value הוא null, מחזיר את התאריך הנוכחי כברירת מחדל
         return DateTime.Now.Date;
     }
 }
 
-
+/// <summary>
+/// converts a DateTime to a string in the format "HH:mm"
+/// </summary>
 public class DateTimeToTimeConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is DateTime dateTime)
         {
-            return dateTime.ToString("HH:mm"); // מחזיר את השעה בפורמט HH:mm
+            return dateTime.ToString("HH:mm"); 
         }
         return null!;
     }
@@ -292,13 +295,31 @@ public class DateTimeToTimeConverter : IValueConverter
     {
         if (value is string timeString && DateTime.TryParseExact(timeString, "HH:mm", culture, DateTimeStyles.None, out DateTime time))
         {
-            // במקרה של זמן בלבד, מחזיר את השעה משולבת עם התאריך הנוכחי
             return DateTime.Today.Add(time.TimeOfDay);
         }
-
-        // ברירת מחדל במקרה של שגיאה: השעה הנוכחית
         return DateTime.Now;
     }
 
+}
 
+/// <summary>
+/// if the cordonates are 0 return the text into red
+/// </summary>
+public class StatusToColorConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is double lat)
+        {
+            if (lat == 0)
+                return Brushes.Red;
+        }
+
+        return Brushes.Gray;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
 }

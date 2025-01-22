@@ -18,7 +18,6 @@ internal class CallImplementation : BlApi.ICall
     /// </summary>
     public int[] ArrayStatus()
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
         try
         {
             var calls = Helpers.CallManager.GetAllCallInList();
@@ -188,18 +187,18 @@ internal class CallImplementation : BlApi.ICall
     /// <param name="change">the new entity we want to switch to</param>
     public void Update(BO.Call change)
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
         try
         {
             Helpers.CallManager.CallChek(change);
-
             DO.Call? call; 
             lock (AdminManager.BlMutex)
                 call = _dal.Call.Read(change.Id);
 
             if (call is null)
                 throw new DO.DalDoesNotExistException($"call with the id : {change.Id} doesn't exist");
-            (double latitude, double longitude) = Helpers.Tools.GetCoordinatesFromAddress(change.CallAddress);
+            double latitude = 0;
+            double longitude = 0;
             DO.Call updateCall = new DO.Call
             {
                 Id = change.Id,
@@ -217,6 +216,8 @@ internal class CallImplementation : BlApi.ICall
 
             CallManager.Observers.NotifyItemUpdated(change.Id);
             CallManager.Observers.NotifyListUpdated();
+            _ = Tools.updateCoordinatesForCallAddressAsync(updateCall); // update the coordinates of the volunteer
+
         }
         catch (DO.DalDoesNotExistException ex)
         {
@@ -229,7 +230,7 @@ internal class CallImplementation : BlApi.ICall
     /// </summary>
     public void Delete(int callId)
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
         try
         {
             DO.Call call;
@@ -259,11 +260,12 @@ internal class CallImplementation : BlApi.ICall
     /// </summary>
     public void Create(BO.Call call)
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
         try
         {
             Helpers.CallManager.CallChek(call);
-            (double latitude, double longitude) = Helpers.Tools.GetCoordinatesFromAddress(call.CallAddress);
+            double latitude = 0;
+            double longitude = 0;
             DO.Call newCall = new DO.Call
             {
                 TypeCall = (DO.TypeCalls)call.Type,
@@ -277,10 +279,12 @@ internal class CallImplementation : BlApi.ICall
 
             lock (AdminManager.BlMutex)
                 _dal.Call.Create(newCall);
-
             CallManager.Observers.NotifyListUpdated();
+
+            _ = Tools.updateCoordinatesForCallAddressAsync(newCall); // update the coordinates of the volunteer
+
         }
-        catch(DO.DalXMLFileLoadCreateException)
+        catch (DO.DalXMLFileLoadCreateException)
         {
             throw new BlCantLoadException("Failed to create call");
         }
@@ -455,7 +459,7 @@ internal class CallImplementation : BlApi.ICall
     /// <param name="assignmentId"> the assignment that need to close</param>
     public void EndAssignment(int volunteerId, int assignmentId)
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
         try
         {
             DO.Assignment assignment;
@@ -501,7 +505,7 @@ internal class CallImplementation : BlApi.ICall
     /// <param name="assignmentId">the assignment that need to cancaled</param>
     public void CanceleAssignment(int volunteerId, int assignmentId)
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
         try
         {
             DO.Assignment assignment;
@@ -556,7 +560,7 @@ internal class CallImplementation : BlApi.ICall
     /// <param name="CallId">the call he want to choose</param>
     public void ChooseCall(int volunteerId, int CallId)
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
         try
         {
             DO.Call call;

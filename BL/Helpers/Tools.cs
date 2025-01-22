@@ -8,9 +8,12 @@ using System.Threading.Tasks;
 using BO;
 using RestSharp;
 using System.Xml;
+using DalApi;
+using System;
 
 internal static class Tools
 {
+    private static readonly DalApi.IDal s_dal = DalApi.Factory.Get;
     /// <summary>
     /// func to ovveride and print tne logical entities
     /// </summary>
@@ -204,10 +207,10 @@ internal static class Tools
     }
 
 
-    ///// <summary>
-    ///// func to get the coordinates of the address
-    ///// </summary>
-    public static (double, double) GetCoordinatesFromAddress(string address)
+    /// <summary>
+    /// Async function to get the coordinates of the address
+    /// </summary>
+    public static async Task<(double, double)> GetCoordinatesFromAddressAsync(string address)
     {
         try
         {
@@ -217,13 +220,13 @@ internal static class Tools
                 string requestUrl = $"https://maps.googleapis.com/maps/api/geocode/xml?address={Uri.EscapeDataString(address)}&key=AIzaSyDzEzuNVPxLv7EIKKvSU2b8GiAikFbV5jk";
 
                 // שליחת הבקשה וקבלת תגובה
-                HttpResponseMessage response = client.GetAsync(requestUrl).Result;
+                HttpResponseMessage response = await client.GetAsync(requestUrl);
 
                 if (!response.IsSuccessStatusCode)
                     return (double.NaN, double.NaN);
 
                 // קריאת התוכן בפורמט XML
-                string xmlResponse = response.Content.ReadAsStringAsync().Result;
+                string xmlResponse = await response.Content.ReadAsStringAsync();
 
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.LoadXml(xmlResponse);
@@ -250,7 +253,49 @@ internal static class Tools
             return (double.NaN, double.NaN);
         }
     }
-};
 
+    /// <summary>
+    /// method to update the coordinates of the volunteer address
+    /// </summary>
+    public static async Task updateCoordinatesForVolunteerAddressAsync(DO.Volunteer volunteer)
+    {
+        if (volunteer.Address is not null)
+        {
+            (double? lat, double? lon) = await GetCoordinatesFromAddressAsync(volunteer.Address);
+            if (lat != null && lon != null)
+            {
+                volunteer = volunteer with { Latitude = lat, Longitude = lon};
+                lock (AdminManager.BlMutex)
+                    s_dal.Volunteer.Update(volunteer);
+                VolunteerManager.Observers.NotifyItemUpdated(volunteer.Id);
+                VolunteerManager.Observers.NotifyListUpdated();
+                CallManager.Observers.NotifyListUpdated();
+            }
+        };
+    }
+
+
+    /// <summary>
+    /// method to update the coordinates of the call address    
+    /// </summary>
+    public static async Task updateCoordinatesForCallAddressAsync(DO.Call call)
+    {
+        if (call.FullAddressOfTheCall is not null)
+        {
+            (double? lat, double? lon) = await GetCoordinatesFromAddressAsync(call.FullAddressOfTheCall);
+            if (lat != null && lon != null)
+            {
+                double latt = (double)lat;
+                double longg = (double)lon;
+                call = call with { Latitude = latt, Longitude = longg };
+                lock (AdminManager.BlMutex)
+                    s_dal.Call.Update(call);
+                CallManager.Observers.NotifyItemUpdated(call.Id);
+                CallManager.Observers.NotifyListUpdated();
+            }
+        };
+    }
+    
+}
 
 

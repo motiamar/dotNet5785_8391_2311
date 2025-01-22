@@ -26,6 +26,7 @@
         <local:OpenCallInListCollection x:Key="OpenCallInListCollectionKey"/>
         <local:DateTimeToDateConverter x:Key="DateTimeToDateConverter"/>
         <local:DateTimeToTimeConverter x:Key="DateTimeToTimeConverter"/>
+        <local:StatusToColorConverter x:Key="StatusToColorConverterKey"/>
     </Application.Resources>
 </Application>
 

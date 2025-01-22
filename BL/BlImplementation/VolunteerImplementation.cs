@@ -88,8 +88,11 @@ internal class VolunteerImplementation : BlApi.IVolunteer
     {
         try
         {
+            DO.Volunteer tmpVolunteer;
             lock (AdminManager.BlMutex)
-                if (_dal.Volunteer.Read(id) != null)
+                tmpVolunteer = _dal.Volunteer.Read(id)!;
+
+            if (tmpVolunteer != null)
                 {
                     BO.Volunteer volunteer = Helpers.VolunteerManager.GetBOVolunteer(id);
                     return volunteer;
@@ -107,7 +110,7 @@ internal class VolunteerImplementation : BlApi.IVolunteer
     /// </summary>
     public void Update(int volunteerId, BO.Volunteer change)
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
         try
         {
             DO.Volunteer? volunteer;
@@ -127,7 +130,8 @@ internal class VolunteerImplementation : BlApi.IVolunteer
                 throw new BlNotAllowException("you can't change the role of the manager becose there is no more managers");
             // func to chek all the incoming details    
             Helpers.VolunteerManager.VolunteerChek(change);
-            (double latitude, double longitude) = Tools.GetCoordinatesFromAddress(change.Address!);
+            double latitude = 0;
+            double longitude = 0;
             var role = (Roles)Enum.Parse(typeof(BRoles), change.role.ToString());
             var distanceType = (DistanceTypes)Enum.Parse(typeof(BDistanceTypes), change.DistanceType.ToString());
             var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = change.FullName, Phone = change.Phone, Email = change.Email, Password = change.Password, Address = change.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = change.Active, MaximumDistance = change.MaximumDistance, DistanceType = distanceType };
@@ -138,6 +142,8 @@ internal class VolunteerImplementation : BlApi.IVolunteer
             VolunteerManager.Observers.NotifyItemUpdated(volunteerId);
             VolunteerManager.Observers.NotifyListUpdated();
             CallManager.Observers.NotifyListUpdated();
+
+            _= Tools.updateCoordinatesForVolunteerAddressAsync(newVolunteer); // update the coordinates of the volunteer
         }
         catch (DO.DalDoesNotExistException ex)
         {
@@ -155,7 +161,7 @@ internal class VolunteerImplementation : BlApi.IVolunteer
     /// </summary>
     public void Delete(int volunteerId)
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
         try
         {
             IEnumerable<Assignment>? assignment;
@@ -190,20 +196,22 @@ internal class VolunteerImplementation : BlApi.IVolunteer
     /// </summary>
     public void Create(BO.Volunteer volunteer)
     {
-        AdminManager.ThrowOnSimulatorIsRunning();  //stage 7
+        AdminManager.ThrowOnSimulatorIsRunning();  // throw exception if the simulator is running
         try
         {
             // check the incoming details
-            Helpers.VolunteerManager.VolunteerChek(volunteer); 
-            (double latitude, double longitude) = Tools.GetCoordinatesFromAddress(volunteer.Address!);
+            Helpers.VolunteerManager.VolunteerChek(volunteer);
+            double latitude = 0;
+            double longitude = 0;
             var role = (Roles)Enum.Parse(typeof(BRoles), volunteer.role.ToString());
             var distanceType = (DistanceTypes)Enum.Parse(typeof(BDistanceTypes), volunteer.DistanceType.ToString());
             var newVolunteer = new DO.Volunteer { Id = volunteer.Id, FullName = volunteer.FullName, Phone = volunteer.Phone, Email = volunteer.Email, Password = volunteer.Password, Address = volunteer.Address, Role = role, Latitude = latitude, Longitude = longitude, Active = volunteer.Active, MaximumDistance = volunteer.MaximumDistance, DistanceType = distanceType };
             
             lock (AdminManager.BlMutex)
                 _dal.Volunteer.Create(newVolunteer);
-
             VolunteerManager.Observers.NotifyListUpdated();
+
+            _ = Tools.updateCoordinatesForVolunteerAddressAsync(newVolunteer); // update the coordinates of the volunteer
         }
         catch (DO.DalAlreadyExistException ex)
         {

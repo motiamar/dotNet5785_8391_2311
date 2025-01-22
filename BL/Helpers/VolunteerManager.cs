@@ -22,7 +22,7 @@ internal static class VolunteerManager
     {
         IEnumerable<DO.Volunteer>? volunteers;
         lock (AdminManager.BlMutex)
-             volunteers = s_dal.Volunteer.ReadAll();
+            volunteers = s_dal.Volunteer.ReadAll();
 
         var volunteer = volunteers.FirstOrDefault(v => v.FullName == username && v.Password == password);
         if (volunteer != null)
@@ -64,7 +64,7 @@ internal static class VolunteerManager
     /// </summary>
     internal static BO.Volunteer GetBOVolunteer(int Id)
     {
-        DO.Volunteer volunteer; 
+        DO.Volunteer volunteer;
         IEnumerable<Assignment>? assignments;
         lock (AdminManager.BlMutex)
         {
@@ -101,19 +101,19 @@ internal static class VolunteerManager
     /// </summary>
     internal static void VolunteerChek(BO.Volunteer volunteer)
     {
-        if(!VaildId(volunteer.Id))
+        if (!VaildId(volunteer.Id))
             throw new BlinCorrectException("the ID is not valid");
         if (string.IsNullOrEmpty(volunteer.FullName))
             throw new BlinCorrectException("the Name is empty");
         if (!VailPhone(volunteer.Phone))
             throw new BlinCorrectException("the Phone is not valid");
-        if(!VaildEmail(volunteer.Email))
+        if (!VaildEmail(volunteer.Email))
             throw new BlinCorrectException("the Email is not valid");
         if (!VaildPassword(volunteer.Password!))
             throw new BlinCorrectException("the Password is not strong enough");
-        if (! Helpers.Tools.IsValidAddress(volunteer.Address!))
+        if (!Helpers.Tools.IsValidAddress(volunteer.Address!))
             throw new BlinCorrectException("the Address is not valid");
-        if(volunteer.MaximumDistance is not null)
+        if (volunteer.MaximumDistance is not null)
         {
             if (!VaildMaxDistance(volunteer.MaximumDistance))
                 throw new BlinCorrectException("the Maximum Distance is not valid");
@@ -198,5 +198,10 @@ internal static class VolunteerManager
         if (MaxDistance!.Value < 0)
             return false;
         return true;
+    }
+
+    internal static void SimulateVolunteerMovment() //stage 7
+    {
+        return;
     }
 }

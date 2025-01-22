@@ -73,8 +73,7 @@ internal static class CallManager
         DO.Call call;
         lock (AdminManager.BlMutex)
              call = s_dal.Call.Read(assignment.CallId)!;
-
-        (double vLati ,double vLongi) = Helpers.Tools.GetCoordinatesFromAddress(volunteer.Address!);
+        (double vLati, double vLongi) = Helpers.Tools.GetCoordinatesFromAddressAsync(volunteer.Address!).Result;
         var callInProgres = new BO.CallInProgress
         {
             Id = assignment.Id,
@@ -207,13 +206,13 @@ internal static class CallManager
     {
         IEnumerable<DO.Call>? calls;
         lock (AdminManager.BlMutex) 
-             calls = s_dal.Call.ReadAll();
+             calls = s_dal.Call.ReadAll().ToList();
 
         foreach (var call in calls)
         {
             IEnumerable<Assignment>? assignments;
             lock (AdminManager.BlMutex)
-                 assignments = s_dal.Assignment.ReadAll(v => v.CallId == call.Id).Where(v=> v.FinishTime is null);
+                 assignments = s_dal.Assignment.ReadAll(v => v.CallId == call.Id).Where(v=> v.FinishTime is null).ToList();
 
             if (call.MaxEndingCallTime < Helpers.AdminManager.Now)
             {               
@@ -225,7 +224,6 @@ internal static class CallManager
                         s_dal.Assignment.Create(assignment);
 
                     CallManager.Observers.NotifyListUpdated();
-
                 }
                 else 
                 {

@@ -35,12 +35,12 @@ public interface IAdmin
     /// <summary>
     /// Start the simulator
     /// </summary>
-    void StartSimulator(int interval); //stage 7
+    void StartSimulator(int interval); 
 
     /// <summary>
     /// Stop the simulator
     /// </summary>
-    void StopSimulator(); //stage 7
+    void StopSimulator(); 
 
 
     #region Stage 5
