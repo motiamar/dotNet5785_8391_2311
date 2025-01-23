@@ -121,7 +121,8 @@
                 </Label.Effect>
             </Label>
             <Label Content="Volunteer Address:" Grid.Row="8" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28" />
-            <TextBox Text="{Binding CurrentVolunteerUser.Address}" TextWrapping="Wrap" Grid.Row="8" VerticalAlignment="Center" Height="40" Margin="137,0,1,0" Grid.ColumnSpan="2" Foreground="{Binding CurrentVolunteerUser.Latitude, Converter={StaticResource StatusToColorConverterKey}}"/>
+            <TextBox Text="{Binding CurrentVolunteerUser.Address}" TextWrapping="Wrap" Grid.Row="8" VerticalAlignment="Center" Height="40" Margin="137,0,1,0" Grid.ColumnSpan="2" 
+                     Foreground="{Binding CurrentVolunteerUser.Latitude, Converter={StaticResource StatusToColorConverterKey}}" ToolTipService.ShowDuration="3000" ToolTip="this will be red if the coordinets are missing"/>
             
             <!-- Volunteer Role label and textbox -->
             <Label Content="Volunteer Role:" Grid.Row="9" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27">
@@ -251,7 +252,8 @@
                 </Label.Effect>
             </Label>
             <Label Content="Call address:" Grid.Row="4" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28"/>
-            <TextBox Grid.Row="4" TextWrapping="Wrap" Text="{Binding userCall.CallAddress}" VerticalAlignment="Bottom" IsReadOnly="True" Height="20" Grid.ColumnSpan="2" Margin="91,0,0,5" Foreground="{Binding userCall.Latitude, Converter={StaticResource StatusToColorConverterKey}}" />
+            <TextBox Grid.Row="4" TextWrapping="Wrap" Text="{Binding userCall.CallAddress}" VerticalAlignment="Bottom" IsReadOnly="True" Height="20" Grid.ColumnSpan="2" Margin="91,0,0,5" 
+                     Foreground="{Binding userCall.Latitude, Converter={StaticResource StatusToColorConverterKey}}" ToolTipService.ShowDuration="3000" ToolTip="this will be red if the coordinets are missing"/>
 
             <!-- Call Open Time -->
             <Label Content="Call open time:" Grid.Row="5" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28">

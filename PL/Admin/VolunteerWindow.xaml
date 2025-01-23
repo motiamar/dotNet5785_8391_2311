@@ -115,7 +115,8 @@
                 </Label.Effect>
             </Label>
             <Label Content="Volunteer Address:" Grid.Row="7" Grid.Column="0" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="28"/>
-            <TextBox Text="{Binding CorrentVolunteer.Address}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Height="20" Foreground="{Binding CorrentVolunteer.Latitude, Converter={StaticResource StatusToColorConverterKey}}" />
+            <TextBox Text="{Binding CorrentVolunteer.Address}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Height="20" 
+                     Foreground="{Binding CorrentVolunteer.Latitude, Converter={StaticResource StatusToColorConverterKey}}" ToolTipService.ShowDuration="3000" ToolTip="this will be red if the coordinets are missing"/>
 
             <!-- Volunteer Role -->
             <Label Content="Volunteer Role:" Grid.Row="8" Grid.Column="0" Foreground="Black" FontSize="13" FontWeight="Bold" VerticalAlignment="Center" Height="27">

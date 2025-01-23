@@ -465,14 +465,6 @@
     <EndKind>Open</EndKind>
   </Assignment>
   <Assignment>
-    <Id>1059</Id>
-    <CallId>1000</CallId>
-    <VolunteerId>221092661</VolunteerId>
-    <StartTime>2025-01-23T15:16:12</StartTime>
-    <FinishTime xsi:nil="true" />
-    <EndKind>Open</EndKind>
-  </Assignment>
-  <Assignment>
     <Id>1060</Id>
     <CallId>1025</CallId>
     <VolunteerId>569768724</VolunteerId>
@@ -495,5 +487,21 @@
     <StartTime>2025-01-23T15:17:12</StartTime>
     <FinishTime>2025-01-23T16:09:12</FinishTime>
     <EndKind>Expired_cancellation</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1059</Id>
+    <CallId>1000</CallId>
+    <VolunteerId>221092661</VolunteerId>
+    <StartTime>2025-01-23T15:16:12</StartTime>
+    <FinishTime>2025-01-23T16:09:12</FinishTime>
+    <EndKind>Self_cancellation</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1062</Id>
+    <CallId>1009</CallId>
+    <VolunteerId>221092661</VolunteerId>
+    <StartTime>2025-01-23T16:09:12</StartTime>
+    <FinishTime xsi:nil="true" />
+    <EndKind>Treated</EndKind>
   </Assignment>
 </ArrayOfAssignment>

@@ -45,7 +45,20 @@
 
         <!--Initi and reset-->
         <Button Content="Initialization" HorizontalAlignment="Center" Margin="0,116,0,0" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Width="100" Height="45" Click="BtnIntialization_Click" RenderTransformOrigin="0.497,1.279" Background="LightBlue"/>
-        <Button Content="Reset" HorizontalAlignment="Center" Background="Red" Grid.Row="2" VerticalAlignment="Top" Grid.Column="1" Width="100" Height="44" Click="BtnReset_Click" Margin="0,174,0,0"/>
+        <Button Content="Reset" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Top" Grid.Column="1" Width="100" Height="44" Click="BtnReset_Click" Margin="0,174,0,0">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Orange"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Label Content="  Calls Lists" Margin="0,25,0,0" Grid.Row="2" Height="37" Width="126" Background="LightBlue" Padding="5" FontFamily="Segoe UI" HorizontalAlignment="Center" VerticalAlignment ="Top" FontSize="20" FontWeight="Bold" Foreground="Black"/>
 
     </Grid>
