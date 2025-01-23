@@ -1,7 +1,9 @@
-﻿using BO;
+﻿using BlImplementation;
+using BO;
 using DalApi;
 using DO;
 using System;
+using System.Data;
 using System.Net;
 using System.Net.Mail;
 using System.Numerics;
@@ -208,20 +210,112 @@ internal static class VolunteerManager
     private static int s_simulatorCounter = 0;
     internal static void SimulateVolunteerActivity() //stage 7
     {
-        Thread.CurrentThread.Name = $"Simulator{++s_simulatorCounter}";
-        LinkedList<int> volunteersToUpdate = new(); 
-        List<DO.Volunteer> doVolList;
-
-        lock (AdminManager.BlMutex) 
-            doVolList = s_dal.Volunteer.ReadAll(v => v.Active == true).ToList();
-
-        foreach (var volunteer in doVolList)
+        try
         {
-            var assignments = s_dal.Assignment.ReadAll(a => a.VolunteerId == volunteer.Id).Where(v=> v.FinishTime == null).ToList();
-            if(assignments == null)
+            Thread.CurrentThread.Name = $"Simulator{++s_simulatorCounter}";
+            List<DO.Volunteer> doVolList;
+
+            lock (AdminManager.BlMutex)
+                doVolList = s_dal.Volunteer.ReadAll(v => v.Active == true).ToList();
+
+            foreach (var volunteer in doVolList)
             {
+                List<DO.Assignment> assignments;
+                lock (AdminManager.BlMutex)
+                    assignments = s_dal.Assignment.ReadAll(a => a.VolunteerId == volunteer.Id).Where(v => v.FinishTime == null).ToList();
+
+
+                // there are no open call in progress
+                if (assignments == null || assignments.Count == 0)
+                {
+                    if (s_rand.Next(0, 100) < 20) // 20% chances to choose a call
+                    {
+                        var openCallInList = Helpers.CallManager.GetOpenCallInLists(volunteer);
+                        if (openCallInList != null && openCallInList.Any())
+                        {
+                            var openCall = openCallInList.ElementAt(s_rand.Next(0, openCallInList.Count()));
+
+                            DO.Assignment assignment = new DO.Assignment
+                            {
+                                CallId = openCall.Id,
+                                VolunteerId = volunteer.Id,
+                                StartTime = Helpers.AdminManager.Now,
+                                FinishTime = null,
+                                EndKind = EndKinds.Treated
+                            };
+
+                            lock (AdminManager.BlMutex)
+                                s_dal.Assignment.Create(assignment);
+
+                            CallManager.Observers.NotifyItemUpdated(openCall.Id);
+                            CallManager.Observers.NotifyListUpdated();
+                            VolunteerManager.Observers.NotifyItemUpdated(volunteer.Id);
+                            VolunteerManager.Observers.NotifyListUpdated();
+                        }
+                    }
+
+                }
+
+
+                // there is an open call in progress
+                else
+                {
+                    DO.Assignment assignment = assignments.First();
+                    int randomMinutes = s_rand.Next(30, 61);
+                    DateTime adjustedStartTime = assignment.StartTime.AddMinutes(randomMinutes);
+
+                    if (Helpers.AdminManager.Now > adjustedStartTime) // past a random time to close the call
+                    {
+                        DO.Assignment updateAssignment = new DO.Assignment
+                        {
+                            Id = assignment.Id,
+                            CallId = assignment.CallId,
+                            VolunteerId = assignment.VolunteerId,
+                            StartTime = assignment.StartTime,
+                            FinishTime = Helpers.AdminManager.Now,
+                            EndKind = DO.EndKinds.Treated
+                        };
+
+                        lock (AdminManager.BlMutex)
+                            s_dal.Assignment.Update(updateAssignment);
+
+                        CallManager.Observers.NotifyItemUpdated(assignment.CallId);
+                        CallManager.Observers.NotifyListUpdated();
+                        VolunteerManager.Observers.NotifyItemUpdated(volunteer.Id);
+                        VolunteerManager.Observers.NotifyListUpdated();
+                    }
+                    else // the time has not yet the past
+                    {
+                        if (s_rand.Next(0, 100) < 10) // 10% chances to cancle a call
+                        {
+                            string? role = Helpers.VolunteerManager.GetVolunteerRole(volunteer.FullName, volunteer.Password!)!;
+                            var update = new DO.Assignment
+                            {
+                                Id = assignment.Id,
+                                CallId = assignment.CallId,
+                                VolunteerId = assignment.VolunteerId,
+                                StartTime = assignment.StartTime,
+                                FinishTime = Helpers.AdminManager.Now,
+                                EndKind = role == "Manager" ? EndKinds.Administrator_cancellation : EndKinds.Self_cancellation,
+                            };
+
+                            lock (AdminManager.BlMutex)
+                                s_dal.Assignment.Update(update);
+
+                            CallManager.Observers.NotifyItemUpdated(assignment.CallId);
+                            CallManager.Observers.NotifyListUpdated();
+                            VolunteerManager.Observers.NotifyItemUpdated(volunteer.Id);
+                            VolunteerManager.Observers.NotifyListUpdated();
+                        }
+                    }
+
+                }
 
             }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
 
     }
