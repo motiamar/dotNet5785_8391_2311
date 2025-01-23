@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 namespace PL.Admin;
 
 /// <summary>
@@ -73,9 +74,14 @@ public partial class CallListWindow : Window
     /// <summary>
     /// update the call list view by observer
     /// </summary>
+    private volatile DispatcherOperation? _observerOperation = null; //stage 7
     private void CallInListObserver()
     {
-        CallList = s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, null)!;
+        if (_observerOperation is null || _observerOperation.Status == DispatcherOperationStatus.Completed)
+            _observerOperation = Dispatcher.BeginInvoke(() =>
+            {
+                CallList = s_bl.Call.ReadAll(BO.CallInListFilter.CallStatus, StatusFilter, null)!;
+            });        
     }
 
     /// <summary>

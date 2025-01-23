@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using BO;
 using DO;
 
@@ -60,9 +61,14 @@ public partial class ChooseCallWindow : Window
     /// <summary>
     /// the observer that get called when the call list get updated
     /// </summary>
+    private volatile DispatcherOperation? _observerOperation = null; //stage 7
     private void CallInListObserver()
     {
-        OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_id, CallTypeFilter, OpenCallInListSort);
+        if (_observerOperation is null || _observerOperation.Status == DispatcherOperationStatus.Completed)
+            _observerOperation = Dispatcher.BeginInvoke(() =>
+            {
+                OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_id, CallTypeFilter, OpenCallInListSort);
+            });
     }
 
     /// <summary>

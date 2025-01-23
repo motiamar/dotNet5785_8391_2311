@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 namespace PL.Admin;
 using BO;
+using System.Windows.Threading;
 
 /// <summary>
 /// Interaction logic for VolunteerListWindow.xaml
@@ -78,9 +79,14 @@ public partial class VolunteerListWindow : Window
     /// <summary>
     /// observer for the list
     /// </summary>
+    private volatile DispatcherOperation? _observerOperation = null; //stage 7
     private void VolunteerListObserver()
     {
-        VolunteerList = s_bl.Volunteer.ReadAllScreen(sort, filter2, filter)!;
+        if (_observerOperation is null || _observerOperation.Status == DispatcherOperationStatus.Completed)
+            _observerOperation = Dispatcher.BeginInvoke(() =>
+            {
+                VolunteerList = s_bl.Volunteer.ReadAllScreen(sort, filter2, filter)!;
+            });
     }
 
 

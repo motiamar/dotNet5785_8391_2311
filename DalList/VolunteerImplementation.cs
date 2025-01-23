@@ -33,9 +33,9 @@ internal class VolunteerImplementation : IVolunteer
 
     // the func remove all the entities in the list
     [MethodImpl(MethodImplOptions.Synchronized)]
-    public void DeleteAll()  
+    public void DeleteAll()
     {
-        DataSource.Volunteers.Clear();  
+        DataSource.Volunteers.Clear();
     }
 
 

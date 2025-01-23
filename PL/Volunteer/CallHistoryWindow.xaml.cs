@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using BO;
 namespace PL.Volunteer;
 
@@ -68,13 +69,6 @@ public partial class CallHistoryWindow : Window
 
 
 
-    /// <summary>
-    /// close the observer
-    /// </summary>
-    private void CallHistoryWindow_Closed(object sender, EventArgs e)
-    {
-        s_bl.Call.RemoveObserver(CallInListObserver);
-    }
 
     /// <summary>
     /// loaded the call list
@@ -85,12 +79,27 @@ public partial class CallHistoryWindow : Window
         s_bl.Call.AddObserver(CallInListObserver);
     }
 
+
+    /// <summary>
+    /// close the observer
+    /// </summary>
+    private void CallHistoryWindow_Closed(object sender, EventArgs e)
+    {
+        s_bl.Call.RemoveObserver(CallInListObserver);
+    }
+
     /// <summary>
     /// observer for the closed call list of the volunteer
     /// </summary>
+    private volatile DispatcherOperation? _observerOperation = null; //stage 7
     private void CallInListObserver()
     {
-        UserHistoryCalls = s_bl.Call.GetCloseCallList(UserID, CallTypeFilter, CallInListSort);
+        if (_observerOperation is null || _observerOperation.Status == DispatcherOperationStatus.Completed)
+            _observerOperation = Dispatcher.BeginInvoke(() =>
+            {
+                UserHistoryCalls = s_bl.Call.GetCloseCallList(UserID, CallTypeFilter, CallInListSort);
+
+            });
     }
 
 

@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 namespace PL.Admin;
 
 /// <summary>
@@ -109,19 +110,34 @@ public partial class MainAdminWindow : Window
     /// <summary>
     /// observer for the clock to update the screen
     /// </summary>
+    private volatile DispatcherOperation? _observerOperation = null; //stage 7
     private void ClockObserver()
     {
-        CurrentTime = s_bl.Admin.GetClock();
+        if (_observerOperation is null || _observerOperation.Status == DispatcherOperationStatus.Completed)
+            _observerOperation = Dispatcher.BeginInvoke(() =>
+            {
+                CurrentTime = s_bl.Admin.GetClock();
+            });
     }
 
+    private volatile DispatcherOperation? _observerOperation2 = null; //stage 7
     private void ConfigObserver()
     {
-        MaxRange = s_bl.Admin.GetMaxRange();
+        if (_observerOperation2 is null || _observerOperation2.Status == DispatcherOperationStatus.Completed)
+            _observerOperation2 = Dispatcher.BeginInvoke(() =>
+            {
+                MaxRange = s_bl.Admin.GetMaxRange();
+            });
     }
 
+    private volatile DispatcherOperation? _observerOperation3 = null; //stage 7
     private void CallsObserver()
     {
-        Btn_calls_Click();
+        if (_observerOperation3 is null || _observerOperation3.Status == DispatcherOperationStatus.Completed)
+            _observerOperation3 = Dispatcher.BeginInvoke(() =>
+            {
+                Btn_calls_Click();
+            });
     }
     /// <summary>
     /// open screen event and initialization

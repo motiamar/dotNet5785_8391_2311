@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 namespace PL.Volunteer;
 
 /// <summary>
@@ -63,17 +64,22 @@ public partial class VolunteerUserWindow : Window
     /// <summary>
     /// observer for the current volunteer
     /// </summary>
+    private volatile DispatcherOperation? _observerOperation = null; //stage 7
     private void VolunteerUserObserver()
     {
-        CurrentVolunteerUser = s_bl.Volunteer.Read(CurrentVolunteerUser.Id)!;
-        if (CurrentVolunteerUser.CorrentCall != null)
-        {
-            userCall = s_bl.Call.Read(CurrentVolunteerUser.CorrentCall.CallId)!;
-        }
-        else
-        {
-            userCall = null;
-        }
+        if (_observerOperation is null || _observerOperation.Status == DispatcherOperationStatus.Completed)
+            _observerOperation = Dispatcher.BeginInvoke(() =>
+            {
+                CurrentVolunteerUser = s_bl.Volunteer.Read(CurrentVolunteerUser.Id)!;
+                if (CurrentVolunteerUser.CorrentCall != null)
+                {
+                    userCall = s_bl.Call.Read(CurrentVolunteerUser.CorrentCall.CallId)!;
+                }
+                else
+                {
+                    userCall = null;
+                }
+            });      
     }
 
     /// <summary>
