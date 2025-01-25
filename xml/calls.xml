@@ -2,702 +2,702 @@
 <ArrayOfCalls>
   <Call>
     <Id>1000</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Motorcyclist unconscious after severe accident</VerbalDecription>
+    <TypeCall>Fall_from_hight</TypeCall>
+    <VerbalDecription>Elderly person slipped and fell down stairs</VerbalDecription>
     <FullAddressOfTheCall>10 Jaffa Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.22119546257982</Latitude>
     <Longitude>31.78130811991647</Longitude>
-    <OpeningCallTime>25/01/2025 18:17:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:52:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:42:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1001</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Elderly person slipped and fell down stairs</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Motorcyclist unconscious after severe accident</VerbalDecription>
     <FullAddressOfTheCall>20 Emek Refaim Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.22123577032626</Latitude>
     <Longitude>31.76543961779154</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:09:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:46:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1002</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Elderly person slipped and fell down stairs</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Mass brawl with injured individuals in city center</VerbalDecription>
     <FullAddressOfTheCall>30 Agripas Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.215657362641764</Latitude>
     <Longitude>31.783470280009738</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:25:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:32:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:04:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1003</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Car overturned with injured passengers inside</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Assault victim reporting head and facial injuries</VerbalDecription>
     <FullAddressOfTheCall>40 Shmuel HaNavi Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.224665335668945</Latitude>
     <Longitude>31.791048846509597</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:13:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:54:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1004</Id>
     <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Young woman complaining of severe pain</VerbalDecription>
+    <VerbalDecription>Elderly person reporting severe shortness of breath</VerbalDecription>
     <FullAddressOfTheCall>50 HaNevi'im Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.221665622205705</Latitude>
     <Longitude>31.78391107912798</Longitude>
-    <OpeningCallTime>25/01/2025 18:20:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:20:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:08:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1005</Id>
-    <TypeCall>Violent_event</TypeCall>
-    <VerbalDecription>Mass brawl with injured individuals in city center</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Motorcyclist unconscious after severe accident</VerbalDecription>
     <FullAddressOfTheCall>60 Gaza Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.21205714918638</Latitude>
     <Longitude>31.771053788166768</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:57:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:57:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1006</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Motorcyclist unconscious after severe accident</VerbalDecription>
+    <TypeCall>Medical_situation</TypeCall>
+    <VerbalDecription>Teenager unconscious after sudden fainting episode</VerbalDecription>
     <FullAddressOfTheCall>4 Herzl Boulevard, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.19764122028971</Latitude>
     <Longitude>31.785777797665002</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:23:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:31:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:59:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1007</Id>
-    <TypeCall>Violent_event</TypeCall>
-    <VerbalDecription>Mass brawl with injured individuals in city center</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Car overturned with injured passengers inside</VerbalDecription>
     <FullAddressOfTheCall>40 Masliansky Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.18968763754008</Latitude>
     <Longitude>31.817876781912197</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:36:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:57:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1008</Id>
-    <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Infant with high fever and instability</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Woman injured by a Car, moderate condition</VerbalDecription>
     <FullAddressOfTheCall>10 Ben Yehuda Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.21774235102746</Latitude>
     <Longitude>31.78186936361579</Longitude>
-    <OpeningCallTime>25/01/2025 18:17:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:25:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:51:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1009</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Woman injured by a Car, moderate condition</VerbalDecription>
+    <TypeCall>Domestic_violent</TypeCall>
+    <VerbalDecription>Teenager bruised due to ongoing domestic violence</VerbalDecription>
     <FullAddressOfTheCall>150 Hebron Road, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.21658163568471</Latitude>
     <Longitude>31.74578724034863</Longitude>
-    <OpeningCallTime>25/01/2025 18:20:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:38:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:29:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1010</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Woman injured by a Car, moderate condition</VerbalDecription>
+    <TypeCall>Domestic_violent</TypeCall>
+    <VerbalDecription>Elderly person injured following family member's assault</VerbalDecription>
     <FullAddressOfTheCall>5 Hillel Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.21638617800225</Latitude>
     <Longitude>31.78068910546481</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:28:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:32:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:54:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1011</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Worker fell from five-story height</VerbalDecription>
+    <TypeCall>Medical_situation</TypeCall>
+    <VerbalDecription>Man aged 60 unconscious in critical condition</VerbalDecription>
     <FullAddressOfTheCall>6 Korazin Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.209312878017535</Latitude>
     <Longitude>31.78255160178496</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:11:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:28:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:49:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1012</Id>
-    <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Elderly person reporting severe shortness of breath</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Mass brawl with injured individuals in city center</VerbalDecription>
     <FullAddressOfTheCall>35 King George Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.2159379</Latitude>
     <Longitude>31.779769</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:47:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:32:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:53:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1013</Id>
-    <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Teenager unconscious after sudden fainting episode</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Man injured following an attack with a sharp weapon</VerbalDecription>
     <FullAddressOfTheCall>78 Ben Zvi Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.2092867</Latitude>
     <Longitude>31.7798566</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:42:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:32:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:59:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1014</Id>
-    <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Child with visible bruises on their face</VerbalDecription>
+    <TypeCall>Medical_situation</TypeCall>
+    <VerbalDecription>Infant with high fever and instability</VerbalDecription>
     <FullAddressOfTheCall>4 Devorah HaNeviah Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.224894</Latitude>
     <Longitude>31.789588</Longitude>
-    <OpeningCallTime>25/01/2025 18:20:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:19:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:28:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:41:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1015</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Girl fell from third-floor window</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Woman injured by a Car, moderate condition</VerbalDecription>
     <FullAddressOfTheCall>15 Yehuda HaNasi Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.202146</Latitude>
     <Longitude>31.75577</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:22:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:27:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1016</Id>
-    <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Woman reports assault inside her home</VerbalDecription>
+    <TypeCall>Fall_from_hight</TypeCall>
+    <VerbalDecription>Girl fell from third-floor window</VerbalDecription>
     <FullAddressOfTheCall>5 Aliash Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.201317</Latitude>
     <Longitude>31.755974</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:25:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:54:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1017</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Car overturned with injured passengers inside</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Assault victim reporting head and facial injuries</VerbalDecription>
     <FullAddressOfTheCall>15 Arlozorov Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.215236</Latitude>
     <Longitude>31.781584</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:50:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:31:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:47:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1018</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Elderly person slipped and fell down stairs</VerbalDecription>
+    <TypeCall>Medical_situation</TypeCall>
+    <VerbalDecription>Man aged 60 unconscious in critical condition</VerbalDecription>
     <FullAddressOfTheCall>13 Shamai Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.216455</Latitude>
     <Longitude>31.77261</Longitude>
-    <OpeningCallTime>25/01/2025 18:20:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:15:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:31:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:56:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1019</Id>
-    <TypeCall>Violent_event</TypeCall>
-    <VerbalDecription>Mass brawl with injured individuals in city center</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Head-on collision between two vehicles</VerbalDecription>
     <FullAddressOfTheCall>10 Tavor Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.218053</Latitude>
     <Longitude>31.781239</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:51:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:32:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:43:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1020</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Girl fell from third-floor window</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Head-on collision between two vehicles</VerbalDecription>
     <FullAddressOfTheCall>55 Ussishkin Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.213336</Latitude>
     <Longitude>31.782361</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:52:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:23:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1021</Id>
-    <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Child with visible bruises on their face</VerbalDecription>
+    <TypeCall>Fall_from_hight</TypeCall>
+    <VerbalDecription>Elderly person slipped and fell down stairs</VerbalDecription>
     <FullAddressOfTheCall>7 Helene HaMalka Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.212081</Latitude>
     <Longitude>31.780486</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:51:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:01:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1022</Id>
     <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Man reports violence by a family member</VerbalDecription>
+    <VerbalDecription>Elderly person injured following family member's assault</VerbalDecription>
     <FullAddressOfTheCall>14 Lincoln Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.221056</Latitude>
     <Longitude>31.7820255</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:28:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:28:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:33:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1023</Id>
     <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Elderly person injured following family member's assault</VerbalDecription>
+    <VerbalDecription>Child with visible bruises on their face</VerbalDecription>
     <FullAddressOfTheCall>40 Zerach Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.219964</Latitude>
     <Longitude>31.775421</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:29:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:31:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:45:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1024</Id>
-    <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Woman reports assault inside her home</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Man injured following an attack with a sharp weapon</VerbalDecription>
     <FullAddressOfTheCall>22 Mea Shearim Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.190149</Latitude>
     <Longitude>31.816719</Longitude>
-    <OpeningCallTime>25/01/2025 18:20:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:23:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:04:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1025</Id>
-    <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Infant with high fever and instability</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Woman injured by a Car, moderate condition</VerbalDecription>
     <FullAddressOfTheCall>10 King David Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.222337</Latitude>
     <Longitude>31.787706</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:55:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:32:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:03:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1026</Id>
-    <TypeCall>Violent_event</TypeCall>
-    <VerbalDecription>Assault victim reporting head and facial injuries</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Head-on collision between two vehicles</VerbalDecription>
     <FullAddressOfTheCall>30 Ruth Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.222155</Latitude>
     <Longitude>31.776943</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:18:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:31:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:10:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1027</Id>
-    <TypeCall>Violent_event</TypeCall>
-    <VerbalDecription>Man stabbed in the upper body</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Head-on collision between two vehicles</VerbalDecription>
     <FullAddressOfTheCall>9 Beit HaDfus Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.217356</Latitude>
     <Longitude>31.7765005</Longitude>
-    <OpeningCallTime>25/01/2025 18:17:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:55:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:03:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1028</Id>
-    <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Elderly person reporting severe shortness of breath</VerbalDecription>
+    <TypeCall>Domestic_violent</TypeCall>
+    <VerbalDecription>Elderly person injured following family member's assault</VerbalDecription>
     <FullAddressOfTheCall>5 David Yellin Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.18918</Latitude>
     <Longitude>31.785952</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:33:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:28:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:22:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1029</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Woman injured by a Car, moderate condition</VerbalDecription>
+    <TypeCall>Fall_from_hight</TypeCall>
+    <VerbalDecription>Child fell from a tree, lightly injured</VerbalDecription>
     <FullAddressOfTheCall>8 Shmuel HaNagid Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.216914</Latitude>
     <Longitude>31.786426</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:10:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:41:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1030</Id>
-    <TypeCall>Violent_event</TypeCall>
-    <VerbalDecription>Mass brawl with injured individuals in city center</VerbalDecription>
+    <TypeCall>Domestic_violent</TypeCall>
+    <VerbalDecription>Elderly person injured following family member's assault</VerbalDecription>
     <FullAddressOfTheCall>15 HaTzanhanim Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.214816</Latitude>
     <Longitude>31.780594</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:47:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:29:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1031</Id>
-    <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Man reports violence by a family member</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Young man attacked by several suspects on the street</VerbalDecription>
     <FullAddressOfTheCall>9 Rabbi Akiva Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.226296</Latitude>
     <Longitude>31.779808</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:11:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:31:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:27:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1032</Id>
-    <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Elderly person injured following family member's assault</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Man stabbed in the upper body</VerbalDecription>
     <FullAddressOfTheCall>7 Greenberg Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.192176</Latitude>
     <Longitude>31.81637</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:46:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:28:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:02:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1033</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Car overturned with injured passengers inside</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Mass brawl with injured individuals in city center</VerbalDecription>
     <FullAddressOfTheCall>6 Henrietta Szold Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.218002</Latitude>
     <Longitude>31.779226</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:34:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:28:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:27:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1034</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Motorcyclist unconscious after severe accident</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Assault victim reporting head and facial injuries</VerbalDecription>
     <FullAddressOfTheCall>5 Shmuel HaNagid Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.1915</Latitude>
     <Longitude>31.817092</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:30:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:28:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:54:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1035</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Car overturned with injured passengers inside</VerbalDecription>
+    <TypeCall>Fall_from_hight</TypeCall>
+    <VerbalDecription>Elderly person slipped and fell down stairs</VerbalDecription>
     <FullAddressOfTheCall>18 Beit Vagan Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.160694</Latitude>
     <Longitude>31.757365</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:33:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:45:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1036</Id>
-    <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Young woman complaining of severe pain</VerbalDecription>
+    <TypeCall>Domestic_violent</TypeCall>
+    <VerbalDecription>Child with visible bruises on their face</VerbalDecription>
     <FullAddressOfTheCall>12 Neve Sha'anan Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.214955</Latitude>
     <Longitude>31.780274</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:55:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:55:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1037</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Pedestrian hit at a crosswalk</VerbalDecription>
+    <TypeCall>Domestic_violent</TypeCall>
+    <VerbalDecription>Man reports violence by a family member</VerbalDecription>
     <FullAddressOfTheCall>3 Rachel Imenu Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.183917</Latitude>
     <Longitude>31.771251</Longitude>
-    <OpeningCallTime>25/01/2025 18:17:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:56:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:56:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1038</Id>
-    <TypeCall>Violent_event</TypeCall>
-    <VerbalDecription>Man stabbed in the upper body</VerbalDecription>
+    <TypeCall>Fall_from_hight</TypeCall>
+    <VerbalDecription>Person lost balance and fell off roof</VerbalDecription>
     <FullAddressOfTheCall>15 Hillel Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.200909</Latitude>
     <Longitude>31.771493</Longitude>
-    <OpeningCallTime>25/01/2025 18:17:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:45:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:07:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1039</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Person lost balance and fell off roof</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Woman injured by a Car, moderate condition</VerbalDecription>
     <FullAddressOfTheCall>8 Bezalel Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.218213</Latitude>
     <Longitude>31.763331</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:27:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:33:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1040</Id>
-    <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Man aged 60 unconscious in critical condition</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Man stabbed in the upper body</VerbalDecription>
     <FullAddressOfTheCall>9 Kiryat Moshe Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.217068</Latitude>
     <Longitude>31.780627</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:35:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:40:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1041</Id>
-    <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Child with visible bruises on their face</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Motorcyclist unconscious after severe accident</VerbalDecription>
     <FullAddressOfTheCall>13 Pierre Koenig Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.214544</Latitude>
     <Longitude>31.780728</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:52:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:31:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:56:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1042</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Woman injured by a Car, moderate condition</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Man injured following an attack with a sharp weapon</VerbalDecription>
     <FullAddressOfTheCall>24 Rabbi Herzog Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.195686</Latitude>
     <Longitude>31.786061</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:56:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:31:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:58:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1043</Id>
-    <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Child with visible bruises on their face</VerbalDecription>
+    <TypeCall>Medical_situation</TypeCall>
+    <VerbalDecription>Young woman complaining of severe pain</VerbalDecription>
     <FullAddressOfTheCall>5 Ein Gedi Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.215021</Latitude>
     <Longitude>31.756843</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:21:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:50:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1044</Id>
-    <TypeCall>Violent_event</TypeCall>
-    <VerbalDecription>Mass brawl with injured individuals in city center</VerbalDecription>
+    <TypeCall>Domestic_violent</TypeCall>
+    <VerbalDecription>Man reports violence by a family member</VerbalDecription>
     <FullAddressOfTheCall>8 HaOman Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.208627</Latitude>
     <Longitude>31.769767</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:22:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:31:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:46:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1045</Id>
-    <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Infant with high fever and instability</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Head-on collision between two vehicles</VerbalDecription>
     <FullAddressOfTheCall>5 Ibn Shaprut Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.221349</Latitude>
     <Longitude>31.753902</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:42:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:59:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1046</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Pedestrian hit at a crosswalk</VerbalDecription>
+    <TypeCall>Fall_from_hight</TypeCall>
+    <VerbalDecription>Child fell from a tree, lightly injured</VerbalDecription>
     <FullAddressOfTheCall>25 Bar Ilan Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.211373</Latitude>
     <Longitude>31.74881</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:34:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:47:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1047</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Elderly person slipped and fell down stairs</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Mass brawl with injured individuals in city center</VerbalDecription>
     <FullAddressOfTheCall>6 Yitzhak Kariv Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.211675</Latitude>
     <Longitude>31.776448</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:40:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:49:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1048</Id>
-    <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Man aged 60 unconscious in critical condition</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Man stabbed in the upper body</VerbalDecription>
     <FullAddressOfTheCall>17 Weizmann Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.218078</Latitude>
     <Longitude>31.794707</Longitude>
-    <OpeningCallTime>25/01/2025 18:17:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:56:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:31:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:51:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1049</Id>
-    <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Man aged 60 unconscious in critical condition</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Man injured following an attack with a sharp weapon</VerbalDecription>
     <FullAddressOfTheCall>9 Shmuel HaNagid Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.224944</Latitude>
     <Longitude>31.777475</Longitude>
-    <OpeningCallTime>25/01/2025 18:17:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:23:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:43:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1050</Id>
     <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Woman reports assault inside her home</VerbalDecription>
+    <VerbalDecription>Man reports violence by a family member</VerbalDecription>
     <FullAddressOfTheCall>7 Ben Ze'ev Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.198722</Latitude>
     <Longitude>31.790191</Longitude>
-    <OpeningCallTime>25/01/2025 18:20:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:44:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:43:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1051</Id>
     <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Worker fell from five-story height</VerbalDecription>
+    <VerbalDecription>Girl fell from third-floor window</VerbalDecription>
     <FullAddressOfTheCall>10 Rivlin Street, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.214792</Latitude>
     <Longitude>31.779852</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:30:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:28:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:19:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1052</Id>
     <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Child with visible bruises on their face</VerbalDecription>
+    <VerbalDecription>Woman reports assault inside her home</VerbalDecription>
     <FullAddressOfTheCall>King George Street 17, Jerusalem</FullAddressOfTheCall>
     <Latitude>35.220409</Latitude>
     <Longitude>31.780946</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:54:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:28:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:50:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1053</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Person lost balance and fell off roof</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Young man attacked by several suspects on the street</VerbalDecription>
     <FullAddressOfTheCall>Jaffa Street 210, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.7815985</Latitude>
     <Longitude>35.2167049</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:21:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:53:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1054</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Woman injured by a Car, moderate condition</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Man injured following an attack with a sharp weapon</VerbalDecription>
     <FullAddressOfTheCall>Agron Street 8, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.7882573</Latitude>
     <Longitude>35.2066516</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:30:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:32:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:04:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1055</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Motorcyclist unconscious after severe accident</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Young man attacked by several suspects on the street</VerbalDecription>
     <FullAddressOfTheCall>Emek Refaim Street 43, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.7755135</Latitude>
     <Longitude>35.2184101</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:39:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:45:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1056</Id>
-    <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Elderly person injured following family member's assault</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Pedestrian hit at a crosswalk</VerbalDecription>
     <FullAddressOfTheCall>Keren Hayesod Street 32, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.7623699</Latitude>
     <Longitude>35.2183278</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:56:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:28:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:24:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1057</Id>
-    <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Teenager bruised due to ongoing domestic violence</VerbalDecription>
+    <TypeCall>Fall_from_hight</TypeCall>
+    <VerbalDecription>Elderly person slipped and fell down stairs</VerbalDecription>
     <FullAddressOfTheCall>Ben Yehuda Street 16, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.7719907</Latitude>
     <Longitude>35.221737</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:49:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:28:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:03:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1058</Id>
-    <TypeCall>Domestic_violent</TypeCall>
-    <VerbalDecription>Man reports violence by a family member</VerbalDecription>
+    <TypeCall>Medical_situation</TypeCall>
+    <VerbalDecription>Infant with high fever and instability</VerbalDecription>
     <FullAddressOfTheCall>Rachel Imenu Street 12, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.781439</Latitude>
     <Longitude>35.2172503</Longitude>
-    <OpeningCallTime>25/01/2025 18:20:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:54:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:37:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1059</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Car overturned with injured passengers inside</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Man injured following an attack with a sharp weapon</VerbalDecription>
     <FullAddressOfTheCall>Haneviim Street 37, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.7635016</Latitude>
     <Longitude>35.2170943</Longitude>
-    <OpeningCallTime>25/01/2025 18:19:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:19:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:28:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:56:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1060</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Child fell from a tree, lightly injured</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Man injured following an attack with a sharp weapon</VerbalDecription>
     <FullAddressOfTheCall>King David Street 23, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.7836055</Latitude>
     <Longitude>35.2213712</Longitude>
-    <OpeningCallTime>25/01/2025 18:21:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:32:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:49:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1061</Id>
-    <TypeCall>Violent_event</TypeCall>
-    <VerbalDecription>Man stabbed in the upper body</VerbalDecription>
+    <TypeCall>Fall_from_hight</TypeCall>
+    <VerbalDecription>Elderly person slipped and fell down stairs</VerbalDecription>
     <FullAddressOfTheCall>Mamilla Avenue 6, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.77417</Latitude>
     <Longitude>35.222486</Longitude>
-    <OpeningCallTime>25/01/2025 18:17:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:35:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:06:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1062</Id>
     <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Elderly person slipped and fell down stairs</VerbalDecription>
+    <VerbalDecription>Person lost balance and fell off roof</VerbalDecription>
     <FullAddressOfTheCall>Shlomzion Hamalka Street 8, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.7776897</Latitude>
     <Longitude>35.2248464</Longitude>
-    <OpeningCallTime>25/01/2025 18:17:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:26:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:00:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1063</Id>
     <TypeCall>Violent_event</TypeCall>
-    <VerbalDecription>Young man attacked by several suspects on the street</VerbalDecription>
+    <VerbalDecription>Man stabbed in the upper body</VerbalDecription>
     <FullAddressOfTheCall>HaPalmach Street 15, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.7588316</Latitude>
     <Longitude>35.2228078</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:15:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:32:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:27:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1064</Id>
     <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Elderly person reporting severe shortness of breath</VerbalDecription>
+    <VerbalDecription>Infant with high fever and instability</VerbalDecription>
     <FullAddressOfTheCall>Jabotinsky Street 27, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.767599</Latitude>
     <Longitude>35.2123256</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:31:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:31:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:22:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1065</Id>
-    <TypeCall>Medical_situation</TypeCall>
-    <VerbalDecription>Young woman complaining of severe pain</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Pedestrian hit at a crosswalk</VerbalDecription>
     <FullAddressOfTheCall>Ramban Street 10, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.7708323</Latitude>
     <Longitude>35.2191828</Longitude>
-    <OpeningCallTime>25/01/2025 18:18:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:51:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:32:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:01:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1066</Id>
-    <TypeCall>Car_accident</TypeCall>
-    <VerbalDecription>Head-on collision between two vehicles</VerbalDecription>
+    <TypeCall>Fall_from_hight</TypeCall>
+    <VerbalDecription>Worker fell from five-story height</VerbalDecription>
     <FullAddressOfTheCall>Arlozorov Street 5, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.7750074</Latitude>
     <Longitude>35.2165394</Longitude>
-    <OpeningCallTime>25/01/2025 18:17:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:38:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:30:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:58:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1067</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Worker fell from five-story height</VerbalDecription>
+    <TypeCall>Violent_event</TypeCall>
+    <VerbalDecription>Mass brawl with injured individuals in city center</VerbalDecription>
     <FullAddressOfTheCall>Ben Zvi Boulevard 89, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.7738688</Latitude>
     <Longitude>35.2159331</Longitude>
-    <OpeningCallTime>25/01/2025 18:20:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:31:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:48:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1068</Id>
-    <TypeCall>Fall_from_hight</TypeCall>
-    <VerbalDecription>Girl fell from third-floor window</VerbalDecription>
+    <TypeCall>Car_accident</TypeCall>
+    <VerbalDecription>Head-on collision between two vehicles</VerbalDecription>
     <FullAddressOfTheCall>Zalman Shneour Street 14, Jerusalem</FullAddressOfTheCall>
     <Latitude>31.785841</Latitude>
     <Longitude>35.207386</Longitude>
-    <OpeningCallTime>25/01/2025 18:17:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:17:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:29:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 22:02:30</MaxEndingCallTime>
   </Call>
   <Call>
     <Id>1069</Id>
-    <TypeCall>Violent_event</TypeCall>
-    <VerbalDecription>Young man attacked by several suspects on the street</VerbalDecription>
+    <TypeCall>Fall_from_hight</TypeCall>
+    <VerbalDecription>Worker fell from five-story height</VerbalDecription>
     <FullAddressOfTheCall>Chaim Vital Street 9, Jerusalem</FullAddressOfTheCall>
     <Latitude>32.0733788</Latitude>
     <Longitude>34.7718297</Longitude>
-    <OpeningCallTime>25/01/2025 18:20:23</OpeningCallTime>
-    <MaxEndingCallTime>25/01/2025 19:40:23</MaxEndingCallTime>
+    <OpeningCallTime>25/01/2025 20:32:30</OpeningCallTime>
+    <MaxEndingCallTime>25/01/2025 21:25:30</MaxEndingCallTime>
   </Call>
 </ArrayOfCalls>

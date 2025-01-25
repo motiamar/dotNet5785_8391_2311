@@ -323,3 +323,25 @@ public class StatusToColorConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+/// <summary>
+/// if the cordonates are 0 return the text into red
+/// </summary>
+public class EnableBtunnsSimulator : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is bool flag)
+        {
+            if (flag is false)
+                return true;
+        }
+
+        return false;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

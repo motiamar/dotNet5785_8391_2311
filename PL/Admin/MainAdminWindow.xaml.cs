@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -24,6 +25,7 @@ public partial class MainAdminWindow : Window
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public MainAdminWindow(int managerId)
     {
+        simulatorButton = "Start";
         ManagerID = managerId;
         InitializeComponent();
         this.Loaded += MainAdminWindowLoaded;
@@ -150,6 +152,7 @@ public partial class MainAdminWindow : Window
         s_bl.Admin.AddClockObserver(ClockObserver);
         s_bl.Admin.AddConfigObserver(ConfigObserver);
         s_bl.Call.AddObserver(CallsObserver);
+        simulator_flag = false;
     }
 
     /// <summary>
@@ -160,6 +163,8 @@ public partial class MainAdminWindow : Window
         s_bl.Admin.RemoveClockObserver(ClockObserver);
         s_bl.Admin.RemoveConfigObserver(ConfigObserver);
         s_bl.Call.RemoveObserver(CallsObserver);
+        s_bl.Admin.StopSimulator();
+
     }
 
     /// <summary>
@@ -257,7 +262,7 @@ public partial class MainAdminWindow : Window
         try
         {
             int[] callsStatus = s_bl.Call.ArrayStatus();
-            string[] statusNames = { "Open", "In_treatment", "Closed", "Expired", "Open_in_risk", "In_treatment_in_risk" };
+            string[] statusNames = { "Open", "In_treatment", "Closed", "Expired", "Open_in_risk", "treatment_in_risk" };
 
             StatusButtonsPanel.Children.Clear(); // clear the panel
 
@@ -313,4 +318,70 @@ public partial class MainAdminWindow : Window
             newWindow.Show();
         }
     }
+
+    /// <summary>
+    /// porperty for the interval of the clock
+    /// </summary>
+    public int Interval
+    {
+        get { return (int)GetValue(IntervalProperty); }
+        set { SetValue(IntervalProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for Interval.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty IntervalProperty =
+        DependencyProperty.Register("Interval", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
+
+
+    /// <summary>
+    /// flag to know if the simulator is on
+    /// </summary>
+    public bool simulator_flag
+    {
+        get { return (bool)GetValue(simulator_flagProperty); }
+        set { SetValue(simulator_flagProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for simulator_flag.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty simulator_flagProperty =
+        DependencyProperty.Register("simulator_flag", typeof(bool), typeof(MainAdminWindow), new PropertyMetadata(null));
+
+    private void BtnSimulator_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            if (!simulator_flag)
+            {
+                simulator_flag = true;
+                s_bl.Admin.StartSimulator(Interval);
+                simulatorButton = "Stop";
+            }
+            else
+            {
+                s_bl.Admin.StopSimulator();
+                simulator_flag = false;
+                simulatorButton = "Start";
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+    }
+
+    /// <summary>
+    /// property for the simulator button
+    /// </summary>
+    public string simulatorButton
+    {
+        get { return (string)GetValue(simulatorButtonProperty); }
+        set { SetValue(simulatorButtonProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for simulatorButton.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty simulatorButtonProperty =
+        DependencyProperty.Register("simulatorButton", typeof(string), typeof(MainAdminWindow), new PropertyMetadata(null));
+
+
 }
