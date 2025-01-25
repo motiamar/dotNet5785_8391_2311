@@ -41,7 +41,12 @@ internal class VolunteerImplementation : IVolunteer
     [MethodImpl(MethodImplOptions.Synchronized)]
     public void DeleteAll()
     {
-        XMLTools.SaveListToXMLSerializer(new List<Volunteer>(), Config.s_volunteers_xml);
+        List<Volunteer> volunteers = XMLTools.LoadListFromXMLSerializer<Volunteer>(Config.s_volunteers_xml);
+        volunteers = volunteers.Where(v=> v.Id == 569768724).ToList();
+        XMLTools.SaveListToXMLSerializer(volunteers, Config.s_volunteers_xml);
+
+
+        //XMLTools.SaveListToXMLSerializer(new List<Volunteer>(), Config.s_volunteers_xml);
     }
 
 

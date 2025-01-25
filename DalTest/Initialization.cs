@@ -29,19 +29,19 @@ public static class Initialization
         {
 
             number = s_rand.Next(200000000, 400000000);
-             // active choise
+            // active choise
             bool tmpaActive = (number % 2) == 0 ? true : false;
-           
+
             // random password
-            string? password = name + "pass" + (i*4);
+            string? password = name + "pass" + (i * 4);
 
             // 15 volunteers and one Manager
             Roles tmpRole = default(Roles);
-            if(i == volunteerName.Length-1)
+            if (i == volunteerName.Length - 1)
             {
                 Roles tmpRoleManager = (Roles)Enum.GetValues(typeof(Roles)).Cast<Roles>().ElementAt(1);
                 tmpRole = tmpRoleManager;
-            }  
+            }
 
             // random distance
             double tmpMaximumDistance = s_rand.Next(50000, 100000);
@@ -49,22 +49,24 @@ public static class Initialization
             //DistanceTypes tmpDistanceType = default(DistanceTypes);
             DistanceTypes tmpDistanceType = (DistanceTypes)s_rand.Next(0, Enum.GetValues(typeof(DistanceTypes)).Length);
 
-            // create a new Volunteer with all the tmp arguments
-            s_dal!.Volunteer.Create(new Volunteer 
-            {
-                Id = iDs[i],
-                FullName = name,
-                Phone = volunteerPhone[i],
-                Email = volunteerEmail[i],
-                Password = password,
-                Address = volunteerAddress[i],
-                Latitude = volunteerLatitude[i],
-                Longitude = volunteerLongitude[i],
-                Role = tmpRole,
-                Active = tmpaActive,
-                MaximumDistance = tmpMaximumDistance,
-                DistanceType = tmpDistanceType,
-            });
+            // create a new Volunteer with all the tmp arguments except the last one that is the Manager
+            if (iDs[i] != 569768724)
+                s_dal!.Volunteer.Create(new Volunteer
+                {
+                    Id = iDs[i],
+                    FullName = name,
+                    Phone = volunteerPhone[i],
+                    Email = volunteerEmail[i],
+                    Password = password,
+                    Address = volunteerAddress[i],
+                    Latitude = volunteerLatitude[i],
+                    Longitude = volunteerLongitude[i],
+                    Role = tmpRole,
+                    Active = tmpaActive,
+                    MaximumDistance = tmpMaximumDistance,
+                    DistanceType = tmpDistanceType,
+                });
+
             i++;
         }
     }

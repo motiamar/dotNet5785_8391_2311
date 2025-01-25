@@ -35,7 +35,9 @@ internal class VolunteerImplementation : IVolunteer
     [MethodImpl(MethodImplOptions.Synchronized)]
     public void DeleteAll()
     {
+        var manager = DataSource.Volunteers.Where(x => x.Id == 569768724).ToList();
         DataSource.Volunteers.Clear();
+        DataSource.Volunteers.AddRange(manager);    
     }
 
 
