@@ -64,7 +64,7 @@ public partial class MainAdminWindow : Window
     public void BtnSetMaxRange_Click(object sender, RoutedEventArgs e)
     {
         s_bl.Admin.SetMaxRange(MaxRange);
-        Btn_calls_Click();
+        UpdateCallStatus();
         MessageBox.Show("The range has been updated", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
@@ -138,7 +138,7 @@ public partial class MainAdminWindow : Window
         if (_observerOperation3 is null || _observerOperation3.Status == DispatcherOperationStatus.Completed)
             _observerOperation3 = Dispatcher.BeginInvoke(() =>
             {
-                Btn_calls_Click();
+                UpdateCallStatus();
             });
     }
     /// <summary>
@@ -146,7 +146,7 @@ public partial class MainAdminWindow : Window
     /// </summary>
     private void MainAdminWindowLoaded(object sendor, RoutedEventArgs e)
     {
-        Btn_calls_Click();
+        UpdateCallStatus();
         CurrentTime = s_bl.Admin.GetClock();
         MaxRange = s_bl.Admin.GetMaxRange();
         s_bl.Admin.AddClockObserver(ClockObserver);
@@ -254,70 +254,9 @@ public partial class MainAdminWindow : Window
         }      
     }
 
-    /// <summary>
-    /// create buttons for each status of the calls
-    /// </summary>
-    public void Btn_calls_Click()
-    {
-        try
-        {
-            int[] callsStatus = s_bl.Call.ArrayStatus();
-            string[] statusNames = { "Open", "In_treatment", "Closed", "Expired", "Open_in_risk", "treatment_in_risk" };
-
-            StatusButtonsPanel.Children.Clear(); // clear the panel
-
-            for (int i = 0; i < callsStatus.Length; i++)
-            {
-                Button statusButton = new Button
-                {
-                    Content = $"{statusNames[i]} ({callsStatus[i]})", // content of the button
-                    Tag = i,
-                    Margin = new Thickness(2),
-                    Padding = new Thickness(5),
-                    Background = Brushes.LightBlue,
-                    FontSize = 14
-                };
-                statusButton.Click += StatusButton_Click;
-                StatusButtonsPanel.Children.Add(statusButton);
-            }
-        }catch (Exception ex)
-        {
-            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-    }
+   
 
 
-    /// <summary>
-    /// event to open a new screen with the selected status only once at in a time
-    /// </summary>
-    public readonly Dictionary<BO.BCallStatus, CallListWindow> _openWindows = new();
-
-    public void StatusButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is Button button)
-        {
-            int status = (int)button.Tag; // Extract the status
-            BO.BCallStatus filter = (BO.BCallStatus)status;
-            if (_openWindows.TryGetValue(filter, out var existingWindow))
-            {
-                if (existingWindow.IsVisible)
-                {
-                    existingWindow.Focus(); // give focus to the existing window
-                    return;
-                }
-                else
-                {
-                    _openWindows.Remove(filter); 
-                }
-            }
-            // create a new window
-            var newWindow = new CallListWindow(filter, ManagerID);
-            newWindow.Closed += (s, args) => _openWindows.Remove(filter); 
-            _openWindows[filter] = newWindow;
-            newWindow.Show();
-        }
-    }
 
     /// <summary>
     /// porperty for the interval of the clock
@@ -384,4 +323,152 @@ public partial class MainAdminWindow : Window
         DependencyProperty.Register("simulatorButton", typeof(string), typeof(MainAdminWindow), new PropertyMetadata(null));
 
 
+
+
+
+
+    /// <summary>
+    /// property for all the numberes of calls in the system
+    /// </summary>
+    public int OpenNum
+    {
+        get { return (int)GetValue(OpenNumProperty); }
+        set { SetValue(OpenNumProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for OpenNum.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty OpenNumProperty =
+        DependencyProperty.Register("OpenNum", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
+
+    public int InTreatmentNum
+    {
+        get { return (int)GetValue(InTreatmentNumProperty); }
+        set { SetValue(InTreatmentNumProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for InTreatmentNum.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty InTreatmentNumProperty =
+        DependencyProperty.Register("InTreatmentNum", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
+
+    public int ClosedNum
+    {
+        get { return (int)GetValue(ClosedNumProperty); }
+        set { SetValue(ClosedNumProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for ClosedNum.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty ClosedNumProperty =
+        DependencyProperty.Register("ClosedNum", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
+
+    public int ExpierdNum
+    {
+        get { return (int)GetValue(ExpierdNumProperty); }
+        set { SetValue(ExpierdNumProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for ExpierdNum.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty ExpierdNumProperty =
+        DependencyProperty.Register("ExpierdNum", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
+
+    public int OpenInRiskNum
+    {
+        get { return (int)GetValue(OpenInRiskNumProperty); }
+        set { SetValue(OpenInRiskNumProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for OpenInRiskNum.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty OpenInRiskNumProperty =
+        DependencyProperty.Register("OpenInRiskNum", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
+
+    public int TreatmentInRiskNum
+    {
+        get { return (int)GetValue(TreatmentInRiskNumProperty); }
+        set { SetValue(TreatmentInRiskNumProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for TreatmrntInRiskNum.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty TreatmentInRiskNumProperty =
+        DependencyProperty.Register("TreatmentInRiskNum", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
+
+
+
+    public void UpdateCallStatus()
+    {
+        try
+        {
+            var status = s_bl.Call.ArrayStatus();
+            OpenNum = status[0];
+            InTreatmentNum = status[1];
+            ClosedNum = status[2];
+            ExpierdNum = status[3];
+            OpenInRiskNum = status[4];
+            TreatmentInRiskNum = status[5];
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+
+    /// <summary>
+    /// open the call screen filterd by the choosen button
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private readonly Dictionary<BO.BCallStatus, CallListWindow> _openWindows = new();
+    private void Btn_Calls_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button button)
+        {
+            var tag = button.Tag;
+            BO.BCallStatus status;
+
+            // Match the tag to the status
+            switch (tag)
+            {
+                case "Open":
+                    status = BO.BCallStatus.Open;
+                    break;
+                case "In_treatment":
+                    status = BO.BCallStatus.In_treatment;
+                    break;
+                case "Closed":
+                    status = BO.BCallStatus.Closed;
+                    break;
+                case "Expired":
+                    status = BO.BCallStatus.Expired;
+                    break;
+                case "Open_in_risk":
+                    status = BO.BCallStatus.Open_in_risk;
+                    break;
+                case "Treatment_in_risk":
+                    status = BO.BCallStatus.In_treatment_in_risk;
+                    break;
+                default:
+                    return; // Exit if tag is not recognized
+            }
+
+            // Check if a window for the status already exists
+            if (_openWindows.TryGetValue(status, out var existingWindow))
+            {
+                if (existingWindow.IsVisible)
+                {
+                    existingWindow.Focus(); // Bring the existing window to the foreground
+                    return;
+                }
+                else
+                {
+                    _openWindows.Remove(status); // Remove the reference if the window is closed
+                }
+            }
+
+            // Create and show a new window
+            var newWindow = new CallListWindow(status, ManagerID);
+            newWindow.Closed += (s, args) => _openWindows.Remove(status); // Remove from dictionary on close
+            _openWindows[status] = newWindow;
+            newWindow.Show();
+        }
+    }
+   
 }

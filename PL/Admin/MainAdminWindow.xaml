@@ -55,7 +55,22 @@
                 RenderTransformOrigin="0.476,-0.18" Click="BtnHandleVolunteers_Click" Background="LightBlue"/>
 
         <!--calls lists buttons-->
-        <StackPanel x:Name="StatusButtonsPanel" Grid.Row="2" Grid.Column="0" Orientation="Vertical" Margin="114,86,134,58" RenderTransformOrigin="0.496,0.931" />
+        <!--<StackPanel x:Name="StatusButtonsPanel" Grid.Row="2" Grid.Column="0" Orientation="Vertical" Margin="114,86,134,58" RenderTransformOrigin="0.496,0.931" />-->
+        <Button Content="Open" HorizontalAlignment="Left" Margin="127,78,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" Height="25" Background="LightBlue" Click="Btn_Calls_Click" Tag="Open"/>
+        <Button Content="In treatment" HorizontalAlignment="Left" Margin="126,108,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" Height="25" Background="LightBlue" Click="Btn_Calls_Click" Tag="In_treatment"/>
+        <Button Content="Closed" HorizontalAlignment="Left" Margin="127,138,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" Height="25" Background="LightBlue" Click="Btn_Calls_Click" Tag="Closed"/>
+        <Button Content="Expired" HorizontalAlignment="Left" Margin="126,168,0,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="-0.325,1.326" Width="126" Height="25" Background="LightBlue" Click="Btn_Calls_Click" Tag="Expired"/>
+        <Button Content="Open in risk" HorizontalAlignment="Left" Margin="127,198,0,0" Grid.Row="2" VerticalAlignment="Top" Width="126" Height="25" RenderTransformOrigin="0.475,-0.026" Background="LightBlue" Click="Btn_Calls_Click" Tag="Open_in_risk"/>
+        <Button Content="Treatment in risk" HorizontalAlignment="Left" Margin="128,228,0,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="-0.373,2.456" Width="124" Height="25" Background="LightBlue" Click="Btn_Calls_Click" Tag="Treatment_in_risk"/>
+        <TextBox HorizontalAlignment="Left" Margin="258,80,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding OpenNum}" VerticalAlignment="Top" Width="29" Height="21" IsEnabled="False" BorderBrush="Red"/>
+        <TextBox HorizontalAlignment="Left" Margin="258,110,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding InTreatmentNum}" VerticalAlignment="Top" Width="29" Height="21" IsEnabled="False" BorderBrush="Red"/>
+        <TextBox HorizontalAlignment="Left" Margin="258,140,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding ClosedNum}" VerticalAlignment="Top" Width="29" Height="21" IsEnabled="False" BorderBrush="Red"/>
+        <TextBox HorizontalAlignment="Left" Margin="258,170,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding ExpierdNum}" VerticalAlignment="Top" Width="29" Height="21" IsEnabled="False" BorderBrush="Red"/>
+        <TextBox HorizontalAlignment="Left" Margin="258,200,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding OpenInRiskNum}" VerticalAlignment="Top" Width="29" Height="21" IsEnabled="False" BorderBrush="Red"/>
+        <TextBox HorizontalAlignment="Left" Margin="258,230,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding TreatmentInRiskNum}" VerticalAlignment="Top" Width="29" Height="21" IsEnabled="False" BorderBrush="Red"/>
+
+
+
 
         <!--Initi and reset-->
         <Button Content="Initialization" HorizontalAlignment="Left" Margin="226,127,0,0" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" 
@@ -89,6 +104,7 @@
                 VerticalAlignment="Top" Width="89" FontWeight="Bold" Foreground="Black" Background="LightBlue" FontFamily="Segoe UI" Height="28" Click="BtnSimulator_Click"/>
         <Label Grid.Column="1" Content="      System time" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" 
                FontWeight="Bold" Foreground="Black" Background="LightBlue" FontFamily="Segoe UI" Width="152" Height="28"/>
+
 
     </Grid>
 
