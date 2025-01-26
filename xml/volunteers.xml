@@ -25,8 +25,8 @@
     <Longitude>31.7648204</Longitude>
     <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>79837</MaximumDistance>
-    <DistanceType>Walk</DistanceType>
+    <MaximumDistance>70533</MaximumDistance>
+    <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
     <Id>236153821</Id>
@@ -39,8 +39,8 @@
     <Longitude>31.7611362</Longitude>
     <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>88701</MaximumDistance>
-    <DistanceType>Car</DistanceType>
+    <MaximumDistance>71502</MaximumDistance>
+    <DistanceType>Walk</DistanceType>
   </Volunteer>
   <Volunteer>
     <Id>810772020</Id>
@@ -53,8 +53,8 @@
     <Longitude>31.7638657</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>80386</MaximumDistance>
-    <DistanceType>Car</DistanceType>
+    <MaximumDistance>71402</MaximumDistance>
+    <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
     <Id>422954990</Id>
@@ -66,8 +66,8 @@
     <Latitude>35.2203343</Latitude>
     <Longitude>31.7483032</Longitude>
     <Role>Volunteer</Role>
-    <Active>false</Active>
-    <MaximumDistance>54967</MaximumDistance>
+    <Active>true</Active>
+    <MaximumDistance>77301</MaximumDistance>
     <DistanceType>Car</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -81,8 +81,8 @@
     <Longitude>31.7589875</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>54101</MaximumDistance>
-    <DistanceType>Car</DistanceType>
+    <MaximumDistance>85800</MaximumDistance>
+    <DistanceType>Walk</DistanceType>
   </Volunteer>
   <Volunteer>
     <Id>740776588</Id>
@@ -95,8 +95,8 @@
     <Longitude>31.7342954</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>98296</MaximumDistance>
-    <DistanceType>Air</DistanceType>
+    <MaximumDistance>79339</MaximumDistance>
+    <DistanceType>Car</DistanceType>
   </Volunteer>
   <Volunteer>
     <Id>720487115</Id>
@@ -109,8 +109,8 @@
     <Longitude>31.7518568</Longitude>
     <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>76534</MaximumDistance>
-    <DistanceType>Walk</DistanceType>
+    <MaximumDistance>57264</MaximumDistance>
+    <DistanceType>Car</DistanceType>
   </Volunteer>
   <Volunteer>
     <Id>933150617</Id>
@@ -122,9 +122,9 @@
     <Latitude>35.1927184</Latitude>
     <Longitude>31.7810136</Longitude>
     <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>76279</MaximumDistance>
-    <DistanceType>Walk</DistanceType>
+    <Active>false</Active>
+    <MaximumDistance>85506</MaximumDistance>
+    <DistanceType>Car</DistanceType>
   </Volunteer>
   <Volunteer>
     <Id>722247939</Id>
@@ -137,8 +137,8 @@
     <Longitude>31.76552192492391</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>71681</MaximumDistance>
-    <DistanceType>Walk</DistanceType>
+    <MaximumDistance>85597</MaximumDistance>
+    <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
     <Id>381662543</Id>
@@ -151,7 +151,7 @@
     <Longitude>31.810386702304726</Longitude>
     <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>77439</MaximumDistance>
+    <MaximumDistance>85618</MaximumDistance>
     <DistanceType>Walk</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -165,8 +165,8 @@
     <Longitude>31.828473377413367</Longitude>
     <Role>Volunteer</Role>
     <Active>true</Active>
-    <MaximumDistance>58622</MaximumDistance>
-    <DistanceType>Air</DistanceType>
+    <MaximumDistance>71218</MaximumDistance>
+    <DistanceType>Walk</DistanceType>
   </Volunteer>
   <Volunteer>
     <Id>76561398</Id>
@@ -179,7 +179,7 @@
     <Longitude>31.788846938792492</Longitude>
     <Role>Volunteer</Role>
     <Active>false</Active>
-    <MaximumDistance>64628</MaximumDistance>
+    <MaximumDistance>62296</MaximumDistance>
     <DistanceType>Walk</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -192,9 +192,9 @@
     <Latitude>35.18891765398783</Latitude>
     <Longitude>31.77681135390754</Longitude>
     <Role>Volunteer</Role>
-    <Active>false</Active>
-    <MaximumDistance>59911</MaximumDistance>
-    <DistanceType>Car</DistanceType>
+    <Active>true</Active>
+    <MaximumDistance>60386</MaximumDistance>
+    <DistanceType>Air</DistanceType>
   </Volunteer>
   <Volunteer>
     <Id>180640021</Id>
@@ -206,8 +206,8 @@
     <Latitude>35.18926428816602</Latitude>
     <Longitude>31.738258839334225</Longitude>
     <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>85924</MaximumDistance>
+    <Active>false</Active>
+    <MaximumDistance>60018</MaximumDistance>
     <DistanceType>Car</DistanceType>
   </Volunteer>
   <Volunteer>
@@ -220,8 +220,8 @@
     <Latitude>35.17470578874885</Latitude>
     <Longitude>31.786734640142832</Longitude>
     <Role>Volunteer</Role>
-    <Active>true</Active>
-    <MaximumDistance>94774</MaximumDistance>
-    <DistanceType>Walk</DistanceType>
+    <Active>false</Active>
+    <MaximumDistance>88490</MaximumDistance>
+    <DistanceType>Air</DistanceType>
   </Volunteer>
 </ArrayOfVolunteer>

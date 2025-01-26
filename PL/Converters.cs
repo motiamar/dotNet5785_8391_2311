@@ -345,3 +345,23 @@ public class EnableBtunnsSimulator : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+/// <summary>
+/// extand the array and return the value in the index
+/// </summary>
+public class ArrayIndexConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+        if (value is int[] array && int.TryParse(parameter.ToString(), out int index) && index >= 0 && index < array.Length)
+        {
+            return array[index];
+        }
+        return null!;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

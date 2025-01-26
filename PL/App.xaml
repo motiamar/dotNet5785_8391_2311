@@ -28,6 +28,7 @@
         <local:DateTimeToTimeConverter x:Key="DateTimeToTimeConverter"/>
         <local:StatusToColorConverter x:Key="StatusToColorConverterKey"/>
         <local:EnableBtunnsSimulator x:Key="EnableBtunnsSimulatorKey"/>
+        <local:ArrayIndexConverter x:Key="ArrayIndexConverterKey"/>
     </Application.Resources>
 </Application>
 

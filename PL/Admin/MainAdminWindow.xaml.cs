@@ -285,6 +285,11 @@ public partial class MainAdminWindow : Window
     public static readonly DependencyProperty simulator_flagProperty =
         DependencyProperty.Register("simulator_flag", typeof(bool), typeof(MainAdminWindow), new PropertyMetadata(null));
 
+    /// <summary>
+    /// button to start or stop the simulator
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void BtnSimulator_Click(object sender, RoutedEventArgs e)
     {
         try
@@ -322,87 +327,32 @@ public partial class MainAdminWindow : Window
     public static readonly DependencyProperty simulatorButtonProperty =
         DependencyProperty.Register("simulatorButton", typeof(string), typeof(MainAdminWindow), new PropertyMetadata(null));
 
+    /// <summary>
+    /// property for the call status
+    /// </summary>
+    public int[] Status
+    {
+        get { return (int[])GetValue(StatusProperty); }
+        set { SetValue(StatusProperty, value); }
+    }
 
+    // Using a DependencyProperty as the backing store for Status.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty StatusProperty =
+        DependencyProperty.Register("Status", typeof(int[]), typeof(MainAdminWindow), new PropertyMetadata(new int[6]));
 
 
 
 
     /// <summary>
-    /// property for all the numberes of calls in the system
+    /// update the call status by the BL layer
     /// </summary>
-    public int OpenNum
-    {
-        get { return (int)GetValue(OpenNumProperty); }
-        set { SetValue(OpenNumProperty, value); }
-    }
-
-    // Using a DependencyProperty as the backing store for OpenNum.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty OpenNumProperty =
-        DependencyProperty.Register("OpenNum", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
-
-    public int InTreatmentNum
-    {
-        get { return (int)GetValue(InTreatmentNumProperty); }
-        set { SetValue(InTreatmentNumProperty, value); }
-    }
-
-    // Using a DependencyProperty as the backing store for InTreatmentNum.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty InTreatmentNumProperty =
-        DependencyProperty.Register("InTreatmentNum", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
-
-    public int ClosedNum
-    {
-        get { return (int)GetValue(ClosedNumProperty); }
-        set { SetValue(ClosedNumProperty, value); }
-    }
-
-    // Using a DependencyProperty as the backing store for ClosedNum.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty ClosedNumProperty =
-        DependencyProperty.Register("ClosedNum", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
-
-    public int ExpierdNum
-    {
-        get { return (int)GetValue(ExpierdNumProperty); }
-        set { SetValue(ExpierdNumProperty, value); }
-    }
-
-    // Using a DependencyProperty as the backing store for ExpierdNum.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty ExpierdNumProperty =
-        DependencyProperty.Register("ExpierdNum", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
-
-    public int OpenInRiskNum
-    {
-        get { return (int)GetValue(OpenInRiskNumProperty); }
-        set { SetValue(OpenInRiskNumProperty, value); }
-    }
-
-    // Using a DependencyProperty as the backing store for OpenInRiskNum.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty OpenInRiskNumProperty =
-        DependencyProperty.Register("OpenInRiskNum", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
-
-    public int TreatmentInRiskNum
-    {
-        get { return (int)GetValue(TreatmentInRiskNumProperty); }
-        set { SetValue(TreatmentInRiskNumProperty, value); }
-    }
-
-    // Using a DependencyProperty as the backing store for TreatmrntInRiskNum.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty TreatmentInRiskNumProperty =
-        DependencyProperty.Register("TreatmentInRiskNum", typeof(int), typeof(MainAdminWindow), new PropertyMetadata(null));
-
-
-
     public void UpdateCallStatus()
     {
         try
         {
             var status = s_bl.Call.ArrayStatus();
-            OpenNum = status[0];
-            InTreatmentNum = status[1];
-            ClosedNum = status[2];
-            ExpierdNum = status[3];
-            OpenInRiskNum = status[4];
-            TreatmentInRiskNum = status[5];
+            Status = new int[6] { status[0], status[1], status[2], status[3], status[4], status[5] };
+
         }
         catch (Exception ex)
         {
@@ -446,7 +396,7 @@ public partial class MainAdminWindow : Window
                     status = BO.BCallStatus.In_treatment_in_risk;
                     break;
                 default:
-                    return; // Exit if tag is not recognized
+                    return;
             }
 
             // Check if a window for the status already exists
@@ -454,18 +404,18 @@ public partial class MainAdminWindow : Window
             {
                 if (existingWindow.IsVisible)
                 {
-                    existingWindow.Focus(); // Bring the existing window to the foreground
+                    existingWindow.Focus(); 
                     return;
                 }
                 else
                 {
-                    _openWindows.Remove(status); // Remove the reference if the window is closed
+                    _openWindows.Remove(status); 
                 }
             }
 
             // Create and show a new window
             var newWindow = new CallListWindow(status, ManagerID);
-            newWindow.Closed += (s, args) => _openWindows.Remove(status); // Remove from dictionary on close
+            newWindow.Closed += (s, args) => _openWindows.Remove(status); 
             _openWindows[status] = newWindow;
             newWindow.Show();
         }
