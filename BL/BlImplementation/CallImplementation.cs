@@ -245,7 +245,6 @@ internal class CallImplementation : BlApi.ICall
                     _dal.Call.Delete(callId);
 
                 CallManager.Observers.NotifyListUpdated();
-                VolunteerManager.Observers.NotifyListUpdated();
             }
             else
                 throw new BlNotAllowException($"Failed to delete call with id {callId}: call is not open");
