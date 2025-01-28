@@ -25,7 +25,20 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         this.DataContext = this; // Ensure binding context is set correctly
+        flag = "Hidden";
     }
+
+
+
+    public string flag
+    {
+        get { return (string)GetValue(flagProperty); }
+        set { SetValue(flagProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for flag.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty flagProperty =
+        DependencyProperty.Register("flag", typeof(string), typeof(MainWindow), new PropertyMetadata(null));
 
 
     /// <summary>
@@ -100,16 +113,7 @@ public partial class MainWindow : Window
                     break;
 
                 case BRoles.Manager:
-                    MessageBoxResult result = MessageBox.Show("Do you want to enter the Manager screen?", "Manager Login", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        new MainAdminWindow(CurrentID).Show();
-
-                    }
-                    else
-                    {
-                        new VolunteerUserWindow(CurrentID).Show();
-                    }
+                    flag = "Visible";
                     break;
 
                 default:
@@ -121,7 +125,6 @@ public partial class MainWindow : Window
             MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
-
 
 
     /// <summary>
@@ -153,5 +156,16 @@ public partial class MainWindow : Window
         chek = "Visible";
     }
 
+    private void Btn_manager_login_Click(object sender, RoutedEventArgs e)
+    {
+        new MainAdminWindow(CurrentID).Show();
+        flag = "Hidden";
+    }
+
+    private void Btn_volunteer_login_Click(object sender, RoutedEventArgs e)
+    {
+        new VolunteerUserWindow(CurrentID).Show();
+        flag = "Hidden";
+    }
 };
 

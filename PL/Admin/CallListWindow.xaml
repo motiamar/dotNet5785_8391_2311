@@ -78,6 +78,7 @@
                                         VerticalAlignment="Center" 
                                         Click="BtnDelete_Click" 
                                         Margin="2" 
+                                        Background="Red"
                                         Visibility="{Binding CallStatus, Converter={StaticResource EnumToVisibilityConverterKey}}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

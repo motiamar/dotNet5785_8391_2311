@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:local="clr-namespace:PL" mc:Ignorable="d" 
-        Title="MainWindow" Height="640" Width="810"
+        Title="MainWindow" Height="400" Width="500"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
         <!-- Set background image of the window -->
@@ -52,25 +52,22 @@
                 <Label Content="Enter Password:" FontSize="16" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Grid>
 
-                <!-- PasswordBox for entering password securely -->
+            <!-- PasswordBox for entering password securely -->
             <Grid>
                 <TextBox Text="{Binding CurrentPassword}"  Width="250" Margin="0,0,0,20" IsReadOnly="True"/>
                 <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" Width="250" Margin="25,0,25,20" Visibility="{Binding chek}" />
             </Grid>
-
-            <!-- CheckBox for showing/hiding the password -->
-            <CheckBox Content="Show password" FontSize="15" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontWeight="Bold"  Foreground="White">
+            <CheckBox Content="Show password" FontSize="10" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" FontWeight="Bold"  Foreground="White">
                 <CheckBox.Effect>
                     <DropShadowEffect Color="Black" Direction="300" ShadowDepth="1" BlurRadius="8" />
                 </CheckBox.Effect>
             </CheckBox>
-
-            <!-- Login button to trigger the login action -->
-            <Button Content="Login" Width="150" Background="LightBlue" Height="40" HorizontalAlignment="Center" Click="BtnLogIn_Click" />
-            
+            <Button Content="Login" Width="150" Background="LightBlue" Height="40" Click="BtnLogIn_Click" />
         </StackPanel>
 
         <!-- Label for showing "בס''ד" in the top-right corner -->
-        <Label Content="בס''ד" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" Margin="751,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-47.467,24.869" />
+        <Label Content="בס''ד" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" Margin="451,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="-47.467,24.869" />
+        <Button Content="Manager Screen" HorizontalAlignment="Left" Margin="250,298,0,0" VerticalAlignment="Top" Height="30" Width="123" Visibility="{Binding flag}" Click="Btn_manager_login_Click" Background="LightBlue"/>
+        <Button Content="Volunteer Screen" HorizontalAlignment="Left" Margin="116,298,0,0" VerticalAlignment="Top" Height="30" Width="123" Visibility="{Binding flag}" Click="Btn_volunteer_login_Click" Background="LightBlue"/>
     </Grid>
 </Window>

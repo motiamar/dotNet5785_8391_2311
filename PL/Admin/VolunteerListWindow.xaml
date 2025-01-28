@@ -58,7 +58,7 @@
                     <GridViewColumn Header="Action" Width="60">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="DELETE" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnDelete_Click"/>
+                                <Button Content="DELETE" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnDelete_Click" Background="Red"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
