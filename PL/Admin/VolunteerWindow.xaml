@@ -183,7 +183,7 @@
             <TextBox Text="{Binding CorrentVolunteer.CorrentCall, Converter={StaticResource CallInProgressConverterKey}}" Grid.Row="14" Grid.Column="1" VerticalAlignment="Center" Height="93" IsReadOnly="True"/>
 
             <!-- Button -->
-            <Button Grid.Row="16" Grid.Column="1" Content="{Binding ButtonText}" HorizontalAlignment="Left" Background="LightBlue" Width="162" Margin="0,5,0,-50" Click="BtnAddUpdate_Click"/>
+            <Button Grid.Row="16" Grid.Column="1" Content="{Binding ButtonText}" HorizontalAlignment="Center" Background="LightBlue" Width="162" Margin="0,5,0,-50" Click="BtnAddUpdate_Click"/>
         </Grid>
     </Grid>
 </Window>

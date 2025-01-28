@@ -25,6 +25,9 @@ internal static class CallManager
         var currentRiskTime = Helpers.AdminManager.Now + Helpers.AdminManager.MaxRange;
         if (assignment == null)
         {
+            if (Helpers.AdminManager.Now > call.MaxEndingCallTime)
+                return BCallStatus.Expired;
+
             return currentRiskTime < call.MaxEndingCallTime ? BCallStatus.Open : BCallStatus.Open_in_risk;
         }
         if (assignment!.FinishTime is not null)
