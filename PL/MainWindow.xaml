@@ -62,12 +62,51 @@
                     <DropShadowEffect Color="Black" Direction="300" ShadowDepth="1" BlurRadius="8" />
                 </CheckBox.Effect>
             </CheckBox>
-            <Button Content="Login" Width="150" Background="LightBlue" Height="40" Click="BtnLogIn_Click" />
+            <Button Content="Login" Width="150" Background="LightBlue" Height="40" Click="BtnLogIn_Click" >
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="15">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </StackPanel>
 
         <!-- Label for showing "בס''ד" in the top-right corner -->
         <Label Content="בס''ד" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" Margin="451,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="-47.467,24.869" />
-        <Button Content="Manager Screen" HorizontalAlignment="Left" Margin="250,298,0,0" VerticalAlignment="Top" Height="30" Width="123" Visibility="{Binding flag}" Click="Btn_manager_login_Click" Background="LightBlue"/>
-        <Button Content="Volunteer Screen" HorizontalAlignment="Left" Margin="116,298,0,0" VerticalAlignment="Top" Height="30" Width="123" Visibility="{Binding flag}" Click="Btn_volunteer_login_Click" Background="LightBlue"/>
+        <Button Content="Manager Screen" HorizontalAlignment="Left" Margin="250,298,0,0" VerticalAlignment="Top" Height="30" Width="123" Visibility="{Binding flag}" Click="Btn_manager_login_Click" Background="LightBlue">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Content="Volunteer Screen" HorizontalAlignment="Left" Margin="116,298,0,0" VerticalAlignment="Top" Height="30" Width="123" Visibility="{Binding flag}" Click="Btn_volunteer_login_Click" Background="LightBlue">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}"
+    BorderBrush="{TemplateBinding BorderBrush}"
+    BorderThickness="{TemplateBinding BorderThickness}"
+    CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>

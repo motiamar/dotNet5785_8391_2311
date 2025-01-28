@@ -369,14 +369,6 @@
     <EndKind>Open</EndKind>
   </Assignment>
   <Assignment>
-    <Id>1046</Id>
-    <CallId>1041</CallId>
-    <VolunteerId>726172349</VolunteerId>
-    <StartTime>2025-01-28T19:05:33</StartTime>
-    <FinishTime xsi:nil="true" />
-    <EndKind>Open</EndKind>
-  </Assignment>
-  <Assignment>
     <Id>1047</Id>
     <CallId>1014</CallId>
     <VolunteerId>236153821</VolunteerId>
@@ -487,5 +479,13 @@
     <StartTime>2025-01-28T19:07:33</StartTime>
     <FinishTime xsi:nil="true" />
     <EndKind>Open</EndKind>
+  </Assignment>
+  <Assignment>
+    <Id>1046</Id>
+    <CallId>1041</CallId>
+    <VolunteerId>726172349</VolunteerId>
+    <StartTime>2025-01-28T19:05:33</StartTime>
+    <FinishTime>2025-01-28T18:58:33</FinishTime>
+    <EndKind>Treated</EndKind>
   </Assignment>
 </ArrayOfAssignment>
