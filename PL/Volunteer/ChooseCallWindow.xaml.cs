@@ -135,7 +135,9 @@ public partial class ChooseCallWindow : Window
     {
         try
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             OpenCallInList = s_bl.Call.GetOpenCallList(volunteer_id, CallTypeFilter, OpenCallInListSort);
+            Mouse.OverrideCursor = null;
         }
         catch (Exception ex)
         {

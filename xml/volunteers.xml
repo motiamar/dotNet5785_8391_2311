@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfVolunteer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Volunteer>
-    <Id>569768724</Id>
-    <FullName>israel gadisha</FullName>
-    <Phone>0542109876</Phone>
-    <Email>israel.gadisha@gmail.com</Email>
-    <Password>Israel gadishapass60#</Password>
-    <Address>aharon brend 12,jerusalem</Address>
-    <Latitude>31.7839528</Latitude>
-    <Longitude>35.1722057</Longitude>
-    <Role>Manager</Role>
-    <Active>true</Active>
-    <MaximumDistance>63826</MaximumDistance>
-    <DistanceType>Air</DistanceType>
-  </Volunteer>
-  <Volunteer>
-    <Id>726172349</Id>
-    <FullName>moti amar</FullName>
-    <Phone>0524815812</Phone>
-    <Email>moti.amar@gmail.com</Email>
-    <Password>moti amarpass0</Password>
-    <Address>Bustanei 15, jerusalem</Address>
-    <Latitude>35.2126784</Latitude>
-    <Longitude>31.7648204</Longitude>
-    <Role>Volunteer</Role>
-    <Active>false</Active>
-    <MaximumDistance>89167</MaximumDistance>
-    <DistanceType>Walk</DistanceType>
-  </Volunteer>
-  <Volunteer>
     <Id>236153821</Id>
     <FullName>elya motai</FullName>
     <Phone>0501234567</Phone>
@@ -237,5 +209,33 @@
     <Active>true</Active>
     <MaximumDistance xsi:nil="true" />
     <DistanceType>Air</DistanceType>
+  </Volunteer>
+  <Volunteer>
+    <Id>726172349</Id>
+    <FullName>moti amar</FullName>
+    <Phone>0524815812</Phone>
+    <Email>moti.amar@gmail.com</Email>
+    <Password>Motiamarpass0#</Password>
+    <Address>hetzel 12, netanya, israel</Address>
+    <Latitude>32.321458</Latitude>
+    <Longitude>34.853196</Longitude>
+    <Role>Volunteer</Role>
+    <Active>true</Active>
+    <MaximumDistance>89167</MaximumDistance>
+    <DistanceType>Car</DistanceType>
+  </Volunteer>
+  <Volunteer>
+    <Id>569768724</Id>
+    <FullName>israel gadisha</FullName>
+    <Phone>0542109876</Phone>
+    <Email>israel.gadisha@gmail.com</Email>
+    <Password>Israel gadishapass60#</Password>
+    <Address>aharon brend 12 ,jerusalem, israel</Address>
+    <Latitude>31.7839528</Latitude>
+    <Longitude>35.1722057</Longitude>
+    <Role>Manager</Role>
+    <Active>true</Active>
+    <MaximumDistance>63826</MaximumDistance>
+    <DistanceType>Car</DistanceType>
   </Volunteer>
 </ArrayOfVolunteer>
