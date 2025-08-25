@@ -24,4 +24,4 @@ This project demonstrates backend development skills, layered architecture desig
 
 ---
 
-🔗 **GitHub Repository:** [https://github.com/YourUsername/dotNet5785_8391_2311](https://github.com/YourUsername/dotNet5785_8391_2311)
+🔗 **GitHub Repository:** [https://github.com/motiAmar/dotNet5785_8391_2311](https://github.com/MotiAmar/dotNet5785_8391_2311)
